@@ -1,0 +1,16 @@
+set_io VGA_HS  26
+set_io VGA_VS  27
+set_io VGA_R0  36
+set_io VGA_R1  37
+set_io VGA_R2  40
+set_io VGA_G0  29
+set_io VGA_G1  30
+set_io VGA_G2  33
+set_io VGA_B0  28
+set_io VGA_B1  41
+set_io VGA_B2  42
+set_io CLK 15
+set_io SW1 53
+set_io SW2 51
+set_io SW3 54
+set_io SW4 52
