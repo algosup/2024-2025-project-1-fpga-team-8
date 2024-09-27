@@ -39,7 +39,7 @@ This is the official document containing the functional specifications of the FP
 | Aurélien FERNANDEZ | Technical Lead    | Guides technical decisions and translates requirements into scalable technical solutions. |
 | Quentin CLEMENT    | Software Engineer | Develops and implements codebase, ensures code quality and collaboration within the team. |
 | Mathis KAKAL       | Software Engineer | Develops and implements codebase, ensures code quality and collaboration within the team. |
-| Antoine PREVOST    | QA                | Creates tests to validate the quality of the solution and to ensure compliance.           |
+| Antoine PREVOST    | Quality Assurance | Creates tests to validate the quality of the solution and to ensure compliance.           |
 | Thibaud MARLIER    | Technical Writer  | Creates comprehensive end-user documentation to facilitate the usage of the application.  |
 
 ### 1.1 Overview
