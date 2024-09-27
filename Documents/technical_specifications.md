@@ -48,8 +48,8 @@ We were also given a screen of  [SIZE TO DEFINE], along with a VGA cable to conn
 ## 2 - Development environment
 
 Our team uses multiple machines to work on this project, such as:
-- [NUMBER TO DEFINE] IBM-compatible laptops operating on Windows 11,
-- [NUMBER TO DEFINE] MacBooks operating on MacOS [VERSION TO DEFINE].
+- 2 IBM-compatible laptops operating on Windows 11,
+- 5 MacBooks operating on MacOS Sequoia 15.0.
 
 As for the IDE, we are using Visual Studio Code. Finally, to be able to upload a program to the board we all installed the tool [Apio](https://github.com/FPGAwars/apio/) on our machines.
 
@@ -66,12 +66,13 @@ Here is the list of the naming conventions regarding the repository and the file
 
 Here is the naming conventions regarding Verilog:
 - **Modules[^3]**: snake_case,
-- **Wires**: w_[name],
-- **Registers**: r_[name],
-- **Inputs**: i_[name],
-- **Outputs**: o_[name].
+- **Wires**: w_[Name],
+- **Registers**: r_[Name],
+- **Inputs**: i_[Name],
+- **Outputs**: o_[Name].
 
-Note that [name] symbolizes the name given to the element.
+Note that [Name] symbolizes the name given to the element. \
+e.g: ```r_Clock```
 
 ### 3.2 Comments
 
@@ -94,7 +95,7 @@ In a PCF file:
 ## This is a comment
 ```
 
-
+Comments should be regularly written to ensure the comprehension of the code of current and future developers and reviewers. 
 
 ## Glossary
 [^1]: Verilog: A programming language used to program and/or simulate circuit boards. Verilog is notably used with specific hardware such as FPGAs[^2].
