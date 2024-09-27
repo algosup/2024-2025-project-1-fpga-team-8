@@ -152,16 +152,17 @@ After the highway, Frogger reaches the riverbank. To get to the home bays, the p
 
 Additional river hazards include snapping alligator jaws, which can appear while Frogger is on logs. As the game progresses, new threats like fast-moving otters that can pull the frog into the water emerge, adding difficulty.
 
-The river is divided into 6 rows:
+The river is divided into 7 rows:
 
-- The first row contains set of three turtles;
-- The second row contains either short logs or long logs;
-- The third row contains long logs only;
-- The fourth row contains sets of two turtles;  
-- The fifth row contains random logs from short, medium or long ones; 
-- The sixth and last row is the goal, containing five safe spot, that the user must fill. And other from that, the grass is unsafe for the user.
+- The first row is the river bank, a rather safe place, where the snake spawns after level 3;
+- The second row contains set of three turtles;
+- The third row contains either short logs or long logs;
+- The fourth row contains long logs only;
+- The fifth row contains sets of two turtles;  
+- The sixth row contains random logs from short, medium or long ones; 
+- The seventh and last row is the goal, containing five safe spot, that the user must fill. And other from that, the grass is unsafe for the user. Moreover, some enemies and bonuses can be here.
 
-Note: From the first to the fifth row, objects are spawned randomly, we will dive into it later.
+Note: From the second to the seventh row, objects are spawned randomly, we will dive into it later.
 
 _River Bank:_
 
@@ -178,7 +179,6 @@ The logs float from left to right.
 
 Frogger can jump from side to side of the log, but beware not to fall into the water.
 Moreover, you can jump from a log to another floating object forward or backward.
-
 
 _Logs_:
 
@@ -239,6 +239,30 @@ _River banks:_
 
 </div>
 
+On the upper river bank, one enemy can spawn:
+
+- **Alligator's head**: If an alligator's head is showing in a home bay, it is not safe to enter it. Jumping into it will result into the death of a frog. However, if the alligator just appeared, there's a 2 second safe period before being deadly.
+
+_Alligator's head:_
+<div align="center">
+
+![goal with enemies](./images/goal_enemies.png)
+
+</div>
+
+On the lower river bank and on the logs, one more enemy can spawn after the level 3:
+
+- **Snakes**: They are deadly enemies spawning randomly on the logs and the lower river bank. It goes from left to right. If a snake touches the frog, it will lead to the death of the frog. The snake has a moving animation, as shown below, that changes every clock cycle.
+
+
+_Snake:_
+
+<div align="center">
+
+![snake](./images/snake.png)
+
+</div>
+
 ### 2.3 Bonuses
 
 In "Frogger," players can increase their score through special bonuses scattered throughout the game. The key bonuses are as follows:
@@ -263,6 +287,7 @@ _Pink frog:_
 - A fly may appear in one of the home bays at random intervals.
 - Players can earn additional points by hopping Frogger into the home bay with the fly.
 - Collecting the fly rewards the player with **200 bonus points**.
+- **DEFINE THE FREQUENCY AT WHICH SHE SPAWNS**
 
 _Flies:_
 
