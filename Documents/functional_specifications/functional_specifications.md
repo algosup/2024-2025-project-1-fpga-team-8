@@ -15,9 +15,11 @@
   - [2. Frogger game](#2-frogger-game)
     - [2.1 Game Objective](#21-game-objective)
     - [2.2 Gameplay Mechanics](#22-gameplay-mechanics)
-      - [2.2.1 Highway Crossing](#221-highway-crossing)
-      - [2.2.2 River Crossing](#222-river-crossing)
-      - [2.2.3 River Banks](#223-river-banks)
+      - [2.2.1 Gameplay movement](#221-gameplay-movement)
+      - [2.2.2 Gameplay controls](#222-gameplay-controls)
+      - [2.2.3 Highway Crossing](#223-highway-crossing)
+      - [2.2.4 River Crossing](#224-river-crossing)
+      - [2.2.5 River Banks](#225-river-banks)
     - [2.3 Bonuses](#23-bonuses)
       - [2.3.1 Pink Frog](#231-pink-frog)
       - [2.3.2 Fly Bonus](#232-fly-bonus)
@@ -94,7 +96,7 @@ The primary users of the FPGA Frogger game include:
 
 In the FPGA Frogger game, the player’s goal is to guide a frog from the bottom of the screen to one of the safe home bays at the top. The player must help the frog cross a busy highway filled with fast-moving vehicles, and then navigate a river by jumping on logs, turtles, and other floating objects. The challenge lies in avoiding obstacles such as cars, diving turtles, and alligator jaws. Successfully reaching a home bay earns points, and additional bonuses can be collected along the way.
 
-To complete a level, the player must guide five frogs safely into the home bays. Each frog represents a life, and the player starts with five lives. The game ends when all frogs are lost or when the player completes all the levels. Additionally, Frogger has a time limit of 30 seconds (or 60 ticks) per frog, shown by a time band at the bottom of the screen. The remaining time also contributes to the player’s score if the frog reaches a home bay on time.
+To complete a level, the player must guide five frogs safely into the home bays. Each frog represents a life, and the player starts with four lives. The game ends when all frogs are lost or when the player completes all the levels. Additionally, Frogger has a time limit of 30 seconds (or 60 ticks) per frog, shown by a time band at the bottom of the screen. The remaining time also contributes to the player’s score if the frog reaches a home bay on time.
 
 _Frogger game:_
 
@@ -106,7 +108,31 @@ _Frogger game:_
 
 ### 2.2 Gameplay Mechanics
 
-#### 2.2.1 Highway Crossing
+#### 2.2.1 Gameplay movement
+
+The frog advances one space per button press. When the frog reaches the top row of the screen and completes the level, the frog is automatically repositioned at the bottom to begin the next level.
+
+_Frog:_
+
+<div align="center">
+
+//placeholder image
+
+</div>
+
+#### 2.2.2 Gameplay controls
+
+The player controls Frogger using the four buttons on the FPGA system. These buttons allow movement in four directions: up, down, left, and right.
+
+_FPGA BUTTONS:_
+
+<div align="center">
+
+//placeholder image
+
+</div>
+
+#### 2.2.3 Highway Crossing
 
 The player begins each round by moving the frog through a four-lane highway. Cars and trucks move horizontally across the screen in both directions at varying speeds. Traffic patterns vary in speed and direction, presenting a continuous challenge for the player to navigate without getting squashed. If the frog touches any vehicle, the player loses a life.
 
@@ -120,7 +146,7 @@ _Highway:_
 
 </div>
 
-#### 2.2.2 River Crossing
+#### 2.2.4 River Crossing
 
 After the highway, Frogger reaches the riverbank. To get to the home bays, the player must jump across floating logs, turtles, and other moving objects. The logs move at different speeds and in different directions. Turtles periodically dive underwater, forcing the player to hop off before they disappear.
 
@@ -168,7 +194,7 @@ _Otters:_
 
 If Frogger falls into the river, the player loses a life, as the frog cannot swim.
 
-#### 2.2.3 River Banks
+#### 2.2.5 River Banks
 
 There are five home bays at the top of the screen. To complete a level, Frogger must safely reach one of these bays. However, the bays may be blocked by hazards like alligator heads or occupied by another frog. If this occurs, the player must wait or choose a different bay.
 
