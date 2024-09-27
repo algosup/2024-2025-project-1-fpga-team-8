@@ -152,43 +152,74 @@ After the highway, Frogger reaches the riverbank. To get to the home bays, the p
 
 Additional river hazards include snapping alligator jaws, which can appear while Frogger is on logs. As the game progresses, new threats like fast-moving otters that can pull the frog into the water emerge, adding difficulty.
 
+The river is divided into 6 rows:
+
+- The first row contains set of three turtles;
+- The second row contains either short logs or long logs;
+- The third row contains long logs only;
+- The fourth row contains sets of two turtles;  
+- The fifth row contains random logs from short, medium or long ones; 
+- The sixth and last row is the goal, containing five safe spot, that the user must fill. And other from that, the grass is unsafe for the user.
+
+Note: From the first to the fifth row, objects are spawned randomly, we will dive into it later.
+
 _River Bank:_
 
 <div align="center">
 
-//placeholder image
+![river](./images/river.png)
+
+</div>
+
+**Logs**:
+
+They come in three different sizes and shapes, a short one, a medium one and a long one. Which the frog can rely on, without falling in the water.
+The logs float from left to right.
+
+Frogger can jump from side to side of the log, but beware not to fall into the water.
+Moreover, you can jump from a log to another floating object forward or backward.
+
+
+_Logs_:
+
+<div align="center">
+
+![log1](./images/log1.png) <br>
+![log2](./images/log2.png) <br>
+![log3](./images/log3.png)
 
 </div>
 
 **Key hazards**:
 
-- **Diving Turtles**: Avoid jumping on turtles that are diving underwater, as Frogger will fall and lose a life.
+- **Diving Turtles**: They come in set of three or in set of two turtles. However,avoid jumping on turtles that are diving underwater, as Frogger will fall and lose a life. When they are overwater, they act as a log, meaning you can jump on the turtles' back. After a second, the state of the turtle changes to underwater. The frog cannot stay above them and if the player is still on the frog when they dive, the frog will fall into the water. The players must be on another floating object before the dive of the turtle to save himself. The frog will fall in the water if the user jumps to the left or the right off either of the end turtles.
 
 _Diving Turtles:_
 
 <div align="center">
 
-//placeholder image
+![turtles](./images/turtle.png)
 
 </div>
 
-- **Alligator Jaws**: Beware of logs with hidden alligator jaws. If contact occurs, the player will loose a life.
+- **Alligator Jaws**: Beware of logs with hidden alligator jaws. They are alligator disguised as a log. The thing that deferentiate them fron the logs are their jaws. You can jump on the alligator's back safely, but if frogger jumps into the alligator's jaw. The user loses a life. Every second, the alligator clacks his jaw, emphasizing the dangerous character he is.
 
-_Alligator jaws:_
+_Alligator:_
 
 <div align="center">
 
-//placeholder image
+![alligator](./images/alligator.png)
 
 </div>
 
-- **Otters**: These creatures swim rapidly and can grab Frogger off floating objects, forcing the player to navigate carefully.
+- **Otters**: These creatures swim rapidly and can grab Frogger off floating objects, forcing the player to navigate carefully. They spawn only after the level 3. Every second, they have a little swimming animation that occurs.
+
 
 _Otters:_
 
 <div align="center">
 
-//placeholder image
+![otter](./images/otter.png)
 
 </div>
 
@@ -204,7 +235,7 @@ _River banks:_
 
 <div align="center">
 
-//placeholder image
+![goal](./images/goal.png)
 
 </div>
 
@@ -215,6 +246,7 @@ In "Frogger," players can increase their score through special bonuses scattered
 #### 2.3.1 Pink Frog
 
 - Occasionally, a pink "lady" frog appears on a log within the river.
+- Lady moves from left to right on the log she's on.
 - To earn bonus points, players must jump onto the log with the pink frog and safely guide her to a home bay.
 - Successfully bringing the pink frog home grants the player **200 bonus points**.
 
@@ -222,7 +254,7 @@ _Pink frog:_
 
 <div align="center">
 
-//placeholder image
+![pink frog](./images/pink_frog.png)
 
 </div>
 
@@ -236,7 +268,8 @@ _Flies:_
 
 <div align="center">
 
-//placeholder image
+![fly](./images/fly.png) <br>
+![fly home](./images/fly_home.png)
 
 </div>
 
