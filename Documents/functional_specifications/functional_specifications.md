@@ -13,6 +13,18 @@
     - [1.3 Personas](#13-personas)
     - [1.4 Use cases](#14-use-cases)
   - [2. Frogger game](#2-frogger-game)
+    - [2.1 Game Objective](#21-game-objective)
+    - [2.2 Gameplay Mechanics](#22-gameplay-mechanics)
+      - [2.2.1 Highway Crossing](#221-highway-crossing)
+      - [2.2.2 River Crossing](#222-river-crossing)
+      - [2.2.3 River Banks](#223-river-banks)
+    - [2.3 Bonuses](#23-bonuses)
+      - [2.3.1 Pink Frog](#231-pink-frog)
+      - [2.3.2 Fly Bonus](#232-fly-bonus)
+    - [2.4 Game Difficulty](#24-game-difficulty)
+      - [Game Levels (1-4):](#game-levels-1-4)
+    - [2.5 Scoring System](#25-scoring-system)
+    - [2.6 End of Game](#26-end-of-game)
 
 </details>
 
@@ -28,7 +40,7 @@ This is the official document containing the functional specifications of the FP
 | Quentin CLEMENT    | Software Engineer | Develops and implements codebase, ensures code quality and collaboration within the team. |
 | Mathis KAKAL       | Software Engineer | Develops and implements codebase, ensures code quality and collaboration within the team. |
 | Antoine PREVOST    | QA                | Creates tests to validate the quality of the solution and to ensure compliance.           |
-| Thibaud MARLIER    | Technical Writer  | Creates comprehensive end-user documentation to facilitate the usage of the application.|
+| Thibaud MARLIER    | Technical Writer  | Creates comprehensive end-user documentation to facilitate the usage of the application.  |
 
 ### 1.1 Overview
 
@@ -78,3 +90,168 @@ The primary users of the FPGA Frogger game include:
 
 ## 2. Frogger game
 
+### 2.1 Game Objective
+
+In the FPGA Frogger game, the player’s goal is to guide a frog from the bottom of the screen to one of the safe home bays at the top. The player must help the frog cross a busy highway filled with fast-moving vehicles, and then navigate a river by jumping on logs, turtles, and other floating objects. The challenge lies in avoiding obstacles such as cars, diving turtles, and alligator jaws. Successfully reaching a home bay earns points, and additional bonuses can be collected along the way.
+
+To complete a level, the player must guide five frogs safely into the home bays. Each frog represents a life, and the player starts with five lives. The game ends when all frogs are lost or when the player completes all the levels. Additionally, Frogger has a time limit of 30 seconds (or 60 ticks) per frog, shown by a time band at the bottom of the screen. The remaining time also contributes to the player’s score if the frog reaches a home bay on time.
+
+_Frogger game:_
+
+<div align="center">
+
+//placeholder image
+
+</div>
+
+### 2.2 Gameplay Mechanics
+
+#### 2.2.1 Highway Crossing
+
+The player begins each round by moving the frog through a four-lane highway. Cars and trucks move horizontally across the screen in both directions at varying speeds. Traffic patterns vary in speed and direction, presenting a continuous challenge for the player to navigate without getting squashed. If the frog touches any vehicle, the player loses a life.
+
+Each forward jump earns the player 10 points. Completing this section will lead the players to the next section.
+
+_Highway:_
+
+<div align="center">
+
+//placeholder image
+
+</div>
+
+#### 2.2.2 River Crossing
+
+After the highway, Frogger reaches the riverbank. To get to the home bays, the player must jump across floating logs, turtles, and other moving objects. The logs move at different speeds and in different directions. Turtles periodically dive underwater, forcing the player to hop off before they disappear.
+
+Additional river hazards include snapping alligator jaws, which can appear while Frogger is on logs. As the game progresses, new threats like fast-moving otters that can pull the frog into the water emerge, adding difficulty.
+
+_River Bank:_
+
+<div align="center">
+
+//placeholder image
+
+</div>
+
+**Key hazards**:
+
+- **Diving Turtles**: Avoid jumping on turtles that are diving underwater, as Frogger will fall and lose a life.
+
+_Diving Turtles:_
+
+<div align="center">
+
+//placeholder image
+
+</div>
+
+- **Alligator Jaws**: Beware of logs with hidden alligator jaws. If contact occurs, the player will loose a life.
+
+_Alligator jaws:_
+
+<div align="center">
+
+//placeholder image
+
+</div>
+
+- **Otters**: These creatures swim rapidly and can grab Frogger off floating objects, forcing the player to navigate carefully.
+
+_Otters:_
+
+<div align="center">
+
+//placeholder image
+
+</div>
+
+If Frogger falls into the river, the player loses a life, as the frog cannot swim.
+
+#### 2.2.3 River Banks
+
+There are five home bays at the top of the screen. To complete a level, Frogger must safely reach one of these bays. However, the bays may be blocked by hazards like alligator heads or occupied by another frog. If this occurs, the player must wait or choose a different bay.
+
+Reaching a home bay grants **50 points**, and players can earn bonus points if a fly or pink frog appears, as explained in the next section. The player must navigate all five frogs to the home bays to complete a level.
+
+_River banks:_
+
+<div align="center">
+
+//placeholder image
+
+</div>
+
+### 2.3 Bonuses
+
+In "Frogger," players can increase their score through special bonuses scattered throughout the game. The key bonuses are as follows:
+
+#### 2.3.1 Pink Frog
+
+- Occasionally, a pink "lady" frog appears on a log within the river.
+- To earn bonus points, players must jump onto the log with the pink frog and safely guide her to a home bay.
+- Successfully bringing the pink frog home grants the player **200 bonus points**.
+
+_Pink frog:_
+
+<div align="center">
+
+//placeholder image
+
+</div>
+
+#### 2.3.2 Fly Bonus
+
+- A fly may appear in one of the home bays at random intervals.
+- Players can earn additional points by hopping Frogger into the home bay with the fly.
+- Collecting the fly rewards the player with **200 bonus points**.
+
+_Flies:_
+
+<div align="center">
+
+//placeholder image
+
+</div>
+
+### 2.4 Game Difficulty
+
+The difficulty in "Frogger" escalates across four distinct levels. Here’s a breakdown of what to expect at each level:
+
+<!-- The original frogger has 4 levels, the requirements says 8 uncertain for now. -->
+
+#### Game Levels (1-4):
+
+- **Level 1 & 2**:
+
+  - At the start, Frogger can float off-screen safely, allowing for a moderate introduction to the gameplay.
+  - Traffic patterns are manageable, with vehicles moving at a moderate speed. Players will have time to learn the timing of their movements without the pressure of fast-moving obstacles.
+  - River obstacles, such as logs and turtles, are plentiful, the players will have ample opportunities to practice hopping safely across the water.
+  - As players progress through these levels, the speed of traffic and river objects gradually increases.
+
+- **Level 3 & 4**:
+  - In these advanced levels, Frogger can no longer float off-screen.
+  - The game starts at a higher difficulty, with traffic moving significantly faster.
+  - New hazards are introduced, such as **otter attacks** appearing off logs or turtles, which players must avoid to prevent losing lives.
+  - With fewer floating objects in the river, players must navigate a more treacherous environment.
+
+To proceed to the next level, the player must safely guide five frogs into the home bays. After completing all levels, the difficulty ramps up again.
+
+<!-- Uncertain if we make it infinite or if we do 8 levels as stated before. -->
+
+### 2.5 Scoring System
+
+Points are awarded for various actions within the game:
+
+- **Jumping Frogger forward**: 10 points per forward jump.
+- **Reaching a home bay**: 50 points.
+- **Guiding all five frogs home**: 1,000 points.
+- **Rescuing the pink frog**: 200 points.
+- **Eating a fly**: 200 points.
+- **Bonus points for remaining time**: 10 points per remaining tick.
+
+If the player reaches a high score of 20,000 points and fewer than four frogs remain, an extra frog (life) is awarded.
+
+### 2.6 End of Game
+
+The game ends when all frogs (lives) are lost. The player can restart the game or reset it via the FPGA system to begin a new round.
