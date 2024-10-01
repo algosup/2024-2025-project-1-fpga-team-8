@@ -1,5 +1,5 @@
 name: Feature request
-description: Request a new feature/functionality to add in SportShield
+description: Request a new feature/functionality to add in Frogger
 title: "Feature request: [Your request]"
 labels: [Feature request]
 assignees:
@@ -8,7 +8,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        We can only implement features following the primary use of SportShield
+        We can only implement features following the primary use of Frogger
   - type: textarea
     id: description
     attributes:

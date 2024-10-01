@@ -9,7 +9,7 @@ assignees:
 body:
   - type: markdown
     attributes:
-        value: "Thank you for filling an issue! If you are here for an issue unrelated to software behaviours, please use the other templates available. This issue form is for SportShield, including its dependencies."
+        value: "Thank you for filling an issue! If you are here for an issue unrelated to software behaviours, please use the other templates available. This issue form is for Frogger Clone."
   - type: textarea
     id: description
     attributes:
@@ -43,10 +43,9 @@ body:
       label: "Environment information"
       description: "What are your environment characteristics"
       value: |
-        - Arduino IDE X.X.X (Displayed in the window title)
-        - Hardware used: (SIM800L card, Xiao BLE Sense nrf52840, ...)
-        - macOS Ventura X.X.X
-        - If used: g++ X.X.X (`g++ --version`)
+        - Apio v.X.X.X (Displayed by running `apio --version`)
+        - Hardware used: (Go Board, ...)
+        - macOS Ventura X.X.X/Windows 10 X.X.X/Debian X.X.X
         - Do not hesitate to add information which seems relevant
       render: markdown
     validations:

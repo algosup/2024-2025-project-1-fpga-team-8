@@ -42,10 +42,9 @@ body:
       label: "Environment information"
       description: "What are your environment characteristics (please detail the hardware as much as possible)"
       placeholder: |
-        - Hardware used (SIM800L card, Xiao BLE Sense nrf52840, ...)
-        - Arduino IDE 2.3.2 (Displayed in the window title)
-        - macOS Ventura 13.3.1
-        - If used: g++ 13.2.0 (`g++ --version`)
+        - Apio v.X.X.X (Displayed by running `apio --version`)
+        - Hardware used: (Go Board, ...)
+        - macOS Ventura X.X.X/Windows 10 X.X.X/Debian X.X.X
         - Do not hesitate to add information which seems relevant
     validations:
         required: true
