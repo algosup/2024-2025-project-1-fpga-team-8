@@ -10,7 +10,7 @@ module frogger_game
    input            i_VSync,
    // Game Start Button   
    input            i_Game_Start,
-   // Player 1 and Player 2 Controls (Controls Paddles)
+   // Player 1 and Player 2 Controls (Controls Frogger)
    input            i_Up_Mvt,
    input            i_Down_Mvt,
    input            i_Left_Mvt,
@@ -18,75 +18,86 @@ module frogger_game
    // Output Video
    output reg       o_HSync,
    output reg       o_VSync,
-   output [3:0] o_Red_Video,
-   output [3:0] o_Grn_Video,
-   output [3:0] o_Blu_Video,
-   output [6:0] o_Segment1,
-   output [6:0] o_Segment2,
+   output [3:0]     o_Red_Video,
+   output [3:0]     o_Grn_Video,
+   output [3:0]     o_Blu_Video,
+   output [6:0]     o_Segment1,
+   output [6:0]     o_Segment2
 );
 
-  parameter c_TOTAL_COLS = 800;
-  parameter c_TOTAL_ROWS = 525;
-
-  // Local Constants to Determine Game Play
-  parameter c_GAME_WIDTH  = 20;
-  parameter c_GAME_HEIGHT = 15;
+  // Game constants
+  parameter c_GAME_WIDTH  = 14;   // 14 columns in the bitmap
+  parameter c_GAME_HEIGHT = 13;   // 13 rows in the bitmap
+  parameter TILE_SIZE     = 32;   // Each tile is 32x32 pixels
   parameter c_SCORE_LIMIT = 99;
-  parameter TILE_BORDER = 32;
+  
+  // Bitmap array: 0=wall, 1=road, 2=water, 3=safe area, 4=lily pad
+  reg [3:0] r_Bitmap[0:c_GAME_HEIGHT-1][0:c_GAME_WIDTH-1];
 
-  // State machine enumerations
-  parameter IDLE    = 3'b000;
-  parameter RUNNING = 3'b001;
-  parameter P1_WINS = 3'b010;
-  parameter P2_WINS = 3'b011;
-  parameter CLEANUP = 3'b100;
-
-
-  wire w_Game_Active = 1'b1;
-  wire w_Draw_Any, w_Draw_Frogger;
-
-  wire       w_HSync, w_VSync;
+  // Signals
   wire [9:0] w_Col_Count, w_Row_Count;
-
-    // Divided version of the Row/Col Counters
-  // Allows us to make the board 40x30
   wire [4:0] w_Col_Count_Div, w_Row_Count_Div;
   wire [5:0] w_Frogger_X, w_Frogger_Y;
+  wire w_Draw_Frogger, w_Game_Active;
 
-    // Drop 5 LSBs, which effectively divides by 32
-  assign w_Col_Count_Div = w_Col_Count[9:5];
-  assign w_Row_Count_Div = w_Row_Count[9:5];
-
+  // Score variable
   reg [6:0] r_Frogger_Score;
 
-    Sync_To_Count #(.TOTAL_COLS(c_TOTAL_COLS),
+  // Synchronize to row and column counters
+  Sync_To_Count #(.TOTAL_COLS(c_TOTAL_COLS),
                   .TOTAL_ROWS(c_TOTAL_ROWS)) Sync_To_Count_Inst
-    (.i_Clk(i_Clk),
-     .i_HSync(i_HSync),
-     .i_VSync(i_VSync),
-     .o_HSync(w_HSync),
-     .o_VSync(w_VSync),
-     .o_Col_Count(w_Col_Count),
-     .o_Row_Count(w_Row_Count));
-
-// Register syncs to align with output data.
-always @(posedge i_Clk) begin
-    o_HSync <= w_HSync;
-    o_VSync <= w_VSync;
-  end
-    // Control the score display
-
-  score_control score_control_inst (
+  (
     .i_Clk(i_Clk),
-    .i_Score(r_Frogger_Score),  // updated score
-    .o_Segment1(o_Segment1),
-    .o_Segment2(o_Segment2)
+    .i_HSync(i_HSync),
+    .i_VSync(i_VSync),
+    .o_HSync(o_HSync),
+    .o_VSync(o_VSync),
+    .o_Col_Count(w_Col_Count),
+    .o_Row_Count(w_Row_Count)
   );
 
-    // Control frogger
+  // Convert current column and row into tile coordinates
+  assign w_Col_Count_Div = w_Col_Count[9:5]; // Divide by TILE_SIZE (32)
+  assign w_Row_Count_Div = w_Row_Count[9:5];
+
+  // Initialize bitmap background
+  integer row, col;  // Declare loop index variables outside of the loops
+  initial begin
+    // Row 0: Lily pads
+    r_Bitmap[0][0] = 4; r_Bitmap[0][1] = 0; r_Bitmap[0][2] = 4; r_Bitmap[0][3] = 0;
+    r_Bitmap[0][4] = 4; r_Bitmap[0][5] = 0; r_Bitmap[0][6] = 4; r_Bitmap[0][7] = 0;
+    r_Bitmap[0][8] = 4; r_Bitmap[0][9] = 0; r_Bitmap[0][10] = 4; r_Bitmap[0][11] = 0;
+    r_Bitmap[0][12] = 4; r_Bitmap[0][13] = 0;
+
+    // Rows 1-5: Water
+    for (row = 1; row < 6; row = row + 1) begin
+      for (col = 0; col < c_GAME_WIDTH; col = col + 1) begin
+        r_Bitmap[row][col] = 2;
+      end
+    end
+
+    // Row 6: Safe Area (Grass)
+    for (col = 0; col < c_GAME_WIDTH; col = col + 1) begin
+      r_Bitmap[6][col] = 3;
+    end
+
+    // Rows 7-11: Road
+    for (row = 7; row < 12; row = row + 1) begin
+      for (col = 0; col < c_GAME_WIDTH; col = col + 1) begin
+        r_Bitmap[row][col] = 1;
+      end
+    end
+
+    // Row 12: Safe Area (Grass)
+    for (col = 0; col < c_GAME_WIDTH; col = col + 1) begin
+      r_Bitmap[12][col] = 3;
+    end
+  end
+
+  // Control Frogger's movements and track its position
   frogger_ctrl frogger_ctrl_inst (
     .i_Clk(i_Clk),
-    .i_Score(r_Frogger_Score),  // input score
+    .i_Score(r_Frogger_Score),
     .i_Up_Mvt(i_Up_Mvt),
     .i_Down_Mvt(i_Down_Mvt),
     .i_Left_Mvt(i_Left_Mvt),
@@ -97,18 +108,39 @@ always @(posedge i_Clk) begin
     .o_Draw_Frogger(w_Draw_Frogger),
     .o_Frogger_X(w_Frogger_X),
     .o_Frogger_Y(w_Frogger_Y),
-    .o_Score(r_Frogger_Score)  // output score
+    .o_Score(r_Frogger_Score)
   );
 
+  // Determine background colors based on the bitmap
+  reg [3:0] r_Red_Video, r_Grn_Video, r_Blu_Video;
+  always @(*) begin
+    if (w_Col_Count_Div < c_GAME_WIDTH && w_Row_Count_Div < c_GAME_HEIGHT) begin
+      case (r_Bitmap[w_Row_Count_Div][w_Col_Count_Div])
+        4'd0: begin r_Red_Video = 4'b1000; r_Grn_Video = 4'b1000; r_Blu_Video = 4'b1000; end // Wall (Gray)
+        4'd1: begin r_Red_Video = 4'b1111; r_Grn_Video = 4'b0000; r_Blu_Video = 4'b0000; end // Road (Red)
+        4'd2: begin r_Red_Video = 4'b0000; r_Grn_Video = 4'b0000; r_Blu_Video = 4'b1111; end // Water (Blue)
+        4'd3: begin r_Red_Video = 4'b0000; r_Grn_Video = 4'b1111; r_Blu_Video = 4'b0000; end // Safe Area (Green)
+        4'd4: begin r_Red_Video = 4'b1111; r_Grn_Video = 4'b1111; r_Blu_Video = 4'b0000; end // Lily Pad (Yellow)
+        default: begin r_Red_Video = 4'b0000; r_Grn_Video = 4'b0000; r_Blu_Video = 4'b0000; end // Default (Black)
+      endcase
+    end else begin
+      r_Red_Video = 4'b0000;
+      r_Grn_Video = 4'b0000;
+      r_Blu_Video = 4'b0000;
+    end
+  end
 
-  // Conditional Assignment based on State Machine state
-//   assign w_Game_Active = (r_SM_Main == RUNNING) ? 1'b1 : 1'b0;
+  // Draw Frogger if needed
+  assign o_Red_Video = w_Draw_Frogger ? 4'b1111 : r_Red_Video;
+  assign o_Grn_Video = w_Draw_Frogger ? 4'b1111 : r_Grn_Video;
+  assign o_Blu_Video = w_Draw_Frogger ? 4'b1111 : r_Blu_Video;
 
-  assign w_Draw_Any = w_Draw_Frogger;
-
-  // Assign colors. Currently set to only 2 colors, white or black.
-  assign o_Red_Video = w_Draw_Any ? 4'b1111 : 4'b0000;
-  assign o_Grn_Video = w_Draw_Any ? 4'b1111 : 4'b0000;
-  assign o_Blu_Video = w_Draw_Any ? 4'b1111 : 4'b0000;
+  // Display Score on 7-segment displays
+  score_control score_control_inst (
+    .i_Clk(i_Clk),
+    .i_Score(r_Frogger_Score),
+    .o_Segment1(o_Segment1),
+    .o_Segment2(o_Segment2)
+  );
 
 endmodule
