@@ -34,10 +34,10 @@ module frogger_top(
     parameter c_ACTIVE_ROWS = 480;
     parameter TILE_BORDER = 32;
 
-  // Common VGA Signals
-  wire [c_VIDEO_WIDTH-1:0] w_Red_Video_Frogger, w_Red_Video_Porch;
-  wire [c_VIDEO_WIDTH-1:0] w_Grn_Video_Frogger, w_Grn_Video_Porch;
-  wire [c_VIDEO_WIDTH-1:0] w_Blu_Video_Frogger, w_Blu_Video_Porch;
+    // Common VGA Signals
+    wire [c_VIDEO_WIDTH-1:0] w_Red_Video_Frogger, w_Red_Video_Porch;
+    wire [c_VIDEO_WIDTH-1:0] w_Grn_Video_Frogger, w_Grn_Video_Porch;
+    wire [c_VIDEO_WIDTH-1:0] w_Blu_Video_Frogger, w_Blu_Video_Porch;
 
     wire w_HSync_VGA, w_VSync_VGA;
     wire w_HSync_Frogger, w_VSync_Frogger;
@@ -122,7 +122,7 @@ module frogger_top(
     .o_Grn_Video(w_Grn_Video_Porch),
     .o_Blu_Video(w_Blu_Video_Porch));
 
-      assign o_VGA_Red_0 = w_Red_Video_Porch[0];
+  assign o_VGA_Red_0 = w_Red_Video_Porch[0];
   assign o_VGA_Red_1 = w_Red_Video_Porch[1];
   assign o_VGA_Red_2 = w_Red_Video_Porch[2];
   

@@ -25,6 +25,9 @@ module frogger_game
    output [6:0] o_Segment2,
 );
 
+  parameter c_TOTAL_COLS = 800;
+  parameter c_TOTAL_ROWS = 525;
+
   // Local Constants to Determine Game Play
   parameter c_GAME_WIDTH  = 20;
   parameter c_GAME_HEIGHT = 15;
@@ -42,13 +45,13 @@ module frogger_game
   wire w_Game_Active = 1'b1;
   wire w_Draw_Any, w_Draw_Frogger;
 
-    wire       w_HSync, w_VSync;
+  wire       w_HSync, w_VSync;
   wire [9:0] w_Col_Count, w_Row_Count;
 
     // Divided version of the Row/Col Counters
   // Allows us to make the board 40x30
   wire [4:0] w_Col_Count_Div, w_Row_Count_Div;
-    wire [5:0] w_Frogger_X, w_Frogger_Y;
+  wire [5:0] w_Frogger_X, w_Frogger_Y;
 
     // Drop 5 LSBs, which effectively divides by 32
   assign w_Col_Count_Div = w_Col_Count[9:5];
