@@ -57,21 +57,6 @@ module frogger_game
   wire [5:0] w_Car_X_1, w_Car_Y_1;
   wire [5:0] w_Car_X_2, w_Car_Y_2;
 
-  // Temporary car 1 data
-  parameter c_Car_1_Init_X = 0;
-  parameter c_Car_1_Init_Y = 13;
-  parameter c_Car_1_Speed = 1;
-  parameter c_Car_1_Slow_Count = 4000000;
-  parameter c_Car_1_Max_X = 20;
-
-
-  // Temporary car 2 data
-  parameter c_Car_2_Init_X = 0;
-  parameter c_Car_2_Init_Y = 11;
-  parameter c_Car_2_Speed = 1;
-  parameter c_Car_2_Slow_Count = 5000000;
-  parameter c_Car_2_Max_X = 20;
-
   // Drop 5 LSBs, which effectively divides by 32
   assign w_Col_Count_Div = w_Col_Count[9:5];
   assign w_Row_Count_Div = w_Row_Count[9:5];
