@@ -62,7 +62,7 @@ module frogger_game
   assign w_Col_Count_Div = w_Col_Count[9:5];
   assign w_Row_Count_Div = w_Row_Count[9:5];
 
-    reg [6:0] counter = 0;
+  reg [6:0] r_Frogger_Score;
 
     Sync_To_Count #(.TOTAL_COLS(c_TOTAL_COLS),
                   .TOTAL_ROWS(c_TOTAL_ROWS)) Sync_To_Count_Inst
@@ -81,29 +81,30 @@ always @(posedge i_Clk) begin
   end
     // Control the score display
 
-    score_control score_control_inst (
-        .i_Clk(i_Clk),
-        .i_Score(counter),
-        .o_Segment1(o_Segment1),
-        .o_Segment2(o_Segment2)
-    );
+  score_control score_control_inst (
+    .i_Clk(i_Clk),
+    .i_Score(r_Frogger_Score),  // updated score
+    .o_Segment1(o_Segment1),
+    .o_Segment2(o_Segment2)
+  );
 
     // Control frogger
-    frogger_ctrl frogger_ctrl_inst (
-        .i_Clk(i_Clk),
-        .i_Score(counter),
-        .i_Up_Mvt(i_Up_Mvt),
-        .i_Down_Mvt(i_Down_Mvt),
-        .i_Left_Mvt(i_Left_Mvt),
-        .i_Right_Mvt(i_Right_Mvt),
-        .i_Game_Active(w_Game_Active),
-        .i_Col_Count_Div(w_Col_Count_Div),
-        .i_Row_Count_Div(w_Row_Count_Div),
-        .o_Draw_Frogger(w_Draw_Frogger),
-        .o_Frogger_X(w_Frogger_X),
-        .o_Frogger_Y(w_Frogger_Y),
-        // .o_Score(counter)
-    );
+  frogger_ctrl frogger_ctrl_inst (
+    .i_Clk(i_Clk),
+    .i_Score(r_Frogger_Score),  // input score
+    .i_Up_Mvt(i_Up_Mvt),
+    .i_Down_Mvt(i_Down_Mvt),
+    .i_Left_Mvt(i_Left_Mvt),
+    .i_Right_Mvt(i_Right_Mvt),
+    .i_Game_Active(w_Game_Active),
+    .i_Col_Count_Div(w_Col_Count_Div),
+    .i_Row_Count_Div(w_Row_Count_Div),
+    .o_Draw_Frogger(w_Draw_Frogger),
+    .o_Frogger_X(w_Frogger_X),
+    .o_Frogger_Y(w_Frogger_Y),
+    .o_Score(r_Frogger_Score)  // output score
+  );
+
 
     // Car 1 instance
     car_ctrl #(

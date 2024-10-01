@@ -1,6 +1,6 @@
 module score_control(
     input wire i_Clk,
-    input i_Score,
+    input [6:0] i_Score,
     output [6:0] o_Segment1,
     output [6:0] o_Segment2,
 );
