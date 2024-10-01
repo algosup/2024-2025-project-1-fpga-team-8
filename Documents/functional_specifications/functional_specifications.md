@@ -37,7 +37,7 @@
         - [Performance Metrics:](#performance-metrics)
         - [Reliability Considerations:](#reliability-considerations)
       - [3.3 Testability](#33-testability)
-    - [Documentation](#documentation)
+  - [Documentation](#documentation)
     - [Flexibility](#flexibility)
     - [Efficiency](#efficiency)
 
@@ -299,7 +299,6 @@ _Pink frog:_
 - A fly may appear in one of the home bays at random intervals.
 - Players can earn additional points by hopping Frogger into the home bay with the fly.
 - Collecting the fly rewards the player with **200 bonus points**.
-- **DEFINE THE FREQUENCY AT WHICH SHE SPAWNS**
 
 _Flies:_
 
@@ -397,17 +396,29 @@ This section defines how quickly and reliably the system responds to user inputs
 
 Testability refers to how easily the system's functionality can be verified. A comprehensive test plan is being developed by a team member. The testing process will cover both simulation and in-hardware testing, with manual gameplay serving as the primary method due to the project's hardware setup.
 
-### Documentation
+## Documentation
 
-- **Definition:** The quality and comprehensiveness of documentation provided to aid in learning and future reference.
-- **Considerations:** Inline code comments and personal notes, focusing on explaining design decisions and implementation for educational purposes.
+- **Definition:** The quality and comprehensiveness of documentation provided to aid in learning, future reference, and ensuring that the project’s goals, scope, and ambitions are clearly communicated. It is crucial that the documentation aligns with our vision for the software.
 
+- **Considerations:**
+
+  - **Comprehensive Documentation:** Our team must ensure whole documentation of the project is comprehensive for everyone. Clear English, tailored to a wide audience is necessary to ensure this.
+  - **Code Documentation:** Code should be easily-readable, and well commented. Ensuring comprehensiveness and clarity in the software. Verilog being low level, it is more than necessary to clarify as much as possible.
+  
 ### Flexibility
 
-- **Definition:** The system’s ability to adapt to changing requirements or new learning objectives.
-- **Considerations:** Configurability and adaptability to different learning tasks or evolving project goals.
+- **Definition:** Flexibility refers to the system's ability to adapt to changing requirements, evolving user needs, and technological advancements without requiring significant redesign or redevelopment.
+
+  For this project, ensuring software flexibility is a must-do. Indeed, we want the game to be reprogrammable over time, allowing our team to add more levels,  layers of difficulties, or apply users' feedback.
+
+- **Considerations:**
+  - **New Functionalities:**
+    Our team won't maintain the project once done, however, if a fellow programmer, want to modify the game to his wish, it must be possible.
+  - **Bug Fixes:** Upon discovering a bug, having flexible software makes bug fixing easier for developers.
 
 ### Efficiency
 
 - **Definition:** The system’s ability to perform its functions with optimal use of resources.
 - **Considerations:** Resource utilization and performance optimization, with a focus on understanding FPGA resource constraints and improving efficiency.
+  - **Resource Utilization:** FPGAs are limited in available resources, the software must be scaled to the available resources to ensure a smooth experience for the end user.
+  - **Performance Optimization:** Software performances must be optimized.
