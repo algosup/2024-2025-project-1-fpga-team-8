@@ -20,8 +20,8 @@ module frogger_ctrl(
     reg r_Switch_4;
 
     initial begin
-        o_Frogger_X = 0;
-        o_Frogger_Y = 0;
+        o_Frogger_X = 10;
+        o_Frogger_Y = 14;
     end
 
 always @(posedge i_Clk) begin

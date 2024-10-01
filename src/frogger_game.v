@@ -43,7 +43,7 @@ module frogger_game
 
 
   wire w_Game_Active = 1'b1;
-  wire w_Draw_Any, w_Draw_Frogger, w_Draw_Car;
+  wire w_Draw_Any, w_Draw_Frogger, w_Draw_Car_1, w_Draw_Car_2;
 
   wire       w_HSync, w_VSync;
   wire [9:0] w_Col_Count, w_Row_Count;
@@ -52,9 +52,27 @@ module frogger_game
   // Allows us to make the board 40x30
   wire [4:0] w_Col_Count_Div, w_Row_Count_Div;
   wire [5:0] w_Frogger_X, w_Frogger_Y;
-  wire [5:0] w_Car_X, w_Car_Y;
 
-    // Drop 5 LSBs, which effectively divides by 32
+  // Cars
+  wire [5:0] w_Car_X_1, w_Car_Y_1;
+  wire [5:0] w_Car_X_2, w_Car_Y_2;
+
+  // Temporary car 1 data
+  parameter c_Car_1_Init_X = 0;
+  parameter c_Car_1_Init_Y = 13;
+  parameter c_Car_1_Speed = 1;
+  parameter c_Car_1_Slow_Count = 4000000;
+  parameter c_Car_1_Max_X = 20;
+
+
+  // Temporary car 2 data
+  parameter c_Car_2_Init_X = 0;
+  parameter c_Car_2_Init_Y = 11;
+  parameter c_Car_2_Speed = 1;
+  parameter c_Car_2_Slow_Count = 5000000;
+  parameter c_Car_2_Max_X = 20;
+
+  // Drop 5 LSBs, which effectively divides by 32
   assign w_Col_Count_Div = w_Col_Count[9:5];
   assign w_Row_Count_Div = w_Row_Count[9:5];
 
@@ -102,27 +120,47 @@ always @(posedge i_Clk) begin
     );
 
     // Control car
-    car_ctrl car_ctrl_inst (
+    car_ctrl #(
+      .c_CAR_SPEED(1),
+      .c_MAX_X(20),
+      .c_SLOW_COUNT(4000000),
+      .c_INIT_X(0),
+      .c_INIT_Y(13)
+    )
+      
+      car_ctrl_inst_1 (
         .i_Clk(i_Clk),
-        // .i_Score(counter),
-        // .i_Up_Mvt(i_Up_Mvt),
-        // .i_Down_Mvt(i_Down_Mvt),
-        // .i_Left_Mvt(i_Left_Mvt),
-        // .i_Right_Mvt(i_Right_Mvt),
-        // .i_Game_Active(w_Game_Active),
         .i_Col_Count_Div(w_Col_Count_Div),
         .i_Row_Count_Div(w_Row_Count_Div),
         .o_Draw_Car(w_Draw_Car),
         .o_Car_X(w_Car_X),
         .o_Car_Y(w_Car_Y),
-        // .o_Score(counter)
+
+    );
+
+    // Control car
+    car_ctrl #(
+      .c_CAR_SPEED(1),
+      .c_MAX_X(20),
+      .c_SLOW_COUNT(5000000),
+      .c_INIT_X(0),
+      .c_INIT_Y(11)
+    )
+
+      car_ctrl_inst_2 (
+        .i_Clk(i_Clk),
+        .i_Col_Count_Div(w_Col_Count_Div),
+        .i_Row_Count_Div(w_Row_Count_Div),
+        .o_Draw_Car(w_Draw_Car_2),
+        .o_Car_X(w_Car_X_2),
+        .o_Car_Y(w_Car_Y_2),
     );
 
   // Conditional Assignment based on State Machine state
 //   assign w_Game_Active = (r_SM_Main == RUNNING) ? 1'b1 : 1'b0;
 
   // Draw any 
-  assign w_Draw_Any = w_Draw_Frogger || w_Draw_Car;
+  assign w_Draw_Any = w_Draw_Frogger || w_Draw_Car || w_Draw_Car_2;
 
   // Assign colors. Currently set to only 2 colors, white or black.
   assign o_Red_Video = w_Draw_Any ? 4'b1111 : 4'b0000;
