@@ -27,6 +27,13 @@
       - [Game Levels (1-4):](#game-levels-1-4)
     - [2.5 Scoring System](#25-scoring-system)
     - [2.6 End of Game](#26-end-of-game)
+  - [3. Non-Functional Requirements](#3-non-functional-requirements)
+    - [Costs](#costs)
+    - [Response/Performance \& Reliability](#responseperformance--reliability)
+    - [Testability](#testability)
+    - [Documentation](#documentation)
+    - [Flexibility](#flexibility)
+    - [Efficiency](#efficiency)
 
 </details>
 
@@ -158,8 +165,8 @@ The river is divided into 7 rows:
 - The second row contains set of three turtles;
 - The third row contains either short logs or long logs;
 - The fourth row contains long logs only;
-- The fifth row contains sets of two turtles;  
-- The sixth row contains random logs from short, medium or long ones; 
+- The fifth row contains sets of two turtles;
+- The sixth row contains random logs from short, medium or long ones;
 - The seventh and last row is the goal, containing five safe spot, that the user must fill. And other from that, the grass is unsafe for the user. Moreover, some enemies and bonuses can be here.
 
 Note: From the second to the seventh row, objects are spawned randomly, we will dive into it later.
@@ -214,7 +221,6 @@ _Alligator:_
 
 - **Otters**: These creatures swim rapidly and can grab Frogger off floating objects, forcing the player to navigate carefully. They spawn only after the level 3. Every second, they have a little swimming animation that occurs.
 
-
 _Otters:_
 
 <div align="center">
@@ -244,6 +250,7 @@ On the upper river bank, one enemy can spawn:
 - **Alligator's head**: If an alligator's head is showing in a home bay, it is not safe to enter it. Jumping into it will result into the death of a frog. However, if the alligator just appeared, there's a 2 second safe period before being deadly.
 
 _Alligator's head:_
+
 <div align="center">
 
 ![goal with enemies](./images/goal_enemies.png)
@@ -253,7 +260,6 @@ _Alligator's head:_
 On the lower river bank and on the logs, one more enemy can spawn after the level 3:
 
 - **Snakes**: They are deadly enemies spawning randomly on the logs and the lower river bank. It goes from left to right. If a snake touches the frog, it will lead to the death of the frog. The snake has a moving animation, as shown below, that changes every clock cycle.
-
 
 _Snake:_
 
@@ -339,3 +345,39 @@ If the player reaches a high score of 20,000 points and fewer than four frogs re
 ### 2.6 End of Game
 
 The game ends when all frogs (lives) are lost. The player can restart the game or reset it via the FPGA system to begin a new round.
+
+## 3. Non-Functional Requirements
+
+### Costs
+
+- **Capital Expenditures:**
+  - Tools
+  - Software
+  - Time Spent/Wages (for educational purposes, time invested in learning)
+- **Operational Expenditures:**
+  - None (since this is a school project with no server or operational costs)
+
+### Response/Performance & Reliability
+
+- **Definition:** The system's ability to perform its required functions under stated conditions while maintaining speed and efficiency in responding to inputs.
+- **Considerations:** Response time, error rates, fault tolerance, and ability to handle edge cases effectively (focused on learning to optimize performance and ensuring reliable operations).
+
+### Testability
+
+- **Definition:** The degree to which the system supports testing activities and ensures reliability.
+- **Considerations:** Availability of test environments (FPGA test benches), ease of creating test cases, and handling errors and edge cases (focused on learning proper testing and ensuring reliable system behavior).
+
+### Documentation
+
+- **Definition:** The quality and comprehensiveness of documentation provided to aid in learning and future reference.
+- **Considerations:** Inline code comments and personal notes, focusing on explaining design decisions and implementation for educational purposes.
+
+### Flexibility
+
+- **Definition:** The system’s ability to adapt to changing requirements or new learning objectives.
+- **Considerations:** Configurability and adaptability to different learning tasks or evolving project goals.
+
+### Efficiency
+
+- **Definition:** The system’s ability to perform its functions with optimal use of resources.
+- **Considerations:** Resource utilization and performance optimization, with a focus on understanding FPGA resource constraints and improving efficiency.
