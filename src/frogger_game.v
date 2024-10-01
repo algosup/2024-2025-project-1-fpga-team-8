@@ -43,7 +43,7 @@ module frogger_game
 
 
   wire w_Game_Active = 1'b1;
-  wire w_Draw_Any, w_Draw_Frogger, w_Draw_Car_1, w_Draw_Car_2;
+  wire w_Draw_Any, w_Draw_Frogger, w_Draw_Car_1, w_Draw_Car_2, w_Draw_Car_3;
 
   wire       w_HSync, w_VSync;
   wire [9:0] w_Col_Count, w_Row_Count;
@@ -56,6 +56,7 @@ module frogger_game
   // Cars
   wire [5:0] w_Car_X_1, w_Car_Y_1;
   wire [5:0] w_Car_X_2, w_Car_Y_2;
+  wire [5:0] w_Car_X_3, w_Car_Y_3;
 
   // Drop 5 LSBs, which effectively divides by 32
   assign w_Col_Count_Div = w_Col_Count[9:5];
@@ -104,7 +105,7 @@ always @(posedge i_Clk) begin
         // .o_Score(counter)
     );
 
-    // Control car
+    // Car 1 instance
     car_ctrl #(
       .c_CAR_SPEED(1),
       .c_MAX_X(20),
@@ -123,7 +124,7 @@ always @(posedge i_Clk) begin
 
     );
 
-    // Control car
+    // Car 2 instance
     car_ctrl #(
       .c_CAR_SPEED(1),
       .c_MAX_X(20),
@@ -141,11 +142,29 @@ always @(posedge i_Clk) begin
         .o_Car_Y(w_Car_Y_2),
     );
 
+    // Car 3 instance
+    car_ctrl #(
+      .c_CAR_SPEED(1),
+      .c_MAX_X(20),
+      .c_SLOW_COUNT(3700000),
+      .c_INIT_X(0),
+      .c_INIT_Y(9)
+    )
+
+      car_ctrl_inst_3 (
+        .i_Clk(i_Clk),
+        .i_Col_Count_Div(w_Col_Count_Div),
+        .i_Row_Count_Div(w_Row_Count_Div),
+        .o_Draw_Car(w_Draw_Car_3),
+        .o_Car_X(w_Car_X_3),
+        .o_Car_Y(w_Car_Y_3),
+    );
+
   // Conditional Assignment based on State Machine state
 //   assign w_Game_Active = (r_SM_Main == RUNNING) ? 1'b1 : 1'b0;
 
   // Draw any 
-  assign w_Draw_Any = w_Draw_Frogger || w_Draw_Car || w_Draw_Car_2;
+  assign w_Draw_Any = w_Draw_Frogger || w_Draw_Car || w_Draw_Car_2 || w_Draw_Car_3;
 
   // Assign colors. Currently set to only 2 colors, white or black.
   assign o_Red_Video = w_Draw_Any ? 4'b1111 : 4'b0000;
