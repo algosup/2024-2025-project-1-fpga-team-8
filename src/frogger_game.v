@@ -43,7 +43,7 @@ module frogger_game
 
 
   wire w_Game_Active = 1'b1;
-  wire w_Draw_Any, w_Draw_Frogger;
+  wire w_Draw_Any, w_Draw_Frogger, w_Draw_Car;
 
   wire       w_HSync, w_VSync;
   wire [9:0] w_Col_Count, w_Row_Count;
@@ -52,6 +52,7 @@ module frogger_game
   // Allows us to make the board 40x30
   wire [4:0] w_Col_Count_Div, w_Row_Count_Div;
   wire [5:0] w_Frogger_X, w_Frogger_Y;
+  wire [5:0] w_Car_X, w_Car_Y;
 
     // Drop 5 LSBs, which effectively divides by 32
   assign w_Col_Count_Div = w_Col_Count[9:5];
@@ -100,10 +101,28 @@ always @(posedge i_Clk) begin
         // .o_Score(counter)
     );
 
+    // Control car
+    car_ctrl car_ctrl_inst (
+        .i_Clk(i_Clk),
+        // .i_Score(counter),
+        // .i_Up_Mvt(i_Up_Mvt),
+        // .i_Down_Mvt(i_Down_Mvt),
+        // .i_Left_Mvt(i_Left_Mvt),
+        // .i_Right_Mvt(i_Right_Mvt),
+        // .i_Game_Active(w_Game_Active),
+        .i_Col_Count_Div(w_Col_Count_Div),
+        .i_Row_Count_Div(w_Row_Count_Div),
+        .o_Draw_Car(w_Draw_Car),
+        .o_Car_X(w_Car_X),
+        .o_Car_Y(w_Car_Y),
+        // .o_Score(counter)
+    );
+
   // Conditional Assignment based on State Machine state
 //   assign w_Game_Active = (r_SM_Main == RUNNING) ? 1'b1 : 1'b0;
 
-  assign w_Draw_Any = w_Draw_Frogger;
+  // Draw any 
+  assign w_Draw_Any = w_Draw_Frogger || w_Draw_Car;
 
   // Assign colors. Currently set to only 2 colors, white or black.
   assign o_Red_Video = w_Draw_Any ? 4'b1111 : 4'b0000;
