@@ -27,10 +27,16 @@
       - [Game Levels (1-4):](#game-levels-1-4)
     - [2.5 Scoring System](#25-scoring-system)
     - [2.6 End of Game](#26-end-of-game)
-  - [3. Non-Functional Requirements](#3-non-functional-requirements)
-    - [Costs](#costs)
-    - [Response/Performance \& Reliability](#responseperformance--reliability)
-    - [Testability](#testability)
+    - [3. Non-Functional Requirements](#3-non-functional-requirements)
+      - [3.1 Costs](#31-costs)
+        - [Capital Expenditures:](#capital-expenditures)
+        - [Time Invested:](#time-invested)
+        - [Operational Expenditures:](#operational-expenditures)
+        - [Project Scope:](#project-scope)
+      - [3.2 Response/Performance \& Reliability](#32-responseperformance--reliability)
+        - [Performance Metrics:](#performance-metrics)
+        - [Reliability Considerations:](#reliability-considerations)
+      - [3.3 Testability](#33-testability)
     - [Documentation](#documentation)
     - [Flexibility](#flexibility)
     - [Efficiency](#efficiency)
@@ -346,26 +352,50 @@ If the player reaches a high score of 20,000 points and fewer than four frogs re
 
 The game ends when all frogs (lives) are lost. The player can restart the game or reset it via the FPGA system to begin a new round.
 
-## 3. Non-Functional Requirements
+### 3. Non-Functional Requirements
 
-### Costs
+This section outlines the non-functional requirements for the FPGA Frogger game project, focusing on costs, performance, reliability, and testability.
 
-- **Capital Expenditures:**
-  - Tools
-  - Software
-  - Time Spent/Wages (for educational purposes, time invested in learning)
-- **Operational Expenditures:**
-  - None (since this is a school project with no server or operational costs)
+#### 3.1 Costs
 
-### Response/Performance & Reliability
+##### Capital Expenditures:
 
-- **Definition:** The system's ability to perform its required functions under stated conditions while maintaining speed and efficiency in responding to inputs.
-- **Considerations:** Response time, error rates, fault tolerance, and ability to handle edge cases effectively (focused on learning to optimize performance and ensuring reliable operations).
+- **Board**: NandLand Go-Board, priced at €70.
+- **Monitor**: Acer EK251Q EBI, priced at €109.99.
 
-### Testability
+The capital expenditures, including the board and monitor, are furnished by the school. There are no relevant development environment costs, as the project uses freely available software.
 
-- **Definition:** The degree to which the system supports testing activities and ensures reliability.
-- **Considerations:** Availability of test environments (FPGA test benches), ease of creating test cases, and handling errors and edge cases (focused on learning proper testing and ensuring reliable system behavior).
+##### Time Invested:
+
+Since this is an educational project, significant time will be invested in learning Verilog and FPGA design. The goal is to both create a functional product and gain knowledge over the tools and hardware.
+
+##### Operational Expenditures:
+
+As the project is entirely self-contained, running on the FPGA hardware, there are no cloud services, server usage, or ongoing maintenance costs. Operational expenditures are expected to be at a minimum after development.
+
+##### Project Scope:
+
+The scope of this project is focused on learning FPGA and Verilog programming while building a fun, playable Frogger game. The cost needs to stay low as the primary objective is education.
+
+#### 3.2 Response/Performance & Reliability
+
+This section defines how quickly and reliably the system responds to user inputs and renders changes on the screen.
+
+##### Performance Metrics:
+
+- **VGA Display**: The game runs at a 640x480 resolution, there will be smooth transitions between game objects while adhering to VGA timing constraints. Clear visuals and consistent refresh rate are expected.
+- **Target FPS**: The game aims for a frame rate of 30 FPS.
+- **Input Latency**: The frog’s movement should occur within 10 to 30 milliseconds of pressing a button.
+- **Object Movement**: Vehicles and obstacles must move fluidly across the screen without jittering. Object speeds will vary by difficulty, but all movements should be smooth and reliable.
+
+##### Reliability Considerations:
+
+- **Error Handling**: The system needs to handle unexpected conditions, such as edge cases like simultaneous button presses. The game will reset or retry if these occur.
+- **Stability**: The game should not crash or freeze during normal gameplay, the players need to be able to complete the game without technical issues.
+
+#### 3.3 Testability
+
+Testability refers to how easily the system's functionality can be verified. A comprehensive test plan is being developed by a team member. The testing process will cover both simulation and in-hardware testing, with manual gameplay serving as the primary method due to the project's hardware setup.
 
 ### Documentation
 
