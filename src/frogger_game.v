@@ -111,10 +111,17 @@ module frogger_game
     .o_Score(r_Frogger_Score)
   );
 
-  // Determine background colors based on the bitmap
+  // Determine background colors based on the bitmap and draw Frogger if applicable
   reg [3:0] r_Red_Video, r_Grn_Video, r_Blu_Video;
   always @(*) begin
-    if (w_Col_Count_Div < c_GAME_WIDTH && w_Row_Count_Div < c_GAME_HEIGHT) begin
+    // Check if the current tile matches Frogger's position
+    if ((w_Col_Count_Div == w_Frogger_X) && (w_Row_Count_Div == w_Frogger_Y)) begin
+      // If in the same tile as Frogger, draw Frogger in white
+      r_Red_Video = 4'b1111; // White
+      r_Grn_Video = 4'b1111;
+      r_Blu_Video = 4'b1111;
+    end else if (w_Col_Count_Div < c_GAME_WIDTH && w_Row_Count_Div < c_GAME_HEIGHT) begin
+      // Otherwise, draw the background based on the bitmap
       case (r_Bitmap[w_Row_Count_Div][w_Col_Count_Div])
         4'd0: begin r_Red_Video = 4'b1000; r_Grn_Video = 4'b1000; r_Blu_Video = 4'b1000; end // Wall (Gray)
         4'd1: begin r_Red_Video = 4'b1111; r_Grn_Video = 4'b0000; r_Blu_Video = 4'b0000; end // Road (Red)
@@ -130,10 +137,10 @@ module frogger_game
     end
   end
 
-  // Draw Frogger if needed
-  assign o_Red_Video = w_Draw_Frogger ? 4'b1111 : r_Red_Video;
-  assign o_Grn_Video = w_Draw_Frogger ? 4'b1111 : r_Grn_Video;
-  assign o_Blu_Video = w_Draw_Frogger ? 4'b1111 : r_Blu_Video;
+  // Assign video outputs
+  assign o_Red_Video = r_Red_Video;
+  assign o_Grn_Video = r_Grn_Video;
+  assign o_Blu_Video = r_Blu_Video;
 
   // Display Score on 7-segment displays
   score_control score_control_inst (
