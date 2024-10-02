@@ -320,7 +320,7 @@ The difficulty in "Frogger" escalates across four distinct levels. Here’s a br
 
   - At the start, Frogger can float off-screen for a frame, allowing for a moderate introduction to the gameplay.
   - Traffic patterns are manageable, with vehicles moving at across the screen with periodically larger gaps. Players will have time to learn the timing of their movements without the pressure of fast-moving obstacles.
-  - River obstacles, such as logs and turtles, are plentiful, the players will have ample opportunities to practice hopping safely across the water. 
+  - River obstacles, such as logs and diving turtles, are plentiful, the players will have ample opportunities to practice hopping safely across the water. 
   - As players progress through these levels, the speed of traffic and river objects gradually increases.
 
 - **Level 2**:
@@ -329,9 +329,12 @@ The difficulty in "Frogger" escalates across four distinct levels. Here’s a br
 
 - **Level 3 & 4**:
   - In these advanced levels, Frogger can no longer float off-screen.
-  - The game starts at a higher difficulty, with traffic moving significantly faster.
-  - New hazards are introduced, such as **otter attacks** appearing off logs or turtles, which players must avoid to prevent losing lives.
+  - The game starts at a higher difficulty, with traffic being denser and log more sparse.
+  - New hazards are introduced, such as **otter attacks** that can push frogger in the water.
   - With fewer floating objects in the river, players must navigate a more treacherous environment.
+- **Level 5 and after**
+  - After these level the speed increase sharply.
+  - The density of traffic is lower but will increase again.
 
 To proceed to the next level, the player must safely guide five frogs into the home bays. After completing all levels, the difficulty ramps up again.
 
