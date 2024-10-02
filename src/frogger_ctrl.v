@@ -21,8 +21,8 @@ module frogger_ctrl(
 
 
     initial begin
-        o_Frogger_X = 1;
-        o_Frogger_Y = 1;
+        o_Frogger_X = 10;
+        o_Frogger_Y = 14;
     end
 
 always @(posedge i_Clk) begin
