@@ -316,12 +316,16 @@ The difficulty in "Frogger" escalates across four distinct levels. Here’s a br
 
 #### Game Levels (1-4)
 
-- **Level 1 & 2**:
+- **Level 1**:
 
-  - At the start, Frogger can float off-screen safely, allowing for a moderate introduction to the gameplay.
-  - Traffic patterns are manageable, with vehicles moving at a moderate speed. Players will have time to learn the timing of their movements without the pressure of fast-moving obstacles.
-  - River obstacles, such as logs and turtles, are plentiful, the players will have ample opportunities to practice hopping safely across the water.
+  - At the start, Frogger can float off-screen for a frame, allowing for a moderate introduction to the gameplay.
+  - Traffic patterns are manageable, with vehicles moving at across the screen with periodically larger gaps. Players will have time to learn the timing of their movements without the pressure of fast-moving obstacles.
+  - River obstacles, such as logs and turtles, are plentiful, the players will have ample opportunities to practice hopping safely across the water. 
   - As players progress through these levels, the speed of traffic and river objects gradually increases.
+
+- **Level 2**:
+    - Alligators start to appear in the river alongside the logs. 
+    - The frog can walk on the alligators' back but the Frogger die when it walk on the Alligators head.
 
 - **Level 3 & 4**:
   - In these advanced levels, Frogger can no longer float off-screen.
@@ -331,7 +335,19 @@ The difficulty in "Frogger" escalates across four distinct levels. Here’s a br
 
 To proceed to the next level, the player must safely guide five frogs into the home bays. After completing all levels, the difficulty ramps up again.
 
-<!-- Uncertain if we make it infinite or if we do 8 levels as stated before. -->
+<!-- reference video https://www.youtube.com/watch?v=k3nKtOh41fE -->
+- **Speed of objects in second to cross the screen**:
+
+| Level | Lane1 | Lane2 | Lane3 | Lane4 | Lane5 | Turtle1 | Log1 | Log2 | Turtle2 | Log3 | Snakes |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | 22 | 18 | 15 | 10 | 8 | 8 | 22 | 4 | 8 | 11 | / |
+| 2 | 22 | 18 | 15 | 10 | 8 | 8 | 22 | 4 | 8 | 11 | / |
+| 3 | 22 | 18 | 15 | 10 | 8 | 8 | 22 | 4 | 8 | 11 | 8 |
+| 4 | 20 | 18 | 15 | 10 | 8 | 8 | 20 | 4 | 8 | 10 | 8 |
+| 5+ | 8 | 12 | 8 | 2 | 10 | 4 | 20 | 8 | 12 | 8 | 8 | 
+
+Alligators have the same speed as the logs in the lane they are in.
+Otters are 10% faster then the logs or turtles in the lane.
 
 ### 2.5 Scoring System
 
