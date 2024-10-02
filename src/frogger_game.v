@@ -64,10 +64,10 @@ module frogger_game
   integer row, col;  // Declare loop index variables outside of the loops
   initial begin
     // Row 0: Lily pads
-    r_Bitmap[0][0] = 4; r_Bitmap[0][1] = 0; r_Bitmap[0][2] = 4; r_Bitmap[0][3] = 0;
-    r_Bitmap[0][4] = 4; r_Bitmap[0][5] = 0; r_Bitmap[0][6] = 4; r_Bitmap[0][7] = 0;
-    r_Bitmap[0][8] = 4; r_Bitmap[0][9] = 0; r_Bitmap[0][10] = 4; r_Bitmap[0][11] = 0;
-    r_Bitmap[0][12] = 4; r_Bitmap[0][13] = 0;
+    r_Bitmap[0][0] = 0; r_Bitmap[0][1] = 4; r_Bitmap[0][2] = 0; r_Bitmap[0][3] = 0;
+    r_Bitmap[0][4] = 4; r_Bitmap[0][5] = 0; r_Bitmap[0][6] = 0; r_Bitmap[0][7] = 4;
+    r_Bitmap[0][8] = 0; r_Bitmap[0][9] = 0; r_Bitmap[0][10] = 4; r_Bitmap[0][11] = 0;
+    r_Bitmap[0][12] = 0; r_Bitmap[0][13] = 4;
 
     // Rows 1-5: Water
     for (row = 1; row < 6; row = row + 1) begin
@@ -123,13 +123,46 @@ module frogger_game
     end else if (w_Col_Count_Div < c_GAME_WIDTH && w_Row_Count_Div < c_GAME_HEIGHT) begin
       // Otherwise, draw the background based on the bitmap
       case (r_Bitmap[w_Row_Count_Div][w_Col_Count_Div])
-        4'd0: begin r_Red_Video = 4'b1000; r_Grn_Video = 4'b1000; r_Blu_Video = 4'b1000; end // Wall (Gray)
-        4'd1: begin r_Red_Video = 4'b1111; r_Grn_Video = 4'b0000; r_Blu_Video = 4'b0000; end // Road (Red)
-        4'd2: begin r_Red_Video = 4'b0000; r_Grn_Video = 4'b0000; r_Blu_Video = 4'b1111; end // Water (Blue)
-        4'd3: begin r_Red_Video = 4'b0000; r_Grn_Video = 4'b1111; r_Blu_Video = 4'b0000; end // Safe Area (Green)
-        4'd4: begin r_Red_Video = 4'b1111; r_Grn_Video = 4'b1111; r_Blu_Video = 4'b0000; end // Lily Pad (Yellow)
-        default: begin r_Red_Video = 4'b0000; r_Grn_Video = 4'b0000; r_Blu_Video = 4'b0000; end // Default (Black)
-      endcase
+      4'd0: begin
+        r_Red_Video = 4'b0001;  // Wall: Red Channel = 0
+        r_Grn_Video = 4'b1110;  // Wall: Green Channel = 14
+        r_Blu_Video = 4'b0000;  // Wall: Blue Channel = 0
+      end
+      4'd1: begin
+        r_Red_Video = 4'b0000;  // Road: Red Channel = 0
+        r_Grn_Video = 4'b0000;  // Road: Green Channel = 0
+        r_Blu_Video = 4'b0000;  // Road: Blue Channel = 0
+      end
+      4'd2: begin
+        r_Red_Video = 4'b0001;  // Water: Red Channel = 1
+        r_Grn_Video = 4'b0000;  // Water: Green Channel = 0
+        r_Blu_Video = 4'b1110;  // Water: Blue Channel = 14
+      end
+      4'd3: begin
+        // Safe Area: Check if it's the top or bottom line of the tile
+        if ((w_Row_Count % TILE_SIZE == 0) || (w_Row_Count % TILE_SIZE == TILE_SIZE - 1)) begin
+          // Top or bottom line of the tile
+          r_Red_Video = 4'b0000;  // Black line
+          r_Grn_Video = 4'b0000;
+          r_Blu_Video = 4'b0000;
+        end else begin
+          // Normal safe area color
+          r_Red_Video = 4'b0011;  // Safe Area: Red Channel = 3
+          r_Grn_Video = 4'b0000;  // Safe Area: Green Channel = 0
+          r_Blu_Video = 4'b1111;  // Safe Area: Blue Channel = 15
+        end
+      end
+      4'd4: begin
+        r_Red_Video = 4'b0001;  // Lily Pad: Red Channel = 1
+        r_Grn_Video = 4'b0000;  // Lily Pad: Green Channel = 0
+        r_Blu_Video = 4'b1110;  // Lily Pad: Blue Channel = 14
+      end
+      default: begin
+        r_Red_Video = 4'b0000;  // Background: Red Channel = 0
+        r_Grn_Video = 4'b0000;  // Background: Green Channel = 0
+        r_Blu_Video = 4'b0000;  // Background: Blue Channel = 0
+      end
+    endcase
     end else begin
       r_Red_Video = 4'b0000;
       r_Grn_Video = 4'b0000;
