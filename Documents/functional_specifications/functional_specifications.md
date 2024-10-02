@@ -29,16 +29,21 @@
     - [2.6 End of Game](#26-end-of-game)
   - [3. Non-Functional Requirements](#3-non-functional-requirements)
     - [3.1 Costs](#31-costs)
-        - [Capital Expenditures](#capital-expenditures)
-        - [Time Invested](#time-invested)
-        - [Operational Expenditures](#operational-expenditures)
-        - [Project Scope](#project-scope)
+      - [Capital Expenditures](#capital-expenditures)
+      - [Time Invested](#time-invested)
+      - [Operational Expenditures](#operational-expenditures)
+      - [Project Scope](#project-scope)
     - [3.2 Response/Performance \& Reliability](#32-responseperformance--reliability)
-        - [Performance Metrics](#performance-metrics)
-        - [Reliability Considerations](#reliability-considerations)
+      - [Performance Metrics](#performance-metrics)
+      - [Reliability Considerations](#reliability-considerations)
     - [3.3 Testability](#33-testability)
     - [3.4 Documentation](#34-documentation)
     - [3.5 Flexibility](#35-flexibility)
+  - [4. Risks and Assumptions](#4-risks-and-assumptions)
+    - [4.1 Risks](#41-risks)
+    - [4.2 Budget considerations](#42-budget-considerations)
+    - [4.3 Out of Scope](#43-out-of-scope)
+    - [4.4 External resources](#44-external-resources)
 
 </details>
 
@@ -320,12 +325,16 @@ The difficulty in "Frogger" escalates across four distinct levels. Here’s a br
 
   - At the start, Frogger can float off-screen for a frame, allowing for a moderate introduction to the gameplay.
   - Traffic patterns are manageable, with vehicles moving at across the screen with periodically larger gaps. Players will have time to learn the timing of their movements without the pressure of fast-moving obstacles.
-  - River obstacles, such as logs and diving turtles, are plentiful, the players will have ample opportunities to practice hopping safely across the water. 
+    <<<<<<< Updated upstream
+  - # River obstacles, such as logs and diving turtles, are plentiful, the players will have ample opportunities to practice hopping safely across the water.
+  - River obstacles, such as logs and turtles, are plentiful, the players will have ample opportunities to practice hopping safely across the water.
+    > > > > > > > Stashed changes
   - As players progress through these levels, the speed of traffic and river objects gradually increases.
 
 - **Level 2**:
-    - Alligators start to appear in the river alongside the logs. 
-    - The frog can walk on the alligators' back but the Frogger die when it walk on the Alligators head.
+
+  - Alligators start to appear in the river alongside the logs.
+  - The frog can walk on the alligators' back but the Frogger die when it walk on the Alligators head.
 
 - **Level 3 & 4**:
   - In these advanced levels, Frogger can no longer float off-screen.
@@ -339,18 +348,32 @@ The difficulty in "Frogger" escalates across four distinct levels. Here’s a br
 To proceed to the next level, the player must safely guide five frogs into the home bays. After completing all levels, the difficulty ramps up again.
 
 <!-- reference video https://www.youtube.com/watch?v=k3nKtOh41fE -->
+
 - **Speed of objects in second to cross the screen**:
 
 | Level | Lane1 | Lane2 | Lane3 | Lane4 | Lane5 | Turtle1 | Log1 | Log2 | Turtle2 | Log3 | Snakes |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | 22 | 18 | 15 | 10 | 8 | 8 | 22 | 4 | 8 | 11 | / |
-| 2 | 22 | 18 | 15 | 10 | 8 | 8 | 22 | 4 | 8 | 11 | / |
-| 3 | 22 | 18 | 15 | 10 | 8 | 8 | 22 | 4 | 8 | 11 | 8 |
-| 4 | 20 | 18 | 15 | 10 | 8 | 8 | 20 | 4 | 8 | 10 | 8 |
-| 5+ | 8 | 12 | 8 | 2 | 10 | 4 | 20 | 8 | 12 | 8 | 8 | 
+| ----- | ----- | ----- | ----- | ----- | ----- | ------- | ---- | ---- | ------- | ---- | ------ |
+| 1     | 22    | 18    | 15    | 10    | 8     | 8       | 22   | 4    | 8       | 11   | /      |
+| 2     | 22    | 18    | 15    | 10    | 8     | 8       | 22   | 4    | 8       | 11   | /      |
+| 3     | 22    | 18    | 15    | 10    | 8     | 8       | 22   | 4    | 8       | 11   | 8      |
+| 4     | 20    | 18    | 15    | 10    | 8     | 8       | 20   | 4    | 8       | 10   | 8      |
+| 5+    | 8     | 12    | 8     | 2     | 10    | 4       | 20   | 8    | 12      | 8    | 8      |
 
 Alligators have the same speed as the logs in the lane they are in.
 Otters are 10% faster then the logs or turtles in the lane.
+
+- **Density of cars and logs:**
+
+| Level   | Lane 1                                                                            | Lane 2                                                                                                                 | Lane 3                                                                            | Lane 4                               | Lane 5                               | Banking     | Water 1                                                                                                             | Water 2                                                                                     | Water 3                                   | Water 4                                                                                | Water 5                                                                      | Home |
+| ------- | --------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------------------------------ | ------------------------------------ | ----------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------- | -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---- |
+| Level 1 | **3 cars**, spaced by **4 tiles**                                                 | **3 cars**, spaced by **3 tiles**                                                                                      | **3 cars**, spaced by **3 tiles**                                                 | **1 car**                            | **2 cars**, spaced by **4 tiles**    | X           | **4 sets** of **3 turtles**, **1 tile apart**, first set is **diving turtles**                                      | **3 small logs**, **2 tiles apart**                                                         | **3 long logs**, **2 tiles apart**        | **4 sets** of **2 turtles**, **2 tiles apart**, first set is **diving turtles**        | **3 medium logs**, **2 tiles apart**                                         | X    |
+| Level 2 | **4 cars**, first **3** separated by **4 tiles**, fourth separated by **2 tiles** | **4 cars**, separated by **4 tiles**                                                                                   | **4 cars**, first **3** separated by **4 tiles**, fourth separated by **2 tiles** | **2 cars**, separated by **2 tiles** | **3 cars**, separated by **4 tiles** | X           | **3 sets** of **3 turtles**, first set separated by **3 tiles**, second and third by **1 tile**                     | **3 small logs**, **2 tiles apart**                                                         | **1 long log**                            | **5 sets** of **2 turtles**, **1 tile apart**, first set is **diving turtles**         | **3 logs**, **2 tiles apart**, **1 crocodile** replaces a log every interval | X    |
+| Level 3 | **4 cars**, separated by **3 tiles**                                              | **4 cars**, first **3** separated by **4 tiles**, last separated by **2 tiles**                                        | **5 cars**, first **4** separated by **3 tiles**, last separated by **1 tile**    | **2 cars**, separated by **3 tiles** | **3 cars**, separated by **2 tiles** | **1 snake** | **3 sets** of **3 turtles**, **2 tiles apart**, **1/3** are **diving turtles**                                      | **3 small logs**, first separated by **3 tiles**, last two by **1 tile**                    | **1 long log**                            | **4 sets** of **2 turtles**, **2 tiles apart**, **1/4** are **diving turtles**         | **2 medium logs**, **2 tiles apart**                                         | X    |
+| Level 4 | **4 cars**, first **3** separated by **3 tiles**, last separated by **1 tile**    | **4 cars**, separated by **3 tiles**                                                                                   | **4 cars**, first **3** separated by **3 tiles**, last separated by **1 tile**    | **3 cars**, separated by **3 tiles** | **4 cars**, separated by **2 tiles** | **1 snake** | **3 sets** of **3 turtles**, separated by **3 tiles**, **1/3** are **diving turtles**                               | **2 small logs**, separated by **4 tiles**                                                  | **1 long log**                            | **3 sets** of **2 turtles**, separated by **2 tiles**, **1/3** are **diving turtles**  | **2 medium logs**, separated by **2 tiles**                                  | X    |
+| Level 5 | **5 cars**, first **4** separated by **2 tiles**, fifth separated by **1 tile**   | **4 cars**, separated by **3 tiles**                                                                                   | **5 cars**, separated by **2 tiles**                                              | **4 cars**, separated by **2 tiles** | **3 cars**, separated by **2 tiles** | **1 snake** | **2 sets** of **3 turtles**, separated by **3 tiles**, **1/2** are **diving turtles**                               | **2 small logs**, separated by **3 tiles**                                                  | **1 long log**                            | **3 sets** of **2 turtles**, separated by **3 tiles**                                  | **1 crocodile**                                                              | X    |
+| Level 6 | **3 cars**, separated by **3 tiles**                                              | **3 cars**, separated by **3 tiles**                                                                                   | **3 cars**, separated by **3 tiles**                                              | **1 car**                            | **2 cars**, separated by **3 tiles** | **1 snake** | **4 sets** of **3 turtles**, separated by **2 tiles**, **1/4** are **diving turtles**                               | **3 small logs**, separated by **2 tiles**                                                  | **2 long logs**, separated by **2 tiles** | **4 sets** of **2 turtles**, separated by **2 tiles**, **1/4** are **diving turtles**  | **2 medium logs**, **1 crocodile**, separated by **2 tiles**                 | X    |
+| Level 7 | **4 cars**, first **3** separated by **3 tiles**, last separated by **1 tile**    | **4 cars**, separated by **3 tiles**                                                                                   | **4 cars**, first **3** separated by **3 tiles**, last separated by **1 tile**    | **2 cars**, separated by **1 tile**  | **3 cars**, separated by **3 tiles** | **1 snake** | **3 sets** of **3 turtles**, first separated by **3 tiles**, last two by **1 tile**, last set is **diving turtles** | **3 small logs**, separated by **3 tiles**                                                  | **1 long log**                            | **5 sets** of **2 turtles**, separated by **1 tile**, **1/5** are **diving turtles**   | **1 crocodile**, **2 medium logs**, separated by **2 tiles**                 | X    |
+| Level 8 | **4 cars**, separated by **3 tiles**                                              | **4 cars**, first and second separated by **3 tiles**, second and third by **1 tile**, third and fourth by **3 tiles** | **5 cars**, first and second separated by **1 tile**, others by **2 tiles**       | **2 cars**, separated by **3 tiles** | **3 cars**, separated by **2 tiles** | **1 snake** | **3 sets** of **3 turtles**, separated by **2 tiles**, first set is **diving turtles**                              | **3 small logs**, first and second separated by **1 tile**, second and third by **3 tiles** | **1 long log**                            | **4 sets** of **2 turtles**, separated by **2 tiles**, first set is **diving turtles** | **1 medium log**, **1 crocodile**, separated by **2 tiles**                  | X    |
 
 ### 2.5 Scoring System
 
@@ -401,7 +424,7 @@ This section defines how quickly and reliably the system responds to user inputs
 ##### Performance Metrics
 
 - **VGA Display**: The game runs at a 640x480 resolution, there will be smooth transitions between game objects while adhering to VGA timing constraints. Clear visuals and consistent refresh rate are expected.
-- **Target FPS**: The game aims for a frame rate of 30 FPS.
+- **Target FPS**: The game aims for a frame rate of 30 FPS without screen tearing.
 - **Input Latency**: The frog’s movement should occur within 10 to 30 milliseconds of pressing a button.
 - **Object Movement**: Vehicles and obstacles must move fluidly across the screen without jittering. Object speeds will vary by difficulty, but all movements should be smooth and reliable.
 
@@ -433,13 +456,27 @@ Testability refers to how easily the system's functionality can be verified. A c
   - **Feature Extensions:** Although our team won't provide post-project support, the game’s design must allow future developers to easily modify and extend its functionalities.
   - **Bug Fixes:** A flexible system also simplifies the process of addressing bugs, enabling developers to efficiently implement fixes without needing to overhaul the software structure.
 
-| Level   | Lane 1                                                                            | Lane 2                                                                                                                 | Lane 3                                                                            | Lane 4                               | Lane 5                               | Banking     | Water 1                                                                                                             | Water 2                                                                                     | Water 3                                   | Water 4                                                                                | Water 5                                                                      | Home |
-| ------- | --------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------------------------------ | ------------------------------------ | ----------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------- | -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---- |
-| Level 1 | **3 cars**, spaced by **4 tiles**                                                 | **3 cars**, spaced by **3 tiles**                                                                                      | **3 cars**, spaced by **3 tiles**                                                 | **1 car**                            | **2 cars**, spaced by **4 tiles**    | X           | **4 sets** of **3 turtles**, **1 tile apart**, first set is **diving turtles**                                      | **3 small logs**, **2 tiles apart**                                                         | **3 long logs**, **2 tiles apart**        | **4 sets** of **2 turtles**, **2 tiles apart**, first set is **diving turtles**        | **3 medium logs**, **2 tiles apart**                                         | X    |
-| Level 2 | **4 cars**, first **3** separated by **4 tiles**, fourth separated by **2 tiles** | **4 cars**, separated by **4 tiles**                                                                                   | **4 cars**, first **3** separated by **4 tiles**, fourth separated by **2 tiles** | **2 cars**, separated by **2 tiles** | **3 cars**, separated by **4 tiles** | X           | **3 sets** of **3 turtles**, first set separated by **3 tiles**, second and third by **1 tile**                     | **3 small logs**, **2 tiles apart**                                                         | **1 long log**                            | **5 sets** of **2 turtles**, **1 tile apart**, first set is **diving turtles**         | **3 logs**, **2 tiles apart**, **1 crocodile** replaces a log every interval | X    |
-| Level 3 | **4 cars**, separated by **3 tiles**                                              | **4 cars**, first **3** separated by **4 tiles**, last separated by **2 tiles**                                        | **5 cars**, first **4** separated by **3 tiles**, last separated by **1 tile**    | **2 cars**, separated by **3 tiles** | **3 cars**, separated by **2 tiles** | **1 snake** | **3 sets** of **3 turtles**, **2 tiles apart**, **1/3** are **diving turtles**                                      | **3 small logs**, first separated by **3 tiles**, last two by **1 tile**                    | **1 long log**                            | **4 sets** of **2 turtles**, **2 tiles apart**, **1/4** are **diving turtles**         | **2 medium logs**, **2 tiles apart**                                         | X    |
-| Level 4 | **4 cars**, first **3** separated by **3 tiles**, last separated by **1 tile**    | **4 cars**, separated by **3 tiles**                                                                                   | **4 cars**, first **3** separated by **3 tiles**, last separated by **1 tile**    | **3 cars**, separated by **3 tiles** | **4 cars**, separated by **2 tiles** | **1 snake** | **3 sets** of **3 turtles**, separated by **3 tiles**, **1/3** are **diving turtles**                               | **2 small logs**, separated by **4 tiles**                                                  | **1 long log**                            | **3 sets** of **2 turtles**, separated by **2 tiles**, **1/3** are **diving turtles**  | **2 medium logs**, separated by **2 tiles**                                  | X    |
-| Level 5 | **5 cars**, first **4** separated by **2 tiles**, fifth separated by **1 tile**   | **4 cars**, separated by **3 tiles**                                                                                   | **5 cars**, separated by **2 tiles**                                              | **4 cars**, separated by **2 tiles** | **3 cars**, separated by **2 tiles** | **1 snake** | **2 sets** of **3 turtles**, separated by **3 tiles**, **1/2** are **diving turtles**                               | **2 small logs**, separated by **3 tiles**                                                  | **1 long log**                            | **3 sets** of **2 turtles**, separated by **3 tiles**                                  | **1 crocodile**                                                              | X    |
-| Level 6 | **3 cars**, separated by **3 tiles**                                              | **3 cars**, separated by **3 tiles**                                                                                   | **3 cars**, separated by **3 tiles**                                              | **1 car**                            | **2 cars**, separated by **3 tiles** | **1 snake** | **4 sets** of **3 turtles**, separated by **2 tiles**, **1/4** are **diving turtles**                               | **3 small logs**, separated by **2 tiles**                                                  | **2 long logs**, separated by **2 tiles** | **4 sets** of **2 turtles**, separated by **2 tiles**, **1/4** are **diving turtles**  | **2 medium logs**, **1 crocodile**, separated by **2 tiles**                 | X    |
-| Level 7 | **4 cars**, first **3** separated by **3 tiles**, last separated by **1 tile**    | **4 cars**, separated by **3 tiles**                                                                                   | **4 cars**, first **3** separated by **3 tiles**, last separated by **1 tile**    | **2 cars**, separated by **1 tile**  | **3 cars**, separated by **3 tiles** | **1 snake** | **3 sets** of **3 turtles**, first separated by **3 tiles**, last two by **1 tile**, last set is **diving turtles** | **3 small logs**, separated by **3 tiles**                                                  | **1 long log**                            | **5 sets** of **2 turtles**, separated by **1 tile**, **1/5** are **diving turtles**   | **1 crocodile**, **2 medium logs**, separated by **2 tiles**                 | X    |
-| Level 8 | **4 cars**, separated by **3 tiles**                                              | **4 cars**, first and second separated by **3 tiles**, second and third by **1 tile**, third and fourth by **3 tiles** | **5 cars**, first and second separated by **1 tile**, others by **2 tiles**       | **2 cars**, separated by **3 tiles** | **3 cars**, separated by **2 tiles** | **1 snake** | **3 sets** of **3 turtles**, separated by **2 tiles**, first set is **diving turtles**                              | **3 small logs**, first and second separated by **1 tile**, second and third by **3 tiles** | **1 long log**                            | **4 sets** of **2 turtles**, separated by **2 tiles**, first set is **diving turtles** | **1 medium log**, **1 crocodile**, separated by **2 tiles**                  | X    |
+## 4. Risks and Assumptions
+
+### 4.1 Risks
+
+| **Risk**                 | **Impact** | **Mitigation**                                                                                                                                                     |
+| ------------------------ | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Hardware Failure**     | High       | Regular testing of hardware components and keeping backup components available to minimize downtime.                                                               |
+| **Software Development** | Medium     | As Verilog is not designed for game development, thorough planning and incremental testing will help manage issues, along with continued learning of the language. |
+
+### 4.2 Budget considerations
+
+As the game is being created from scratch, there should not be any expenses related to the software creation. However, there may be a need to spend some money for unforeseen components or enhancements. It’s important to note that while the FPGA board and VGA monitor were provided by the school, future users of the project will need to obtain these components themselves. We reserve the right to recommend specific functionalities if deemed necessary.
+
+### 4.3 Out of Scope
+
+- The inclusion of an arcade cabinet design is considered out of scope.
+- Detailed shapes and graphics are deemed out of scope.
+- Sound effects and music are out of scope.
+- Integration of leaderboards is out of scope.
+- Multi-language support for the game is out of scope.
+
+### 4.4 External resources
+
+To enhance our understanding of the game mechanics, we referred to the official Frogger manual. [Link](https://annarchive.com/files2/Frogger%20%28U%29.pdf)
