@@ -1,0 +1,7 @@
+# Remove all automatically generated files
+
+hardware.json
+.sconsign.dblite
+hardware.asc
+hardware.bin
+*.DS_Store

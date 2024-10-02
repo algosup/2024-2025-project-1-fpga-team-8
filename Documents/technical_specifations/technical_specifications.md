@@ -16,6 +16,8 @@ Created by: Aurélien FERNANDEZ
   - [1.1 - What is this project?](#11---what-is-this-project)
   - [1.2 - Provided hardware](#12---provided-hardware)
     - [1.2.1 - Go boards](#121---go-boards)
+      - [1.2.1.1- Overview](#1211--overview)
+      - [1.2.1.1 - Components of the board](#1211---components-of-the-board)
     - [1.2.2 - Screen](#122---screen)
   - [2 - Development environment](#2---development-environment)
     - [2.1 - Computers](#21---computers)
@@ -24,8 +26,10 @@ Created by: Aurélien FERNANDEZ
       - [2.2.2 - Why Verilog?](#222---why-verilog)
   - [3 - Development rules](#3---development-rules)
     - [3.1 Naming conventions](#31-naming-conventions)
-    - [3.2 Comments](#32-comments)
-    - [3.3 - Syntax conventions](#33---syntax-conventions)
+    - [3.2 - Comments](#32---comments)
+  - [4 - Technical implementations](#4---technical-implementations)
+    - [4.1 - Features required](#41---features-required)
+    - [4.2 - Screen implementation](#42---screen-implementation)
   - [Glossary](#glossary)
 </details>
 
@@ -40,19 +44,80 @@ This project is a reproduction of the game "Frogger" published in 1981 by Konami
 
 ### 1.2.1 - Go boards
 
+#### 1.2.1.1- Overview
 For this project, we were given a total of 7 [go boards](https://nandland.com/the-go-board/) which can be programmed using Verilog[^1].
 
 A go board is an FPGA[^2] that can be reprogrammed at any time. it has been created by the company [NandLand](https://nandland.com/) to allow students and beginners to learn about FPGAs[^2].
 
 Along with the boards we were given 7 books written by Russell MERRICK, our teacher for this project. This book contains the different usages and subtleties of Verilog.
 
-The default parameters of the go board remain unchanged.
+#### 1.2.1.1 - Components of the board
 
-[DEFAULT PARAMS TO DEFINE]
+
+- Lattice ICE40 HX1K FPGA
+- Mini USB
+- Four Settable LEDs
+- Four Push-Buttons
+- A Dual 7-Segment LED Display
+- VGA Connector
+- External Connector (PMOD)
+- 25 MHz on-board clock
+- 1Mb Flash for booting up the FPGA
+
+| Component   | Name used in code | Pin |
+| ----------- | ----------------- | --- |
+| LED 1       | o_LED_1           | 056 |
+| LED 2       | o_LED_2           | 057 |
+| LED 3       | o_LED_3           | 059 |
+| LED 4       | o_LED_4           | 060 |
+| Switch 1    | i_Switch_1        | 053 |
+| Switch 2    | i_Switch_2        | 051 |
+| Switch 3    | i_Switch_3        | 054 |
+| Switch 4    | i_Switch_4        | 052 |
+| VGA HSync   | o_VGA_HSync       | 026 |
+| VGA VSync   | o_VGA_VSync       | 027 |
+| VGA red 0   | o_VGA_Red_0       | 036 |
+| VGA red 1   | o_VGA_Red_1       | 037 |
+| VGA red 2   | o_VGA_Red_2       | 040 |
+| VGA green 0 | o_VGA_Grn_0       | 029 |
+| VGA green 1 | o_VGA_Grn_1       | 030 |
+| VGA green 2 | o_VGA_Grn_2       | 033 |
+| VGA blue 0  | o_VGA_Blu_0       | 028 |
+| VGA blue 1  | o_VGA_Blu_1       | 041 |
+| VGA blue 2  | o_VGA_Blu_2       | 042 |
+| PMOD 1      | io_PMOD_1         | 065 |
+| PMOD 2      | io_PMOD_2         | 064 |
+| PMOD 3      | io_PMOD_3         | 063 |
+| PMOD 4      | io_PMOD_4         | 062 |
+| PMOD 5      | /                 | /   |
+| PMOD 6      | /                 | /   |
+| PMOD 7      | io_PMOD_7         | 078 |
+| PMOD 8      | io_PMOD_8         | 079 |
+| PMOD 9      | io_PMOD_9         | 080 |
+| PMOD 10     | io_PMOD_10        | 081 |
+| Segment 1 A | o_Segment1[0]     | 003 |
+| Segment 1 B | o_Segment1[1]     | 004 |
+| Segment 1 C | o_Segment1[2]     | 093 |
+| Segment 1 D | o_Segment1[3]     | 091 |
+| Segment 1 E | o_Segment1[4]     | 090 |
+| Segment 1 F | o_Segment1[5]     | 001 |
+| Segment 1 G | o_Segment1[6]     | 002 |
+| Segment 2 A | o_Segment2[0]     | 100 |
+| Segment 2 B | o_Segment2[1]     | 099 |
+| Segment 2 C | o_Segment2[2]     | 097 |
+| Segment 2 D | o_Segment2[3]     | 095 |
+| Segment 2 E | o_Segment2[4]     | 094 |
+| Segment 2 F | o_Segment2[5]     | 008 |
+| Segment 2 G | o_Segment2[6]     | 096 |
+| Clock       | i_Clk             | 015 |
+| UART RX     | i_UART_RX         | 073 |
+| UART TX     | i_UART_TX         | 074 |
+
+The default parameters of the go board will remain unchanged, which means no component is added, removed or modified and the clock will hold the same frequency throughout the project.
 
 ### 1.2.2 - Screen
 
-We were also given a screen of  640 pixels width by 480 pixels height, along with a VGA cable to connect a board to the screen,
+We were also given a screen of  [TO DEFINE] width by [TO DEFINE] height, along with a VGA cable to connect a board to the screen,
 
 ## 2 - Development environment
 
@@ -103,7 +168,7 @@ reg r_Clock;
 parameter MYPARAM = 20;
 ```
 
-### 3.2 Comments
+### 3.2 - Comments
 
 The use of comments is crucial for the maintainability of a project is the use of comments. It allows collaborators and future developer to maintain and update the code without struggling on understanding the inner part of a program.
 
@@ -126,9 +191,33 @@ In a PCF file:
 
 Comments should be regularly written to ensure the comprehension of the code of current and future developers and reviewers. 
 
-### 3.3 - Syntax conventions
+## 4 - Technical implementations
+
+### 4.1 - Features required
+
+Here is a short summary of the features that are required for the success of this project. For a more detailed version of these features, refer to the [functional specifications](../functional_specifications/functional_specifications.md)
+| Feature name | Description                                                                                                                                                                                                               |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Move         | The player can move a playable character.                                                                                                                                                                                 |
+| Life system  | The player possesses 3 lives, when this number reaches 0, a game over screen appears and the game resets.                                                                                                                 |
+| Grid         | The screen is divided by a 13x13 grid, where each cells is 32x32 pixels.                                                                                                                                                  |
+| Grass        | 2 rows on the grid are composed of "grass" cells, one at the bottom, the second in the middle of the screen.                                                                                                              |
+| Road         | 5 rows on the grid are composed of "road" cells, they all are between the two rows of "grass".                                                                                                                            |
+| water        | 5 rows on the grid are composed of "water" cells, they all are between the second rows of "grass" and the last row.                                                                                                       |
+| Lilypads     | The last row is composed of 5 lilypads with walls on the left and right of each lilypad. When the player collides with every lilypads, the player wins, when the player collides with the walls, the player loses a life. |
+| Cars         | Cars are moving through the screen from left to right or  from right to left, they can only appear on roads. When the player collides with a car, the player loses a life.                                                |
+| Crocodiles   | Crocodiles are moving through the screen from left to right or from right to left, they can only appear on water. When the player collides with the mouth of a crocodile, the player loses a life.                        |
+| turtles      | Turtles are moving through the screen from left to right or from right to left, they can only appear on water. Some turtles can go under water.                                                                           |
+| Snakes       | Snakes are moving through the screen from left to right or from right to left, they can only appear on the second "grass" row. When the player collides with one, the player loses a life.                                |
+
+### 4.2 - Screen implementation
+
+To display images on our screen, we are using a VGA cable, due to the technical limitations of a VGA cable, the framerate is limited to a maximum of 30 frame per seconds.
+
+To use the VGA output,
+
 
 ## Glossary
-[^1]: Verilog: A programming language used to program and/or simulate circuit boards. Verilog is notably used with specific hardware such as FPGAs[^2].
+[^1]: Verilog: A programming language used to program and/or simulate circuit boards. Verilog is notably used with specific hardware such as FPGAs.
 [^2]: FPGA: A Field-Programmable Gate Array is a type of integrated circuit that can be programmed after manufacturing, it is notably used to create satellites, military equipment, or other devices requiring low-latency operations.
 [^3]: Module: The equivalent of other languages' functions. It is used to create and store the logic of the program.
