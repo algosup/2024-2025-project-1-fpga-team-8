@@ -27,18 +27,18 @@
       - [Game Levels (1-4)](#game-levels-1-4)
     - [2.5 Scoring System](#25-scoring-system)
     - [2.6 End of Game](#26-end-of-game)
-    - [3. Non-Functional Requirements](#3-non-functional-requirements)
-      - [3.1 Costs](#31-costs)
+  - [3. Non-Functional Requirements](#3-non-functional-requirements)
+    - [3.1 Costs](#31-costs)
         - [Capital Expenditures](#capital-expenditures)
         - [Time Invested](#time-invested)
         - [Operational Expenditures](#operational-expenditures)
         - [Project Scope](#project-scope)
-      - [3.2 Response/Performance \& Reliability](#32-responseperformance--reliability)
+    - [3.2 Response/Performance \& Reliability](#32-responseperformance--reliability)
         - [Performance Metrics](#performance-metrics)
         - [Reliability Considerations](#reliability-considerations)
-      - [3.3 Testability](#33-testability)
-      - [3.4 Documentation](#34-documentation)
-      - [3.5 Flexibility](#35-flexibility)
+    - [3.3 Testability](#33-testability)
+    - [3.4 Documentation](#34-documentation)
+    - [3.5 Flexibility](#35-flexibility)
 
 </details>
 
@@ -350,11 +350,11 @@ If the player reaches a high score of 20,000 points and fewer than four frogs re
 
 The game ends when all frogs (lives) are lost. The player can restart the game or reset it via the FPGA system to begin a new round.
 
-### 3. Non-Functional Requirements
+## 3. Non-Functional Requirements
 
 This section outlines the non-functional requirements for the FPGA Frogger game project, focusing on costs, performance, reliability, and testability.
 
-#### 3.1 Costs
+### 3.1 Costs
 
 ##### Capital Expenditures
 
@@ -375,7 +375,7 @@ As the project is entirely self-contained, running on the FPGA hardware, there a
 
 The scope of this project is focused on learning FPGA and Verilog programming while building a fun, playable Frogger game. The cost needs to stay low as the primary objective is education.
 
-#### 3.2 Response/Performance & Reliability
+### 3.2 Response/Performance & Reliability
 
 This section defines how quickly and reliably the system responds to user inputs and renders changes on the screen.
 
@@ -391,11 +391,11 @@ This section defines how quickly and reliably the system responds to user inputs
 - **Error Handling**: The system needs to handle unexpected conditions, such as edge cases like simultaneous button presses. The game will reset or retry if these occur.
 - **Stability**: The game should not crash or freeze during normal gameplay, the players need to be able to complete the game without technical issues.
 
-#### 3.3 Testability
+### 3.3 Testability
 
 Testability refers to how easily the system's functionality can be verified. A comprehensive test plan is being developed by a team member. The testing process will cover both simulation and in-hardware testing, with manual gameplay serving as the primary method due to the project's hardware setup.
 
-#### 3.4 Documentation
+### 3.4 Documentation
 
 - **Definition:** The quality and comprehensiveness of documentation provided to aid in learning, future reference, and ensuring that the project’s goals, scope, and ambitions are clearly communicated. The documentation must align with our vision for the software.
 
@@ -404,7 +404,7 @@ Testability refers to how easily the system's functionality can be verified. A c
   - **Comprehensive Documentation:** Our team will ensure that all of the documentation of the project is comprehensive for everyone by having clear english.
   - **Code Documentation:** Code should be easily-readable, and commented with purpose. Ensuring comprehensiveness and clarity in the software. As Verilog is a low level language , clarity will be necessary.
 
-#### 3.5 Flexibility
+### 3.5 Flexibility
 
 - **Definition:** Flexibility refers to the system's ability to accommodate future enhancements, evolving user needs, and minor adjustments without requiring major rework.
 
