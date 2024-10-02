@@ -24,18 +24,18 @@
       - [2.3.1 Pink Frog](#231-pink-frog)
       - [2.3.2 Fly Bonus](#232-fly-bonus)
     - [2.4 Game Difficulty](#24-game-difficulty)
-      - [Game Levels (1-4):](#game-levels-1-4)
+      - [Game Levels (1-4)](#game-levels-1-4)
     - [2.5 Scoring System](#25-scoring-system)
     - [2.6 End of Game](#26-end-of-game)
     - [3. Non-Functional Requirements](#3-non-functional-requirements)
       - [3.1 Costs](#31-costs)
-        - [Capital Expenditures:](#capital-expenditures)
-        - [Time Invested:](#time-invested)
-        - [Operational Expenditures:](#operational-expenditures)
-        - [Project Scope:](#project-scope)
+        - [Capital Expenditures](#capital-expenditures)
+        - [Time Invested](#time-invested)
+        - [Operational Expenditures](#operational-expenditures)
+        - [Project Scope](#project-scope)
       - [3.2 Response/Performance \& Reliability](#32-responseperformance--reliability)
-        - [Performance Metrics:](#performance-metrics)
-        - [Reliability Considerations:](#reliability-considerations)
+        - [Performance Metrics](#performance-metrics)
+        - [Reliability Considerations](#reliability-considerations)
       - [3.3 Testability](#33-testability)
   - [Documentation](#documentation)
     - [Flexibility](#flexibility)
@@ -315,7 +315,7 @@ The difficulty in "Frogger" escalates across four distinct levels. Here’s a br
 
 <!-- The original frogger has 4 levels, the requirements says 8 uncertain for now. -->
 
-#### Game Levels (1-4):
+#### Game Levels (1-4)
 
 - **Level 1 & 2**:
 
@@ -357,22 +357,22 @@ This section outlines the non-functional requirements for the FPGA Frogger game 
 
 #### 3.1 Costs
 
-##### Capital Expenditures:
+##### Capital Expenditures
 
 - **Board**: NandLand Go-Board, priced at €70.
 - **Monitor**: Acer EK251Q EBI, priced at €109.99.
 
 The capital expenditures, including the board and monitor, are furnished by the school. There are no relevant development environment costs, as the project uses freely available software.
 
-##### Time Invested:
+##### Time Invested
 
 Since this is an educational project, significant time will be invested in learning Verilog and FPGA design. The goal is to both create a functional product and gain knowledge over the tools and hardware.
 
-##### Operational Expenditures:
+##### Operational Expenditures
 
 As the project is entirely self-contained, running on the FPGA hardware, there are no cloud services, server usage, or ongoing maintenance costs. Operational expenditures are expected to be at a minimum after development.
 
-##### Project Scope:
+##### Project Scope
 
 The scope of this project is focused on learning FPGA and Verilog programming while building a fun, playable Frogger game. The cost needs to stay low as the primary objective is education.
 
@@ -380,14 +380,14 @@ The scope of this project is focused on learning FPGA and Verilog programming wh
 
 This section defines how quickly and reliably the system responds to user inputs and renders changes on the screen.
 
-##### Performance Metrics:
+##### Performance Metrics
 
 - **VGA Display**: The game runs at a 640x480 resolution, there will be smooth transitions between game objects while adhering to VGA timing constraints. Clear visuals and consistent refresh rate are expected.
 - **Target FPS**: The game aims for a frame rate of 30 FPS.
 - **Input Latency**: The frog’s movement should occur within 10 to 30 milliseconds of pressing a button.
 - **Object Movement**: Vehicles and obstacles must move fluidly across the screen without jittering. Object speeds will vary by difficulty, but all movements should be smooth and reliable.
 
-##### Reliability Considerations:
+##### Reliability Considerations
 
 - **Error Handling**: The system needs to handle unexpected conditions, such as edge cases like simultaneous button presses. The game will reset or retry if these occur.
 - **Stability**: The game should not crash or freeze during normal gameplay, the players need to be able to complete the game without technical issues.
@@ -422,3 +422,14 @@ Testability refers to how easily the system's functionality can be verified. A c
 - **Considerations:** Resource utilization and performance optimization, with a focus on understanding FPGA resource constraints and improving efficiency.
   - **Resource Utilization:** FPGAs are limited in available resources, the software must be scaled to the available resources to ensure a smooth experience for the end user.
   - **Performance Optimization:** Software performances must be optimized.
+
+| Level   | Lane 1 | Lane 2 | Lane 3 | Lane 4 | Lane 5 | Banking | Water 1 | Water 2 | Water 3 | Water 4 | Water 5 |Home |
+|---------|--------|--------|--------|--------|--------|---------|---------|---------|---------|---------|---------|------|
+| Level 1 | 3 cars spaced by 4 tiles.       |  3 cars, spaced by 3 tiles      | 3 cars, spaced by 3 tiles       |  1 car      | 2 cars spaced by 4 tiles       |     X    |     4 set of three turtles separated by 1 tile, first set being diving turtle     |    3 small logs separated by 2 tiles     |    3 long logs separated by 2 tiles     |   4 sets of two turtles separated by 2 tiles, first set being diving turtle    |   3 medium logs separated by 2 tiles      |   X   |
+|Level 2 |  4 cars, 3 first are separated by 4 tiles, the fourth is separated by 2 tiles  |  4 cars separated by 4 tiles | 4 cars, 3 first are separated by 4 tiles, the fourth is separated by 2 tiles  | 2 cars separated by 2 tiles  |  3 cars separated by 4 tiles | X  | 3 sets of three turtle, the first set is separated by 3 tiles, the second and third are separated by 1 tile  | 3 small logs separated by 2 tiles  | 1 long log  | 5 sets of 2 turtles separated by 1 tile, the first set are diving  | 3 logs separated by 2 tiles, 1 crocodile every [interval] separated by 2 tiles (remplacing a log) |  X |
+|Level 3| 4 cars, separated by 3 tiles| 4 cars, 3 first are separated by 4 tiles, last is separated by 2 tiles|5 cars, 4 of which are separated by 3 tiles, last is separated by 1 tile|2 cars separated by 3 tiles|3 cars separated by 2 tiles|1 snake|3 sets of 3 turtles, separated by 2 tiles, 1/3 are diving turtles|3 small logs, first one separated by 3 tiles, the two last are separated by 1 tile|1 long log| 4 sets of 2 turtles separated by 2 tiles, 1/4 are diving turtles|2 medium logs separated by 2 tiles| X |
+|Level 4|4 cars, three first cars are separated by 3 tiles, last one is separated by 1 tile|4 cars separated by 3 tiles|4 cars, three first separated by 3 tiles, last one is separated by 1 tile|3 cars separated by 3 tiles|4 cars separated by 2 tiles| 1 snake | 3 sets of 3 turtles separated by 3 tiles, 1/3 are diving turtles|2 small logs separated by 4 tiles|1 long log|3 sets of 2 turtles separated by 2 tiles, 1/3 are diving turtles|2 medium logs separated by 2 tiles|X|
+|Level 5|5 cars, 4 of which are separated by 2 tiles, fifth is separated by 1 tile from the previous one|4 cars, separated by 3 tiles|5 cars, separated by 2 tiles|4 cars, separated by 2 tiles|3 cars, separated by 2 tiles|1 snake|2 sets of three turtle, separated by 3 tiles, 1/2 are diving turtles|2 small logs, separated by 3 tiles|1 long log|3 sets of two turtle, separated by 3 tiles|1 crocodile|X|
+|Level 6|3 cars separated by 3 tiles|3 cars separated by 3 tiles|3 car separated by 3 tiles|1 car|2 cars, separated by 3 tiles|1 snake|4 sets of three turtles, separated by 2 tiles, 1/4 are diving turtles|3 small logs, separated by 2 tiles|2 long logs, separated by 2 tiles|4 sets of two turtles, separed by 2 tiles, 1/4 are diving turtles|2 medium logs, 1 crocodile, separated by 2 tiles|X|
+|Level 7|4 cars, three of which are separated by 3 tiles, last one being separated by 1 tile from the previous one|4 cars separated by 3 tiles|4 cars, three of which are separated by 3 tiles, last one being separated by 1 tile|2 cars being separated by 1 tile|3 cars being separated by 3 tiles|1 snake|3 sets of three turtles, first one being separated by 3 tiles, two last one being separated by 1 tile, 1/3 set (last of the queue) are diving turtles|3 small logs, separated by 3 tiles|1 long log |5 sets of two turtles, separated by 1 tile, 1/5 set are diving turtles|1 crocodile, 2 medium logs, separated by 2 tiles|X|
+|Level 8|4 cars, separated by 3 tiles|4 cars, first and second are separated by 3 tiles, second and third are separated by 1 tile, third and last are separated by 3 tiles|5 cars, first and second are separated by tile, the other ones are separated by 2 tiles|2 cars, separated by 3 tiles|3 cars, separated by 2 tiles|1 snake|3 sets of three turtles, separated by 2 tiles, 1 first set being diving turtles|3 small logs, first and second being separated by 1 tile, second and third being separated by 3 tiles|1 long log|4 sets of two turtles, separated by 2 tiles, first set being diving turtles|1 medium log, 1 crocodile, separated by 2 tiles|X|
