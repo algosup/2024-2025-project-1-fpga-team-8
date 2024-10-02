@@ -29,13 +29,13 @@
     - [2.6 End of Game](#26-end-of-game)
   - [3. Non-Functional Requirements](#3-non-functional-requirements)
     - [3.1 Costs](#31-costs)
-      - [Capital Expenditures](#capital-expenditures)
-      - [Time Invested](#time-invested)
-      - [Operational Expenditures](#operational-expenditures)
-      - [Project Scope](#project-scope)
+        - [Capital Expenditures](#capital-expenditures)
+        - [Time Invested](#time-invested)
+        - [Operational Expenditures](#operational-expenditures)
+        - [Project Scope](#project-scope)
     - [3.2 Response/Performance \& Reliability](#32-responseperformance--reliability)
-      - [Performance Metrics](#performance-metrics)
-      - [Reliability Considerations](#reliability-considerations)
+        - [Performance Metrics](#performance-metrics)
+        - [Reliability Considerations](#reliability-considerations)
     - [3.3 Testability](#33-testability)
     - [3.4 Documentation](#34-documentation)
     - [3.5 Flexibility](#35-flexibility)
@@ -325,10 +325,7 @@ The difficulty in "Frogger" escalates across four distinct levels. Here’s a br
 
   - At the start, Frogger can float off-screen for a frame, allowing for a moderate introduction to the gameplay.
   - Traffic patterns are manageable, with vehicles moving at across the screen with periodically larger gaps. Players will have time to learn the timing of their movements without the pressure of fast-moving obstacles.
-    <<<<<<< Updated upstream
-  - # River obstacles, such as logs and diving turtles, are plentiful, the players will have ample opportunities to practice hopping safely across the water.
   - River obstacles, such as logs and turtles, are plentiful, the players will have ample opportunities to practice hopping safely across the water.
-    > > > > > > > Stashed changes
   - As players progress through these levels, the speed of traffic and river objects gradually increases.
 
 - **Level 2**:
