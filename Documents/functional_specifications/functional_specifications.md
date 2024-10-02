@@ -24,7 +24,7 @@
       - [2.3.1 Pink Frog](#231-pink-frog)
       - [2.3.2 Fly Bonus](#232-fly-bonus)
     - [2.4 Game Difficulty](#24-game-difficulty)
-      - [Game Levels (1-4)](#game-levels-1-4)
+      - [Game Levels (1-8)](#game-levels-1-8)
     - [2.5 Scoring System](#25-scoring-system)
     - [2.6 End of Game](#26-end-of-game)
   - [3. Non-Functional Requirements](#3-non-functional-requirements)
@@ -314,7 +314,7 @@ The difficulty in "Frogger" escalates across four distinct levels. Here’s a br
 
 <!-- The original frogger has 4 levels, the requirements says 8 uncertain for now. -->
 
-#### Game Levels (1-4)
+#### Game Levels (1-8)
 
 - **Level 1**:
 
@@ -332,7 +332,7 @@ The difficulty in "Frogger" escalates across four distinct levels. Here’s a br
   - The game starts at a higher difficulty, with traffic being denser and log more sparse.
   - New hazards are introduced, such as **otter attacks** that can push frogger in the water.
   - With fewer floating objects in the river, players must navigate a more treacherous environment.
-- **Level 5 and after**
+- **Level 5 to 8**
   - After these level the speed increase sharply.
   - The density of traffic is lower but will increase again.
 
