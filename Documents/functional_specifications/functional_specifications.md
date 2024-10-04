@@ -242,9 +242,7 @@ Thus 96x32 pixels.
 
 <div align="center">
 
-![mediumlog1](./images/logpart1.png)
-![mediumlog2](./images/logpart2.png)
-![mediumlog3](./images/logpart3.png)
+![mediumlog1](./images/logpart1.png) ![mediumlog2](./images/logpart2.png) ![mediumlog3](./images/logpart3.png)
 
 </div>
 
