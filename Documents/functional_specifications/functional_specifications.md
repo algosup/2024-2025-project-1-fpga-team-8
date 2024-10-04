@@ -12,6 +12,8 @@
     - [1.2 Purpose](#12-purpose)
     - [1.3 Out of Scope](#13-out-of-scope)
     - [1.4 Personas](#14-personas)
+      - [Modern Gamer:](#modern-gamer)
+      - [Old-school Gamer:](#old-school-gamer)
     - [1.5 Use cases](#15-use-cases)
   - [2. Frogger game](#2-frogger-game)
     - [2.1 Game Objective](#21-game-objective)
@@ -101,9 +103,56 @@ The game start button is "start" which means that the game isn't quite language 
 
 The primary users of the FPGA Frogger game include:
 
-- **Modern Gamer**: This individual enjoys fast-paced and exciting games but also appreciates the retro charm of classic arcade games. They are looking for a simple yet challenging experience and are interested in exploring games that go beyond typical software, like one built on FPGA hardware. They value innovation in how games are made and enjoy testing out unique gaming platforms.
+#### Modern Gamer: 
 
-- **Old-school Gamer**: Someone who grew up playing arcade games like Frogger. They seek nostalgia and appreciate the authenticity of recreating the original experience. This person is likely to appreciate the familiar gameplay mechanics while being intrigued by the idea of playing Frogger on new technology like an FPGA.
+**Gaming Habits:** Plays fast-paced competitive games (e.g., Rocket League, Apex Legends) and indie games with innovative mechanics.
+
+**Motivations:**
+- Innovation & Technology: Fascinated by unconventional game platforms like FPGA, appreciates creativity in game design, and wants to explore something that bridges classic gaming with modern tech.
+- Challenge & Simplicity: Enjoys games that balance simplicity and complexity; likes to challenge their reflexes and strategy, but without unnecessary complexity in controls or story.
+- Retro Appeal: Has a mild interest in retro aesthetics and finds the idea of FPGA recreating a classic arcade game intriguing, especially with a unique platform.
+
+**Goals:**
+- Explore New Technologies: Curious about how FPGA can be used in gaming, they wants to experience how the performance and input speed of an FPGA-powered game compares to traditional platforms.
+- Fun & Challenging Gameplay: They are seeking a game that challenges their reflexes but are still engaging and replayable without overly complex rules or mechanics.
+- Quick & Casual Experience: As someone who enjoys competitive online games, they are looking for a game they can pick up quickly for short play sessions without a large time commitment.
+
+**Frustrations:**
+- Overly Complicated Games: Alex avoids games that are too convoluted, with multiple menus, levels of management, or excessive narrative.
+- Lack of Polish: They dislike games that are buggy, have poor controls, or do not feel responsive—especially when trying a game on new technology like FPGA.
+- Unintuitive Controls: Would quickly lose interest if the game’s controls are not intuitive or responsive to quick inputs.
+
+**Preferred Features:**
+- Responsive Controls: Values low input latency and high frame rates to make gameplay feel smooth and satisfying.
+- Challenging Levels: Interested in increasing difficulty curves where skill is rewarded, like progressively harder levels or faster-moving objects.
+- Visual Feedback: Prefers games with clear visual and audio feedback, especially in response to actions or mistakes (e.g., lives lost, jumps, hazards).
+<br>
+
+
+#### Old-school Gamer: 
+
+**Gaming Habits:** Grew up playing arcade games like Frogger, Pac-Man, and Space Invaders. Now enjoys replaying classics, either via emulators or retro-style games on consoles.
+Motivations:
+
+**Nostalgia:**
+- Enjoys reliving the gaming experiences of their youth and values accuracy in recreating these moments.
+- Simplicity: Prefers straightforward, easy-to-pick-up games where the objective is clear and the focus is on skill-based challenges.
+- Curiosity for New Tech: While they prefers retro gameplay, they are curious about how new technologies (e.g., FPGA) can revive or improve these classic experiences without losing their authenticity.
+
+**Goals:**
+- Recreate the Arcade Experience: They wants a game that captures the arcade experience, with accurate mechanics, graphics, and gameplay flow, but on new technology.
+- Challenge themselves Again: They seeks to experience the same gameplay challenge that they enjoyed as a teenager, testing their reflexes and memory.
+- Teach the Next Generation: They hopes to share their love for arcade games with their kids, introducing them to simpler yet rewarding gameplay without the overwhelming nature of modern titles.
+
+**Frustrations:**
+- Inauthentic Remakes: Dislikes when remakes or ports of retro games deviate too much from the original in terms of mechanics, visuals, or difficulty balance.
+- Overcomplication: Prefers not to be overwhelmed with menus, tutorials, or complex modern features like microtransactions or customization that disrupt the core arcade experience.
+- Technical Hiccups: They values the seamlessness of original arcade machines, so any bugs, crashes, or input delays would detract from their enjoyment of the FPGA game.
+
+**Preferred Features:**
+- Faithful Recreation: Sarah values mechanics that stay true to the original Frogger, including the exact placement of hazards, timing, and game difficulty.
+- Simple, Physical Controls: Prefers simple control schemes similar to the arcade (e.g., a joystick or basic directional buttons), avoiding complex key mappings.
+- Visual & Audio Accuracy: They appreciates retro pixel graphics, original sound effects, or music that captures the vibe of the classic Frogger, even if on new hardware.
 
 ### 1.5 Use cases
 
