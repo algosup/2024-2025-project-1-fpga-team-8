@@ -226,12 +226,27 @@ _Logs_:
 A small log spans the equivalent of 2 tiles.
 Thus 64x32 pixels.
 
+<div align="center">
+
+![smalllog1](./images/logpart1.png)
+![smalllog2](./images/logpart3.png)
+
+</div>
+
 **Medium logs:**
 
 ![log2](./images/log2.png)
 
 A medium log spans the equivalent of 3 tiles.
 Thus 96x32 pixels.
+
+<div align="center">
+
+![mediumlog1](./images/logpart1.png)
+![mediumlog2](./images/logpart2.png)
+![mediumlog3](./images/logpart3.png)
+
+</div>
 
 **Long Logs:**
 
