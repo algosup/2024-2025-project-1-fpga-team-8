@@ -56,6 +56,8 @@ module frogger_game
   wire [5:0] w_Car_X_1, w_Car_Y_1;
   wire [5:0] w_Car_X_2, w_Car_Y_2;
   wire [5:0] w_Car_X_3, w_Car_Y_3;
+  wire [5:0] w_Car_X_4, w_Car_Y_4;
+  wire [5:0] w_Car_X_5, w_Car_Y_5;
 
   // Drop 5 LSBs, which effectively divides by 32
   assign w_Col_Count_Div = w_Col_Count[9:5];
@@ -131,7 +133,7 @@ module frogger_game
     .o_Score(r_Frogger_Score)
   );
 
-      // Car 1 instance
+    // Car 1 instance
     car_ctrl #(
       .c_CAR_SPEED(1),
       .c_MAX_X(14),
@@ -156,7 +158,7 @@ module frogger_game
       .c_MAX_X(14),
       .c_SLOW_COUNT(5000000),
       .c_INIT_X(0),
-      .c_INIT_Y(9)
+      .c_INIT_Y(10)
     )
 
       car_ctrl_inst_2 (
@@ -174,7 +176,7 @@ module frogger_game
       .c_MAX_X(14),
       .c_SLOW_COUNT(3700000),
       .c_INIT_X(0),
-      .c_INIT_Y(7)
+      .c_INIT_Y(9)
     )
 
       car_ctrl_inst_3 (
@@ -184,6 +186,40 @@ module frogger_game
         .o_Draw_Car(w_Draw_Car_3),
         .o_Car_X(w_Car_X_3),
         .o_Car_Y(w_Car_Y_3),
+    );
+
+    car_ctrl #(
+      .c_CAR_SPEED(1),
+      .c_MAX_X(14),
+      .c_SLOW_COUNT(4500000),
+      .c_INIT_X(0),
+      .c_INIT_Y(8)
+    )
+
+      car_ctrl_inst_4 (
+        .i_Clk(i_Clk),
+        .i_Col_Count_Div(w_Col_Count_Div),
+        .i_Row_Count_Div(w_Row_Count_Div),
+        .o_Draw_Car(w_Draw_Car_4),
+        .o_Car_X(w_Car_X_4),
+        .o_Car_Y(w_Car_Y_4),
+    );
+
+    car_ctrl #(
+      .c_CAR_SPEED(1),
+      .c_MAX_X(14),
+      .c_SLOW_COUNT(4200000),
+      .c_INIT_X(0),
+      .c_INIT_Y(7)
+    )
+
+      car_ctrl_inst_5 (
+        .i_Clk(i_Clk),
+        .i_Col_Count_Div(w_Col_Count_Div),
+        .i_Row_Count_Div(w_Row_Count_Div),
+        .o_Draw_Car(w_Draw_Car_5),
+        .o_Car_X(w_Car_X_5),
+        .o_Car_Y(w_Car_Y_5),
     );
 
   // Determine background colors based on the bitmap and draw Frogger if applicable
@@ -214,6 +250,18 @@ module frogger_game
       r_Grn_Video = 4'b1111;
       r_Blu_Video = 4'b1111;
     end
+    else if ((w_Col_Count_Div == w_Car_X_4) && (w_Row_Count_Div == w_Car_Y_4)) begin
+      // If in the same tile as Frogger, draw Frogger in white
+      r_Red_Video = 4'b1111; // White
+      r_Grn_Video = 4'b1111;
+      r_Blu_Video = 4'b1111;
+    end
+    else if ((w_Col_Count_Div == w_Car_X_5) && (w_Row_Count_Div == w_Car_Y_5)) begin
+      // If in the same tile as Frogger, draw Frogger in white
+      r_Red_Video = 4'b1111; // White
+      r_Grn_Video = 4'b1111;
+      r_Blu_Video = 4'b1111;
+    end    
     else if (w_Col_Count_Div < c_GAME_WIDTH && w_Row_Count_Div < c_GAME_HEIGHT) begin
       // Otherwise, draw the background based on the bitmap
       case (r_Bitmap[w_Row_Count_Div][w_Col_Count_Div])
