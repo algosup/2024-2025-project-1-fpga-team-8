@@ -86,13 +86,13 @@ While the primary objective is to get the core gameplay functioning, we’re als
 
 - <u>Arcade Cabinet:</u>
 An arcade cabinet would have a joystick and screen integrated into a casing to hide the entire system.<br>The arcade would make the game easier to play and make the system less intimidating for non-technical people. However, such an endeavor would involve fabrication skills and resources beyond what is available to the team.
-<br>
+
 - <u>Sounds:</u>
 Sound effects and Music would add a sense of life to the game and make it closer to the original experience.<br>The hardware available doesn't support sound. In addition, the benefits don't justify the effort of implementing a sound system from scratch.
-<br>
+
 - <u>Leaderboard:</u>
 A leaderboard would allow us to save and display the best score on the screen.<br>This could make the game more attractive and more competitive. But those aren't the objectives of the project so it shouldn't be implemented.
-<br>
+
 - <u>Multi-language support:</u>
 The game start button is "start" which means that the game isn't quite language agnostic. A multilingual solution would be a solution to remedy this issue.<br>This solution is high effort and wasteful as it would require adding a language selection menu. Whereas simply making the game language agnostic could be done by changing the start button.
 
