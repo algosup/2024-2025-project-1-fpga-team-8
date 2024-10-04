@@ -178,7 +178,7 @@ Motivations:
 
 ### 2.1 Game Objective
 
-To complete a level, the player must guide five frogs safely into the home bays. Each frog represents a life, and the player starts with four lives. The game ends when all frogs are lost or when the player completes all the levels. Additionally, Frogger has a time limit of 30 seconds (or 60 ticks) per frog, shown by a time band at the bottom of the screen. The remaining time also contributes to the player’s score if the frog reaches a home bay on time.
+To complete a level, the player must guide five frogs safely into the home bays. Each frog represents a life, and the player starts with four lives. The game ends when all frogs are lost or when the player completes all the levels. Additionally, Frogger has a time limit of 30 seconds (or 60 ticks) per frog, shown by a time band at the bottom of the screen. The remaining time also contributes to the player’s score if the frog reaches a home bay on time. This remain the same throughout all the levels.
 
 _Frogger game:_
 
@@ -253,13 +253,11 @@ The river is divided into 7 rows:
 
 - First row: The riverbank—a relatively safe area where the snake begins spawning after level 3.
 - Second row: Contains sets of three turtles.
-- Third row: Alternates between short and long logs.
+- Third row: Consists of short logs only.
 - Fourth row: Consists of long logs only.
 - Fifth row: Contains sets of two turtles.
-- Sixth row: Features a random mix of short, medium, or long logs.
+- Sixth row: Consists of medium logs only.
 - Seventh row: The goal, with five safe spots (home bays) that Frogger must fill. The grass here is unsafe, and enemies or bonuses may also appear.
-
-Note: From the second to the seventh row, the objects spawn randomly, a topic we will explore further later on.
 
 _River Bank:_
 
