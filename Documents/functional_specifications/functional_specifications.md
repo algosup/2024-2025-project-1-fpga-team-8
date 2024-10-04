@@ -69,7 +69,7 @@ _A logo of the game is shown below:_
 
 <div align="center">
 
-//placeholder image
+![logo](./images/logo.jpeg)
 
 </div>
 
@@ -111,7 +111,7 @@ The primary users of the FPGA Frogger game include:
 
 ### 2.1 Game Objective
 
-In the FPGA Frogger game, the player’s goal is to guide a frog from the bottom of the screen to one of the safe home bays at the top. The player must help the frog cross a busy highway filled with fast-moving vehicles, and then navigate a river by jumping on logs, turtles, and other floating objects. The challenge lies in avoiding obstacles such as cars, diving turtles, and alligator jaws. Successfully reaching a home bay earns points, and additional bonuses can be collected along the way.
+In the FPGA Frogger game, the player’s goal is to guide a frog from the bottom of the screen to one of the safe home bays at the top. The player must help the frog cross a busy highway filled with fast-moving vehicles, and then navigate a river by jumping on logs, turtles, and other floating objects. The challenge lies in avoiding obstacles such as cars, diving turtles, and alligator jaws. Successfully reaching a home bay earns points, and additional bonuses can be collected along the way. The player moves on a 14 by 13 tile grid, each tiles being 32x32 pixel.
 
 To complete a level, the player must guide five frogs safely into the home bays. Each frog represents a life, and the player starts with four lives. The game ends when all frogs are lost or when the player completes all the levels. Additionally, Frogger has a time limit of 30 seconds (or 60 ticks) per frog, shown by a time band at the bottom of the screen. The remaining time also contributes to the player’s score if the frog reaches a home bay on time.
 
@@ -119,7 +119,8 @@ _Frogger game:_
 
 <div align="center">
 
-//placeholder image
+![game](./images/frogger_game.png)
+
 
 </div>
 
@@ -133,7 +134,7 @@ _Frog:_
 
 <div align="center">
 
-//placeholder image
+![frog](./images/frog.png)
 
 </div>
 
@@ -145,7 +146,7 @@ _FPGA BUTTONS:_
 
 <div align="center">
 
-//placeholder image
+![FPGA](./images/fpga.jpg)
 
 </div>
 
@@ -159,7 +160,7 @@ _Highway:_
 
 <div align="center">
 
-//placeholder image
+![road](./images/road.png)
 
 </div>
 
@@ -316,8 +317,6 @@ _Flies:_
 ### 2.4 Game Difficulty
 
 The difficulty in "Frogger" escalates across four distinct levels. Here’s a breakdown of what to expect at each level:
-
-<!-- The original frogger has 4 levels, the requirements says 8 uncertain for now. -->
 
 #### Game Levels (1-8)
 
