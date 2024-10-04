@@ -46,8 +46,9 @@
     - [3.5 Flexibility](#35-flexibility)
   - [4. Risks and Assumptions](#4-risks-and-assumptions)
     - [4.1 Risks](#41-risks)
-    - [4.2 Budget considerations](#42-budget-considerations)
-    - [4.3 External resources](#43-external-resources)
+    - [4.2 Copyright](#42-copyright)
+    - [4.3 Budget considerations](#43-budget-considerations)
+    - [4.4 External resources](#44-external-resources)
   - [Glossary](#glossary)
 
 </details>
@@ -607,11 +608,16 @@ Testability refers to how easily the system's functionality can be verified. A c
 | **Hardware Failure**     | High       | Regular testing of hardware components and keeping backup components available to minimize downtime.                                                                |
 | **Software Development** | Medium     | As Verilog is not designed for game development, thorough planning, and incremental testing will help manage issues, along with continued learning of the language. |
 
-### 4.2 Budget considerations
+### 4.2 Copyright
+
+Frogger is owned by Konami. This means that we aren't allowed to use the same code and assets as the original game.
+This will not be an issue as we are creating our own software and our assets are inspired but not copied from the original game.
+
+### 4.3 Budget considerations
 
 As the game is being created from scratch, there should not be any expenses related to the software creation. However, there may be a need to spend some money on unforeseen components or enhancements. It’s important to note that while the FPGA board and VGA monitor were provided by the school, future users of the project will need to obtain these components themselves. We reserve the right to recommend specific functionalities if deemed necessary.
 
-### 4.3 External resources
+### 4.4 External resources
 
 To enhance our understanding of the game mechanics, we referred to the official Frogger manual. [Link](https://annarchive.com/files2/Frogger%20%28U%29.pdf)
 
@@ -632,3 +638,4 @@ To enhance our understanding of the game mechanics, we referred to the official 
 | Simulation Testing                   | A method used to test the game’s functionality before deploying it on actual hardware. This is done using software simulations.                         |
 | Error Handling                       | Mechanisms put in place to manage unexpected conditions in the game, such as pressing multiple buttons simultaneously.                                  |
 | Frame Rate                           | The speed at which the game renders frames on the screen, targeted at 30 frames per second (FPS).                                                       |
+| Konami | A video game company that owns the rights of Frogger |
