@@ -30,6 +30,10 @@ Created by: Aurélien FERNANDEZ
   - [4 - Technical implementations](#4---technical-implementations)
     - [4.1 - Features required](#41---features-required)
     - [4.2 - Screen implementation](#42---screen-implementation)
+    - [4.2.1 - Frame management](#421---frame-management)
+    - [4.2.2 - Creating the map](#422---creating-the-map)
+      - [4.2.2.1 - The grid](#4221---the-grid)
+      - [4.2.2.2 - Bitmap](#4222---bitmap)
   - [Glossary](#glossary)
 </details>
 
@@ -113,11 +117,13 @@ Along with the boards we were given 7 books written by Russell MERRICK, our teac
 | UART RX     | i_UART_RX         | 073 |
 | UART TX     | i_UART_TX         | 074 |
 
+The clock, operating at a frequency of 25Mhz, performs 25 000 000 cycles per second. 
+
 The default parameters of the go board will remain unchanged, which means no component is added, removed or modified and the clock will hold the same frequency throughout the project.
 
 ### 1.2.2 - Screen
 
-We were also given a screen of  [TO DEFINE] width by [TO DEFINE] height, along with a VGA cable to connect a board to the screen,
+We were also given a screen of  1920 pixels width by 1080 pixels height, along with a VGA cable to connect a board to the screen. The specific model of our screen is the LCD monitor EK1 Series-EK251Q.
 
 ## 2 - Development environment
 
@@ -200,10 +206,10 @@ Here is a short summary of the features that are required for the success of thi
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Move         | The player can move a playable character.                                                                                                                                                                                 |
 | Life system  | The player possesses 3 lives, when this number reaches 0, a game over screen appears and the game resets.                                                                                                                 |
-| Grid         | The screen is divided by a 13x13 grid, where each cells is 32x32 pixels.                                                                                                                                                  |
-| Grass        | 2 rows on the grid are composed of "grass" cells, one at the bottom, the second in the middle of the screen.                                                                                                              |
-| Road         | 5 rows on the grid are composed of "road" cells, they all are between the two rows of "grass".                                                                                                                            |
-| water        | 5 rows on the grid are composed of "water" cells, they all are between the second rows of "grass" and the last row.                                                                                                       |
+| Grid         | The screen is divided by a 13x13 grid, where each tiles is 32x32 pixels.                                                                                                                                                  |
+| Grass        | 2 rows on the grid are composed of "grass" tiles, one at the bottom, the second in the middle of the screen.                                                                                                              |
+| Road         | 5 rows on the grid are composed of "road" tiles, they all are between the two rows of "grass".                                                                                                                            |
+| water        | 5 rows on the grid are composed of "water" tiles, they all are between the second rows of "grass" and the last row.                                                                                                       |
 | Lilypads     | The last row is composed of 5 lilypads with walls on the left and right of each lilypad. When the player collides with every lilypads, the player wins, when the player collides with the walls, the player loses a life. |
 | Cars         | Cars are moving through the screen from left to right or  from right to left, they can only appear on roads. When the player collides with a car, the player loses a life.                                                |
 | Crocodiles   | Crocodiles are moving through the screen from left to right or from right to left, they can only appear on water. When the player collides with the mouth of a crocodile, the player loses a life.                        |
@@ -212,10 +218,29 @@ Here is a short summary of the features that are required for the success of thi
 
 ### 4.2 - Screen implementation
 
-To display images on our screen, we are using a VGA cable, due to the technical limitations of a VGA cable, the framerate is limited to a maximum of 30 frame per seconds.
+To display images on our screen, we are using a VGA cable, due to the technical limitations of a VGA cable, we are limited to a size of 640x480 pixels as the active area with an inactive area of 794x525 pixels as seen in the following image.
+![](./images/display.png)
 
-To use the VGA output,
+### 4.2.1 - Frame management
 
+ Knowing that our board has a frequency of 25Mhz, and that the screen used is of 794x525, translating to 416,850 pixels we can calculate the time needed to change a frame on the screen. For this, we only have to divide the number of pixels to change by the frequency of the clock:
+
+ 416850 / 25000000 = 0.01667
+
+ Following this calculus, we can conclude it takes 0.01667 seconds to change a frame. Finally we can deduce that we can manage a framerate of 60 frame per second exceeding the limit of 30 frame per second of VGA.
+
+### 4.2.2 - Creating the map
+
+#### 4.2.2.1 - The grid
+To create the map we are using a grid system, dividing the screen into 32x32 pixels tiles. With 32x32 cells, the grid result with a size of 15x13 cells filling the width as 15 cells equals 480 pixels. The height however leaves 224 pixels, which is intentional as in the original game this space is used to display the score and the high-score.
+
+Here is the representation of the grid on our screen.
+
+![](./images/grid_display.png)
+
+#### 4.2.2.2 - Bitmap
+
+Additionally to the use of a grid, we are using a bitmap, the bitmap is a table representing the type of tiles the grid is composed of, we currently have 5 types of tiles.
 
 ## Glossary
 [^1]: Verilog: A programming language used to program and/or simulate circuit boards. Verilog is notably used with specific hardware such as FPGAs.

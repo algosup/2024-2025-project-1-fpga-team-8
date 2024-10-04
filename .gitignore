@@ -5,3 +5,4 @@ hardware.json
 hardware.asc
 hardware.bin
 *.DS_Store
+*.vscode
