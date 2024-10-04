@@ -10,8 +10,9 @@
   - [1. Introduction](#1-introduction)
     - [1.1 Overview](#11-overview)
     - [1.2 Purpose](#12-purpose)
-    - [1.3 Personas](#13-personas)
-    - [1.4 Use cases](#14-use-cases)
+    - [1.3 Out of Scope](#13-out-of-scope)
+    - [1.4 Personas](#14-personas)
+    - [1.5 Use cases](#15-use-cases)
   - [2. Frogger game](#2-frogger-game)
     - [2.1 Game Objective](#21-game-objective)
     - [2.2 Gameplay Mechanics](#22-gameplay-mechanics)
@@ -43,7 +44,6 @@
   - [4. Risks and Assumptions](#4-risks-and-assumptions)
     - [4.1 Risks](#41-risks)
     - [4.2 Budget considerations](#42-budget-considerations)
-    - [4.3 Out of Scope](#43-out-of-scope)
     - [4.4 External resources](#44-external-resources)
 
 </details>
@@ -64,7 +64,7 @@ This is the official document containing the functional specifications of the FP
 
 ### 1.1 Overview
 
-"Frogger FPGA" is a project aimed at creating a fun and interactive Frogger game using FPGA technology and Verilog programming. In this classic arcade-style game, a player guides a frog across a busy road filled with moving cars and navigate a river with logs and other obstacles. The goal is to safely reach the other side while avoiding hazards. This project prioritizes an engaging gaming experience while also showcasing the power of FPGA for real-time applications.
+"Frogger FPGA" is a project aimed at creating a fun and interactive Frogger game using FPGA technology and Verilog programming language. In this classic arcade-style game, a player guides a frog across a busy road filled with moving cars and navigate a river with logs and other obstacles. The goal is to safely reach the other side while avoiding hazards. This project prioritizes an engaging gaming experience while also showcasing the power of FPGA for real-time applications.
 
 _A logo of the game is shown below:_
 
@@ -78,9 +78,24 @@ _A logo of the game is shown below:_
 
 This project is an opportunity for us to dive deeper into Verilog programming and FPGA technology. Our main goal is to create a fun and exciting Frogger game that can be displayed on a 640x480 VGA monitor. The game involves a frog crossing a road filled with obstacles, focusing on delivering a smooth, engaging experience for users.
 
-While the primary objective is to get the core gameplay functioning, we’re also considering adding more detailed graphics and possibly arcade features in the future. However, features like sound fall outside the scope of this project.
+While the primary objective is to get the core gameplay functioning, we’re also considering adding more detailed graphics and possibly arcade features in the future. However adding sound falls outside the scope of this project.
 
-### 1.3 Personas
+<!-- Why are things out of scope?-->
+### 1.3 Out of Scope
+
+- <u>Arcade Cabinet:</u>
+An arcade cabinet would have joystick and screen integrated into a casing to hide the entire system.<br>The arcade would make the game easier to play and make the system less intimidating for non technical people. However such endeavor would involve fabrication skills and resources beyond what is available to the team.
+<br>
+- <u>Sounds:</u>
+Sound effect and Music would add a sense of life to the game and make it closer to the original experience.<br>The hardware available doesn't support sound. To add, the benefits don't justify the effort of implementing a sound system from scratch.
+<br>
+- <u>Leaderboard:</u>
+A leaderboard would allow us to save and display the best score on the screen.<br>This could make the game more attractive and more competitive. But those aren't the objectives of the project so it shouldn't be implemented.
+<br>
+- <u>Multi-language support:</u>
+The game start button is "start" this means that the game isn't quite language agnostic. A multilingual solution would be a solution to remedy this issue.<br>This solution is high effort and wasteful as it would require adding a language selection menu.Whereas simply making the game language agnostic could be done by changing the start button.
+
+### 1.4 Personas
 
 The primary users of the FPGA Frogger game include:
 
@@ -88,7 +103,7 @@ The primary users of the FPGA Frogger game include:
 
 - **Old-school Gamer**: Someone who grew up playing arcade games like Frogger. They seek nostalgia and appreciate the authenticity of recreating the original experience. This person is likely to appreciate the familiar gameplay mechanics while being intrigued by the idea of playing Frogger on new technology like an FPGA.
 
-### 1.4 Use cases
+### 1.5 Use cases
 
 **Modern Gamer Explores FPGA Frogger**:
 
@@ -256,7 +271,7 @@ _Diving Turtles:_
 
 </div>
 
-- **Alligator Jaws**: Beware of logs with hidden alligator jaws. They are alligator disguised as a log. The thing that deferentiate them fron the logs are their jaws. You can jump on the alligator's back safely, but if frogger jumps into the alligator's open jaw, the user loses a life. Every second, the alligator clacks it's jaw, when the jaws are closed, the frogger can walk on the alligators head.
+- **Alligator Jaws**: Beware of logs with hidden alligator jaws. They are alligator disguised as a log. The thing that differentiate them from the logs are their jaws. You can jump on the alligator's back safely, but if frogger jumps into the alligator's open jaw, the user loses a life. Every second, the alligator clacks it's jaw, when the jaws are closed, the frogger can walk on the alligators head.
 
 _Alligator:_
 
@@ -528,14 +543,6 @@ Testability refers to how easily the system's functionality can be verified. A c
 ### 4.2 Budget considerations
 
 As the game is being created from scratch, there should not be any expenses related to the software creation. However, there may be a need to spend some money for unforeseen components or enhancements. It’s important to note that while the FPGA board and VGA monitor were provided by the school, future users of the project will need to obtain these components themselves. We reserve the right to recommend specific functionalities if deemed necessary.
-
-### 4.3 Out of Scope
-
-- The inclusion of an arcade cabinet design is considered out of scope.
-- Detailed shapes and graphics are deemed out of scope.
-- Sound effects and music are out of scope.
-- Integration of leaderboards is out of scope.
-- Multi-language support for the game is out of scope.
 
 ### 4.4 External resources
 
