@@ -168,11 +168,11 @@ _Highway:_
   
 |Name|Picture| Size | Description|
 |------|------|------|---------|
-|Car 1|![car1](./images/car1.png)|32x32 pixels <br> 1 tile|First hazard encountered by the player <br> Placed on lane 2 <br> Slowest of all cars|
-|Car 2|![car2](./images/car2.png)|32x32 pixels <br> 1 tile| Placed on lane 3|
-|Car 3|![car3](./images/car3.png)|32x32 pixels <br> 1 tile| Placed on lane 4|
-|Car 4|![car4](./images/car4.png)|32x32 pixels <br> 1 tile| Placed on lane 5 <br> The fastest car out of all|
-|Truck|![truck](./images/truck.png)|64x32 pixels <br> 2 tiles|Placed on lane 6 <br> Slowest moving vehicle|
+|**Car 1**|![car1](./images/car1.png)|**32x32** pixels <br> 1 tile| - **First hazard** encountered by the player <br> - Placed on **lane 2** <br> - Travels from **right to left** <br > - **Slowest** of all cars|
+|**Car 2**|![car2](./images/car2.png)|**32x32** pixels <br> 1 tile| - Placed on **lane 3** <br> - Travels from **left to right**|
+|**Car 3**|![car3](./images/car3.png)|**32x32** pixels <br> 1 tile| - Placed on **lane 4** <br> - Travels from **right to left**|
+|**Car 4**|![car4](./images/car4.png)|**32x32** pixels <br> 1 tile| - Placed on **lane 5** <br> - Travels from **left to right** <br> - The **fastest** car out of all|
+|**Truck**|![truck](./images/truck.png)|**64x32** pixels <br> 2 tiles| - Placed on **lane 6** <br> - Travels from **right to left** <br> - **Slowest** moving vehicle|
 
 The speed of each of these vehicles increases with each level, as detailed further in the document in the section [Game Levels (1-8)](#game-levels-1-8).
 
