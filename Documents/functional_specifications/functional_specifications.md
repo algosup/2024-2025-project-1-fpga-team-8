@@ -114,14 +114,14 @@ The primary users of the FPGA Frogger game include:
 
 **Goals:**
 
-- Explore New Technologies: Curious about how FPGA can be used in gaming, they wants to experience how the performance and input speed of an FPGA-powered game compares to traditional platforms.
-- Fun & Challenging Gameplay: They are seeking a game that challenges their reflexes but are still engaging and replayable without overly complex rules or mechanics.
-- Quick & Casual Experience: As someone who enjoys competitive online games, they are looking for a game they can pick up quickly for short play sessions without a large time commitment.
+- Explore New Technologies: Curious about how FPGA can be used in gaming, they want to experience how the performance and input speed of an FPGA-powered game compares to traditional platforms.
+- Fun & Challenging Gameplay: They are seeking a game that challenges their reflexes but is still engaging and replayable without overly complex rules or mechanics.
+- Quick & Casual Experience: Someone who enjoys competitive online games, they are looking for a game they can pick up quickly for short play sessions without a large time commitment.
 
 **Frustrations:**
 
 - Overly Complicated Games: Alex avoids games that are too convoluted, with multiple menus, levels of management, or excessive narrative.
-- Lack of Polish: They dislike games that are buggy, have poor controls, or do not feel responsive—especially when trying a game on new technology like FPGA.
+- Lack of Polish: They dislike buggy games, have poor controls, or do not feel responsive—especially when trying a game on new technology like FPGA.
 - Unintuitive Controls: Would quickly lose interest if the game’s controls are not intuitive or responsive to quick inputs.
 
 **Preferred Features:**
