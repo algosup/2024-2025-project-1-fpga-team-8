@@ -25,8 +25,9 @@
       - [2.3.2 Fly Bonus](#232-fly-bonus)
     - [2.4 Game Difficulty](#24-game-difficulty)
       - [Game Levels (1-8)](#game-levels-1-8)
-    - [2.5 Scoring System](#25-scoring-system)
-    - [2.6 End of Game](#26-end-of-game)
+    - [2.5 Time Band](#25-time-band)
+    - [2.6 Scoring System](#26-scoring-system)
+    - [2.7 End of Game](#27-end-of-game)
   - [3. Non-Functional Requirements](#3-non-functional-requirements)
     - [3.1 Costs](#31-costs)
         - [Capital Expenditures](#capital-expenditures)
@@ -63,7 +64,7 @@ This is the official document containing the functional specifications of the FP
 
 ### 1.1 Overview
 
-"Frogger FPGA" is a project aimed at creating a fun and interactive Frogger game using FPGA technology and Verilog programming. In this classic arcade-style game, players guide a frog across a busy road filled with moving cars and navigate a river with logs and other obstacles. The goal is to safely reach the other side while avoiding hazards. This project prioritizes an engaging gaming experience while also showcasing the power of FPGA for real-time applications.
+"Frogger FPGA" is a project aimed at creating a fun and interactive Frogger game using FPGA technology and Verilog programming. In this classic arcade-style game, a player guides a frog across a busy road filled with moving cars and navigate a river with logs and other obstacles. The goal is to safely reach the other side while avoiding hazards. This project prioritizes an engaging gaming experience while also showcasing the power of FPGA for real-time applications.
 
 _A logo of the game is shown below:_
 
@@ -75,7 +76,7 @@ _A logo of the game is shown below:_
 
 ### 1.2 Purpose
 
-This project is an opportunity for us to dive deeper into Verilog programming and FPGA technology. Our main goal is to create a fun and exciting Frogger game that can be displayed on a 640x480 VGA monitor. The game will involve a frog crossing a road filled with obstacles, focusing on delivering a smooth, engaging experience for users.
+This project is an opportunity for us to dive deeper into Verilog programming and FPGA technology. Our main goal is to create a fun and exciting Frogger game that can be displayed on a 640x480 VGA monitor. The game involves a frog crossing a road filled with obstacles, focusing on delivering a smooth, engaging experience for users.
 
 While the primary objective is to get the core gameplay functioning, we’re also considering adding more detailed graphics and possibly arcade features in the future. However, features like sound fall outside the scope of this project.
 
@@ -111,8 +112,6 @@ The primary users of the FPGA Frogger game include:
 
 ### 2.1 Game Objective
 
-In the FPGA Frogger game, the player’s goal is to guide a frog from the bottom of the screen to one of the safe home bays at the top. The player must help the frog cross a busy highway filled with fast-moving vehicles, and then navigate a river by jumping on logs, turtles, and other floating objects. The challenge lies in avoiding obstacles such as cars, diving turtles, and alligator jaws. Successfully reaching a home bay earns points, and additional bonuses can be collected along the way. The player moves on a 14 by 13 tile grid, each tiles being 32x32 pixel.
-
 To complete a level, the player must guide five frogs safely into the home bays. Each frog represents a life, and the player starts with four lives. The game ends when all frogs are lost or when the player completes all the levels. Additionally, Frogger has a time limit of 30 seconds (or 60 ticks) per frog, shown by a time band at the bottom of the screen. The remaining time also contributes to the player’s score if the frog reaches a home bay on time.
 
 _Frogger game:_
@@ -128,7 +127,7 @@ _Frogger game:_
 
 #### 2.2.1 Gameplay movement
 
-The frog advances one space per button press. When the frog reaches the top row of the screen and completes the level, the frog is automatically repositioned at the bottom to begin the next level.
+The frog advances one tile per button press. When the frog reaches the top row of the screen and completes the level, the frog is automatically repositioned at the bottom to begin the next level.
 
 _Frog:_
 
@@ -192,11 +191,9 @@ _River Bank:_
 
 **Logs**:
 
-They come in three different sizes and shapes, a short one, a medium one and a long one. Which the frog can rely on, without falling in the water.
-The logs float from left to right.
+Logs come in three different sizes and shapes: short, medium, and long. Frogger can safely land on these logs without falling into the water, as they float from left to right across the screen.
 
-Frogger can jump from side to side of the log, but beware not to fall into the water.
-Moreover, you can jump from a log to another floating object forward or backward.
+Frogger is able to jump side to side while on a log, but be careful not to fall into the water. Additionally, Frogger can leap from one log to another floating object, moving forward or backward.
 
 _Logs_:
 
@@ -208,9 +205,30 @@ _Logs_:
 
 </div>
 
+**Small logs:**
+
+![log1](./images/log1.png)
+
+A small log spans the equivalent of 2 tiles.
+Thus 64x32 pixels.
+
+**Medium logs:**
+
+![log2](./images/log2.png)
+
+A medium log spans the equivalent of 3 tiles.
+Thus 96x32 pixels.
+
+**Long Logs:**
+
+![log3](./images/log3.png)
+
+A long log spans the equivalent of 5 tiles.
+Thus 160x32 pixels.
+
 **Key hazards**:
 
-- **Diving Turtles**: They come in set of three or in set of two turtles. However,avoid jumping on turtles that are diving underwater, as Frogger will fall and lose a life. When they are overwater, they act as a log, meaning you can jump on the turtles' back. After a second, the state of the turtle changes to underwater. The frog cannot stay above them and if the player is still on the frog when they dive, the frog will fall into the water. The players must be on another floating object before the dive of the turtle to save himself. The frog will fall in the water if the user jumps to the left or the right off either of the end turtles.
+- **Diving Turtles**: Turtles in the game appear in sets of two or three. You can jump on them when they are above the water, where they function like logs, supporting the frog. However, be cautious of turtles that dive underwater. If Frogger is still on a turtle when it dives, he will fall into the water and lose a life. To avoid this, players must leap to another floating object before the turtles submerge. Additionally, if you jump to the left or right off the edge of a turtle group, Frogger will also fall into the water, leading to the loss of a life.
 
 _Diving Turtles:_
 
@@ -220,7 +238,7 @@ _Diving Turtles:_
 
 </div>
 
-- **Alligator Jaws**: Beware of logs with hidden alligator jaws. They are alligator disguised as a log. The thing that deferentiate them fron the logs are their jaws. You can jump on the alligator's back safely, but if frogger jumps into the alligator's jaw. The user loses a life. Every second, the alligator clacks his jaw, emphasizing the dangerous character he is.
+- **Alligator Jaws**: Beware of logs with hidden alligator jaws. These are actually alligators disguised as logs. The key difference between them and regular logs is their visible jaws. You can safely jump on the alligator's back, but if Frogger lands on its open jaw, you'll lose a life. Every second, the alligator snaps its jaws, emphasizing the danger it poses.
 
 _Alligator:_
 
@@ -230,7 +248,7 @@ _Alligator:_
 
 </div>
 
-- **Otters**: These creatures swim rapidly and can grab Frogger off floating objects, forcing the player to navigate carefully. They spawn only after the level 3. Every second, they have a little swimming animation that occurs.
+- **Otters**: These creatures swim rapidly and can snatch Frogger off floating objects, adding an extra layer of challenge for the player. They only start appearing after level 3. Every second, they perform a brief swimming animation, signaling their presence and keeping players on their toes.
 
 _Otters:_
 
@@ -244,7 +262,7 @@ If Frogger falls into the river, the player loses a life, as the frog cannot swi
 
 #### 2.2.5 River Banks
 
-There are five home bays at the top of the screen. To complete a level, Frogger must safely reach one of these bays. However, the bays may be blocked by hazards like alligator heads or occupied by another frog. If this occurs, the player must wait or choose a different bay.
+At the top of the screen, there are five home bays that Frogger must safely reach to complete a level. However, some bays may occasionally be blocked by hazards, such as alligator heads. If a bay is blocked, the player must wait or aim for a different one. Once Frogger successfully reaches a home bay, that bay becomes unavailable for the rest of the level, and the player must fill the remaining bays to advance.
 
 Reaching a home bay grants **50 points**, and players can earn bonus points if a fly or pink frog appears, as explained in the next section. The player must navigate all five frogs to the home bays to complete a level.
 
@@ -318,6 +336,8 @@ _Flies:_
 
 The difficulty in "Frogger" escalates across four distinct levels. Here’s a breakdown of what to expect at each level:
 
+<!-- The original frogger has 4 levels, the requirements says 8 uncertain for now. -->
+
 #### Game Levels (1-8)
 
 - **Level 1**:
@@ -371,7 +391,23 @@ Otters are 10% faster then the logs or turtles in the lane.
 | Level 7 | **4 cars**, first **3** separated by **3 tiles**, last separated by **1 tile**    | **4 cars**, separated by **3 tiles**                                                                                   | **4 cars**, first **3** separated by **3 tiles**, last separated by **1 tile**    | **2 cars**, separated by **1 tile**  | **3 cars**, separated by **3 tiles** | **1 snake** | **3 sets** of **3 turtles**, first separated by **3 tiles**, last two by **1 tile**, last set is **diving turtles** | **3 small logs**, separated by **3 tiles**                                                  | **1 long log**                            | **5 sets** of **2 turtles**, separated by **1 tile**, **1/5** are **diving turtles**   | **1 crocodile**, **2 medium logs**, separated by **2 tiles**                 | X    |
 | Level 8 | **4 cars**, separated by **3 tiles**                                              | **4 cars**, first and second separated by **3 tiles**, second and third by **1 tile**, third and fourth by **3 tiles** | **5 cars**, first and second separated by **1 tile**, others by **2 tiles**       | **2 cars**, separated by **3 tiles** | **3 cars**, separated by **2 tiles** | **1 snake** | **3 sets** of **3 turtles**, separated by **2 tiles**, first set is **diving turtles**                              | **3 small logs**, first and second separated by **1 tile**, second and third by **3 tiles** | **1 long log**                            | **4 sets** of **2 turtles**, separated by **2 tiles**, first set is **diving turtles** | **1 medium log**, **1 crocodile**, separated by **2 tiles**                  | X    |
 
-### 2.5 Scoring System
+### 2.5 Time Band
+
+Frogger has a time limit of 30 seconds (or 60 ticks) to reach the home bay.
+If the player fails to bring the frog to the home bay within this time, they will lose a life.
+The remaining time is displayed as a time band at the bottom right of the screen.
+
+_time band_:
+
+![time band](./images/timeband.png)
+
+The time band gradually shrinks as time passes. When only 10 seconds (or 20 ticks) remain, the time band turns red to signal that time is running out, as shown below:
+
+_time running out_:
+
+![red time band](./images/redtimeband.png)
+
+### 2.6 Scoring System
 
 Points are awarded for various actions within the game:
 
@@ -384,9 +420,19 @@ Points are awarded for various actions within the game:
 
 If the player reaches a high score of 20,000 points and fewer than four frogs remain, an extra frog (life) is awarded.
 
-### 2.6 End of Game
+|Action| Points Earned|
+|------|--------------|
+|Jump Forward| +10 points|
+|Reaching Home Bay| +50 points|
+|Beating A Level| +1,000 points|
+|Escorting Pink Lady | +200 points|
+|Eating A Fly| +200 points|
+|Bonus Time| +10 points * ticks remaining|
+|Score = 20,000| 1 UP|
 
-The game ends when all frogs (lives) are lost. The player can restart the game or reset it via the FPGA system to begin a new round.
+### 2.7 End of Game
+
+The game ends when all of Frogger's lives are lost. At this point, the player can either restart the game or reset it using the FPGA system to begin a new round. Additionally, if the player successfully reaches the end of the 8th level, they will have beaten the game. They are redirected to the main menu.
 
 ## 3. Non-Functional Requirements
 
