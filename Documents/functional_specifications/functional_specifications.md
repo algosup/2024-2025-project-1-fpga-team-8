@@ -58,7 +58,7 @@ This is the official document containing the functional specifications of the FP
 
 | Name               | Role              | Description                                                                               |
 | ------------------ | ----------------- | ----------------------------------------------------------------------------------------- |
-| Max BERNARD        | Project Manager   | Responsible for project management, including timelines, planning, and team coordination.  |
+| Max BERNARD        | Project Manager   | Responsible for project management, including timelines, planning, and team coordination. |
 | David CUAHONTE     | Program Manager   | Manages functional specification development and client communication for the project.    |
 | Aurélien FERNANDEZ | Technical Lead    | Guides technical decisions and translates requirements into scalable technical solutions. |
 | Quentin CLEMENT    | Software Engineer | Develops and implements codebase, ensures code quality and collaboration within the team. |
@@ -84,72 +84,78 @@ This project is an opportunity for us to dive deeper into Verilog programming an
 
 While the primary objective is to get the core gameplay functioning, we’re also considering adding more detailed graphics and possibly arcade features. However, adding sound falls outside the scope of this project.
 
-<!-- Why are things out of scope?-->
 ### 1.3 Out of Scope
 
 - <u>Arcade Cabinet:</u>
-An arcade cabinet would have a joystick and screen integrated into a casing to hide the entire system.<br>The arcade would make the game easier to play and make the system less intimidating for non-technical people. However, such an endeavor would involve fabrication skills and resources beyond what is available to the team.
+  An arcade cabinet would have a joystick and screen integrated into a casing to hide the entire system.<br>The arcade would make the game easier to play and make the system less intimidating for non-technical people. However, such an endeavor would involve fabrication skills and resources beyond what is available to the team.
 
 - <u>Sounds:</u>
-Sound effects and Music would add a sense of life to the game and make it closer to the original experience.<br>The hardware available doesn't support sound. In addition, the benefits don't justify the effort of implementing a sound system from scratch.
+  Sound effects and Music would add a sense of life to the game and make it closer to the original experience.<br>The hardware available doesn't support sound. In addition, the benefits don't justify the effort of implementing a sound system from scratch.
 
 - <u>Leaderboard:</u>
-A leaderboard would allow us to save and display the best score on the screen.<br>This could make the game more attractive and more competitive. But those aren't the objectives of the project so it shouldn't be implemented.
+  A leaderboard would allow us to save and display the best score on the screen.<br>This could make the game more attractive and more competitive. But those aren't the objectives of the project so it shouldn't be implemented.
 
 - <u>Multi-language support:</u>
-The game start button is "start" which means that the game isn't quite language agnostic. A multilingual solution would be a solution to remedy this issue.<br>This solution is high effort and wasteful as it would require adding a language selection menu. Whereas simply making the game language agnostic could be done by changing the start button.
+  The game start button is "start" which means that the game isn't quite language agnostic. A multilingual solution would be a solution to remedy this issue.<br>This solution is high effort and wasteful as it would require adding a language selection menu. Whereas simply making the game language agnostic could be done by changing the start button.
 
 ### 1.4 Personas
 
 The primary users of the FPGA Frogger game include:
 
-#### Modern Gamer: 
+#### Modern Gamer:
 
 **Gaming Habits:** Plays fast-paced competitive games (e.g., Rocket League, Apex Legends) and indie games with innovative mechanics.
 
 **Motivations:**
+
 - Innovation & Technology: Fascinated by unconventional game platforms like FPGA, appreciates creativity in game design, and wants to explore something that bridges classic gaming with modern tech.
 - Challenge & Simplicity: Enjoys games that balance simplicity and complexity; likes to challenge their reflexes and strategy, but without unnecessary complexity in controls or story.
 - Retro Appeal: Has a mild interest in retro aesthetics and finds the idea of FPGA recreating a classic arcade game intriguing, especially with a unique platform.
 
 **Goals:**
+
 - Explore New Technologies: Curious about how FPGA can be used in gaming, they wants to experience how the performance and input speed of an FPGA-powered game compares to traditional platforms.
 - Fun & Challenging Gameplay: They are seeking a game that challenges their reflexes but are still engaging and replayable without overly complex rules or mechanics.
 - Quick & Casual Experience: As someone who enjoys competitive online games, they are looking for a game they can pick up quickly for short play sessions without a large time commitment.
 
 **Frustrations:**
+
 - Overly Complicated Games: Alex avoids games that are too convoluted, with multiple menus, levels of management, or excessive narrative.
 - Lack of Polish: They dislike games that are buggy, have poor controls, or do not feel responsive—especially when trying a game on new technology like FPGA.
 - Unintuitive Controls: Would quickly lose interest if the game’s controls are not intuitive or responsive to quick inputs.
 
 **Preferred Features:**
+
 - Responsive Controls: Values low input latency and high frame rates to make gameplay feel smooth and satisfying.
 - Challenging Levels: Interested in increasing difficulty curves where skill is rewarded, like progressively harder levels or faster-moving objects.
 - Visual Feedback: Prefers games with clear visual and audio feedback, especially in response to actions or mistakes (e.g., lives lost, jumps, hazards).
-<br>
+  <br>
 
-
-#### Old-school Gamer: 
+#### Old-school Gamer:
 
 **Gaming Habits:** Grew up playing arcade games like Frogger, Pac-Man, and Space Invaders. Now enjoys replaying classics, either via emulators or retro-style games on consoles.
 Motivations:
 
 **Nostalgia:**
+
 - Enjoys reliving the gaming experiences of their youth and values accuracy in recreating these moments.
 - Simplicity: Prefers straightforward, easy-to-pick-up games where the objective is clear and the focus is on skill-based challenges.
 - Curiosity for New Tech: While they prefers retro gameplay, they are curious about how new technologies (e.g., FPGA) can revive or improve these classic experiences without losing their authenticity.
 
 **Goals:**
+
 - Recreate the Arcade Experience: They wants a game that captures the arcade experience, with accurate mechanics, graphics, and gameplay flow, but on new technology.
 - Challenge themselves Again: They seeks to experience the same gameplay challenge that they enjoyed as a teenager, testing their reflexes and memory.
 - Teach the Next Generation: They hopes to share their love for arcade games with their kids, introducing them to simpler yet rewarding gameplay without the overwhelming nature of modern titles.
 
 **Frustrations:**
+
 - Inauthentic Remakes: Dislikes when remakes or ports of retro games deviate too much from the original in terms of mechanics, visuals, or difficulty balance.
 - Overcomplication: Prefers not to be overwhelmed with menus, tutorials, or complex modern features like microtransactions or customization that disrupt the core arcade experience.
 - Technical Hiccups: They values the seamlessness of original arcade machines, so any bugs, crashes, or input delays would detract from their enjoyment of the FPGA game.
 
 **Preferred Features:**
+
 - Faithful Recreation: Sarah values mechanics that stay true to the original Frogger, including the exact placement of hazards, timing, and game difficulty.
 - Simple, Physical Controls: Prefers simple control schemes similar to the arcade (e.g., a joystick or basic directional buttons), avoiding complex key mappings.
 - Visual & Audio Accuracy: They appreciates retro pixel graphics, original sound effects, or music that captures the vibe of the classic Frogger, even if on new hardware.
@@ -185,7 +191,6 @@ _Frogger game:_
 <div align="center">
 
 ![game](./images/frogger_game.png)
-
 
 </div>
 
@@ -231,14 +236,14 @@ _Highway:_
 
 - **Key hazards:**
   - Vehicles: There are five different types of vehicles in the game, all equally deadly. If Frogger comes into contact with any of them, he will be crushed, resulting in the loss of a life.
-  
-|Name|Picture| Size | Description|
-|------|------|------|---------|
-|**Car 1**|![car1](./images/car1.png)|**32x32** pixels <br> 1 tile| - **First hazard** encountered by the player <br> - Placed on **lane 2** <br> - Travels from **right to left** <br > - **Slowest** of all cars|
-|**Car 2**|![car2](./images/car2.png)|**32x32** pixels <br> 1 tile| - Placed on **lane 3** <br> - Travels from **left to right**|
-|**Car 3**|![car3](./images/car3.png)|**32x32** pixels <br> 1 tile| - Placed on **lane 4** <br> - Travels from **right to left**|
-|**Car 4**|![car4](./images/car4.png)|**32x32** pixels <br> 1 tile| - Placed on **lane 5** <br> - Travels from **left to right** <br> - The **fastest** car out of all|
-|**Truck**|![truck](./images/truck.png)|**64x32** pixels <br> 2 tiles| - Placed on **lane 6** <br> - Travels from **right to left** <br> - **Slowest** moving vehicle|
+
+| Name      | Picture                      | Size                          | Description                                                                                                                                    |
+| --------- | ---------------------------- | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Car 1** | ![car1](./images/car1.png)   | **32x32** pixels <br> 1 tile  | - **First hazard** encountered by the player <br> - Placed on **lane 2** <br> - Travels from **right to left** <br > - **Slowest** of all cars |
+| **Car 2** | ![car2](./images/car2.png)   | **32x32** pixels <br> 1 tile  | - Placed on **lane 3** <br> - Travels from **left to right**                                                                                   |
+| **Car 3** | ![car3](./images/car3.png)   | **32x32** pixels <br> 1 tile  | - Placed on **lane 4** <br> - Travels from **right to left**                                                                                   |
+| **Car 4** | ![car4](./images/car4.png)   | **32x32** pixels <br> 1 tile  | - Placed on **lane 5** <br> - Travels from **left to right** <br> - The **fastest** car out of all                                             |
+| **Truck** | ![truck](./images/truck.png) | **64x32** pixels <br> 2 tiles | - Placed on **lane 6** <br> - Travels from **right to left** <br> - **Slowest** moving vehicle                                                 |
 
 The speed of each of these vehicles increases with each level, as detailed further in the document in the section [Game Levels (1-8)](#game-levels-1-8).
 
@@ -428,8 +433,6 @@ _Flies:_
 
 The difficulty in "Frogger" escalates across four distinct levels. Here’s a breakdown of what to expect at each level:
 
-<!-- The original frogger has 4 levels, the requirements says 8 uncertain for now. -->
-
 #### Game Levels (1-8)
 
 - **Level 1**:
@@ -512,15 +515,15 @@ Points are awarded for various actions within the game:
 
 If the player reaches a high score of 20,000 points and fewer than four frogs remain, an extra frog (life) is awarded.
 
-|Action| Points Earned|
-|------|--------------|
-|Jump Forward| +10 points|
-|Reaching Home Bay| +50 points|
-|Beating A Level| +1,000 points|
-|Escorting Pink Lady | +200 points|
-|Eating A Fly| +200 points|
-|Bonus Time| +10 points * ticks remaining|
-|Score = 20,000| 1 UP|
+| Action              | Points Earned                 |
+| ------------------- | ----------------------------- |
+| Jump Forward        | +10 points                    |
+| Reaching Home Bay   | +50 points                    |
+| Beating A Level     | +1,000 points                 |
+| Escorting Pink Lady | +200 points                   |
+| Eating A Fly        | +200 points                   |
+| Bonus Time          | +10 points \* ticks remaining |
+| Score = 20,000      | 1 UP                          |
 
 ### 2.7 End of Game
 
@@ -599,9 +602,9 @@ Testability refers to how easily the system's functionality can be verified. A c
 
 ### 4.1 Risks
 
-| **Risk**                 | **Impact** | **Mitigation**                                                                                                                                                     |
-| ------------------------ | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Hardware Failure**     | High       | Regular testing of hardware components and keeping backup components available to minimize downtime.                                                               |
+| **Risk**                 | **Impact** | **Mitigation**                                                                                                                                                      |
+| ------------------------ | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Hardware Failure**     | High       | Regular testing of hardware components and keeping backup components available to minimize downtime.                                                                |
 | **Software Development** | Medium     | As Verilog is not designed for game development, thorough planning, and incremental testing will help manage issues, along with continued learning of the language. |
 
 ### 4.2 Budget considerations
@@ -614,33 +617,18 @@ To enhance our understanding of the game mechanics, we referred to the official 
 
 ## Glossary
 
-| Word | Definition |
-|--- | --- |
-| FPGA (Field-Programmable Gate Array) | A type of hardware that can be programmed after manufacturing to perform different tasks. In this project, it is used to create the Frogger game. |
-| Verilog | A hardware description language (HDL) used to design and model electronic systems. It is used to program the FPGA for this project. |
-| VGA (Video Graphics Array) | A display standard that provides the graphical interface for the game. In this project, the game is displayed at 640x480 resolution using VGA output.|
-| Tiles | The basic unit of measurement for movement in the game. The frog moves one tile at a time. |
-| Home Bays | The five safe spots at the top of the screen where the frog must reach to complete the level. |
-| Ticks | A unit of time used in the game, where one tick equals 0.5 seconds. The player has 60 ticks (30 seconds) to complete certain actions. |
-| Bonuses | Special points awarded for specific achievements in the game, such as rescuing a pink frog or collecting a fly. |
-| River Crossing | A section of the game where the player must navigate floating objects like logs and turtles to avoid falling into the water. |
-| Highway Crossing | The initial part of each level where the player must avoid traffic, such as cars and trucks, moving in both directions. |
-| Objects | Vehicles, logs, turtles, and other elements that move across the screen, posing a hazard or platform for Frogger. |
-| Alligator Jaws | A hazard in the river section where alligators can appear disguised as logs, presenting a danger when their jaws are open. |
-| Diving Turtles | Turtles that periodically submerge underwater, causing Frogger to lose a life if still standing on them when they dive. |
-| Otters | A hazard that appears in later levels, moving quickly across the water and pulling Frogger into the river. |
-| Snakes | Enemies that spawn on the logs and lower riverbank from level 3 onward, capable of killing Frogger if touched. |
-| Game Levels | The stages of the game, each of which increases in difficulty by speeding up vehicles and reducing the number of floating objects in the river.
-| Time Band | A visual bar on the screen that shows how much time remains for the frog to reach a home bay. It turns red when only 10 seconds remain.
-| Capital Expenditures | The fixed costs associated with hardware like the FPGA board and VGA monitor.
-| Input Latency | The delay between pressing a control button and the movement of Frogger on the screen. It should be between 10 and 30 milliseconds.
-| Performance Metrics | A set of targets ensuring the game runs smoothly, including a frame rate of 30 FPS, smooth object movement, and a 640x480 display.
-| Testability | The ease with which the game’s functionality can be verified, primarily through manual gameplay testing on the hardware.
-| Flexibility | The ability to accommodate future changes, such as adding new levels or features, without major rework.
-| Non-Functional Requirements | Aspects of the project that are not directly related to the gameplay but impact the overall performance, reliability, and ease of future modifications.
-| Pink Frog | A special bonus frog that appears on logs in the river. Escorting it to a home bay awards the player extra points.
-| Fly Bonus | A bonus point opportunity where a fly appears in a home bay, awarding additional points when collected.
-| Capital Costs | Expenditures on physical items like the FPGA board and monitor, provided by the school.
-| Simulation Testing | A method used to test the game’s functionality before deploying it on actual hardware. This is done using software simulations.
-| Error Handling | Mechanisms put in place to manage unexpected conditions in the game, such as pressing multiple buttons simultaneously.
-| Frame Rate | The speed at which the game renders frames on the screen, targeted at 30 frames per second (FPS).
+| Word                                 | Definition                                                                                                                                              |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| FPGA (Field-Programmable Gate Array) | A type of hardware that can be programmed after manufacturing to perform different tasks. In this project, it is used to create the Frogger game.       |
+| Verilog                              | A hardware description language (HDL) used to design and model electronic systems. It is used to program the FPGA for this project.                     |
+| VGA (Video Graphics Array)           | A display standard that provides the graphical interface for the game. In this project, the game is displayed at 640x480 resolution using VGA output.   |
+| Tiles                                | The basic unit of measurement for movement in the game. The frog moves one tile at a time.                                                              |
+| Ticks                                | A unit of time used in the game, where one tick equals 0.5 seconds. The player has 60 ticks (30 seconds) to complete certain actions.                   |
+| Objects                              | Vehicles, logs, turtles, and other elements that move across the screen, posing a hazard or platform for Frogger.                                       |
+| Capital Expenditures                 | The fixed costs associated with hardware like the FPGA board and VGA monitor.                                                                           |
+| Input Latency                        | The delay between pressing a control button and the movement of Frogger on the screen. It should be between 10 and 30 milliseconds.                     |
+| Performance Metrics                  | A set of targets ensuring the game runs smoothly, including a frame rate of 30 FPS, smooth object movement, and a 640x480 display.                      |
+| Non-Functional Requirements          | Aspects of the project that are not directly related to the gameplay but impact the overall performance, reliability, and ease of future modifications. |
+| Simulation Testing                   | A method used to test the game’s functionality before deploying it on actual hardware. This is done using software simulations.                         |
+| Error Handling                       | Mechanisms put in place to manage unexpected conditions in the game, such as pressing multiple buttons simultaneously.                                  |
+| Frame Rate                           | The speed at which the game renders frames on the screen, targeted at 30 frames per second (FPS).                                                       |
