@@ -29,11 +29,14 @@ Created by: Aurélien FERNANDEZ
     - [3.2 - Comments](#32---comments)
   - [4 - Technical implementations](#4---technical-implementations)
     - [4.1 - Features required](#41---features-required)
-    - [4.2 - Screen implementation](#42---screen-implementation)
+    - [4.2 - Display the game](#42---display-the-game)
     - [4.2.1 - Frame management](#421---frame-management)
     - [4.2.2 - Creating the map](#422---creating-the-map)
       - [4.2.2.1 - The grid](#4221---the-grid)
       - [4.2.2.2 - Bitmap](#4222---bitmap)
+    - [4.2.3 - Sprites](#423---sprites)
+    - [4.3 - Control the frog](#43---control-the-frog)
+    - [4.4 - Cars](#44---cars)
   - [Glossary](#glossary)
 </details>
 
@@ -116,6 +119,8 @@ Along with the boards we were given 7 books written by Russell MERRICK, our teac
 | Clock       | i_Clk             | 015 |
 | UART RX     | i_UART_RX         | 073 |
 | UART TX     | i_UART_TX         | 074 |
+
+![](./images/fpga.png)
 
 The clock, operating at a frequency of 25Mhz, performs 25 000 000 cycles per second. 
 
@@ -216,7 +221,7 @@ Here is a short summary of the features that are required for the success of thi
 | turtles      | Turtles are moving through the screen from left to right or from right to left, they can only appear on water. Some turtles can go under water.                                                                           |
 | Snakes       | Snakes are moving through the screen from left to right or from right to left, they can only appear on the second "grass" row. When the player collides with one, the player loses a life.                                |
 
-### 4.2 - Screen implementation
+### 4.2 - Display the game
 
 To display images on our screen, we are using a VGA cable, due to the technical limitations of a VGA cable, we are limited to a size of 640x480 pixels as the active area with an inactive area of 794x525 pixels as seen in the following image.
 ![](./images/display.png)
@@ -240,7 +245,78 @@ Here is the representation of the grid on our screen.
 
 #### 4.2.2.2 - Bitmap
 
-Additionally to the use of a grid, we are using a bitmap, the bitmap is a table representing the type of tiles the grid is composed of, we currently have 5 types of tiles.
+Additionally to the use of a grid, we are using a bitmap, the bitmap is a table representing the type of tiles the grid is composed of, we currently have 5 types of tiles:
+- Grass/safe area,
+- Road,
+- Water,
+- Lilypad,
+- wall.
+
+The bitmap is created as a two-dimensional array presented as such:
+<center>
+
+```
+040040040040
+222222222222
+222222222222
+222222222222
+222222222222
+222222222222
+333333333333
+111111111111
+111111111111
+111111111111
+111111111111
+111111111111
+333333333333
+```
+</center>
+
+Where, every value is an int that can be interpreted as such:
+- 0 -> wall,
+- 1 -> road,
+- 2 -> water,
+- 3 -> grass,
+- 4 -> lilypad.
+
+Finally, the origin, 0x0, is placed at the bottom left of the grid.
+
+### 4.2.3 - Sprites
+
+TODO
+
+### 4.3 - Control the frog 
+
+To control the frog we are using two value:
+- w_Frogger_X, to control the x position of the frog,
+- w_Frogger_Y, to control the y position of the frog.
+
+These two value indicate the position of the frog on the grid.
+
+e.g: If the frog has a position of: X=3, Y=5:
+
+<center>
+
+![](./images/position.png)
+
+</center>
+
+To move the frog, the player can use the 4 push-buttons present on the go-board:
+- button 1 -> increase Y
+- button 2 -> decrease Y
+- button 3 -> decrease X
+- button 4 -> increase X
+
+Finally, the 4 buttons are subject to a side-effect called "boucing". The boucing is a common problem of physical switches, when you are pressing a button, two metal parts connect to let electricty pass, the contact is not made instantly, in the span of 1 millisecond, multiple contacts are made which in turn distort the desired result by repeatedly turning on and off.
+
+Here is the representation of a boucing:
+![](./images/bouncing.png)
+
+To overcome this effect, we can wait for a certain number of cycles before taking the change of state into account. For this project waiting 25 000 cycles (1 millisecond) before reacting to the change is sufficient enough to overcome this effect without impacting the game itself.
+
+### 4.4 - Cars
+
+
 
 ## Glossary
 [^1]: Verilog: A programming language used to program and/or simulate circuit boards. Verilog is notably used with specific hardware such as FPGAs.
