@@ -36,7 +36,9 @@ Created by: Aurélien FERNANDEZ
       - [4.2.2.2 - Bitmap](#4222---bitmap)
     - [4.2.3 - Sprites](#423---sprites)
     - [4.3 - Control the frog](#43---control-the-frog)
-    - [4.4 - Cars](#44---cars)
+    - [4.4 - Lane](#44---lane)
+    - [4.5 - Cars](#45---cars)
+      - [4.5 - Logs](#45---logs)
   - [Glossary](#glossary)
 </details>
 
@@ -176,6 +178,7 @@ Note that [Name] symbolises the name given to the element. \
 e.g: 
 ```
 reg r_Clock;
+assign o_My_Led=1;
 parameter MYPARAM = 20;
 ```
 
@@ -314,9 +317,43 @@ Here is the representation of a boucing:
 
 To overcome this effect, we can wait for a certain number of cycles before taking the change of state into account. For this project waiting 25 000 cycles (1 millisecond) before reacting to the change is sufficient enough to overcome this effect without impacting the game itself.
 
-### 4.4 - Cars
+### 4.4 - Lane
 
+To manage the different obstacles we are using a system of lanes, these lanes are use to choose the Y position, the direction, the type of obstacle, their numbers and the interval in cycles between each obstacle.
 
+Here are the different input of the lane:
+
+| Name     | Descrition                                                                     | Type         | Default value |
+| -------- | ------------------------------------------------------------------------------ | ------------ | ------------- |
+| INIT_Y   | The initial Y position of the lane                                             | constant int | 1             |
+| DIR      | The direction the obstacle is heading. 0 = right, 1 = left                     | boolean      | 0             |
+| TYPE     | The type of osbtacle the lane contains, 0 = car, 1 = log, 2 = snake 4 = turtle | constant int | 0             |
+| COUNT    | The number of obstacle on the lane at the same time                            | constant int | 1             |
+| INTERVAL | The number of cycles between two obstacle                                      | constant int | 20 000        |
+
+### 4.5 - Cars
+
+The cars are instances possessing a few values:
+
+**inputs:**
+| Name            | Description                                           | Type               | Default value |
+| --------------- | ----------------------------------------------------- | ------------------ | ------------- |
+| MAX_X           | The maximum speed a car can have                      | constant int       | 20            |
+| CAR_SPEED       | The speed of the car                                  | constant int       | 1             |
+| SLOW_COUNT      | A counter which, once finished allows the car to move | constant int       | 4 000 000     |
+| INIT_X          | The base X position of the car                        | constant int       | 0             |
+| INIT_Y          | The base Y position of the car                        | constant int       | 13            |
+| i_Clk           | The clock                                             | boolean            | None          |
+| i_Col_Count_Div | The X position of the car                             | 6-bit positive int | None          |
+| i_Row_Count_Div | The Y position of the car                             | 6-bit positive int | None          |
+
+**output**
+| name    | description                       | type               |
+| ------- | --------------------------------- | ------------------ |
+| o_Car_X | The current X position of the car | 6 bit positive int |
+| o_Car_Y | The current Y position of the car | 6 bit positive int |
+
+#### 4.5 - Logs
 
 ## Glossary
 [^1]: Verilog: A programming language used to program and/or simulate circuit boards. Verilog is notably used with specific hardware such as FPGAs.
