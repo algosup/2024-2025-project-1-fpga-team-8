@@ -141,25 +141,25 @@ Motivations:
 
 - Enjoys reliving the gaming experiences of their youth and values accuracy in recreating these moments.
 - Simplicity: Prefers straightforward, easy-to-pick-up games where the objective is clear and the focus is on skill-based challenges.
-- Curiosity for New Tech: While they prefers retro gameplay, they are curious about how new technologies (e.g., FPGA) can revive or improve these classic experiences without losing their authenticity.
+- Curiosity for New Tech: While they prefer retro gameplay, they are curious about how new technologies (e.g., FPGA) can revive or improve these classic experiences without losing their authenticity.
 
 **Goals:**
 
-- Recreate the Arcade Experience: They wants a game that captures the arcade experience, with accurate mechanics, graphics, and gameplay flow, but on new technology.
-- Challenge themselves Again: They seeks to experience the same gameplay challenge that they enjoyed as a teenager, testing their reflexes and memory.
-- Teach the Next Generation: They hopes to share their love for arcade games with their kids, introducing them to simpler yet rewarding gameplay without the overwhelming nature of modern titles.
+- Recreate the Arcade Experience: They want a game that captures the arcade experience, with accurate mechanics, graphics, and gameplay flow, but on new technology.
+- Challenge themselves Again: They seek to experience the same gameplay challenge that they enjoyed as a teenager, testing their reflexes and memory.
+- Teach the Next Generation: They hope to share their love for arcade games with their kids, introducing them to simpler yet rewarding gameplay without the overwhelming nature of modern titles.
 
 **Frustrations:**
 
 - Inauthentic Remakes: Dislikes when remakes or ports of retro games deviate too much from the original in terms of mechanics, visuals, or difficulty balance.
 - Overcomplication: Prefers not to be overwhelmed with menus, tutorials, or complex modern features like microtransactions or customization that disrupt the core arcade experience.
-- Technical Hiccups: They values the seamlessness of original arcade machines, so any bugs, crashes, or input delays would detract from their enjoyment of the FPGA game.
+- Technical Hiccups: They value the seamlessness of original arcade machines, so any bugs, crashes, or input delays would detract from their enjoyment of the FPGA game.
 
 **Preferred Features:**
 
 - Faithful Recreation: Sarah values mechanics that stay true to the original Frogger, including the exact placement of hazards, timing, and game difficulty.
 - Simple, Physical Controls: Prefers simple control schemes similar to the arcade (e.g., a joystick or basic directional buttons), avoiding complex key mappings.
-- Visual & Audio Accuracy: They appreciates retro pixel graphics, original sound effects, or music that captures the vibe of the classic Frogger, even if on new hardware.
+- Visual & Audio Accuracy: They appreciate retro pixel graphics, original sound effects, or music that captures the vibe of the classic Frogger, even if on new hardware.
 
 ### 1.5 Use cases
 
@@ -185,7 +185,7 @@ Motivations:
 
 ### 2.1 Game Objective
 
-To complete a level, the player must guide five frogs safely into the home bays. Each frog represents a life, and the player starts with four lives. The game ends when all frogs are lost or when the player completes all the levels. Additionally, Frogger has a time limit of 30 seconds (or 60 ticks) per frog, shown by a time band at the bottom of the screen. The remaining time also contributes to the player’s score if the frog reaches a home bay on time. This remain the same throughout all the levels.
+To complete a level, the player must guide five frogs safely into the home bays. Each frog represents a life, and the player starts with four lives. The game ends when all frogs are lost or when the player completes all the levels. Additionally, Frogger has a time limit of 30 seconds (or 60 ticks) per frog, shown by a time band at the bottom of the screen. The remaining time also contributes to the player’s score if the frog reaches a home bay on time. This remains the same throughout all the levels.
 
 _Frogger game:_
 
@@ -568,8 +568,8 @@ This section defines how quickly and reliably the system responds to user inputs
 
 ##### Failure modes
 
-- If all four buttons are pressed at once the game restart.
-- If two or more input are made at the same time the output is combined. eg. Left and Up would be a diagonal.
+- If all four buttons are pressed at once the game restarts.
+- If two or more inputs are made at the same time the output is combined. Eg. Left and Up would be diagonal.
 
 ##### Reliability Considerations
 
@@ -630,7 +630,7 @@ To enhance our understanding of the game mechanics, we referred to the official 
 | VGA (Video Graphics Array)           | A display standard that provides the graphical interface for the game. In this project, the game is displayed at 640x480 resolution using VGA output.   |
 | Tiles                                | The basic unit of measurement for movement in the game. The frog moves one tile at a time.                                                              |
 | Ticks                                | A unit of time used in the game, where one tick equals 0.5 seconds. The player has 60 ticks (30 seconds) to complete certain actions.                   |
-| Objects                              | Vehicles, logs, turtles, and other elements that move across the screen, posing a hazard or platform for Frogger.                                       |
+| Objects                              | Vehicles, logs, turtles, and other elements that move across the screen, pose a hazard or platform for Frogger.                                       |
 | Capital Expenditures                 | The fixed costs associated with hardware like the FPGA board and VGA monitor.                                                                           |
 | Input Latency                        | The delay between pressing a control button and the movement of Frogger on the screen. It should be between 10 and 30 milliseconds.                     |
 | Performance Metrics                  | A set of targets ensuring the game runs smoothly, including a frame rate of 30 FPS, smooth object movement, and a 640x480 display.                      |
@@ -638,4 +638,4 @@ To enhance our understanding of the game mechanics, we referred to the official 
 | Simulation Testing                   | A method used to test the game’s functionality before deploying it on actual hardware. This is done using software simulations.                         |
 | Error Handling                       | Mechanisms put in place to manage unexpected conditions in the game, such as pressing multiple buttons simultaneously.                                  |
 | Frame Rate                           | The speed at which the game renders frames on the screen, targeted at 30 frames per second (FPS).                                                       |
-| Konami | A video game company that owns the rights of Frogger |
+| Konami | A video game company that owns the rights to Frogger |
