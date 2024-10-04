@@ -228,13 +228,13 @@ Thus 64x32 pixels.
 
 <div align="center">
     <span style="display: inline-block;">
-        <img src="./images/logpart1.png" alt="mediumlog1" style="width: 70%; height: 70%;" />
+        <img src="./images/logpart1.png" alt="mediumlog1" style="width: 50%; height: 50%;" />
     </span>
     <span style="display: inline-block;">
-        <img src="./images/logpart2.png" alt="mediumlog2" style="width: 70%; height: 70%;" />
+        <img src="./images/logpart2.png" alt="mediumlog2" style="width: 50%; height: 50%;" />
     </span>
     <span style="display: inline-block;">
-        <img src="./images/logpart3.png" alt="mediumlog3" style="width: 70%; height: 70%;" />
+        <img src="./images/logpart3.png" alt="mediumlog3" style="width: 50%; height: 50%;" />
     </span>
 </div>
 
