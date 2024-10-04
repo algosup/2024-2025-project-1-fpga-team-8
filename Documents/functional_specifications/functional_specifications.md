@@ -44,7 +44,8 @@
   - [4. Risks and Assumptions](#4-risks-and-assumptions)
     - [4.1 Risks](#41-risks)
     - [4.2 Budget considerations](#42-budget-considerations)
-    - [4.4 External resources](#44-external-resources)
+    - [4.3 External resources](#43-external-resources)
+  - [Glossary](#glossary)
 
 </details>
 
@@ -554,6 +555,39 @@ Testability refers to how easily the system's functionality can be verified. A c
 
 As the game is being created from scratch, there should not be any expenses related to the software creation. However, there may be a need to spend some money for unforeseen components or enhancements. It’s important to note that while the FPGA board and VGA monitor were provided by the school, future users of the project will need to obtain these components themselves. We reserve the right to recommend specific functionalities if deemed necessary.
 
-### 4.4 External resources
+### 4.3 External resources
 
 To enhance our understanding of the game mechanics, we referred to the official Frogger manual. [Link](https://annarchive.com/files2/Frogger%20%28U%29.pdf)
+
+## Glossary
+
+| Word | Definition |
+|--- | --- |
+| FPGA (Field-Programmable Gate Array) | A type of hardware that can be programmed after manufacturing to perform different tasks. In this project, it is used to create the Frogger game. |
+| Verilog | A hardware description language (HDL) used to design and model electronic systems. It is used to program the FPGA for this project. |
+| VGA (Video Graphics Array) | A display standard that provides the graphical interface for the game. In this project, the game is displayed at 640x480 resolution using VGA output.|
+| Tiles | The basic unit of measurement for movement in the game. The frog moves one tile at a time. |
+| Home Bays | The five safe spots at the top of the screen where the frog must reach to complete the level. |
+| Ticks | A unit of time used in the game, where one tick equals 0.5 seconds. The player has 60 ticks (30 seconds) to complete certain actions. |
+| Bonuses | Special points awarded for specific achievements in the game, such as rescuing a pink frog or collecting a fly. |
+| River Crossing | A section of the game where the player must navigate floating objects like logs and turtles to avoid falling into the water. |
+| Highway Crossing | The initial part of each level where the player must avoid traffic, such as cars and trucks, moving in both directions. |
+| Objects | Vehicles, logs, turtles, and other elements that move across the screen, posing a hazard or platform for Frogger. |
+| Alligator Jaws | A hazard in the river section where alligators can appear disguised as logs, presenting a danger when their jaws are open. |
+| Diving Turtles | Turtles that periodically submerge underwater, causing Frogger to lose a life if still standing on them when they dive. |
+| Otters | A hazard that appears in later levels, moving quickly across the water and pulling Frogger into the river. |
+| Snakes | Enemies that spawn on the logs and lower riverbank from level 3 onward, capable of killing Frogger if touched. |
+| Game Levels | The stages of the game, each of which increases in difficulty by speeding up vehicles and reducing the number of floating objects in the river.
+| Time Band | A visual bar on the screen that shows how much time remains for the frog to reach a home bay. It turns red when only 10 seconds remain.
+| Capital Expenditures | The fixed costs associated with hardware like the FPGA board and VGA monitor.
+| Input Latency | The delay between pressing a control button and the movement of Frogger on the screen. It should be between 10 and 30 milliseconds.
+| Performance Metrics | A set of targets ensuring the game runs smoothly, including a frame rate of 30 FPS, smooth object movement, and a 640x480 display.
+| Testability | The ease with which the game’s functionality can be verified, primarily through manual gameplay testing on the hardware.
+| Flexibility | The ability to accommodate future changes, such as adding new levels or features, without major rework.
+| Non-Functional Requirements | Aspects of the project that are not directly related to the gameplay but impact the overall performance, reliability, and ease of future modifications.
+| Pink Frog | A special bonus frog that appears on logs in the river. Escorting it to a home bay awards the player extra points.
+| Fly Bonus | A bonus point opportunity where a fly appears in a home bay, awarding additional points when collected.
+| Capital Costs | Expenditures on physical items like the FPGA board and monitor, provided by the school.
+| Simulation Testing | A method used to test the game’s functionality before deploying it on actual hardware. This is done using software simulations.
+| Error Handling | Mechanisms put in place to manage unexpected conditions in the game, such as pressing multiple buttons simultaneously.
+| Frame Rate | The speed at which the game renders frames on the screen, targeted at 30 frames per second (FPS).
