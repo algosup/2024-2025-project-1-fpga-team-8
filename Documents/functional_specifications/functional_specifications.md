@@ -163,23 +163,37 @@ _Highway:_
 
 </div>
 
+- **Key hazards:**
+  - Vehicles: There are five different types of vehicles in the game, all equally deadly. If Frogger comes into contact with any of them, he will be crushed, resulting in the loss of a life.
+  
+|Name|Picture| Size | Description|
+|------|------|------|---------|
+|Car 1|![car1](./images/car1.png)|32x32 pixels <br> 1 tile|First hazard encountered by the player <br> Placed on lane 2 <br> Slowest of all cars|
+|Car 2|![car2](./images/car2.png)|32x32 pixels <br> 1 tile| Placed on lane 3|
+|Car 3|![car3](./images/car3.png)|32x32 pixels <br> 1 tile| Placed on lane 4|
+|Car 4|![car4](./images/car4.png)|32x32 pixels <br> 1 tile| Placed on lane 5 <br> The fastest car out of all|
+|Truck|![truck](./images/truck.png)|64x32 pixels <br> 2 tiles|Placed on lane 6 <br> Slowest moving vehicle|
+
+The speed of each of these vehicles increases with each level, as detailed further in the document in the section [Game Levels (1-8)](#game-levels-1-8).
+
 #### 2.2.4 River Crossing
 
-After the highway, Frogger reaches the riverbank. To get to the home bays, the player must jump across floating logs, turtles, and other moving objects. The logs move at different speeds and in different directions. Turtles periodically dive underwater, forcing the player to hop off before they disappear.
+After crossing the highway, Frogger reaches the riverbank. To get to the home bays, the player must jump across floating logs, turtles, and other moving objects.
+These logs vary in speed and direction, while turtles periodically dive underwater, requiring the player to hop off before they disappear.
 
-Additional river hazards include snapping alligator jaws, which can appear while Frogger is on logs. As the game progresses, new threats like fast-moving otters that can pull the frog into the water emerge, adding difficulty.
+Additional river hazards include snapping alligator jaws that can appear while Frogger is on logs. As the game progresses, new threats like fast-moving otters emerge, capable of pulling the frog into the water, increasing the challenge.
 
 The river is divided into 7 rows:
 
-- The first row is the river bank, a rather safe place, where the snake spawns after level 3;
-- The second row contains set of three turtles;
-- The third row contains either short logs or long logs;
-- The fourth row contains long logs only;
-- The fifth row contains sets of two turtles;
-- The sixth row contains random logs from short, medium or long ones;
-- The seventh and last row is the goal, containing five safe spot, that the user must fill. And other from that, the grass is unsafe for the user. Moreover, some enemies and bonuses can be here.
+- First row: The riverbank—a relatively safe area where the snake begins spawning after level 3.
+- Second row: Contains sets of three turtles.
+- Third row: Alternates between short and long logs.
+- Fourth row: Consists of long logs only.
+- Fifth row: Contains sets of two turtles.
+- Sixth row: Features a random mix of short, medium, or long logs.
+- Seventh row: The goal, with five safe spots (home bays) that Frogger must fill. The grass here is unsafe, and enemies or bonuses may also appear.
 
-Note: From the second to the seventh row, objects are spawned randomly, we will dive into it later.
+Note: From the second to the seventh row, the objects spawn randomly, a topic we will explore further later on.
 
 _River Bank:_
 
