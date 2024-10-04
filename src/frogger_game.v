@@ -222,6 +222,27 @@ module frogger_game
         .o_Car_Y(w_Car_Y_5),
     );
 
+  // Check for collisions between Frogger and cars
+  frogger_collisions frogger_collisions_inst (
+    .i_Clk(i_Clk),
+    .i_Frogger_X(w_Frogger_X),
+    .i_Frogger_Y(w_Frogger_Y),
+    .i_Frogger_Orig_x(10),
+    .i_Frogger_Orig_y(14),
+    .i_Car_X_1(w_Car_X_1),
+    .i_Car_Y_1(w_Car_Y_1),
+    .i_Car_X_2(w_Car_X_2),
+    .i_Car_Y_2(w_Car_Y_2),
+    .i_Car_X_3(w_Car_X_3),
+    .i_Car_Y_3(w_Car_Y_3),
+    .i_Car_X_4(w_Car_X_4),
+    .i_Car_Y_4(w_Car_Y_4),
+    .i_Car_X_5(w_Car_X_5),
+    .i_Car_Y_5(w_Car_Y_5),
+    .o_Frogger_X(w_Frogger_X),
+    .o_Frogger_Y(w_Frogger_Y)
+  );
+
   // Determine background colors based on the bitmap and draw Frogger if applicable
   reg [3:0] r_Red_Video, r_Grn_Video, r_Blu_Video;
   always @(*) begin
