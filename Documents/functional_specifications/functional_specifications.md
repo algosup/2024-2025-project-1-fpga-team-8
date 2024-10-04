@@ -307,6 +307,16 @@ _River banks:_
 
 </div>
 
+- **Filling the home bay:**
+  - When the player reaches a home bay, a frog is placed inside it. Once filled, the player cannot enter that home bay again. If the player attempts to jump into a home bay that has already been filled, Frogger will lose a life.
+
+<div align="center">
+
+![homebay frog](./images/froghome.png)
+![frog in bay](./images/froginbay.png)
+
+</div>
+
 On the upper river bank, one enemy can spawn:
 
 - **Alligator's head**: If an alligator's head is showing in a home bay, it is not safe to enter it. Jumping into it will result into the death of a frog. However, if the alligator just appeared, there's a 2 second safe period before being deadly.
