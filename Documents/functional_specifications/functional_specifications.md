@@ -227,11 +227,17 @@ A small log spans the equivalent of 2 tiles.
 Thus 64x32 pixels.
 
 <div align="center">
-
-![smalllog1](./images/logpart1.png)
-![smalllog2](./images/logpart3.png)
-
+    <span style="display: inline-block;">
+        <img src="./images/logpart1.png" alt="mediumlog1" />
+    </span>
+    <span style="display: inline-block;">
+        <img src="./images/logpart2.png" alt="mediumlog2" />
+    </span>
+    <span style="display: inline-block;">
+        <img src="./images/logpart3.png" alt="mediumlog3" />
+    </span>
 </div>
+
 
 **Medium logs:**
 
