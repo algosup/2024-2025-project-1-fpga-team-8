@@ -6,17 +6,24 @@
 - [Test plan](#test-plan)
   - [1. Introduction](#1-introduction)
   - [2. Test Environment](#2-test-environment)
-    - [2.1 Hardware Platform](#21-hardware-platform)
-      - [2.1.1 FPGA Board](#211-fpga-board)
-      - [2.1.2 Interfaces](#212-interfaces)
-    - [2.2 Software Tools](#22-software-tools)
-    - [2.3 Test Equipment](#23-test-equipment)
+    - [2.1. Hardware Platform](#21-hardware-platform)
+      - [2.1.1. FPGA Board](#211-fpga-board)
+      - [2.1.2. Interfaces](#212-interfaces)
+    - [2.2. Software Tools](#22-software-tools)
+    - [2.3. Test Equipment](#23-test-equipment)
   - [3. Scope of Testing](#3-scope-of-testing)
-    - [3.1 In Scope](#31-in-scope)
-    - [3.2 Out of Scope](#32-out-of-scope)
+    - [3.1. In Scope](#31-in-scope)
+    - [3.2. Out of Scope](#32-out-of-scope)
   - [4. Test Objectives](#4-test-objectives)
   - [5. Testing Strategy](#5-testing-strategy)
-    - [5.1 Test Methodology](#51-test-methodology)
+    - [5.1. Test Methodology](#51-test-methodology)
+      - [5.1.1. BlackBox Testing](#511-blackbox-testing)
+      - [5.1.2. Simulation Testing](#512-simulation-testing)
+      - [5.1.3. Hardware Testing](#513-hardware-testing)
+      - [5.1.4. Regression Testing](#514-regression-testing)
+    - [5.2. Test Cases](#52-test-cases)
+    - [5.3. Test Reports](#53-test-reports)
+    - [5.4. Bug Lifecycle](#54-bug-lifecycle)
 
 </details>
 
@@ -28,9 +35,9 @@ This document outlines the test plan for verifying and validating the Frogger ga
 
 The test environement includes the hardware, the software and the development tools necessary for testing the Frogger game that will be uploaded on the FPGA.
 
-### 2.1 Hardware Platform
+### 2.1. Hardware Platform
 
-#### 2.1.1 FPGA Board
+#### 2.1.1. FPGA Board
 
 - Go Board FPGA Platform
   - Lattice ICE40 HX1K FPGA
@@ -47,7 +54,7 @@ The defaut settings of the hardware won't be changed to ensure compatiility of o
 
 <!-- Add the list of default parameters (CF: https://nandland.com/wp-content/uploads/2022/06/Go_Board_V1.pdf) -->
 
-#### 2.1.2 Interfaces
+#### 2.1.2. Interfaces
 
 **Input:**
 
@@ -59,7 +66,7 @@ The defaut settings of the hardware won't be changed to ensure compatiility of o
 - Settable LEDs to display the remaining lives and status of the game
 - Dual 7-Segment LED Display to indicate the score of the user
 
-### 2.2 Software Tools
+### 2.2. Software Tools
 
 **Language:**
 
@@ -78,7 +85,7 @@ The defaut settings of the hardware won't be changed to ensure compatiility of o
 
 <!-- Potentially missing STA Tools, further investigations on this subject will be done -->
 
-### 2.3 Test Equipment
+### 2.3. Test Equipment
 
 - **Monitor:** <!-- Check the complete specifications  -->
 - **Input Device:** The only inputs will be the Physical buttons located on the Go Board FPGA
@@ -88,7 +95,7 @@ The defaut settings of the hardware won't be changed to ensure compatiility of o
 
 The scope of testing of Frogger's clone encompasses all key requirements pointed out by the client and mentionned in the specifications. It will ensure the correctness of the exectued actions, the execution of a smooth gameplay and correct system performance on the Go Board.
 
-### 3.1 In Scope
+### 3.1. In Scope
 
 - **Game Logic & Behaviour:**
   - Frog movements based on user input in the following directions: Up, Down, Left, Right.
@@ -106,7 +113,7 @@ The scope of testing of Frogger's clone encompasses all key requirements pointed
   - Ensure the game runs smoothly at a constant framerate.
   - Acknowledge the program's logic and timings.
 
-### 3.2 Out of Scope
+### 3.2. Out of Scope
 
 The following elements will nor be covered in the test plan, nor in the test cases:
 
@@ -147,5 +154,54 @@ The objective of the testing phase of Frogger is to rigorously evaluate that our
 
 ## 5. Testing Strategy
 
-### 5.1 Test Methodology
+Our strategy employs a multifaceted approach which will consists in multiple phases of testing to identify issues early on in the project.
+
+The test phase will be ran 
+
+### 5.1. Test Methodology
+
+#### 5.1.1. BlackBox Testing
+
+To ensure a correct delivery in the project's timeframe, we need to validate early on if the functionnalities are working on our app without focusing on the implemetation of those features.
+
+This will allow us to validate the core functionnalities early on and focus on iterating to implement less critical features.
+
+For this test phase, we will solely test the solutions via gameplay sessions.
+
+#### 5.1.2. Simulation Testing
+
+FPGAs are a blackbox executing code without any possibility of simple debugging, apart from creating a logic analyzer will be used only once. Rather than going for this extensive solution, we will use simulation to ensure the states of each component follow the specifications' instructions, but also verify if the specifications themselves are accurate.
+
+As mentionned in the [Test Environment section](#22-software-tools), we are going to use [EDAPlayGround](edaplayground.com), a website on which we can execute our Verilog and test components independently, but also in the game environment.
+
+Simulation testing on EDAPlayGround introduces various keywords helping us getting more precise results on the executed tests:
+
+- `$dumpfile("dump.vcd");`
+- `$dumpvars;`
+- `assert();`: This statement asserts a component in our FPGA design has the same value as what our exepectation. If the assertion is false, the testing breaks automatically.
+- `#10`: 10 here can be replaced by any positive integer to represent the number of clock cycles during which we have to wait to execute the code following this statement.
+
+The simulations tests scripts will be stored in the [simulations folder](./simulations/), and be updated to test every new addition to the Frogger clone.
+
+#### 5.1.3. Hardware Testing
+
+
+
+#### 5.1.4. Regression Testing
+
+To validate new additions and fixes to the software, the whole test bed will be ran every time code will be merged 
+
+### 5.2. Test Cases
+
+All of our codebase will be tested following the defined [test cases](./test_cases.md). Those test cases are using all the mehtodologies explained in the [Methodology Section](#51-test-methodology).
+
+### 5.3. Test Reports
+
+Each testing session consists in testing all the existing test cases. After each testing session, the results will be added into a [Google Sheets Document](https://docs.google.com/spreadsheets/d/13jn9MZXwvPJthTED8lPlTzNpH2iK69MnvhQDEM3IoZw/edit?usp=sharing).
+
+This will allow the development team to know which test cases failed on a run by run basis, helping them identify the points where fixes should be made to make the most faithful clone of Frogger. It will also help them track their progression over time, and will help managment know if the allocated time and resources to testing and development are sufficient or not.
+
+After each test execution, a test report will be added to the [Test Reports](./test-reports/) folder, linking all the identified issues and summarizing the overall 
+
+### 5.4. Bug Lifecycle
 
