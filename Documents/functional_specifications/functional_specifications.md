@@ -238,7 +238,7 @@ _Diving Turtles:_
 
 </div>
 
-- **Alligator Jaws**: Beware of logs with hidden alligator jaws. These are actually alligators disguised as logs. The key difference between them and regular logs is their visible jaws. You can safely jump on the alligator's back, but if Frogger lands on its open jaw, you'll lose a life. Every second, the alligator snaps its jaws, emphasizing the danger it poses.
+- **Alligator Jaws**: Beware of logs with hidden alligator jaws. They are alligator disguised as a log. The thing that deferentiate them fron the logs are their jaws. You can jump on the alligator's back safely, but if frogger jumps into the alligator's open jaw, the user loses a life. Every second, the alligator clacks it's jaw, when the jaws are closed, the frogger can walk on the alligators head.
 
 _Alligator:_
 
