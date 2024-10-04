@@ -75,7 +75,7 @@ _A logo of the game is shown below:_
 
 <div align="center">
 
-![logo](./images/logo.jpeg)
+![logo](./images/logo.png)
 
 </div>
 
