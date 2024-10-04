@@ -63,6 +63,8 @@ module frogger_game
   assign w_Col_Count_Div = w_Col_Count[9:5];
   assign w_Row_Count_Div = w_Row_Count[9:5];
 
+  wire w_Collided;
+
   reg [6:0] r_Frogger_Score;
 
   // Synchronize to row and column counters
@@ -125,6 +127,7 @@ module frogger_game
     .i_Left_Mvt(i_Left_Mvt),
     .i_Right_Mvt(i_Right_Mvt),
     .i_Game_Active(w_Game_Active),
+    .i_Collided(w_Collided),
     .i_Col_Count_Div(w_Col_Count_Div),
     .i_Row_Count_Div(w_Row_Count_Div),
     .o_Draw_Frogger(w_Draw_Frogger),
@@ -239,8 +242,7 @@ module frogger_game
     .i_Car_Y_4(w_Car_Y_4),
     .i_Car_X_5(w_Car_X_5),
     .i_Car_Y_5(w_Car_Y_5),
-    .o_Frogger_X(w_Frogger_X),
-    .o_Frogger_Y(w_Frogger_Y)
+    .o_Collided(w_Collided)
   );
 
   // Determine background colors based on the bitmap and draw Frogger if applicable

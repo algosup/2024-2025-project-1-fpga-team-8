@@ -6,6 +6,7 @@ module frogger_ctrl(
     input i_Left_Mvt,
     input i_Right_Mvt,
     input i_Game_Active,
+    input i_Collided,
     input [5:0]      i_Col_Count_Div,
     input [5:0]      i_Row_Count_Div,
     output reg       o_Draw_Frogger,
@@ -30,6 +31,11 @@ always @(posedge i_Clk) begin
     r_Switch_2 <= i_Down_Mvt;
     r_Switch_3 <= i_Left_Mvt;
     r_Switch_4 <= i_Right_Mvt;
+
+    if (i_Collided == 1) begin
+        o_Frogger_X <= 10;
+        o_Frogger_Y <= 14;
+    end
 
     if (o_Frogger_Y == 0) begin
             o_Frogger_Y <= 14;
