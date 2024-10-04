@@ -42,9 +42,10 @@ module frogger_game
   parameter P2_WINS = 3'b011;
   parameter CLEANUP = 3'b100;
 
+  reg [1:0] lives = 2'b11;
 
   wire w_Game_Active = 1'b1;
-    wire w_Draw_Any, w_Draw_Frogger, w_Draw_Car_1, w_Draw_Car_2, w_Draw_Car_3;
+  wire w_Draw_Any, w_Draw_Frogger, w_Draw_Car_1, w_Draw_Car_2, w_Draw_Car_3;
 
   wire       w_HSync, w_VSync;
   wire [9:0] w_Col_Count, w_Row_Count;
@@ -118,114 +119,93 @@ module frogger_game
     end
   end
 
-  // Control Frogger's movements and track its position
-  frogger_ctrl frogger_ctrl_inst (
-    .i_Clk(i_Clk),
-    .i_Score(r_Frogger_Score),
-    .i_Up_Mvt(i_Up_Mvt),
-    .i_Down_Mvt(i_Down_Mvt),
-    .i_Left_Mvt(i_Left_Mvt),
-    .i_Right_Mvt(i_Right_Mvt),
-    .i_Game_Active(w_Game_Active),
-    .i_Collided(w_Collided),
-    .i_Col_Count_Div(w_Col_Count_Div),
-    .i_Row_Count_Div(w_Row_Count_Div),
-    .o_Draw_Frogger(w_Draw_Frogger),
-    .o_Frogger_X(w_Frogger_X),
-    .o_Frogger_Y(w_Frogger_Y),
-    .o_Score(r_Frogger_Score)
+    wire [3:0] w_Bitmap_Data;
+
+  // Assign bitmap data corresponding to Frogger's position
+  assign w_Bitmap_Data = (w_Frogger_Y < c_GAME_HEIGHT && w_Frogger_X < c_GAME_WIDTH) ? 
+                         r_Bitmap[w_Frogger_Y][w_Frogger_X] : 4'd0;
+
+  // Car 1 instance
+  car_ctrl #(
+    .c_CAR_SPEED(1),
+    .c_MAX_X(14),
+    .c_SLOW_COUNT(4000000),
+    .c_INIT_X(0),
+    .c_INIT_Y(11)
+  )
+    
+    car_ctrl_inst_1 (
+      .i_Clk(i_Clk),
+      .i_Col_Count_Div(w_Col_Count_Div),
+      .i_Row_Count_Div(w_Row_Count_Div),
+      .o_Draw_Car(w_Draw_Car),
+      .o_Car_X(w_Car_X_1),
+      .o_Car_Y(w_Car_Y_1),
+  );
+  // Car 2 instance
+  car_ctrl #(
+    .c_CAR_SPEED(1),
+    .c_MAX_X(14),
+    .c_SLOW_COUNT(5000000),
+    .c_INIT_X(0),
+    .c_INIT_Y(10)
+  )
+    car_ctrl_inst_2 (
+      .i_Clk(i_Clk),
+      .i_Col_Count_Div(w_Col_Count_Div),
+      .i_Row_Count_Div(w_Row_Count_Div),
+      .o_Draw_Car(w_Draw_Car_2),
+      .o_Car_X(w_Car_X_2),
+      .o_Car_Y(w_Car_Y_2),
+  );
+  // Car 3 instance
+  car_ctrl #(
+    .c_CAR_SPEED(1),
+    .c_MAX_X(14),
+    .c_SLOW_COUNT(3700000),
+    .c_INIT_X(0),
+    .c_INIT_Y(9)
+  )
+    car_ctrl_inst_3 (
+      .i_Clk(i_Clk),
+      .i_Col_Count_Div(w_Col_Count_Div),
+      .i_Row_Count_Div(w_Row_Count_Div),
+      .o_Draw_Car(w_Draw_Car_3),
+      .o_Car_X(w_Car_X_3),
+      .o_Car_Y(w_Car_Y_3),
+  );
+  car_ctrl #(
+    .c_CAR_SPEED(1),
+    .c_MAX_X(14),
+    .c_SLOW_COUNT(4500000),
+    .c_INIT_X(0),
+    .c_INIT_Y(8)
+  )
+    car_ctrl_inst_4 (
+      .i_Clk(i_Clk),
+      .i_Col_Count_Div(w_Col_Count_Div),
+      .i_Row_Count_Div(w_Row_Count_Div),
+      .o_Draw_Car(w_Draw_Car_4),
+      .o_Car_X(w_Car_X_4),
+      .o_Car_Y(w_Car_Y_4),
+  );
+  car_ctrl #(
+    .c_CAR_SPEED(1),
+    .c_MAX_X(14),
+    .c_SLOW_COUNT(4200000),
+    .c_INIT_X(0),
+    .c_INIT_Y(7)
+  )
+    car_ctrl_inst_5 (
+      .i_Clk(i_Clk),
+      .i_Col_Count_Div(w_Col_Count_Div),
+      .i_Row_Count_Div(w_Row_Count_Div),
+      .o_Draw_Car(w_Draw_Car_5),
+      .o_Car_X(w_Car_X_5),
+      .o_Car_Y(w_Car_Y_5),
   );
 
-    // Car 1 instance
-    car_ctrl #(
-      .c_CAR_SPEED(1),
-      .c_MAX_X(14),
-      .c_SLOW_COUNT(4000000),
-      .c_INIT_X(0),
-      .c_INIT_Y(11)
-    )
-      
-      car_ctrl_inst_1 (
-        .i_Clk(i_Clk),
-        .i_Col_Count_Div(w_Col_Count_Div),
-        .i_Row_Count_Div(w_Row_Count_Div),
-        .o_Draw_Car(w_Draw_Car),
-        .o_Car_X(w_Car_X_1),
-        .o_Car_Y(w_Car_Y_1),
-
-    );
-
-    // Car 2 instance
-    car_ctrl #(
-      .c_CAR_SPEED(1),
-      .c_MAX_X(14),
-      .c_SLOW_COUNT(5000000),
-      .c_INIT_X(0),
-      .c_INIT_Y(10)
-    )
-
-      car_ctrl_inst_2 (
-        .i_Clk(i_Clk),
-        .i_Col_Count_Div(w_Col_Count_Div),
-        .i_Row_Count_Div(w_Row_Count_Div),
-        .o_Draw_Car(w_Draw_Car_2),
-        .o_Car_X(w_Car_X_2),
-        .o_Car_Y(w_Car_Y_2),
-    );
-
-    // Car 3 instance
-    car_ctrl #(
-      .c_CAR_SPEED(1),
-      .c_MAX_X(14),
-      .c_SLOW_COUNT(3700000),
-      .c_INIT_X(0),
-      .c_INIT_Y(9)
-    )
-
-      car_ctrl_inst_3 (
-        .i_Clk(i_Clk),
-        .i_Col_Count_Div(w_Col_Count_Div),
-        .i_Row_Count_Div(w_Row_Count_Div),
-        .o_Draw_Car(w_Draw_Car_3),
-        .o_Car_X(w_Car_X_3),
-        .o_Car_Y(w_Car_Y_3),
-    );
-
-    car_ctrl #(
-      .c_CAR_SPEED(1),
-      .c_MAX_X(14),
-      .c_SLOW_COUNT(4500000),
-      .c_INIT_X(0),
-      .c_INIT_Y(8)
-    )
-
-      car_ctrl_inst_4 (
-        .i_Clk(i_Clk),
-        .i_Col_Count_Div(w_Col_Count_Div),
-        .i_Row_Count_Div(w_Row_Count_Div),
-        .o_Draw_Car(w_Draw_Car_4),
-        .o_Car_X(w_Car_X_4),
-        .o_Car_Y(w_Car_Y_4),
-    );
-
-    car_ctrl #(
-      .c_CAR_SPEED(1),
-      .c_MAX_X(14),
-      .c_SLOW_COUNT(4200000),
-      .c_INIT_X(0),
-      .c_INIT_Y(7)
-    )
-
-      car_ctrl_inst_5 (
-        .i_Clk(i_Clk),
-        .i_Col_Count_Div(w_Col_Count_Div),
-        .i_Row_Count_Div(w_Row_Count_Div),
-        .o_Draw_Car(w_Draw_Car_5),
-        .o_Car_X(w_Car_X_5),
-        .o_Car_Y(w_Car_Y_5),
-    );
-
-  // Check for collisions between Frogger and cars
+  // Control Frogger's movements and track its position
   frogger_collisions frogger_collisions_inst (
     .i_Clk(i_Clk),
     .i_Frogger_X(w_Frogger_X),
@@ -242,6 +222,8 @@ module frogger_game
     .i_Car_Y_4(w_Car_Y_4),
     .i_Car_X_5(w_Car_X_5),
     .i_Car_Y_5(w_Car_Y_5),
+    .i_Lives(r_Current_Lives),
+    .o_Lives(r_Current_Lives),
     .o_Collided(w_Collided)
   );
 
