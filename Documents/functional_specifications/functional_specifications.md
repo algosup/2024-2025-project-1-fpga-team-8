@@ -537,8 +537,8 @@ This section outlines the non-functional requirements for the FPGA Frogger game 
 
 ##### Capital Expenditures
 
-- **Board**: NandLand Go-Board, priced at €70.
-- **Monitor**: Acer EK251Q EBI, priced at €109.99.
+- **Board**: NandLand Go-Board, priced at $70 including VAT.
+- **Monitor**: Acer EK251Q EBI, priced at €109.99 VAT.
 
 The capital expenditures, including the board and monitor, are furnished by the school. There are no relevant development environment costs, as the project uses freely available software.
 
