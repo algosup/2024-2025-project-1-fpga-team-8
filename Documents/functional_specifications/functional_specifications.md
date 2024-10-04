@@ -37,6 +37,7 @@
         - [Project Scope](#project-scope)
     - [3.2 Response/Performance \& Reliability](#32-responseperformance--reliability)
         - [Performance Metrics](#performance-metrics)
+        - [Failure modes](#failure-modes)
         - [Reliability Considerations](#reliability-considerations)
     - [3.3 Testability](#33-testability)
     - [3.4 Documentation](#34-documentation)
@@ -513,6 +514,11 @@ This section defines how quickly and reliably the system responds to user inputs
 - **Target FPS**: The game aims for a frame rate of 30 FPS without screen tearing.
 - **Input Latency**: The frog’s movement should occur within 10 to 30 milliseconds of pressing a button.
 - **Object Movement**: Vehicles and obstacles must move fluidly across the screen without jittering. Object speeds will vary by difficulty, but all movements should be smooth and reliable.
+
+##### Failure modes
+
+- If all four buttons are pressed at once the game restart.
+- If two or more input are made at the same time the output is combined. eg. Left and Up would be a diagonal.
 
 ##### Reliability Considerations
 
