@@ -69,7 +69,7 @@ _A logo of the game is shown below:_
 
 <div align="center">
 
-//placeholder image
+![logo](./images/logo.jpeg)
 
 </div>
 
@@ -119,7 +119,8 @@ _Frogger game:_
 
 <div align="center">
 
-//placeholder image
+![game](./images/frogger_game.png)
+
 
 </div>
 
@@ -133,7 +134,7 @@ _Frog:_
 
 <div align="center">
 
-//placeholder image
+![frog](./images/frog.png)
 
 </div>
 
@@ -145,7 +146,7 @@ _FPGA BUTTONS:_
 
 <div align="center">
 
-//placeholder image
+![FPGA](./images/fpga.jpg)
 
 </div>
 
@@ -159,7 +160,7 @@ _Highway:_
 
 <div align="center">
 
-//placeholder image
+![road](./images/road.png)
 
 </div>
 
