@@ -492,13 +492,13 @@ Frogger has a time limit of 30 seconds (or 60 ticks) to reach the home bay.
 If the player fails to bring the frog to the home bay within this time, they will lose a life.
 The remaining time is displayed as a time band at the bottom right of the screen.
 
-_time band_:
+_Time band_:
 
 ![time band](./images/timeband.png)
 
 The time band gradually shrinks as time passes. When only 10 seconds (or 20 ticks) remain, the time band turns red to signal that time is running out, as shown below:
 
-_time running out_:
+_Time running out_:
 
 ![red time band](./images/redtimeband.png)
 
@@ -538,7 +538,7 @@ This section outlines the non-functional requirements for the FPGA Frogger game 
 ##### Capital Expenditures
 
 - **Board**: NandLand Go-Board, priced at $70 including VAT.
-- **Monitor**: Acer EK251Q EBI, priced at €109.99 VAT.
+- **Monitor**: Acer EK251Q EBI, priced at $124.99 VAT.
 
 The capital expenditures, including the board and monitor, are furnished by the school. There are no relevant development environment costs, as the project uses freely available software.
 
