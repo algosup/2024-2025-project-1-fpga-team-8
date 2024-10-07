@@ -10,7 +10,6 @@ module frogger_ctrl(
     input [5:0]      i_Col_Count_Div,
     input [5:0]      i_Row_Count_Div,
     input [3:0]      i_Bitmap_Data,  // Add input to get the bitmap data
-    output reg       o_Draw_Frogger,
     output reg [5:0] o_Frogger_X,
     output reg [5:0] o_Frogger_Y,
     output reg [6:0] o_Score
@@ -72,14 +71,6 @@ module frogger_ctrl(
                 o_Frogger_X <= o_Frogger_X + 1;  // Move right
             end
         end
-    end
-
-    // Draw Frogger at its current tile position
-    always @(posedge i_Clk) begin
-        if (i_Col_Count_Div == o_Frogger_X && i_Row_Count_Div == o_Frogger_Y)
-            o_Draw_Frogger <= 1'b1;
-        else
-            o_Draw_Frogger <= 1'b0;
     end
 
 endmodule

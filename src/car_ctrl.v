@@ -12,8 +12,6 @@ module car_ctrl #(
     input i_Clk,
     input [5:0] i_Col_Count_Div,
     input [5:0] i_Row_Count_Div,
-
-    output reg o_Draw_Car,
     output reg [5:0] o_Car_X,
     output reg [5:0] o_Car_Y
 );
@@ -46,15 +44,6 @@ module car_ctrl #(
             else begin
                 o_Car_X <= 0;
             end
-        end
-
-        // Draw the car
-        if (i_Col_Count_Div == o_Car_X && i_Row_Count_Div == o_Car_Y) begin
-            // change this to 1 to draw the car
-            o_Draw_Car <= 1;
-        end
-        else begin
-            o_Draw_Car <= 0;
         end
     end
 
