@@ -1,5 +1,3 @@
-`include "bitmap_init.mem"
-
 module frogger_game
 #(
     parameter c_TOTAL_COLS=800,
@@ -88,35 +86,6 @@ module frogger_game
   initial begin
     $readmemh("bitmap_init.mem", r_Bitmap);
 
-    // Row 0: Lily pads
-    r_Bitmap[0][0] = 0; r_Bitmap[0][1] = 4; r_Bitmap[0][2] = 0; r_Bitmap[0][3] = 0;
-    r_Bitmap[0][4] = 4; r_Bitmap[0][5] = 0; r_Bitmap[0][6] = 0; r_Bitmap[0][7] = 4;
-    r_Bitmap[0][8] = 0; r_Bitmap[0][9] = 0; r_Bitmap[0][10] = 4; r_Bitmap[0][11] = 0;
-    r_Bitmap[0][12] = 0; r_Bitmap[0][13] = 4;
-
-    // // Rows 1-5: Water
-    // for (row = 1; row < 6; row = row + 1) begin
-    //   for (col = 0; col < c_GAME_WIDTH; col = col + 1) begin
-    //     r_Bitmap[row][col] = 2;
-    //   end
-    // end
-
-    // // Row 6: Safe Area (Grass)
-    // for (col = 0; col < c_GAME_WIDTH; col = col + 1) begin
-    //   r_Bitmap[6][col] = 3;
-    // end
-
-    // // Rows 7-11: Road
-    // for (row = 7; row < 12; row = row + 1) begin
-    //   for (col = 0; col < c_GAME_WIDTH; col = col + 1) begin
-    //     r_Bitmap[row][col] = 1;
-    //   end
-    // end
-
-    // // Row 12: Safe Area (Grass)
-    // for (col = 0; col < c_GAME_WIDTH; col = col + 1) begin
-    //   r_Bitmap[12][col] = 3;
-    // end
   end
 
     wire [3:0] w_Bitmap_Data;
@@ -158,7 +127,6 @@ module frogger_game
         .i_Row_Count_Div(w_Row_Count_Div),
         .o_Car_X(w_Car_X_1),
         .o_Car_Y(w_Car_Y_1),
-
     );
 
     // Car 2 instance
