@@ -94,7 +94,7 @@ While the primary objective is to get the core gameplay functioning, we’re als
   Sound effects and Music would add a sense of life to the game and make it closer to the original experience.<br>The hardware available doesn't support sound. In addition, the benefits don't justify the effort of implementing a sound system from scratch.
 
 - <u>Leaderboard:</u>
-  A leaderboard would allow us to save and display the best score on the screen.<br>This could make the game more attractive and more competitive. But those aren't the objectives of the project so it shouldn't be implemented.
+  A leaderboard would allow us to save and display the best score on the screen.<br>This could make the game more attractive and more competitive. However, since these are not project objectives, this feature will not be implemented.
 
 - <u>Multi-language support:</u>
   The game start button is "start" which means that the game isn't quite language agnostic. A multilingual solution would be a solution to remedy this issue.<br>This solution is high effort and wasteful as it would require adding a language selection menu. Whereas simply making the game language agnostic could be done by changing the start button.
@@ -135,7 +135,8 @@ The primary users of the FPGA Frogger game include:
 #### Old-school Gamer:
 
 **Gaming Habits:** Grew up playing arcade games like Frogger, Pac-Man, and Space Invaders. Now enjoys replaying classics, either via emulators or retro-style games on consoles.
-Motivations:
+
+**Motivations:**
 
 **Nostalgia:**
 
@@ -277,7 +278,7 @@ _River Bank:_
 
 Logs come in three different sizes and shapes: short, medium, and long. Frogger can safely land on these logs without falling into the water, as they float from left to right across the screen.
 
-Frogger can to jump side to side while on a log, but be careful not to fall into the water. Additionally, Frogger can leap from one log to another floating object, moving forward or backward.
+Frogger can jump side to side while on a log, but the player has to be careful not to fall into the water. Additionally, Frogger can leap from one log to another floating object, moving forward or backward.
 
 _Logs_:
 
@@ -316,7 +317,7 @@ Thus 160x32 pixels.
 
 **Key hazards**:
 
-- **Diving Turtles**: Turtles in the game appear in sets of two or three. You can jump on them when they are above the water, where they function like logs, supporting the frog. However, be cautious of turtles that dive underwater. If Frogger is still on a turtle when it dives, he will fall into the water and lose a life. To avoid this, players must leap to another floating object before the turtles submerge. Additionally, if you jump to the left or right off the edge of a turtle group, Frogger will also fall into the water, leading to the loss of a life.
+- **Diving Turtles**: Turtles in the game appear in sets of two or three. You can jump on them when they are above the water, where they function like logs, supporting the frog. However, the player needs to be wary of the turtles that dive underwater. If Frogger is still on a turtle when it dives, he will fall into the water and lose a life. To avoid this, players must leap to another floating object before the turtles submerge. Additionally, if you jump to the left or right off the edge of a turtle group, Frogger will also fall into the water, leading to the loss of a life.
 
 _Diving Turtles:_
 
@@ -326,7 +327,7 @@ _Diving Turtles:_
 
 </div>
 
-- **Alligator Jaws**: Beware of logs with hidden alligator jaws. They are alligators disguised as logs. The thing that differentiates them from the logs is their jaws. You can jump on the alligator's back safely, but if Frogger jumps into the alligator's open jaw, the user loses a life. Every second, the alligator clacks its jaw, when the jaws are closed, the frogger can walk on the alligator's head.
+- **Alligator Jaws**: Beware of logs with hidden alligator jaws. They are alligators disguised as logs. The thing that differentiates them from the logs is their jaws. You can jump on the alligator's back safely, but if Frogger jumps into the alligator's open jaw, the user loses a life. Every second, the alligator clacks its jaw, when the jaws are closed, Frogger can walk on the alligator's head.
 
 _Alligator:_
 
@@ -403,7 +404,7 @@ In "Frogger," players can increase their score through special bonuses scattered
 #### 2.3.1 Pink Frog
 
 - Occasionally, a pink "lady" frog appears on a log within the river.
-- Lady moves from left to right on the log she's on.
+- The pink frog moves from left to right on the log she's on.
 - To earn bonus points, players must jump onto the log with the pink frog and safely guide her to a home bay.
 - Successfully bringing the pink frog home grants the player **200 bonus points**.
 
@@ -446,7 +447,7 @@ The difficulty in "Frogger" escalates across four distinct levels. Here’s a br
 - **Level 2**:
 
   - Alligators start to appear in the river alongside the logs.
-  - The frog can walk on the alligator's back but the Frogger dies when it walks on the alligator's head.
+  - The frog can walk on the alligator's back but Frogger will die if it walks on the alligator's head.
 
 - **Level 3 & 4**:
   - In these advanced levels, Frogger can no longer float off-screen.
@@ -507,15 +508,6 @@ _Time running out_:
 
 Points are awarded for various actions within the game:
 
-- **Jumping Frogger forward**: 10 points per forward jump.
-- **Reaching a home bay**: 50 points.
-- **Guiding all five frogs home**: 1,000 points.
-- **Rescuing the pink frog**: 200 points.
-- **Eating a fly**: 200 points.
-- **Bonus points for remaining time**: 10 points per remaining tick.
-
-If the player reaches a high score of 20,000 points and fewer than four frogs remain, an extra frog (life) is awarded.
-
 | Action              | Points Earned                 |
 | ------------------- | ----------------------------- |
 | Jump Forward        | +10 points                    |
@@ -524,11 +516,13 @@ If the player reaches a high score of 20,000 points and fewer than four frogs re
 | Escorting Pink Lady | +200 points                   |
 | Eating A Fly        | +200 points                   |
 | Bonus Time          | +10 points \* ticks remaining |
-| Score = 20,000      | 1 UP                          |
+| Score = 20,000      | 1 life gained                 |
+
+If the player reaches a high score of 20,000 points and fewer than four frogs remain, an extra frog (life) is awarded.
 
 ### 2.7 End of Game
 
-The game ends when all of Frogger's lives are lost. At this point, the player can either restart the game or reset it using the FPGA system to begin a new round. Additionally, if the player successfully reaches the end of the 8th level, they will have beaten the game. They are redirected to the main menu.
+The game ends when all of Frogger's lives are lost. At this point, the player can either restart the game or reset it using the FPGA system to begin a new round. Additionally, if the player successfully reaches the end of the 8th level, they will have beaten the game. They will then be redirected to the main menu.
 
 ## 3. Non-Functional Requirements
 
@@ -578,7 +572,9 @@ This section defines how quickly and reliably the system responds to user inputs
 
 ### 3.3 Testability
 
-Testability refers to how easily the system's functionality can be verified. A comprehensive test plan is being developed by a team member. The testing process will cover both simulation and in-hardware testing, with manual gameplay serving as the primary method due to the project's hardware setup.
+Testability refers to how easily the system's functionality can be verified.
+
+A comprehensive test plan is being developed by a team member. The testing process will cover both simulation and in-hardware testing, with manual gameplay serving as the primary method due to the project's hardware setup.
 
 ### 3.4 Documentation
 
@@ -587,7 +583,7 @@ Testability refers to how easily the system's functionality can be verified. A c
 - **Considerations:**
 
   - **Comprehensive Documentation:** Our team will ensure that all of the documentation of the project is comprehensive for everyone by having clear English.
-  - **Code Documentation:** CCode should be easily readable and commented with purpose. Ensuring comprehensiveness and clarity in the software. As Verilog is a low-level language, clarity will be necessary.
+  - **Code Documentation:** Code should be easily readable and commented with purpose. Ensuring comprehensiveness and clarity in the software. As Verilog is a low-level language, clarity will be necessary.
 
 ### 3.5 Flexibility
 
@@ -597,7 +593,7 @@ Testability refers to how easily the system's functionality can be verified. A c
 
 - **Considerations:**
   - **Feature Extensions:** Although our team won't provide post-project support, the game’s design must allow future developers to easily modify and extend its functionalities.
-  - **Bug Fixes:** A flexible system also simplifies the process of addressing bugs, enabling developers to efficiently implement fixes without needing to overhaul the software structure.
+  - **Bug Fixes:** A flexible system also simplifies the process of addressing bugs, as developers will not struggle to efficiently implement fixes without needing to overhaul the software structure.
 
 ## 4. Risks and Assumptions
 
@@ -610,8 +606,8 @@ Testability refers to how easily the system's functionality can be verified. A c
 
 ### 4.2 Copyright
 
-Frogger is owned by Konami. This means that we aren't allowed to use the same code and assets as the original game.
-This will not be an issue as we are creating our own software and our assets are inspired but not copied from the original game.
+Frogger is owned by Konami, meaning we are not permitted to use the same code, assets, or trademarked elements from the original game. However, gameplay mechanics themselves are not protected by copyright, and can only be patented, which is rare in the case of gameplay.
+Since we are creating our own software and using assets that are inspired by, but not copied from, the original Frogger game, there are no legal issues related to the development of this project. The name “Frogger” and any specific trademarks related to it will not be used in our project.
 
 ### 4.3 Budget considerations
 
@@ -623,19 +619,19 @@ To enhance our understanding of the game mechanics, we referred to the official 
 
 ## Glossary
 
-| Word                                 | Definition                                                                                                                                              |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| FPGA (Field-Programmable Gate Array) | A type of hardware that can be programmed after manufacturing to perform different tasks. In this project, it is used to create the Frogger game.       |
-| Verilog                              | A hardware description language (HDL) used to design and model electronic systems. It is used to program the FPGA for this project.                     |
-| VGA (Video Graphics Array)           | A display standard that provides the graphical interface for the game. In this project, the game is displayed at 640x480 resolution using VGA output.   |
-| Tiles                                | The basic unit of measurement for movement in the game. The frog moves one tile at a time.                                                              |
-| Ticks                                | A unit of time used in the game, where one tick equals 0.5 seconds. The player has 60 ticks (30 seconds) to complete certain actions.                   |
-| Objects                              | Vehicles, logs, turtles, and other elements that move across the screen, pose a hazard or platform for Frogger.                                       |
-| Capital Expenditures                 | The fixed costs associated with hardware like the FPGA board and VGA monitor.                                                                           |
-| Input Latency                        | The delay between pressing a control button and the movement of Frogger on the screen. It should be between 10 and 30 milliseconds.                     |
-| Performance Metrics                  | A set of targets ensuring the game runs smoothly, including a frame rate of 30 FPS, smooth object movement, and a 640x480 display.                      |
-| Non-Functional Requirements          | Aspects of the project that are not directly related to the gameplay but impact the overall performance, reliability, and ease of future modifications. |
-| Simulation Testing                   | A method used to test the game’s functionality before deploying it on actual hardware. This is done using software simulations.                         |
-| Error Handling                       | Mechanisms put in place to manage unexpected conditions in the game, such as pressing multiple buttons simultaneously.                                  |
-| Frame Rate                           | The speed at which the game renders frames on the screen, targeted at 30 frames per second (FPS).                                                       |
-| Konami | A video game company that owns the rights to Frogger |
+| Word                                 | Definition                                                                                                                                                                                                                                 |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| FPGA (Field-Programmable Gate Array) | A type of hardware that can be programmed after manufacturing to perform different tasks. In this project, it is used to create the Frogger game.                                                                                          |
+| Verilog                              | A hardware description language (HDL) used to design and model electronic systems. It is used to program the FPGA for this project.                                                                                                        |
+| VGA (Video Graphics Array)           | A display standard that provides the graphical interface for the game. In this project, the game is displayed at 640x480 resolution using VGA output.                                                                                      |
+| Tiles                                | The basic unit of measurement for movement in the game. The frog moves one tile at a time.                                                                                                                                                 |
+| Ticks                                | A unit of time used in the game, where one tick equals 0.5 seconds. The player has 60 ticks (30 seconds) to complete certain actions.                                                                                                      |
+| Objects                              | Vehicles, logs, turtles, and other elements that move across the screen, pose a hazard or platform for Frogger.                                                                                                                            |
+| Capital Expenditures                 | The fixed costs associated with hardware like the FPGA board and VGA monitor.                                                                                                                                                              |
+| Input Latency                        | The delay between pressing a control button and the movement of Frogger on the screen. It should be between 10 and 30 milliseconds.                                                                                                        |
+| Performance Metrics                  | A set of targets ensuring the game runs smoothly, including a frame rate of 30 FPS, smooth object movement, and a 640x480 display.                                                                                                         |
+| Non-Functional Requirements          | Aspects of the project that are not directly related to the gameplay but impact the overall performance, reliability, and ease of future modifications.                                                                                    |
+| Simulation Testing                   | A method used to test the game’s functionality before deploying it on actual hardware. This is done using software simulations.                                                                                                            |
+| Error Handling                       | Mechanisms put in place to manage unexpected conditions in the game, such as pressing multiple buttons simultaneously.                                                                                                                     |
+| Frame Rate                           | The speed at which the game renders frames on the screen, targeted at 30 frames per second (FPS).                                                                                                                                          |
+| Konami                               | A Japanese video game company known for creating and publishing popular titles. They hold the rights to the Frogger franchise, including its name, assets, and original code. |
