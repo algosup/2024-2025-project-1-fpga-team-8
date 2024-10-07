@@ -24,6 +24,11 @@
     - [5.2. Test Cases](#52-test-cases)
     - [5.3. Test Reports](#53-test-reports)
     - [5.4. Bug Lifecycle](#54-bug-lifecycle)
+    - [6. Testing Criteria](#6-testing-criteria)
+      - [6.1. Entry Criteria](#61-entry-criteria)
+      - [6.2. Exit Criteria](#62-exit-criteria)
+      - [6.3. Suspension Criteria](#63-suspension-criteria)
+      - [6.4. Resumption Criteria](#64-resumption-criteria)
 
 </details>
 
@@ -33,7 +38,7 @@ This document outlines the test plan for verifying and validating the Frogger ga
 
 ## 2. Test Environment
 
-The test environement includes the hardware, the software and the development tools necessary for testing the Frogger game that will be uploaded on the FPGA.
+The test environement includes the hardware, the firmware and the development tools necessary for testing the Frogger game that will be uploaded on the FPGA.
 
 ### 2.1. Hardware Platform
 
@@ -74,7 +79,7 @@ The defaut settings of the hardware won't be changed to ensure compatiility of o
 
 **Simulation Tool:** 
 
-- [EDAPlayGround](edaplayground.com) - This website will be used to test throughly the code before being synthesized and deployed to hardware.
+- [EDAPlayGround](edaplayground.com) - This website will be used to test throughly the code before being synthesized and deployed to hardware. You will need to create an account and use the following options the "Tools & Simulators" section in order to simulate all of your snippets.
   - **Simulator Used:** Icarus Verilog 12.0
   - **Compile Options:** `-Wall -g2012`
   - **Additional Tools:** Usage of EPWave to verify the state of every variable.
@@ -82,14 +87,15 @@ The defaut settings of the hardware won't be changed to ensure compatiility of o
 **Synthesis Tool:**
 
 - [Apio](https://apiodoc.readthedocs.io/en/stable/index.html) will be used for synthesizing the Verilog code and to create the bitstream for the FPGA.
+You can follow [this tutorial](https://nandland.com/set-up-apio-fpga-build-and-program/) to get APIO installed on your machine.
 
 <!-- Potentially missing STA Tools, further investigations on this subject will be done -->
 
 ### 2.3. Test Equipment
 
-- **Monitor:** <!-- Check the complete specifications  -->
-- **Input Device:** The only inputs will be the Physical buttons located on the Go Board FPGA
-- **Non-Graphical Outputs:** 4 Settable LEDs and Dual 7-Segment LED Display wired on the Go Board
+- **Monitor:** LCD monitor EK1 Series-EK251Q.
+- **Input Device:** The only inputs will be the Physical buttons located on the Go Board FPGA.
+- **Non-Graphical Outputs:** 4 Settable LEDs and Dual 7-Segment LED Display wired on the Go Board.
 
 ## 3. Scope of Testing
 
@@ -168,6 +174,8 @@ This will allow us to validate the core functionnalities early on and focus on i
 
 For this test phase, we will solely test the solutions via gameplay sessions.
 
+<!-- To verify -->
+
 #### 5.1.2. Simulation Testing
 
 FPGAs are a blackbox executing code without any possibility of simple debugging, apart from creating a logic analyzer will be used only once. Rather than going for this extensive solution, we will use simulation to ensure the states of each component follow the specifications' instructions, but also verify if the specifications themselves are accurate.
@@ -185,11 +193,17 @@ The simulations tests scripts will be stored in the [simulations folder](./simul
 
 #### 5.1.3. Hardware Testing
 
+Some behaviours cannot be simulated, consequently, we will have to go through game testing sessions which will be using the Go Board.
 
+<!-- To complete -->
 
 #### 5.1.4. Regression Testing
 
-To validate new additions and fixes to the software, the whole test bed will be ran every time code will be merged 
+To validate new additions and fixes to the firmware, the whole test bed will be ran every time code will be merged in the dev branch.
+
+This will allow the team to get insights on the progression of the development, but also on the quality of the code produced.
+
+<!-- To complete -->
 
 ### 5.2. Test Cases
 
@@ -204,4 +218,50 @@ This will allow the development team to know which test cases failed on a run by
 After each test execution, a test report will be added to the [Test Reports](./test-reports/) folder, linking all the identified issues and summarizing the overall 
 
 ### 5.4. Bug Lifecycle
+
+```mermaid
+graph TD
+    A[Bug detected during testing session] --> B[Create new issue]
+    B --> C[Assign Tech Lead & Developers]
+    C --> D[The development team creates a fix]
+    D --> E[Does this fix pass the new testing session?]
+    E --> |Yes| F[Merge the fix in dev branch]
+    E --> |No| G[Notify the dev team the fix is not successful]
+    G --> D
+```
+### 6. Testing Criteria
+
+####  6.1. Entry Criteria
+
+To ensure relevant test reports and provide insights on the firmware development progression, the following points need to be validated:
+
+- All the necessary documentation and requirement information should be available in the repository to ensure consistent testing. It will also allow testers to operate the system correctly
+- All the needed software tools including the testing tools must have been successfully installed and should work properly.
+- All the hardware platforms must have been successfully installed, configured and functioning properly.
+- The test environment, including the hardware, the firmware, and issue templates must be ready.
+- The test scenarios, test cases and testing suite have been reviewed.
+- Testers are familiar with the product's specific features and expected functionalities.
+- All the core features defined for the MVP in the functional specifications have been implemented.
+
+#### 6.2. Exit Criteria
+
+In order to consider the test phase as completed, the following points should have been validated:
+
+- All the tests marked with with the criticity "High" and "Medium" should pass successfully.
+- At least 95% of all tests (including "Low" criticity tests) must pass.
+- All the identified issues have been addressed and resolved.
+- All the documentation should have been verified, ensuring correctness of information and vocabulary precision.
+
+#### 6.3. Suspension Criteria
+
+In case of a critical bug affecting the whole testing process, the testing phase can be temporarily suspended. The following cases can trigger this suspension:
+
+- Hardware problems/failure.
+- Assigned resources are not available when required by the quality assurance team.
+- Significant change in requirements asked by the client.
+- The firmware contains serious defects limiting or preventing testing (e.g. `apio upload` command returns an error).
+
+#### 6.4. Resumption Criteria
+
+To resume the testing phase, the cause of the suspension should have been identified, adressed and resolved.
 
