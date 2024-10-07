@@ -29,6 +29,9 @@
       - [6.2. Exit Criteria](#62-exit-criteria)
       - [6.3. Suspension Criteria](#63-suspension-criteria)
       - [6.4. Resumption Criteria](#64-resumption-criteria)
+      - [7. Risks \& Assumptions](#7-risks--assumptions)
+      - [8. Deliverables](#8-deliverables)
+      - [9. Glossary](#9-glossary)
 
 </details>
 
@@ -55,9 +58,7 @@ The test environement includes the hardware, the firmware and the development to
   - 25 MHz on-board clock
   - 1Mb Flash for booting up the FPGA
 
-The defaut settings of the hardware won't be changed to ensure compatiility of our program among all Go Boards. Here is the list of the default voltages and parameters of our board:
-
-<!-- Add the list of default parameters (CF: https://nandland.com/wp-content/uploads/2022/06/Go_Board_V1.pdf) -->
+The defaut settings of the hardware won't be changed to ensure compatibility of our program among all Go Boards. You can refer to the [Go Board electronic schematic](https://nandland.com/wp-content/uploads/2022/06/Go_Board_V1.pdf) to ensure all the parameters of your Go Board corresponds to the factory defaults.
 
 #### 2.1.2. Interfaces
 
@@ -86,10 +87,25 @@ The defaut settings of the hardware won't be changed to ensure compatiility of o
 
 **Synthesis Tool:**
 
-- [Apio](https://apiodoc.readthedocs.io/en/stable/index.html) will be used for synthesizing the Verilog code and to create the bitstream for the FPGA.
+- [Apio v.0.9.5](https://apiodoc.readthedocs.io/en/stable/index.html) will be used for synthesizing the Verilog code and to create the bitstream for the FPGA.
 You can follow [this tutorial](https://nandland.com/set-up-apio-fpga-build-and-program/) to get APIO installed on your machine.
 
 <!-- Potentially missing STA Tools, further investigations on this subject will be done -->
+
+**Version Control & Issue Tracking:**
+
+- To track all changes among the codebase of the project, we will leverage the features of GitHub, a version control website, built on top of Git. You can see more details about the usage we make of GitHub looking at [the functional specification document](../functional_specifications/functional_specifications.md).
+
+- GitHub issues is a built-in feature of GitHub, allowing us to describe precisely the problems encountered during the testing phase.
+
+  We define:
+
+  - **Firmware bugs:** Unexpected behaviours of the program
+  - **Missing feature:** Critical functions not implemented in the program
+  - **Documentation:** Review of the documentation documents and the code
+  - **Task allocation:** Define assignees for the task pointed out by the issue
+
+- In order to make our issues consistent from one to antoher, we decided to use issue templates, a feature allowing people to create an issue by filling simple questions. This allows use to manage assignees more simply, as well as facilitating the tags implementation.
 
 ### 2.3. Test Equipment
 
@@ -264,4 +280,21 @@ In case of a critical bug affecting the whole testing process, the testing phase
 #### 6.4. Resumption Criteria
 
 To resume the testing phase, the cause of the suspension should have been identified, adressed and resolved.
+
+#### 7. Risks & Assumptions
+
+| Risk                                                   | Mitigation                                                                 |
+| ------------------------------------------------------ | -------------------------------------------------------------------------- |
+| The provided codebase isn't working                    | Find the origin of the error and create a new issue to inform the dev team |
+| Limited time or ressources allocated because of delays | Test the most critical features first                                      |
+| A hardware failure occurs                              | Try to fix the hardware or share it with other teams if needed             |
+
+#### 8. Deliverables
+
+- Test Plan
+- Test Cases Description
+- Test Reports
+- Testing resources and scripts
+
+#### 9. Glossary
 
