@@ -22,8 +22,9 @@ Created by: Aurélien FERNANDEZ
   - [2 - Development environment](#2---development-environment)
     - [2.1 - Computers](#21---computers)
     - [2.2 - Programming language](#22---programming-language)
-      - [2.2.1 - What is Verilog?](#221---what-is-verilog)
-      - [2.2.2 - Why Verilog?](#222---why-verilog)
+      - [2.2.1 What is an FPGA?](#221-what-is-an-fpga)
+      - [2.2.2 - What is Verilog?](#222---what-is-verilog)
+      - [2.2.3 - Why Verilog?](#223---why-verilog)
   - [3 - Development rules](#3---development-rules)
     - [3.1 Naming conventions](#31-naming-conventions)
     - [3.2 - Comments](#32---comments)
@@ -144,13 +145,37 @@ As for the IDE, we are using Visual Studio Code. Finally, to be able to upload a
 
 ### 2.2 - Programming language
 
-#### 2.2.1 - What is Verilog?
+#### 2.2.1 What is an FPGA?
+
+Fields ProGramable Arrays, in short FPGA, are alternatives to processors capable of executing multiple instructions at the same time whereas processors are executing the instructions sequentialy, one at the time. The logic blocks of the FPGA, used to perform the different calculations are configurable, this allows FPGAs to be highly versatile. All these advantages allow FPGAs to be faster than regular processors in terms of calculations per cycles.
+
+To summarise, here is the list of the different advantages of FPGAs:
+- Highly flexible,
+- Parallel processing,
+- Reconfigurability,
+- Rapide prototyping.
+
+FPGAs also possess downsides, here is the list of the different downsides:
+- They cost more to produce than traditional circuit boards,
+- They require more power to run than specialised circuit boards,
+- They may be less performant than specialised circuit boards,
+- They are generaly bigger physically than traditional circuit boards due to the fact that logic blocks are not centralised in a single unit but physcial components.
+
+FPGAs are used in very specific fields, more precisely in military projects, in radars and in aerospace project such as satellites, they can also be used for projects requiring fast calculations or video processing.
+
+#### 2.2.2 - What is Verilog?
 
 The programming language used for this project is Verilog. It is a programming language specialised in the programming of FPGAs[^2]. Verilog possesses multiple particularities listed as:
 - There is no order of execution, meaning that all lines present in a module are executed simultaneously, the only exceptions being the lines requiring specific conditions such as "always" and if-else conditions.
 - Verilog belongs to a type of programming languages known as "hardware description languages" which are languages that are used to model electronic systems. Although the language is easier to read than assembly languages due to a syntax similar to C-like languages it manages component in a lower level than assembly language as it interacts directly with wires.
 
-#### 2.2.2 - Why Verilog?
+A verilog project is composed of multiple type of files such as:
+- apio.ini: This is the file containing two value "top-module" and "board".
+- .v files: Standing for verilog files, they contain the different functions used for the project, the file named after the "top-module" value is the one called upon running the program, the module contained in this file must have the same name as the file.
+- .pcf file: This is the file containing the different inputs and outputs used for this project. The file must be named after the "board" value.
+- .mem: Standing for memory, this file stores a matrix of values separated by whitespaces, the values can be called in the program at any given time.
+
+#### 2.2.3 - Why Verilog?
 
 Verilog is not the only HDL to exist, VHDL is another popular HDL compatible with our programming board. Here is the list following the reasoning as to why we are using Verilog:
 - The use of Verilog is a requirement of the project.
