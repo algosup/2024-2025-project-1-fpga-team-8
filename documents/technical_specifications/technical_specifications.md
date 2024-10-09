@@ -350,6 +350,71 @@ Here is the representation of a boucing:
 
 To overcome this effect, we can wait for a certain number of cycles before taking the change of state into account. For this project waiting 25 000 cycles (1 millisecond) before reacting to the change is sufficient enough to overcome this effect without impacting the game itself.
 
+The following module serves to counter the boucing effect:
+
+```verilog
+// This module is used to debounce any switch or button coming into the FPGA.
+// Does not allow the output to change unless the input i_Bouncy is
+// steady for enough time (not toggling).
+//
+// Parameters: 
+// DEBOUNCE_LIMIT - Determines number of clock cycles that input must be stable
+//                  before output is updated. 
+
+module debounce_filter #(parameter DEBOUNCE_LIMIT = 20) (
+  input  i_Clk,
+  input  i_Bouncy,
+  output o_Debounced);
+ 
+  // Will set the width of this counter based on the input parameter
+  reg [$clog2(DEBOUNCE_LIMIT)-1:0] r_Count = 0;
+  reg r_State = 1'b0;
+  
+  always @(posedge i_Clk)
+  begin
+    // Bouncy input is different than internal state value, so an input is
+    // changing.  Increase the counter until it is stable for enough time.  
+    if (i_Bouncy !== r_State && r_Count < DEBOUNCE_LIMIT-1)
+    begin
+      r_Count <= r_Count + 1;
+      
+    end
+    
+    // End of counter reached, switch is stable, register it, reset counter
+    else if (r_Count == DEBOUNCE_LIMIT-1)
+    begin
+      r_State <= i_Bouncy;
+      
+      r_Count <= 0;
+
+    end 
+
+    // Switches are the same state, reset the counter
+    else
+    begin
+      r_Count <= 0;
+
+    end
+  end
+  
+  // Assign internal register to output (debounced!)
+  assign o_Debounced = r_State;
+  
+endmodule
+```
+
+Finally, here is how the deboucne filter can be used:
+```verilog
+  wire w_Debounced_1;
+
+  // Debounce the switch inputs
+    debounce_filter #(25000) debounce_filter_1 (
+        .i_Clk(i_Clk),
+        .i_Bouncy(i_Switch_1),
+        .o_Debounced(w_Debounced_1)
+    );
+```
+
 ### 4.4 - Lane
 
 To manage the different obstacles we are using a system of lanes, these lanes are use to choose the Y position, the direction, the type of obstacle, their numbers and the interval in cycles between each obstacle.
