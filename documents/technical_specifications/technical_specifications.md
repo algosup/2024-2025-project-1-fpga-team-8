@@ -356,13 +356,13 @@ To manage the different obstacles we are using a system of lanes, these lanes ar
 
 Here are the different input of the lane:
 
-| Name     | Descrition                                                                     | Type         | Default value |
-| -------- | ------------------------------------------------------------------------------ | ------------ | ------------- |
-| INIT_Y   | The initial Y position of the lane                                             | constant int | 1             |
-| DIR      | The direction the obstacle is heading. 0 = right, 1 = left                     | constant boolean      | 0             |
-| TYPE     | The type of osbtacle the lane contains, 0 = car, 1 = log, 2 = snake 4 = turtle | constant int | 0             |
-| COUNT    | The number of obstacle on the lane at the same time                            | constant int | 1             |
-| INTERVAL | The number of cycles between two obstacle                                      | constant int | 20 000        |
+| Name     | Descrition                                                                     | Type             | Default value |
+| -------- | ------------------------------------------------------------------------------ | ---------------- | ------------- |
+| INIT_Y   | The initial Y position of the lane                                             | constant int     | 1             |
+| DIR      | The direction the obstacle is heading. 0 = right, 1 = left                     | constant boolean | 0             |
+| TYPE     | The type of osbtacle the lane contains, 0 = car, 1 = log, 2 = snake 4 = turtle | constant int     | 0             |
+| COUNT    | The number of obstacle on the lane at the same time                            | constant int     | 1             |
+| INTERVAL | The number of cycles between two obstacle                                      | constant int     | 20 000        |
 
 ### 4.5 - Cars
 
@@ -381,10 +381,10 @@ The cars are instances possessing a few values:
 | i_Row_Count_Div | The Y position of the car                             | 6-bit positive int | None          |
 
 **output**
-| name    | description                       | type               |
-| ------- | --------------------------------- | ------------------ |
-| o_Car_X | The current X position of the car | 6 bit positive int |
-| o_Car_Y | The current Y position of the car | 6 bit positive int |
+| name    | description                                                           | type               |
+| ------- | --------------------------------------------------------------------- | ------------------ |
+| o_Car_X | The current X position of the car, this value is used to draw the car | 6 bit positive int |
+| o_Car_Y | The current Y position of the car, this value is used to draw the car | 6 bit positive int |
 
 #### 4.5 - Logs
 
