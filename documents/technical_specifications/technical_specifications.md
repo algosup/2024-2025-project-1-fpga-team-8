@@ -328,9 +328,31 @@ Finally, the origin, 0x0, is placed at the bottom left of the grid.
 
 To store sprites, we use the same technique: a two-dimensional array, with each integer representing a colour. Each sprite has its own dedicated .mem file. Except for the turtles, each obstacles has multiple sprites (e.g: There is 3 types of cars  and 1 truck).
 
+Note: Each bitmap is followed by it's graphical counterpart.
+
 #### 4.2.3.1 - Frog
 
 #### 4.2.3.2 - Cars
+
+```
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 0
+0 1 1 1 1 1 1 0 0 0 1 1 1 1 1 0
+0 1 1 1 1 1 1 0 0 0 1 1 1 1 1 0
+0 0 0 0 3 0 0 0 0 0 0 0 3 0 0 0
+0 0 2 2 2 2 2 2 2 2 2 2 2 2 0 0
+0 2 2 2 2 3 3 3 2 2 3 3 3 3 3 3
+2 2 2 2 3 3 3 2 2 1 2 1 2 1 2 0
+2 2 2 2 3 3 3 2 2 1 2 1 2 1 2 0
+0 2 2 2 2 3 3 3 2 2 3 3 3 3 3 3
+0 0 2 2 2 2 2 2 2 2 2 2 2 2 0 0
+0 0 0 0 3 0 0 0 0 0 0 0 3 0 0 0
+0 1 1 1 1 1 1 0 0 0 1 1 1 1 1 0
+0 1 1 1 1 1 1 0 0 0 1 1 1 1 1 0
+0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+```
+![](../functional_specifications/images/car1.png)
 
 #### 4.2.3.3 - Logs
 
