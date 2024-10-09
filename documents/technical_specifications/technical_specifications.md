@@ -28,6 +28,7 @@ Created by: Aurélien FERNANDEZ
   - [3 - Development rules](#3---development-rules)
     - [3.1 Naming conventions](#31-naming-conventions)
     - [3.2 - Comments](#32---comments)
+    - [3.3 - Code conventions](#33---code-conventions)
   - [4 - Technical implementations](#4---technical-implementations)
     - [4.1 - Features required](#41---features-required)
     - [4.2 - Display the game](#42---display-the-game)
@@ -229,6 +230,13 @@ In a PCF file:
 ```
 
 Comments should be regularly written to ensure the comprehension of the code of current and future developers and reviewers. 
+
+### 3.3 - Code conventions
+
+The code must follow few but strict rules such as:
+
+- The module contained in a file must have the same name as its file,
+- The spacing 4 spaces between each level of indentation.
 
 ## 4 - Technical implementations
 
