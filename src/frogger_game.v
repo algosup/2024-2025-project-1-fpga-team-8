@@ -22,7 +22,9 @@ module frogger_game
    output [3:0]     o_Grn_Video,
    output [3:0]     o_Blu_Video,
    output [6:0]     o_Segment1,
-   output [6:0]     o_Segment2
+   output [6:0]     o_Segment2,
+   // Output LEDs
+   output           o_LED_2, o_LED_3, o_LED_4
 );
 
   // Game constants
@@ -38,8 +40,6 @@ module frogger_game
   parameter RUNNING = 2'b01;
   parameter P1_WINS = 2'b10;
   parameter CLEANUP = 2'b11;
-
-  reg [1:0] lives = 2'b11;
 
   wire w_Game_Active = 1'b1;
 
@@ -93,6 +93,15 @@ module frogger_game
   // Assign bitmap data corresponding to Frogger's position
   assign w_Bitmap_Data = (w_Frogger_Y < c_GAME_HEIGHT && w_Frogger_X < c_GAME_WIDTH) ? 
                          r_Bitmap[w_Frogger_Y][w_Frogger_X] : 4'd0;
+
+  // Implement lives display
+  lives_counter lives_counter_inst (
+    .i_Clk(i_Clk),
+    .i_Collided(w_Collided),
+    .o_LED_2(o_LED_2),
+    .o_LED_3(o_LED_3),
+    .o_LED_4(o_LED_4)
+  );
 
   // Control Frogger's movements and track its position
   frogger_ctrl frogger_ctrl_inst (
@@ -196,7 +205,7 @@ module frogger_game
     );
 
   // Check for collisions between Frogger and cars
-  frogger_collisions frogger_collisions_inst (
+  car_collisions car_collisions_inst (
     .i_Clk(i_Clk),
     .i_Frogger_X(w_Frogger_X),
     .i_Frogger_Y(w_Frogger_Y),

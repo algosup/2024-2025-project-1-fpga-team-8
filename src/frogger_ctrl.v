@@ -22,7 +22,7 @@ module frogger_ctrl(
 
     // Initialize starting position of Frogger
     initial begin
-        o_Frogger_X = 10;  // Initial column
+        o_Frogger_X = 0;  // Initial column
         o_Frogger_Y = 14;  // Initial row (bottom of the screen)
         o_Score = 0;       // Initial score
     end
