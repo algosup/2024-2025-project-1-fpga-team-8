@@ -37,6 +37,11 @@ Created by: Aurélien FERNANDEZ
       - [4.2.2.1 - The grid](#4221---the-grid)
       - [4.2.2.2 - Bitmap](#4222---bitmap)
     - [4.2.3 - Sprites](#423---sprites)
+      - [4.2.3.1 - Frog](#4231---frog)
+      - [4.2.3.2 - Cars](#4232---cars)
+      - [4.2.3.3 - Logs](#4233---logs)
+      - [4.2.3.4 - Turtles](#4234---turtles)
+      - [4.2.3.5 - Tiles](#4235---tiles)
     - [4.3 - Control the frog](#43---control-the-frog)
     - [4.4 - Lane](#44---lane)
     - [4.5 - Cars](#45---cars)
@@ -288,23 +293,23 @@ Additionally to the use of a grid, we are using a bitmap, the bitmap is a table 
 - Lilypad,
 - wall.
 
-The bitmap is created as a two-dimensional array presented as such:
+The bitmap is a two-dimensional array presented as such:
 <center>
 
 ```
-040040040040
-222222222222
-222222222222
-222222222222
-222222222222
-222222222222
-333333333333
-111111111111
-111111111111
-111111111111
-111111111111
-111111111111
-333333333333
+0 4 0 0 4 0 0 4 0 0 4 0
+2 2 2 2 2 2 2 2 2 2 2 2
+2 2 2 2 2 2 2 2 2 2 2 2
+2 2 2 2 2 2 2 2 2 2 2 2
+2 2 2 2 2 2 2 2 2 2 2 2
+2 2 2 2 2 2 2 2 2 2 2 2
+3 3 3 3 3 3 3 3 3 3 3 3
+1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1
+3 3 3 3 3 3 3 3 3 3 3 3
 ```
 </center>
 
@@ -315,11 +320,25 @@ Where, every value is an int that can be interpreted as such:
 - 3 -> grass,
 - 4 -> lilypad.
 
+The bitmap is stored in a .mem file which loads it into the memory if the board.
+
 Finally, the origin, 0x0, is placed at the bottom left of the grid.
 
 ### 4.2.3 - Sprites
 
-TODO
+To store sprites, we use the same technique: a two-dimensional array, with each integer representing a colour. Each sprite has its own dedicated .mem file. Except for the turtles, each obstacles has multiple sprites (e.g: There is 3 types of cars  and 1 truck).
+
+Each sprites are 32x32 pixels squares.
+
+#### 4.2.3.1 - Frog
+
+#### 4.2.3.2 - Cars
+
+#### 4.2.3.3 - Logs
+
+#### 4.2.3.4 - Turtles
+
+#### 4.2.3.5 - Tiles
 
 ### 4.3 - Control the frog 
 
