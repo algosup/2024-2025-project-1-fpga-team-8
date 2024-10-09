@@ -328,8 +328,6 @@ Finally, the origin, 0x0, is placed at the bottom left of the grid.
 
 To store sprites, we use the same technique: a two-dimensional array, with each integer representing a colour. Each sprite has its own dedicated .mem file. Except for the turtles, each obstacles has multiple sprites (e.g: There is 3 types of cars  and 1 truck).
 
-Each sprites are 32x32 pixels squares.
-
 #### 4.2.3.1 - Frog
 
 #### 4.2.3.2 - Cars
