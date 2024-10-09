@@ -5,7 +5,6 @@ module frogger_ctrl(
     input            i_Down_Mvt,
     input            i_Left_Mvt,
     input            i_Right_Mvt,
-    input            i_Game_Active,
     input            i_Collided,
     input [5:0]      i_Col_Count_Div,
     input [5:0]      i_Row_Count_Div,

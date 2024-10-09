@@ -9,7 +9,9 @@ module frogger_game
    input            i_HSync,
    input            i_VSync,
    // Game Start Button   
-   input            i_Game_Start,
+   input            i_Game_Start_Button,
+    // Pause Button
+    input            i_Pause_Button,
    // Player 1 and Player 2 Controls (Controls Frogger)
    input            i_Up_Mvt,
    input            i_Down_Mvt,
@@ -35,10 +37,6 @@ module frogger_game
     // Bitmap array: 0=wall, 1=road, 2=water, 3=safe area, 4=lily pad
   reg [3:0] r_Bitmap[0:c_GAME_HEIGHT-1][0:c_GAME_WIDTH-1];
 
-  // State machine enumerations
-  parameter IDLE    = 2'b00;
-  parameter RUNNING = 2'b01;
-  parameter P1_WINS = 2'b10;
   parameter CLEANUP = 2'b11;
 
   wire w_Game_Active = 1'b1;
@@ -63,6 +61,48 @@ module frogger_game
   wire w_Collided;
 
   reg [6:0] r_Frogger_Score;
+
+  // State machine enumerations
+  parameter IDLE    = 2'b00;
+  parameter PLAY = 2'b01;
+  parameter PAUSE = 2'b10;
+  parameter CLEANUP = 2'b11;
+
+  // State register and next state register
+  reg game_state_t, r_CurrentState, r_NextState;
+
+  // State transition logic
+  always @(posedge i_Clk) begin
+    r_CurrentState <= r_NextState;
+  end
+
+  // Next state logic
+  always @(*) begin
+    case (r_CurrentState)
+      IDLE: begin
+        if (i_Game_Start_Button)         // Transition to PLAY on game start button
+          r_NextState = PLAY;
+        else
+          r_NextState = IDLE;     // Stay in IDLE state
+      end
+      PLAY: begin
+        if (i_Pause_Button)       // Transition to PAUSE on pause button
+          r_NextState = PAUSE;
+        else
+          r_NextState = PLAY;     // Stay in PLAY state
+      end
+      PAUSE: begin
+        if (i_Pause_Button)       // Unpause the game (return to PLAY state)
+          r_NextState = PLAY;
+        else
+          r_NextState = PAUSE;    // Stay in PAUSE state
+      end
+      default: r_NextState = IDLE; // Default state
+    endcase
+  end
+
+  // Control signals for game elements based on state
+  wire w_Game_Active = (r_CurrentState == PLAY);  // Enable game movement only in PLAY state
 
   // Synchronize to row and column counters
   Sync_To_Count #(.TOTAL_COLS(c_TOTAL_COLS),
@@ -111,7 +151,6 @@ module frogger_game
     .i_Down_Mvt(i_Down_Mvt),
     .i_Left_Mvt(i_Left_Mvt),
     .i_Right_Mvt(i_Right_Mvt),
-    .i_Game_Active(w_Game_Active),
     .i_Collided(w_Collided),
     .i_Col_Count_Div(w_Col_Count_Div),
     .i_Row_Count_Div(w_Row_Count_Div),
