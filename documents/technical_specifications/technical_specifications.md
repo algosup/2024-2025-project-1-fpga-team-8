@@ -360,11 +360,11 @@ Here are the different input of the lane:
 | -------- | ------------------------------------------------------------------------------ | ---------------- | ------------- |
 | INIT_X   | The initial X position of the obstacle                                         | constant int     | 0             |
 | INIT_Y   | The initial Y position of the lane                                             | constant int     | 1             |
+| MAX_X    | The X position where the obstacle is deleted                                   | constant int     | 20            |
 | DIR      | The direction the obstacle is heading. 0 = right, 1 = left                     | constant boolean | 0             |
 | TYPE     | The type of osbtacle the lane contains, 0 = car, 1 = log, 2 = snake 4 = turtle | constant int     | 0             |
 | COUNT    | The number of obstacle on the lane at the same time                            | constant int     | 1             |
 | INTERVAL | The number of cycles between two obstacle                                      | constant int     | 20 000        |
-| MAX_X    | The X position where the obstacle is deleted                                   | constant int     | 20            |
 
 ### 4.5 - Cars
 
@@ -373,10 +373,10 @@ The cars are instances possessing a few values:
 **inputs:**
 | Name            | Description                                           | Type               | Default value |
 | --------------- | ----------------------------------------------------- | ------------------ | ------------- |
-| CAR_SPEED       | The speed of the car                                  | constant int       | 1             |
-| SLOW_COUNT      | A counter which, once finished allows the car to move | constant int       | 4 000 000     |
 | INIT_X          | The initial X position of the car                     | constant int       | 0             |
 | INIT_Y          | The base Y position of the car                        | constant int       | 13            |
+| CAR_SPEED       | The speed of the car                                  | constant int       | 1             |
+| SLOW_COUNT      | A counter which, once finished allows the car to move | constant int       | 4 000 000     |
 | i_Clk           | The clock                                             | boolean            | None          |
 | i_Col_Count_Div | The X position of the car                             | 6-bit positive int | None          |
 | i_Row_Count_Div | The Y position of the car                             | 6-bit positive int | None          |
