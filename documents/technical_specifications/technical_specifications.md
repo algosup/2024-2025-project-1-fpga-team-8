@@ -60,7 +60,7 @@ This project is a reproduction of the game "Frogger" published in 1981 by Konami
 ### 1.2.1 - Go boards
 
 #### 1.2.1.1- Overview
-For this project, we were given a total of 7 [go boards](https://nandland.com/the-go-board/) which can be programmed using Verilog[^1].
+For this project, we were give  n a total of 7 [go boards](https://nandland.com/the-go-board/) which can be programmed using Verilog[^1].
 
 A go board is an FPGA[^2] that can be reprogrammed at any time. it has been created by the company [NandLand](https://nandland.com/) to allow students and beginners to learn about FPGAs[^2].
 
@@ -545,6 +545,55 @@ The cars are instances possessing a few values:
 | o_Car_Y | The current Y position of the car, this value is used to get the position of the car | 6 bit positive int |
 
 #### 4.5 - Logs
+
+The logs are an other type of object that can be in a lane. The log all go from left to right.
+
+The speed is measured in the number of clock cycle it takes an object to move across a tile (32px)
+
+Early proof of concept showed that the complex density system defined initially used too much LUT to be usable. Therefore the logic density of the log has been simplified to a simple fixed interval between logs.
+
+| Level 1 | Lane1 | Lane2 | Lane3 |
+| --- | --- | --- | --- |
+| Speed | 39,000,000 | 7,000,000 | 20,000,000 |
+| Density | 2   |	2   | 2   |
+| size of log | 2 | 5 | 3 |
+| Position in Y | 9 | 10 | 12 |
+
+| Level 2 | Lane1 | Lane2 | Lane3 |
+| --- | --- | --- | --- |
+| Speed | 39,000,000 | 7,000,000 | 20,000,000 |
+| Density | 2   |	14   | 2   |
+| size of log | 2 | 5 | 3 |
+| Position in Y | 9 | 10 | 12 |
+
+| Level 3 | Lane1 | Lane1 | Lane1 |
+| --- | --- | --- | --- |
+| Speed | 39,000,000 | 7,000,000 | 20,000,000 |
+| Density | 3   |	14   | 2   |
+| size of log | 2 | 5 | 3 |
+| Position in Y | 9 | 10 | 12 |
+
+| Level 4 | Lane1 | Lane1 | Lane1 |
+| --- | --- | --- | --- |
+| Speed | 39,000,000 | 7,000,000 | 20,000,000 |
+| Density | 3   |	14   | 2   |
+| size of log | 2 | 5 | 3 |
+| Position in Y | 9 | 10 | 12 |
+
+| Level 5 | Lane1 | Lane1 | Lane1 |
+| --- | --- | --- | --- |
+| Speed | 39,000,000 | 7,000,000 | 20,000,000 |
+| Density | 3   |	14   | 14   |
+| size of log | 2 | 5 | 3 |
+| Position in Y | 9 | 10 | 12 |
+
+| Level 6 | Lane1 | Lane1 | Lane1 |
+| --- | --- | --- | --- |
+| Speed | 39,000,000 | 7,000,000 | 20,000,000 |
+| Density | 5 |	7 | 2 | 
+| size of log | 2 | 5 | 3 |
+| Position in Y | 9 | 10 | 12 |
+
 
 ## Glossary
 [^1]: Verilog: A programming language used to program and/or simulate circuit boards. Verilog is notably used with specific hardware such as FPGAs.
