@@ -504,8 +504,21 @@ Here is the representation of a boucing:
 
 To overcome this effect, we can wait for a certain number of cycles before taking the change of state into account. For this project waiting 25 000 cycles (1 millisecond) before reacting to the change is sufficient enough to overcome this effect without impacting the game itself.
 
+In order to create this behaviour, a simple logic can be implemented, the following pseudocode represent this behaviour:
 
+```
+module debouncer()
+begin
+  always @(posedge i_Clk)
+  begin
+    counter+=1;
 
+    if i_switch1 is not equal to r_switch1 and counter is equal to 25 000
+      r_switch1 = i_switch1;
+  end
+end
+```
+Note: the counter increase at each clock cycle and r_switch 1 is the output
 
 ### 4.4 - Lane
 
@@ -552,47 +565,47 @@ The speed is measured in the number of clock cycle it takes an object to move ac
 
 Early proof of concept showed that the complex density system defined initially used too much LUT to be usable. Therefore the logic density of the log has been simplified to a simple fixed interval between logs.
 
-| Level 1 | Lane1 | Lane2 | Lane3 |
-| --- | --- | --- | --- |
-| Speed | 39,000,000 | 7,000,000 | 20,000,000 |
-| Density | 2   |	2   | 2   |
-| size of log | 2 | 5 | 3 |
-| Position in Y | 9 | 10 | 12 |
+| Level 1       | Lane1      | Lane2     | Lane3      |
+| ------------- | ---------- | --------- | ---------- |
+| Speed         | 39,000,000 | 7,000,000 | 20,000,000 |
+| Density       | 2          | 2         | 2          |
+| size of log   | 2          | 5         | 3          |
+| Position in Y | 9          | 10        | 12         |
 
-| Level 2 | Lane1 | Lane2 | Lane3 |
-| --- | --- | --- | --- |
-| Speed | 39,000,000 | 7,000,000 | 20,000,000 |
-| Density | 2   |	14   | 2   |
-| size of log | 2 | 5 | 3 |
-| Position in Y | 9 | 10 | 12 |
+| Level 2       | Lane1      | Lane2     | Lane3      |
+| ------------- | ---------- | --------- | ---------- |
+| Speed         | 39,000,000 | 7,000,000 | 20,000,000 |
+| Density       | 2          | 14        | 2          |
+| size of log   | 2          | 5         | 3          |
+| Position in Y | 9          | 10        | 12         |
 
-| Level 3 | Lane1 | Lane1 | Lane1 |
-| --- | --- | --- | --- |
-| Speed | 39,000,000 | 7,000,000 | 20,000,000 |
-| Density | 3   |	14   | 2   |
-| size of log | 2 | 5 | 3 |
-| Position in Y | 9 | 10 | 12 |
+| Level 3       | Lane1      | Lane1     | Lane1      |
+| ------------- | ---------- | --------- | ---------- |
+| Speed         | 39,000,000 | 7,000,000 | 20,000,000 |
+| Density       | 3          | 14        | 2          |
+| size of log   | 2          | 5         | 3          |
+| Position in Y | 9          | 10        | 12         |
 
-| Level 4 | Lane1 | Lane1 | Lane1 |
-| --- | --- | --- | --- |
-| Speed | 39,000,000 | 7,000,000 | 20,000,000 |
-| Density | 3   |	14   | 2   |
-| size of log | 2 | 5 | 3 |
-| Position in Y | 9 | 10 | 12 |
+| Level 4       | Lane1      | Lane1     | Lane1      |
+| ------------- | ---------- | --------- | ---------- |
+| Speed         | 39,000,000 | 7,000,000 | 20,000,000 |
+| Density       | 3          | 14        | 2          |
+| size of log   | 2          | 5         | 3          |
+| Position in Y | 9          | 10        | 12         |
 
-| Level 5 | Lane1 | Lane1 | Lane1 |
-| --- | --- | --- | --- |
-| Speed | 39,000,000 | 7,000,000 | 20,000,000 |
-| Density | 3   |	14   | 14   |
-| size of log | 2 | 5 | 3 |
-| Position in Y | 9 | 10 | 12 |
+| Level 5       | Lane1      | Lane1     | Lane1      |
+| ------------- | ---------- | --------- | ---------- |
+| Speed         | 39,000,000 | 7,000,000 | 20,000,000 |
+| Density       | 3          | 14        | 14         |
+| size of log   | 2          | 5         | 3          |
+| Position in Y | 9          | 10        | 12         |
 
-| Level 6 | Lane1 | Lane1 | Lane1 |
-| --- | --- | --- | --- |
-| Speed | 39,000,000 | 7,000,000 | 20,000,000 |
-| Density | 5 |	7 | 2 | 
-| size of log | 2 | 5 | 3 |
-| Position in Y | 9 | 10 | 12 |
+| Level 6       | Lane1      | Lane1     | Lane1      |
+| ------------- | ---------- | --------- | ---------- |
+| Speed         | 39,000,000 | 7,000,000 | 20,000,000 |
+| Density       | 5          | 7         | 2          |
+| size of log   | 2          | 5         | 3          |
+| Position in Y | 9          | 10        | 12         |
 
 
 ## Glossary
