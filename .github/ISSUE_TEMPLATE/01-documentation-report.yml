@@ -1,0 +1,46 @@
+name: Documentation Report
+description: "One or multiple documents contain errors"
+title: "Documentation Report [2024/XX/XX]"
+labels: ["Documentation", "Invalid"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description"
+      description: "Please describe the documentation issue in detail."
+      placeholder: "Short and explicit description of the problem..."
+    validations:
+      required: true
+  - type: dropdown
+    id: severity
+    attributes:
+      label: "Severity"
+      options:
+        - 4. Critical (Severe impact)
+        - 3. High (Immediate attention needed)
+        - 2. Medium (Should be fixed soon)
+        - 1. Low (Slightly annoying)
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: "Version"
+      description: "Hash of the commit in which the issue was found."
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: "Expected Correction"
+      description: "What is the expected correction for the documentation?"
+    validations:
+      required: true
+  - type: textarea
+    id: other
+    attributes:
+      label: "Other Details"
+      description: "Provide any additional information or context about the issue."
+  - type: markdown
+    attributes:
+      value: "Attach screenshots or relevant snippets if available to help identify the issue."
