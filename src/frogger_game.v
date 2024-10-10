@@ -80,10 +80,10 @@ module frogger_game #(
 
   	// Cars
 		wire [5:0] w_Car_X_1, w_Car_Y_1;
-		wire [5:0] w_Car_X_2, w_Car_Y_2;
-		wire [5:0] w_Car_X_3, w_Car_Y_3;
-		wire [5:0] w_Car_X_4, w_Car_Y_4;
-		wire [5:0] w_Car_X_5, w_Car_Y_5;
+		// wire [5:0] w_Car_X_2, w_Car_Y_2;
+		// wire [5:0] w_Car_X_3, w_Car_Y_3;
+		// wire [5:0] w_Car_X_4, w_Car_Y_4;
+		// wire [5:0] w_Car_X_5, w_Car_Y_5;
 
 	// Floating Logs
 		wire [5:0] w_Floating_X_1, w_Floating_Y_1;
@@ -152,7 +152,7 @@ module frogger_game #(
 			.o_Frogger_Y(w_Frogger_Y),
 			.o_Score(r_Frogger_Score)
 		);
-/*
+
     // Car 1 instance
 		car_ctrl #(
 		.c_CAR_SPEED(1),
@@ -169,7 +169,7 @@ module frogger_game #(
 			.o_Car_X(w_Car_X_1),
 			.o_Car_Y(w_Car_Y_1),
 		);
-
+/*
     // Car 2 instance
 		car_ctrl #(
 			.c_CAR_SPEED(1),
@@ -322,7 +322,7 @@ module frogger_game #(
 			.o_Floating_X(w_Floating_X_5),
 			.o_Floating_Y(w_Floating_Y_5),
 		);
-	
+	/* TODO: Deactivated Collisions because they expect 5 cars and they prevent from working on logs/boats
   	// Check for collisions between Frogger and cars
 		frogger_collisions frogger_collisions_inst (
 			.i_Clk(i_Clk),
@@ -332,16 +332,17 @@ module frogger_game #(
 			.i_Frogger_Orig_y(14),
 			.i_Car_X_1(w_Car_X_1),
 			.i_Car_Y_1(w_Car_Y_1),
-			.i_Car_X_2(w_Car_X_2),
-			.i_Car_Y_2(w_Car_Y_2),
-			.i_Car_X_3(w_Car_X_3),
-			.i_Car_Y_3(w_Car_Y_3),
-			.i_Car_X_4(w_Car_X_4),
-			.i_Car_Y_4(w_Car_Y_4),
-			.i_Car_X_5(w_Car_X_5),
-			.i_Car_Y_5(w_Car_Y_5),
+			// .i_Car_X_2(w_Car_X_2),
+			// .i_Car_Y_2(w_Car_Y_2),
+			// .i_Car_X_3(w_Car_X_3),
+			// .i_Car_Y_3(w_Car_Y_3),
+			// .i_Car_X_4(w_Car_X_4),
+			// .i_Car_Y_4(w_Car_Y_4),
+			// .i_Car_X_5(w_Car_X_5),
+			// .i_Car_Y_5(w_Car_Y_5),
 			.o_Collided(w_Collided)
 		);
+	*/
 
 
 	// Determine background colors based on the bitmap and draw Frogger if applicable
@@ -351,8 +352,16 @@ module frogger_game #(
 	always @(*) begin
 
 		// Check if the current tile matches Frogger's position
-		if ((w_Col_Count_Div == w_Frogger_X) && (w_Row_Count_Div == w_Frogger_Y) || 
-			// (w_Col_Count_Div == w_Car_X_1) && (w_Row_Count_Div == w_Car_Y_1) || 
+		if ((w_Col_Count_Div == w_Frogger_X) && (w_Row_Count_Div == w_Frogger_Y))
+			begin
+
+				// If in the same tile as Frogger, draw Frogger in red
+				r_Red_Video = 4'b1111; // White
+				r_Grn_Video = 4'b0000;
+				r_Blu_Video = 4'b0000;
+			end
+
+		else if ((w_Col_Count_Div == w_Car_X_1) && (w_Row_Count_Div == w_Car_Y_1) || 
 			// (w_Col_Count_Div == w_Car_X_2) && (w_Row_Count_Div == w_Car_Y_2) || 
 			// (w_Col_Count_Div == w_Car_X_3) && (w_Row_Count_Div == w_Car_Y_3) || 
 			// (w_Col_Count_Div == w_Car_X_4) && (w_Row_Count_Div == w_Car_Y_4) || 
@@ -364,8 +373,8 @@ module frogger_game #(
 			(w_Col_Count_Div == w_Floating_X_5) && (w_Row_Count_Div == w_Floating_Y_5))
 			begin
 
-				// If in the same tile as Frogger, draw Frogger in white
-				r_Red_Video = 4'b1111; // White
+				// If in the same tile as a car, draw the car in white
+				r_Red_Video = 4'b1111;
 				r_Grn_Video = 4'b1111;
 				r_Blu_Video = 4'b1111;
 			end
