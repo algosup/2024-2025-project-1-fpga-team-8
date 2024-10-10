@@ -40,8 +40,7 @@ Created by: Aurélien FERNANDEZ
       - [4.2.3.1 - Frog](#4231---frog)
       - [4.2.3.2 - Cars](#4232---cars)
       - [4.2.3.3 - Logs](#4233---logs)
-      - [4.2.3.4 - Turtles](#4234---turtles)
-      - [4.2.3.5 - Tiles](#4235---tiles)
+      - [4.2.3.4 - Tiles](#4234---tiles)
     - [4.3 - Control the frog](#43---control-the-frog)
     - [4.4 - Lane](#44---lane)
     - [4.5 - Cars](#45---cars)
@@ -297,19 +296,19 @@ The bitmap is a two-dimensional array presented as such:
 <center>
 
 ```
-0 4 0 0 4 0 0 4 0 0 4 0
-2 2 2 2 2 2 2 2 2 2 2 2
-2 2 2 2 2 2 2 2 2 2 2 2
-2 2 2 2 2 2 2 2 2 2 2 2
-2 2 2 2 2 2 2 2 2 2 2 2
-2 2 2 2 2 2 2 2 2 2 2 2
-3 3 3 3 3 3 3 3 3 3 3 3
-1 1 1 1 1 1 1 1 1 1 1 1
-1 1 1 1 1 1 1 1 1 1 1 1
-1 1 1 1 1 1 1 1 1 1 1 1
-1 1 1 1 1 1 1 1 1 1 1 1
-1 1 1 1 1 1 1 1 1 1 1 1
-3 3 3 3 3 3 3 3 3 3 3 3
+0 0 4 0 0 0 4 0 0 0 4 0 0 0 4 0 0 0 4 0
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
 ```
 </center>
 
@@ -328,37 +327,153 @@ Finally, the origin, 0x0, is placed at the bottom left of the grid.
 
 To store sprites, we use the same technique: a two-dimensional array, with each integer representing a colour. Each sprite has its own dedicated .mem file. Except for the turtles, each obstacles has multiple sprites (e.g: There is 3 types of cars  and 1 truck).
 
-Note: Each bitmap is followed by it's graphical counterpart.
+Note: Each bitmap is followed by it's graphical counterpart and follow this legend:
+- **black** = 0
+- **white** = 1
+- **green** = 2
+- **yellow** = 3
+- **pink** = 4
+- **red** = 5
+- **blue** = 6
+- **purple** = 7
+- **brown** = 8
+- **dark brown** = 9
 
 #### 4.2.3.1 - Frog
+```
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 2 0 0 3 2 3 3 0 0 2 0 0 0
+0 0 2 2 0 4 2 3 3 2 4 0 2 2 0 0
+0 0 0 2 0 2 2 3 3 2 2 0 2 0 0 0
+0 0 0 2 2 3 3 3 3 3 3 2 2 0 0 0
+0 0 0 0 0 3 2 3 3 3 3 0 0 0 0 0
+0 0 0 2 2 3 2 3 3 3 3 2 2 0 0 0
+0 0 0 2 0 2 2 2 3 3 2 0 2 0 0 0
+0 0 2 2 0 0 2 3 3 2 0 0 2 2 0 0
+0 0 0 2 0 0 0 0 0 0 0 0 2 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+```
+<img src="../functional_specifications/images/frog.png" height="300">
+
+```
+0 0 0 2 2 0 0 0 0 0 0 2 2 0 0 0
+0 0 2 0 0 2 0 0 0 0 2 5 5 2 0 0
+0 0 2 5 5 2 2 2 2 2 2 5 5 2 0 0
+0 0 0 2 2 2 2 2 2 2 2 2 2 0 0 0
+0 0 0 0 0 2 2 2 2 2 2 0 0 0 0 0
+0 0 0 0 2 2 5 5 5 5 2 2 0 0 0 0
+0 2 0 0 2 2 5 5 5 5 2 2 0 0 2 0
+2 2 2 0 6 2 2 5 5 2 2 6 0 2 2 2
+2 2 2 2 6 2 2 2 2 2 2 6 2 2 2 2
+2 2 2 2 6 6 2 2 2 2 6 6 2 2 2 2
+2 2 2 2 2 6 6 6 6 6 6 2 2 2 2 2
+0 2 2 2 2 6 6 5 5 6 6 2 2 2 2 0
+0 2 2 2 2 6 6 5 5 6 6 2 2 2 2 0
+0 0 0 2 2 2 6 6 6 6 2 2 2 0 0 0
+0 0 2 2 2 2 0 0 0 0 2 2 2 2 0 0
+0 2 2 2 0 2 0 0 0 0 2 0 2 2 2 0
+```
+<img src="../functional_specifications/images/froghome.png" height="300">
 
 #### 4.2.3.2 - Cars
 
 ```
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 0
-0 1 1 1 1 1 1 0 0 0 1 1 1 1 1 0
-0 1 1 1 1 1 1 0 0 0 1 1 1 1 1 0
-0 0 0 0 3 0 0 0 0 0 0 0 3 0 0 0
-0 0 2 2 2 2 2 2 2 2 2 2 2 2 0 0
-0 2 2 2 2 3 3 3 2 2 3 3 3 3 3 3
-2 2 2 2 3 3 3 2 2 1 2 1 2 1 2 0
-2 2 2 2 3 3 3 2 2 1 2 1 2 1 2 0
-0 2 2 2 2 3 3 3 2 2 3 3 3 3 3 3
-0 0 2 2 2 2 2 2 2 2 2 2 2 2 0 0
-0 0 0 0 3 0 0 0 0 0 0 0 3 0 0 0
-0 1 1 1 1 1 1 0 0 0 1 1 1 1 1 0
-0 1 1 1 1 1 1 0 0 0 1 1 1 1 1 0
-0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 0
+0 0 0 0 0 0 0 0 0 0 5 5 5 5 5 0
+0 5 5 5 5 5 5 0 0 0 5 5 5 5 5 0
+0 5 5 5 5 5 5 0 0 0 5 5 5 5 5 0
+0 0 0 0 7 0 0 0 0 0 0 0 7 0 0 0
+0 0 3 3 3 3 3 3 3 3 3 3 3 3 0 0
+0 3 3 3 3 7 7 7 3 3 7 7 7 7 7 7
+3 3 3 3 7 7 7 3 3 5 3 5 3 5 3 0
+3 3 3 3 7 7 7 3 3 5 3 5 3 5 3 0
+0 3 3 3 3 7 7 7 3 3 7 7 7 7 7 7
+0 0 3 3 3 3 3 3 3 3 3 3 3 3 0 0
+0 0 0 0 7 0 0 0 0 0 0 0 7 0 0 0
+0 5 5 5 5 5 5 0 0 0 5 5 5 5 5 0
+0 5 5 5 5 5 5 0 0 0 5 5 5 5 5 0
+0 0 0 0 0 0 0 0 0 0 5 5 5 5 5 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 ```
-![](../functional_specifications/images/car1.png)
+<img src="../functional_specifications/images/car1.png" height="300">
 
 #### 4.2.3.3 - Logs
 
-#### 4.2.3.4 - Turtles
+```
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 8 8 8 8 8 8 8 0 8 8
+0 0 0 0 8 8 8 8 8 1 8 8 8 8 8 8
+0 0 0 0 8 8 1 1 8 8 8 8 8 8 8 8
+0 0 0 8 8 8 8 8 8 8 8 8 8 8 8 8
+0 0 0 8 8 8 8 8 8 8 8 8 8 1 1 1
+0 0 0 8 8 1 1 8 8 8 1 8 8 8 8 8
+0 0 0 8 8 8 8 8 8 8 1 8 8 8 8 8
+0 0 0 0 8 8 8 8 8 8 8 0 9 1 9 9
+0 0 0 0 0 0 9 0 9 9 9 9 9 9 9 9
+0 0 0 0 0 8 8 8 9 9 9 0 9 9 9 9
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+```
+<img src="../functional_specifications/images/logpart1.png" height="300">
 
-#### 4.2.3.5 - Tiles
+```
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+8 8 0 8 8 8 8 8 8 8 8 8 0 8 8 8
+1 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8
+8 8 8 8 8 8 8 8 8 8 1 1 8 8 8 8
+8 8 8 8 8 8 1 8 8 8 8 8 8 1 8 8
+8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8
+8 8 8 1 8 8 8 8 8 8 8 8 8 8 8 8
+8 8 8 8 8 8 8 8 8 8 1 1 1 8 8 8
+9 9 9 9 9 9 9 9 9 8 8 8 8 8 8 9
+9 9 9 9 1 1 1 9 9 9 9 9 9 9 9 9
+9 9 9 0 9 9 9 9 9 9 9 0 9 9 9 9
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+```
+
+<img src="../functional_specifications/images/logpart2.png" height="300">
+
+```
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+8 8 0 8 8 8 8 1 1 1 0 0 0 0 0 0
+8 8 8 8 1 8 1 1 1 1 1 0 0 0 0 0
+8 8 8 8 8 8 1 8 8 8 1 0 0 0 0 0
+8 8 8 8 8 8 1 8 8 8 1 1 0 0 0 0
+8 8 8 8 8 1 8 8 8 8 8 1 0 0 0 0
+8 8 8 8 8 1 8 8 1 8 8 1 0 0 0 0
+8 8 8 8 1 1 1 8 1 8 1 1 0 0 0 0
+9 9 9 9 9 9 1 8 8 8 1 0 0 0 0 0
+9 9 9 9 9 9 1 8 8 1 1 0 0 0 0 0
+9 9 9 0 9 9 9 8 1 1 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+```
+<img src="../functional_specifications/images/logpart3.png" height="300">
+
+
+#### 4.2.3.4 - Tiles
+
+As for the terrain it consists into one-colored squares where:
+- The "grass" tiles are in purple,
+- The "road" tiles are in black,
+- The "water" and "lilypad" tiles are in dark blue,
+- The "wall" tiles are in green.
+
 
 ### 4.3 - Control the frog 
 
@@ -389,70 +504,8 @@ Here is the representation of a boucing:
 
 To overcome this effect, we can wait for a certain number of cycles before taking the change of state into account. For this project waiting 25 000 cycles (1 millisecond) before reacting to the change is sufficient enough to overcome this effect without impacting the game itself.
 
-The following module serves to counter the boucing effect:
 
-```verilog
-// This module is used to debounce any switch or button coming into the FPGA.
-// Does not allow the output to change unless the input i_Bouncy is
-// steady for enough time (not toggling).
-//
-// Parameters: 
-// DEBOUNCE_LIMIT - Determines number of clock cycles that input must be stable
-//                  before output is updated. 
 
-module debounce_filter #(parameter DEBOUNCE_LIMIT = 20) (
-  input  i_Clk,
-  input  i_Bouncy,
-  output o_Debounced);
- 
-  // Will set the width of this counter based on the input parameter
-  reg [$clog2(DEBOUNCE_LIMIT)-1:0] r_Count = 0;
-  reg r_State = 1'b0;
-  
-  always @(posedge i_Clk)
-  begin
-    // Bouncy input is different than internal state value, so an input is
-    // changing.  Increase the counter until it is stable for enough time.  
-    if (i_Bouncy !== r_State && r_Count < DEBOUNCE_LIMIT-1)
-    begin
-      r_Count <= r_Count + 1;
-      
-    end
-    
-    // End of counter reached, switch is stable, register it, reset counter
-    else if (r_Count == DEBOUNCE_LIMIT-1)
-    begin
-      r_State <= i_Bouncy;
-      
-      r_Count <= 0;
-
-    end 
-
-    // Switches are the same state, reset the counter
-    else
-    begin
-      r_Count <= 0;
-
-    end
-  end
-  
-  // Assign internal register to output (debounced!)
-  assign o_Debounced = r_State;
-  
-endmodule
-```
-
-Finally, here is how the deboucne filter can be used:
-```verilog
-  wire w_Debounced_1;
-
-  // Debounce the switch inputs
-    debounce_filter #(25000) debounce_filter_1 (
-        .i_Clk(i_Clk),
-        .i_Bouncy(i_Switch_1),
-        .o_Debounced(w_Debounced_1)
-    );
-```
 
 ### 4.4 - Lane
 
