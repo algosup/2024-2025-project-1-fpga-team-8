@@ -586,27 +586,40 @@ Early proof of concept showed that the complex density system defined initially 
 | size of log   | 2          | 5         | 3          |
 | Position in Y | 9          | 10        | 12         |
 
-| Level 4       | Lane1      | Lane1     | Lane1      |
-| ------------- | ---------- | --------- | ---------- |
-| Speed         | 39,000,000 | 7,000,000 | 20,000,000 |
-| Density       | 3          | 14        | 2          |
-| size of log   | 2          | 5         | 3          |
-| Position in Y | 9          | 10        | 12         |
+| Level 4 | Lane1 | Lane1 | Lane1 |
+| --- | --- | --- | --- |
+| Speed | 35,000,000 | 7,000,000 | 18,000,000 |
+| Density | 3   |	14   | 2   |
+| size of log | 2 | 5 | 3 |
+| Position in Y | 9 | 10 | 12 |
 
-| Level 5       | Lane1      | Lane1     | Lane1      |
-| ------------- | ---------- | --------- | ---------- |
-| Speed         | 39,000,000 | 7,000,000 | 20,000,000 |
-| Density       | 3          | 14        | 14         |
-| size of log   | 2          | 5         | 3          |
-| Position in Y | 9          | 10        | 12         |
+| Level 5 | Lane1 | Lane1 | Lane1 |
+| --- | --- | --- | --- |
+| Speed | 35,000,000 | 14,000,000 | 16,000,000 |
+| Density | 3   |	14   | 14   |
+| size of log | 2 | 5 | 3 |
+| Position in Y | 9 | 10 | 12 |
 
-| Level 6       | Lane1      | Lane1     | Lane1      |
-| ------------- | ---------- | --------- | ---------- |
-| Speed         | 39,000,000 | 7,000,000 | 20,000,000 |
-| Density       | 5          | 7         | 2          |
-| size of log   | 2          | 5         | 3          |
-| Position in Y | 9          | 10        | 12         |
+| Level 6 | Lane1 | Lane1 | Lane1 |
+| --- | --- | --- | --- |
+| Speed | 35,000,000 | 7,000,000 | 14,000,000 |
+| Density | 4 |	7 | 2 | 
+| size of log | 2 | 5 | 3 |
+| Position in Y | 9 | 10 | 12 |
 
+| Level 7 | Lane1 | Lane1 | Lane1 |
+| --- | --- | --- | --- |
+| Speed | 32,000,000 | 7,000,000 | 14,000,000 |
+| Density | 5 |	14 | 4 | 
+| size of log | 2 | 5 | 3 |
+| Position in Y | 9 | 10 | 12 |
+
+| Level 8 | Lane1 | Lane1 | Lane1 |
+| --- | --- | --- | --- |
+| Speed | 32,000,000 | 7,000,000 | 14,000,000 |
+| Density | 6 |	16 | 4 | 
+| size of log | 2 | 5 | 3 |
+| Position in Y | 9 | 10 | 12 |
 
 ## Glossary
 [^1]: Verilog: A programming language used to program and/or simulate circuit boards. Verilog is notably used with specific hardware such as FPGAs.
