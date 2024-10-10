@@ -23,6 +23,8 @@ module frogger_ctrl(
         input [5:0]      i_Row_Count_Div,
         // Bitmap data input
         input [3:0]      i_Bitmap_Data,
+        // Frogger is on a log signal
+        input            i_On_Log,
 
     /// Outputs
         // X position of the frogger
@@ -43,6 +45,10 @@ module frogger_ctrl(
         // Right movement switch
         reg r_Switch_4;
 
+    // Parameters and registers for log movement
+        parameter c_LOG_SLOW_COUNT = 39000000;
+        reg [31:0] r_Log_Movement_Counter = 0;
+
     /// Initialize starting position of Frogger
     initial begin
         // Initial column
@@ -61,7 +67,8 @@ module frogger_ctrl(
         r_Switch_3 <= i_Left_Mvt;
         r_Switch_4 <= i_Right_Mvt;
 
-        // Reset Frogger position if a collision occurs
+        if (i_Game_Active) begin
+            // Reset Frogger position if a collision occurs
             if (i_Collided) begin
                 o_Frogger_X <= 10;
                 o_Frogger_Y <= 14;
@@ -109,6 +116,38 @@ module frogger_ctrl(
                     o_Frogger_X <= o_Frogger_X + 1;
                 end
             end
-    end
+
+            // Handle drowning if in water and not on log
+            if (i_Bitmap_Data == 4'd2 && !i_On_Log) begin
+                w_Frogger_X <= i_Frogger_Orig_X;
+                w_Frogger_Y <= i_Frogger_Orig_Y;
+                // Decrement lives or other penalty
+            end
+
+            // Move frog with log if on log
+            if (i_On_Log) begin
+
+                r_Log_Movement_Counter <= r_Log_Movement_Counter + 1;
+
+                if (r_Log_Movement_Counter >= c_LOG_SLOW_COUNT) begin
+
+                    r_Log_Movement_Counter <= 0;
+
+                    // Move frog left with log
+                    if (w_Frogger_X > 0)
+                        w_Frogger_X <= w_Frogger_X - 1;
+                    else
+                        w_Frogger_X <= w_Frogger_X; // Stop at edge or handle accordingly
+                end
+            end 
+            
+            else begin
+                r_Log_Movement_Counter <= 0; // Reset counter if not on log
+            end
+
+
+        end // Game active
+
+    end // Main Frogger control logic
 
 endmodule

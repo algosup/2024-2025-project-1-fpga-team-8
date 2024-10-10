@@ -39,6 +39,9 @@ module frogger_game #(
 		output [3:0]     o_Grn_Video,
 		// Blue video output
 		output [3:0]     o_Blu_Video,
+
+		// TODO: On Log led debug
+		output o_LED_On_Log,
 		
 		// 7-segment display outputs
 		output [6:0]     o_Segment1,
@@ -52,10 +55,6 @@ module frogger_game #(
 		parameter c_GAME_HEIGHT = 13;
 		// Each tile is 32x32 pixels
 		parameter TILE_SIZE     = 32;
-		// Parameters for the number of cars
-		parameter N_CARS = 1;
-		// Parameter for the number of logs
-		parameter N_LOGS = 5;
 
     // Bitmap array: 0=wall, 1=road, 2=water, 3=safe area, 4=lily pad
   		reg [3:0] r_Bitmap[0:c_GAME_HEIGHT-1][0:c_GAME_WIDTH-1];
@@ -92,14 +91,13 @@ module frogger_game #(
 		wire [5:0] w_Floating_X_1, w_Floating_Y_1;
 		wire [5:0] w_Floating_X_2, w_Floating_Y_2;
 		wire [5:0] w_Floating_X_3, w_Floating_Y_3;
-		wire [5:0] w_Floating_X_4, w_Floating_Y_4;
-		wire [5:0] w_Floating_X_5, w_Floating_Y_5;
 
   	// Drop 5 LSBs, which effectively divides by 32
 		assign w_Col_Count_Div = w_Col_Count[9:5];
 		assign w_Row_Count_Div = w_Row_Count[9:5];
 
   	wire w_Collided;
+	wire w_On_Log;
 
   	reg [6:0] r_Frogger_Score;
 
@@ -154,7 +152,8 @@ module frogger_game #(
 			.i_Bitmap_Data(w_Bitmap_Data),  // Pass the bitmap data
 			.o_Frogger_X(w_Frogger_X),
 			.o_Frogger_Y(w_Frogger_Y),
-			.o_Score(r_Frogger_Score)
+			.o_Score(r_Frogger_Score),
+			.i_On_Log(w_On_Log)
 		);
 
     // Car 1 instance
@@ -246,7 +245,7 @@ module frogger_game #(
 		floating_ctrl #(
 			.c_FLOATING_SPEED(1),
 			.c_MIN_X(0),
-			.c_SLOW_COUNT(4200000),
+			.c_SLOW_COUNT(39000000),
 			.c_INIT_X(13),
 			.c_INIT_Y(1)
 		)
@@ -263,9 +262,9 @@ module frogger_game #(
 		floating_ctrl #(
 			.c_FLOATING_SPEED(1),
 			.c_MIN_X(0),
-			.c_SLOW_COUNT(4200000),
+			.c_SLOW_COUNT(39000000),
 			.c_INIT_X(13),
-			.c_INIT_Y(2)
+			.c_INIT_Y(3)
 		)
 
 		floating_ctrl_inst_2 (
@@ -280,9 +279,9 @@ module frogger_game #(
 		floating_ctrl #(
 			.c_FLOATING_SPEED(1),
 			.c_MIN_X(0),
-			.c_SLOW_COUNT(4200000),
+			.c_SLOW_COUNT(39000000),
 			.c_INIT_X(13),
-			.c_INIT_Y(3)
+			.c_INIT_Y(5)
 		)
 
 		floating_ctrl_inst_3 (
@@ -293,39 +292,6 @@ module frogger_game #(
 			.o_Floating_Y(w_Floating_Y_3),
 		);
 
-	// Floating Log 4 instance 
-		floating_ctrl #(
-			.c_FLOATING_SPEED(1),
-			.c_MIN_X(0),
-			.c_SLOW_COUNT(4200000),
-			.c_INIT_X(13),
-			.c_INIT_Y(4)
-		)
-
-		floating_ctrl_inst_4 (
-			.i_Clk(i_Clk),
-			.i_Col_Count_Div(w_Col_Count_Div),
-			.i_Row_Count_Div(w_Row_Count_Div),
-			.o_Floating_X(w_Floating_X_4),
-			.o_Floating_Y(w_Floating_Y_4),
-		);
-
-	// Floating Log 5 instance 
-		floating_ctrl #(
-			.c_FLOATING_SPEED(1),
-			.c_MIN_X(0),
-			.c_SLOW_COUNT(4200000),
-			.c_INIT_X(13),
-			.c_INIT_Y(5)
-		)
-
-		floating_ctrl_inst_5 (
-			.i_Clk(i_Clk),
-			.i_Col_Count_Div(w_Col_Count_Div),
-			.i_Row_Count_Div(w_Row_Count_Div),
-			.o_Floating_X(w_Floating_X_5),
-			.o_Floating_Y(w_Floating_Y_5),
-		);
 
 	// TEMPORARY: Assign car positions to out-of-bounds values to deactivate collisions
 		assign w_Car_X_2 = 6'd63;  
@@ -353,7 +319,14 @@ module frogger_game #(
 			.i_Car_Y_4(w_Car_Y_4),
 			.i_Car_X_5(w_Car_X_5),
 			.i_Car_Y_5(w_Car_Y_5),
-			.o_Collided(w_Collided)
+			.i_Log_X_1(w_Floating_X_1),
+			.i_Log_Y_1(w_Floating_Y_1),
+			.i_Log_X_2(w_Floating_X_2),
+			.i_Log_Y_2(w_Floating_Y_2),
+			.i_Log_X_3(w_Floating_X_3),
+			.i_Log_Y_3(w_Floating_Y_3),
+			.o_Collided(w_Collided),
+			.o_On_Log(w_On_Log)
 		);
 
 
@@ -380,9 +353,7 @@ module frogger_game #(
 				// (w_Col_Count_Div == w_Car_X_5) && (w_Row_Count_Div == w_Car_Y_5) ||
 				(w_Col_Count_Div == w_Floating_X_1) && (w_Row_Count_Div == w_Floating_Y_1) ||
 				(w_Col_Count_Div == w_Floating_X_2) && (w_Row_Count_Div == w_Floating_Y_2) ||
-				(w_Col_Count_Div == w_Floating_X_3) && (w_Row_Count_Div == w_Floating_Y_3) ||
-				(w_Col_Count_Div == w_Floating_X_4) && (w_Row_Count_Div == w_Floating_Y_4) ||
-				(w_Col_Count_Div == w_Floating_X_5) && (w_Row_Count_Div == w_Floating_Y_5))
+				(w_Col_Count_Div == w_Floating_X_3) && (w_Row_Count_Div == w_Floating_Y_3))
 				begin
 
 					// If in the same tile as a car, draw the car in white
@@ -462,6 +433,9 @@ module frogger_game #(
 			assign o_Grn_Video = r_Grn_Video;
 			assign o_Blu_Video = r_Blu_Video;
 
+			// TODO: onLog 
+			assign o_LED_On_Log = w_Collided;
+
 		// Display Score on 7-segment displays
 			score_control score_control_inst (
 				.i_Clk(i_Clk),
@@ -471,3 +445,7 @@ module frogger_game #(
 			);
 
 		endmodule
+
+
+
+// TODO: IM CURRENTLY TRYING TO LINK THE LED TO THE ON LOG SIGNAL SO THAT I CAN UNDERSTAND WHY THE LOG MOVEMENT ISNT WORKING

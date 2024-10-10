@@ -6,7 +6,7 @@ module floating_ctrl #(
         // How much to move the floating element in one step
         parameter c_FLOATING_SPEED = 1,
         // Slow down counter threshold (adjust based on clock speed)
-        parameter c_SLOW_COUNT = 4000000,
+        parameter c_SLOW_COUNT = 39000000,
         // Initial X position
         parameter c_INIT_X = 13,
         // Initial Y position
