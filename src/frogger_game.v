@@ -52,6 +52,10 @@ module frogger_game #(
 		parameter c_GAME_HEIGHT = 13;
 		// Each tile is 32x32 pixels
 		parameter TILE_SIZE     = 32;
+		// Parameters for the number of cars
+		parameter N_CARS = 1;
+		// Parameter for the number of logs
+		parameter N_LOGS = 5;
 
     // Bitmap array: 0=wall, 1=road, 2=water, 3=safe area, 4=lily pad
   		reg [3:0] r_Bitmap[0:c_GAME_HEIGHT-1][0:c_GAME_WIDTH-1];
@@ -322,7 +326,16 @@ module frogger_game #(
 			.o_Floating_X(w_Floating_X_5),
 			.o_Floating_Y(w_Floating_Y_5),
 		);
-	// TODO: Deactivated Collisions because they expect 5 cars and they prevent from working on logs/boats
+
+	// TEMPORARY: Assign car positions to out-of-bounds values to deactivate collisions
+		assign w_Car_X_2 = 6'd63;  
+		assign w_Car_Y_2 = 6'd63;
+		assign w_Car_X_3 = 6'd63;
+		assign w_Car_Y_3 = 6'd63;
+		assign w_Car_X_4 = 6'd63;
+		assign w_Car_Y_4 = 6'd63;
+		assign w_Car_X_5 = 6'd63;
+		assign w_Car_Y_5 = 6'd63;
   	// Check for collisions between Frogger and cars
 		frogger_collisions frogger_collisions_inst (
 			.i_Clk(i_Clk),
@@ -332,14 +345,14 @@ module frogger_game #(
 			.i_Frogger_Orig_y(14),
 			.i_Car_X_1(w_Car_X_1),
 			.i_Car_Y_1(w_Car_Y_1),
-			// .i_Car_X_2(w_Car_X_2),
-			// .i_Car_Y_2(w_Car_Y_2),
-			// .i_Car_X_3(w_Car_X_3),
-			// .i_Car_Y_3(w_Car_Y_3),
-			// .i_Car_X_4(w_Car_X_4),
-			// .i_Car_Y_4(w_Car_Y_4),
-			// .i_Car_X_5(w_Car_X_5),
-			// .i_Car_Y_5(w_Car_Y_5),
+			.i_Car_X_2(w_Car_X_2),
+			.i_Car_Y_2(w_Car_Y_2),
+			.i_Car_X_3(w_Car_X_3),
+			.i_Car_Y_3(w_Car_Y_3),
+			.i_Car_X_4(w_Car_X_4),
+			.i_Car_Y_4(w_Car_Y_4),
+			.i_Car_X_5(w_Car_X_5),
+			.i_Car_Y_5(w_Car_Y_5),
 			.o_Collided(w_Collided)
 		);
 
