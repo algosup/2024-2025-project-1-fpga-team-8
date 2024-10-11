@@ -375,6 +375,8 @@ Note: Each bitmap is followed by it's graphical counterpart and follow this lege
 - **dark brown** = 9
 
 #### 4.2.3.1 - Frog
+
+Frog: 
 ```
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
@@ -395,6 +397,7 @@ Note: Each bitmap is followed by it's graphical counterpart and follow this lege
 ```
 <img src="../functional_specifications/images/frog.png" height="300">
 
+Frog on a lilypad:
 ```
 0 0 0 2 2 0 0 0 0 0 0 2 2 0 0 0
 0 0 2 0 0 2 0 0 0 0 2 5 5 2 0 0
@@ -417,6 +420,7 @@ Note: Each bitmap is followed by it's graphical counterpart and follow this lege
 
 #### 4.2.3.2 - Cars
 
+Car n°1:
 ```
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 5 5 5 5 5 0
@@ -437,8 +441,9 @@ Note: Each bitmap is followed by it's graphical counterpart and follow this lege
 ```
 <img src="../functional_specifications/images/car1.png" height="300">
 
-#### 4.2.3.3 - Logs
 
+#### 4.2.3.3 - Logs
+Start of a log:
 ```
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
@@ -459,6 +464,7 @@ Note: Each bitmap is followed by it's graphical counterpart and follow this lege
 ```
 <img src="../functional_specifications/images/logpart1.png" height="300">
 
+Middle section of a log:
 ```
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
@@ -477,9 +483,9 @@ Note: Each bitmap is followed by it's graphical counterpart and follow this lege
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 ```
-
 <img src="../functional_specifications/images/logpart2.png" height="300">
 
+End of a log:
 ```
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
