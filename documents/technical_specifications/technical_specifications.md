@@ -51,8 +51,9 @@ Created by: Aurélien FERNANDEZ
       - [4.6.3 - Size](#463---size)
       - [4.6.3 - Table](#463---table)
       - [4.7 - Turtles](#47---turtles)
-    - [4.8 - Collision system](#48---collision-system)
-    - [4.9 - Lives system](#49---lives-system)
+    - [4.8 - Level system](#48---level-system)
+    - [4.9 - Collision system](#49---collision-system)
+    - [4.5 - Lives system](#45---lives-system)
   - [Glossary](#glossary)
 </details>
 
@@ -381,8 +382,9 @@ Where, every value is an int that can be interpreted as such:
 - 2 -> water,
 - 3 -> grass,
 - 4 -> lilypad.
-
 The bitmap is stored in a .mem file which loads it into the memory if the board.
+
+Upon colliding with a water or a wall tile will kill the frog, decreasing the number of lives by 1 and making the frog reappear at its original position.
 
 Finally, the origin, 0x0, is placed at the bottom left of the grid.
 
@@ -566,6 +568,12 @@ To move the frog, the player can use the 4 push-buttons present on the go-board:
 - button 3 -> decrease X
 - button 4 -> increase X
 
+By pressing all four button at the same time the game will reset to its orginal state, including:
+- The frog's position,
+- The level number,
+- The number of lives,
+- The lilypads' states.
+
 Finally, the 4 buttons are subject to a side-effect called "boucing". The boucing is a common problem of physical switches, when you are pressing a button, two metal parts connect to let electricty pass, the contact is not made instantly, in the span of 1 millisecond, multiple contacts are made which in turn distort the desired result by repeatedly turning on and off.
 
 Here is the representation of a boucing:
@@ -705,7 +713,13 @@ In the case of Medium and Long logs, the tiles in the middle of the log use the 
 #### 4.7 - Turtles
 
 
-### 4.8 - Collision system
+### 4.8 - Level system
+
+The game start with the level 1, upon filling all lilypads with frogs the level incrase by 1 until level 8 which is the final level.
+
+When changing level the frog returns to its original position and all lilypads are emptied.
+
+### 4.9 - Collision system
 
 The collision system works by getting the X and Y position of each tile, car, turtle, log and lilypad displayed and compare them with the position of the frog.
 
@@ -714,7 +728,9 @@ Here is a list explaining the different interactions when the frog collides with
 - Logs and turtles while moving will move the frog (e.g: when the frog is on a turtle and the turtle moves on tile to the left, the frog moves along with it).
 - Lilypads: The second sprite of the frog is drawn on the lilypad, the lilypad now acts as a wall and the frog reapear at its original position.
 
-### 4.9 - Lives system
+Upon being killed, the number of lives decreases by 1 an the frog reappear at its original position.
+
+### 4.5 - Lives system
 
 The system of lives is a simple counter which decreases each time a collision is triggered.
 
@@ -726,6 +742,12 @@ The lives are displayed by using the 4 LEDs present on the log, the number of li
 The base number of lives is set to 3.
 
 Due to the limitation of the go-boards in terms of calculations and saved values we cannot create a score system without removing key element of the game, thus the player cannot gain lives from reaching a defined number of points.
+
+When the number of lives reaches 0, the game resets variables including: 
+- The number of lives,
+- The current level,
+- The position of the frog,
+- The lylipads' states.
 
 ## Glossary
 [^1]: Verilog: A programming language used to program and/or simulate circuit boards. Verilog is notably used with specific hardware such as FPGAs.
