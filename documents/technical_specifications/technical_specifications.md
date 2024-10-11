@@ -44,7 +44,12 @@ Created by: Aurélien FERNANDEZ
     - [4.3 - Control the frog](#43---control-the-frog)
     - [4.4 - Lane](#44---lane)
     - [4.5 - Cars](#45---cars)
-      - [4.5 - Logs](#45---logs)
+    - [4.6 - Logs](#46---logs)
+      - [4.6.1 - Speed](#461---speed)
+      - [4.6.2 - Density](#462---density)
+      - [4.6.3 - Size](#463---size)
+      - [4.6.3 - Table](#463---table)
+      - [4.7 - Turtles](#47---turtles)
   - [Glossary](#glossary)
 </details>
 
@@ -587,14 +592,26 @@ The cars are instances possessing a few values:
 | o_Car_X | The current X position of the car, this value is used to get the position of the car | 6 bit positive int |
 | o_Car_Y | The current Y position of the car, this value is used to get the position of the car | 6 bit positive int |
 
-#### 4.5 - Logs
+### 4.6 - Logs
 
 The logs are an other type of object that can be in a lane. The log all go from left to right.
 
+#### 4.6.1 - Speed
 The speed is measured in the number of clock cycle it takes an object to move across a tile (32px)
 
-Early proof of concept showed that the complex density system defined initially used too much LUT to be usable. Therefore the logic density of the log has been simplified to a simple fixed interval between logs.
+#### 4.6.2 - Density
+Early proof of concept showed that the complex density system defined initially used too much LUT to be usable. Therefore the logic density of the log has been simplified to a simple fixed interval between logs. This interval is defined in a number of 32px tiles. 
 
+#### 4.6.3 - Size
+All the logs are the same size in a lane. There are three different size of logs. 
+- Small logs are 2 tiles long
+- Medium logs are 3 tiles long
+- Long logs are 5 tiles long
+
+Logs are made of two and three sprites, `log_start` is the left-most sprite of a log. `log_end` is the right-most sprite of a log.
+In the case of Medium and Long logs, the tiles in the middle of the log use the `log_middle` sprite.
+
+#### 4.6.3 - Table
 | Level 1       | Lane1      | Lane2     | Lane3      |
 | ------------- | ---------- | --------- | ---------- |
 | Speed         | 39,000,000 | 7,000,000 | 20,000,000 |
@@ -609,47 +626,51 @@ Early proof of concept showed that the complex density system defined initially 
 | size of log   | 2          | 5         | 3          |
 | Position in Y | 9          | 10        | 12         |
 
-| Level 3       | Lane1      | Lane1     | Lane1      |
+| Level 3       | Lane1      | Lane2     | Lane3      |
 | ------------- | ---------- | --------- | ---------- |
 | Speed         | 39,000,000 | 7,000,000 | 20,000,000 |
 | Density       | 3          | 14        | 2          |
 | size of log   | 2          | 5         | 3          |
 | Position in Y | 9          | 10        | 12         |
 
-| Level 4       | Lane1      | Lane1     | Lane1      |
+| Level 4       | Lane1      | Lane2     | Lane3      |
 | ------------- | ---------- | --------- | ---------- |
 | Speed         | 35,000,000 | 7,000,000 | 18,000,000 |
 | Density       | 3          | 14        | 2          |
 | size of log   | 2          | 5         | 3          |
 | Position in Y | 9          | 10        | 12         |
 
-| Level 5       | Lane1      | Lane1      | Lane1      |
+| Level 5       | Lane1      | Lane2      | Lane3      |
 | ------------- | ---------- | ---------- | ---------- |
 | Speed         | 35,000,000 | 14,000,000 | 16,000,000 |
 | Density       | 3          | 14         | 14         |
 | size of log   | 2          | 5          | 3          |
 | Position in Y | 9          | 10         | 12         |
 
-| Level 6       | Lane1      | Lane1     | Lane1      |
+| Level 6       | Lane1      | Lane2     | Lane3      |
 | ------------- | ---------- | --------- | ---------- |
 | Speed         | 35,000,000 | 7,000,000 | 14,000,000 |
 | Density       | 4          | 7         | 2          |
 | size of log   | 2          | 5         | 3          |
 | Position in Y | 9          | 10        | 12         |
 
-| Level 7       | Lane1      | Lane1     | Lane1      |
+| Level 7       | Lane1      | Lane2     | Lane3      |
 | ------------- | ---------- | --------- | ---------- |
 | Speed         | 32,000,000 | 7,000,000 | 14,000,000 |
 | Density       | 5          | 14        | 4          |
 | size of log   | 2          | 5         | 3          |
 | Position in Y | 9          | 10        | 12         |
 
-| Level 8       | Lane1      | Lane1     | Lane1      |
+| Level 8       | Lane1      | Lane2     | Lane3      |
 | ------------- | ---------- | --------- | ---------- |
 | Speed         | 32,000,000 | 7,000,000 | 14,000,000 |
 | Density       | 6          | 16        | 4          |
 | size of log   | 2          | 5         | 3          |
 | Position in Y | 9          | 10        | 12         |
+
+#### 4.7 - Turtles
+
+
 
 ## Glossary
 [^1]: Verilog: A programming language used to program and/or simulate circuit boards. Verilog is notably used with specific hardware such as FPGAs.
