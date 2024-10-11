@@ -19,6 +19,7 @@ Created by: Aurélien FERNANDEZ
       - [1.2.1.1- Overview](#1211--overview)
       - [1.2.1.1 - Components of the board](#1211---components-of-the-board)
     - [1.2.2 - Screen](#122---screen)
+  - [1.3 - File architecture](#13---file-architecture)
   - [2 - Development environment](#2---development-environment)
     - [2.1 - Computers](#21---computers)
     - [2.2 - Programming language](#22---programming-language)
@@ -143,6 +144,30 @@ The default parameters of the go board will remain unchanged, which means no com
 ### 1.2.2 - Screen
 
 We were also given a screen of  1920 pixels width by 1080 pixels height, along with a VGA cable to connect a board to the screen. The specific model of our screen is the LCD monitor EK1 Series-EK251Q.
+
+
+## 1.3 - File architecture
+
+```
+FPGA Project
+├── 📁documents
+|   ├── 📁management
+|   |   └── 📄project_charter.md
+|   ├── 📁quality_assurance
+|   |   ├── 📄test_plan.md
+|   |   └── 📄test_cases.md
+|   ├── 📁functional_specifactions
+|   |   ├── 📁images
+|   |   └── 📄functional_specifications.md
+|   └── 📁technical_specifactions
+|       ├── 📁images
+|       └── 📄functional_specifications.md
+└── 📁 src
+    ├── 📁 sprites
+    ├── apio.ini
+    ├── go-board.pcf
+    └── frogger_top.v
+```
 
 ## 2 - Development environment
 
