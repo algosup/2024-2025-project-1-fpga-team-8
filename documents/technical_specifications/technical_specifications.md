@@ -264,7 +264,37 @@ Here is a short summary of the features that are required for the success of thi
 ### 4.2 - Display the game
 
 To display images on our screen, we are using a VGA cable, due to the technical limitations of a VGA cable, we are limited to a size of 640x480 pixels as the active area with an inactive area of 794x525 pixels as seen in the following image.
+
 ![](./images/display.png)
+
+The pins of a VGA cable are read from top right to bottom left as seen in the following image:
+![](./images/VGA.png)
+
+Here is the table of the different pins and their use:
+| pin | use                        |
+| --- | -------------------------- |
+| 01  | Red                        |
+| 02  | Green                      |
+| 03  | Blue                       |
+| 04  | Not connected              |
+| 05  | Ground                     |
+| 06  | Red return                 |
+| 07  | Green return               |
+| 08  | Blue return                |
+| 09  | 5V                         |
+| 10  | Ground                     |
+| 11  | Not connected              |
+| 12  | Serial Data Line (SDA)     |
+| 13  | Horizontal synchronisation |
+| 14  | Vertical synchronisation   |
+| 15  | Clock                      |
+
+To display on the screen the only pins required in the code are:
+
+- **01 to 03**: To create a colour,
+- **05 to 08**: To assign a ground to each color pin,
+- **13**: The X position of the pixel to draw,
+- **14**: The Y position of the pixel to draw,
 
 ### 4.2.1 - Frame management
 
@@ -586,40 +616,40 @@ Early proof of concept showed that the complex density system defined initially 
 | size of log   | 2          | 5         | 3          |
 | Position in Y | 9          | 10        | 12         |
 
-| Level 4 | Lane1 | Lane1 | Lane1 |
-| --- | --- | --- | --- |
-| Speed | 35,000,000 | 7,000,000 | 18,000,000 |
-| Density | 3   |	14   | 2   |
-| size of log | 2 | 5 | 3 |
-| Position in Y | 9 | 10 | 12 |
+| Level 4       | Lane1      | Lane1     | Lane1      |
+| ------------- | ---------- | --------- | ---------- |
+| Speed         | 35,000,000 | 7,000,000 | 18,000,000 |
+| Density       | 3          | 14        | 2          |
+| size of log   | 2          | 5         | 3          |
+| Position in Y | 9          | 10        | 12         |
 
-| Level 5 | Lane1 | Lane1 | Lane1 |
-| --- | --- | --- | --- |
-| Speed | 35,000,000 | 14,000,000 | 16,000,000 |
-| Density | 3   |	14   | 14   |
-| size of log | 2 | 5 | 3 |
-| Position in Y | 9 | 10 | 12 |
+| Level 5       | Lane1      | Lane1      | Lane1      |
+| ------------- | ---------- | ---------- | ---------- |
+| Speed         | 35,000,000 | 14,000,000 | 16,000,000 |
+| Density       | 3          | 14         | 14         |
+| size of log   | 2          | 5          | 3          |
+| Position in Y | 9          | 10         | 12         |
 
-| Level 6 | Lane1 | Lane1 | Lane1 |
-| --- | --- | --- | --- |
-| Speed | 35,000,000 | 7,000,000 | 14,000,000 |
-| Density | 4 |	7 | 2 | 
-| size of log | 2 | 5 | 3 |
-| Position in Y | 9 | 10 | 12 |
+| Level 6       | Lane1      | Lane1     | Lane1      |
+| ------------- | ---------- | --------- | ---------- |
+| Speed         | 35,000,000 | 7,000,000 | 14,000,000 |
+| Density       | 4          | 7         | 2          |
+| size of log   | 2          | 5         | 3          |
+| Position in Y | 9          | 10        | 12         |
 
-| Level 7 | Lane1 | Lane1 | Lane1 |
-| --- | --- | --- | --- |
-| Speed | 32,000,000 | 7,000,000 | 14,000,000 |
-| Density | 5 |	14 | 4 | 
-| size of log | 2 | 5 | 3 |
-| Position in Y | 9 | 10 | 12 |
+| Level 7       | Lane1      | Lane1     | Lane1      |
+| ------------- | ---------- | --------- | ---------- |
+| Speed         | 32,000,000 | 7,000,000 | 14,000,000 |
+| Density       | 5          | 14        | 4          |
+| size of log   | 2          | 5         | 3          |
+| Position in Y | 9          | 10        | 12         |
 
-| Level 8 | Lane1 | Lane1 | Lane1 |
-| --- | --- | --- | --- |
-| Speed | 32,000,000 | 7,000,000 | 14,000,000 |
-| Density | 6 |	16 | 4 | 
-| size of log | 2 | 5 | 3 |
-| Position in Y | 9 | 10 | 12 |
+| Level 8       | Lane1      | Lane1     | Lane1      |
+| ------------- | ---------- | --------- | ---------- |
+| Speed         | 32,000,000 | 7,000,000 | 14,000,000 |
+| Density       | 6          | 16        | 4          |
+| size of log   | 2          | 5         | 3          |
+| Position in Y | 9          | 10        | 12         |
 
 ## Glossary
 [^1]: Verilog: A programming language used to program and/or simulate circuit boards. Verilog is notably used with specific hardware such as FPGAs.
