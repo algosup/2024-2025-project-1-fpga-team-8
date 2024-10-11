@@ -47,6 +47,8 @@ module frogger_ctrl(
 
     // Parameters and registers for log movement
         parameter c_LOG_SLOW_COUNT = 39000000;
+        parameter c_FROGGER_ORIG_X = 10;
+        parameter c_FROGGER_ORIG_Y = 14;
         reg [31:0] r_Log_Movement_Counter = 0;
 
     /// Initialize starting position of Frogger
@@ -118,11 +120,13 @@ module frogger_ctrl(
             end
 
             // Handle drowning if in water and not on log
+            /*
             if (i_Bitmap_Data == 4'd2 && !i_On_Log) begin
-                w_Frogger_X <= i_Frogger_Orig_X;
-                w_Frogger_Y <= i_Frogger_Orig_Y;
+                o_Frogger_X <= c_FROGGER_ORIG_X;
+                o_Frogger_Y <= c_FROGGER_ORIG_Y;
                 // Decrement lives or other penalty
             end
+            */
 
             // Move frog with log if on log
             if (i_On_Log) begin
@@ -134,10 +138,10 @@ module frogger_ctrl(
                     r_Log_Movement_Counter <= 0;
 
                     // Move frog left with log
-                    if (w_Frogger_X > 0)
-                        w_Frogger_X <= w_Frogger_X - 1;
+                    if (o_Frogger_X > 0)
+                        o_Frogger_X <= o_Frogger_X - 1;
                     else
-                        w_Frogger_X <= w_Frogger_X; // Stop at edge or handle accordingly
+                        o_Frogger_X <= o_Frogger_X; // Stop at edge or handle accordingly
                 end
             end 
             

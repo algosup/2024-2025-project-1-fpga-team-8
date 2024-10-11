@@ -21,7 +21,7 @@ module frogger_top(
     output reg o_VGA_Blu_2,            // Blue channel bit 2
 
     // output o_LED_1,
-    output o_LED_On_Log,
+    output o_LED_1,
     output o_LED_2,
     output o_LED_3,
     output o_LED_4

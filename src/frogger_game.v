@@ -41,7 +41,7 @@ module frogger_game #(
 		output [3:0]     o_Blu_Video,
 
 		// TODO: On Log led debug
-		output o_LED_On_Log,
+		// output o_LED_On_Log,
 		
 		// 7-segment display outputs
 		output [6:0]     o_Segment1,
@@ -95,6 +95,10 @@ module frogger_game #(
   	// Drop 5 LSBs, which effectively divides by 32
 		assign w_Col_Count_Div = w_Col_Count[9:5];
 		assign w_Row_Count_Div = w_Row_Count[9:5];
+
+	// Declare registers for LED pulse extension
+		reg [23:0] r_LED_Counter = 24'd0; // Adjust the bit width as needed
+		reg        r_LED_On_Log = 1'b0;
 
   	wire w_Collided;
 	wire w_On_Log;
@@ -336,6 +340,23 @@ module frogger_game #(
 	/// Main game logic
 		always @(*) begin
 
+			// DEBUG
+			if (w_On_Log) begin
+				// When w_On_Log goes high, start the counter and turn on the LED
+				r_LED_Counter <= 24'd10_000_000; // Adjust the count value based on your clock frequency
+				r_LED_On_Log <= 1'b1;
+			end
+			else if (r_LED_Counter > 0) begin
+				// Decrement the counter each clock cycle
+				r_LED_Counter <= r_LED_Counter - 1;
+				r_LED_On_Log <= 1'b1; // Keep the LED on while the counter is running
+			end
+			else begin
+				// When the counter reaches zero, turn off the LED
+				r_LED_On_Log <= 1'b0;
+			end
+			// ENDDEBUG
+
 			// Check if the current tile matches Frogger's position
 			if ((w_Col_Count_Div == w_Frogger_X) && (w_Row_Count_Div == w_Frogger_Y))
 				begin
@@ -346,20 +367,31 @@ module frogger_game #(
 					r_Blu_Video = 4'b0000;
 				end
 
-			else if ((w_Col_Count_Div == w_Car_X_1) && (w_Row_Count_Div == w_Car_Y_1) || 
+			else if ((w_Col_Count_Div == w_Car_X_1) && (w_Row_Count_Div == w_Car_Y_1)) 
 				// (w_Col_Count_Div == w_Car_X_2) && (w_Row_Count_Div == w_Car_Y_2) || 
 				// (w_Col_Count_Div == w_Car_X_3) && (w_Row_Count_Div == w_Car_Y_3) || 
 				// (w_Col_Count_Div == w_Car_X_4) && (w_Row_Count_Div == w_Car_Y_4) || 
 				// (w_Col_Count_Div == w_Car_X_5) && (w_Row_Count_Div == w_Car_Y_5) ||
-				(w_Col_Count_Div == w_Floating_X_1) && (w_Row_Count_Div == w_Floating_Y_1) ||
-				(w_Col_Count_Div == w_Floating_X_2) && (w_Row_Count_Div == w_Floating_Y_2) ||
-				(w_Col_Count_Div == w_Floating_X_3) && (w_Row_Count_Div == w_Floating_Y_3))
+				// (w_Col_Count_Div == w_Floating_X_1) && (w_Row_Count_Div == w_Floating_Y_1) ||
+				// (w_Col_Count_Div == w_Floating_X_2) && (w_Row_Count_Div == w_Floating_Y_2) ||
+				// (w_Col_Count_Div == w_Floating_X_3) && (w_Row_Count_Div == w_Floating_Y_3))
 				begin
 
 					// If in the same tile as a car, draw the car in white
 					r_Red_Video = 4'b1111;
 					r_Grn_Video = 4'b1111;
 					r_Blu_Video = 4'b1111;
+				end
+			
+			//  Three tile wide floating log
+			else if (((w_Col_Count_Div == w_Floating_X_1 || w_Col_Count_Div == w_Floating_X_1 - 1 || w_Col_Count_Div == w_Floating_X_1 - 2) && w_Row_Count_Div == w_Floating_Y_1) ||
+         		((w_Col_Count_Div == w_Floating_X_2 || w_Col_Count_Div == w_Floating_X_2 - 1 || w_Col_Count_Div == w_Floating_X_2 - 2) && w_Row_Count_Div == w_Floating_Y_2) ||
+         		((w_Col_Count_Div == w_Floating_X_3 || w_Col_Count_Div == w_Floating_X_3 - 1 || w_Col_Count_Div == w_Floating_X_3 - 2) && w_Row_Count_Div == w_Floating_Y_3))
+
+				begin
+					r_Red_Video = 4'b1000; // Brownish color
+    				r_Grn_Video = 4'b0100;
+    				r_Blu_Video = 4'b0000;
 				end
 
 			// Otherwise, draw the background based on the bitmap
@@ -434,7 +466,7 @@ module frogger_game #(
 			assign o_Blu_Video = r_Blu_Video;
 
 			// TODO: onLog 
-			assign o_LED_On_Log = w_Collided;
+			// assign o_LED_On_Log = w_Collided;
 
 		// Display Score on 7-segment displays
 			score_control score_control_inst (
@@ -446,6 +478,3 @@ module frogger_game #(
 
 		endmodule
 
-
-
-// TODO: IM CURRENTLY TRYING TO LINK THE LED TO THE ON LOG SIGNAL SO THAT I CAN UNDERSTAND WHY THE LOG MOVEMENT ISNT WORKING

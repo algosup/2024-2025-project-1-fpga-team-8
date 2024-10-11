@@ -51,20 +51,34 @@ module frogger_collisions (
             (i_Frogger_Y == i_Car_Y_2 && (i_Frogger_X + 1 == i_Car_X_2 || i_Frogger_X == i_Car_X_2 + 1)) ||
             (i_Frogger_Y == i_Car_Y_3 && (i_Frogger_X + 1 == i_Car_X_3 || i_Frogger_X == i_Car_X_3 + 1)) ||
             (i_Frogger_Y == i_Car_Y_4 && (i_Frogger_X + 1 == i_Car_X_4 || i_Frogger_X == i_Car_X_4 + 1)) ||
-            (i_Frogger_Y == i_Car_Y_5 && (i_Frogger_X + 1 == i_Car_X_5 || i_Frogger_X == i_Car_X_5 + 1))) begin
-            o_Collided <= 1;
-        end
+            (i_Frogger_Y == i_Car_Y_5 && (i_Frogger_X + 1 == i_Car_X_5 || i_Frogger_X == i_Car_X_5 + 1)))
+            
+            begin
+                o_Collided <= 1;
+            end
+
         // Handle collision with Logs
+        /*
         else if ((i_Frogger_X == i_Log_X_1 && i_Frogger_Y == i_Log_Y_1) ||
-                 (i_Frogger_X == i_Log_X_2 && i_Frogger_Y == i_Log_Y_2) ||
-                 (i_Frogger_X == i_Log_X_3 && i_Frogger_Y == i_Log_Y_3)) begin
-            o_On_Log <= 1;
-        end
+                (i_Frogger_X == i_Log_X_2 && i_Frogger_Y == i_Log_Y_2) ||
+                (i_Frogger_X == i_Log_X_3 && i_Frogger_Y == i_Log_Y_3))
+        */
+        // Three tile wide variant
+        else if ((i_Frogger_Y == i_Log_Y_1 && (i_Frogger_X == i_Log_X_1 || i_Frogger_X == i_Log_X_1 - 1 || i_Frogger_X == i_Log_X_1 - 2)) ||
+        (i_Frogger_Y == i_Log_Y_2 && (i_Frogger_X == i_Log_X_2 || i_Frogger_X == i_Log_X_2 - 1 || i_Frogger_X == i_Log_X_2 - 2)) ||
+        (i_Frogger_Y == i_Log_Y_3 && (i_Frogger_X == i_Log_X_3 || i_Frogger_X == i_Log_X_3 - 1 || i_Frogger_X == i_Log_X_3 - 2)))
+                 
+                begin
+                    o_On_Log <= 1;
+                end
+
         // No collision
-        else begin
-            o_Collided <= 0;
-            o_On_Log <= 0;
-        end
+        else
+        
+            begin
+                o_Collided <= 0;
+                o_On_Log <= 0;
+            end
     end
 
 endmodule
