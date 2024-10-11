@@ -45,11 +45,15 @@ Created by: Aurélien FERNANDEZ
     - [4.3 - Control the frog](#43---control-the-frog)
     - [4.4 - Lane](#44---lane)
     - [4.5 - Cars](#45---cars)
+      - [4.5.1 - Instantiation \& Output](#451---instantiation--output)
+      - [4.5.2 - Speed and Direction](#452---speed-and-direction)
+      - [4.5.3 - Density](#453---density)
+      - [4.5.4 - Table](#454---table)
     - [4.6 - Logs](#46---logs)
       - [4.6.1 - Speed](#461---speed)
       - [4.6.2 - Density](#462---density)
       - [4.6.3 - Size](#463---size)
-      - [4.6.3 - Table](#463---table)
+      - [4.6.4 - Table](#464---table)
       - [4.7 - Turtles](#47---turtles)
     - [4.8 - Level system](#48---level-system)
     - [4.9 - Collision system](#49---collision-system)
@@ -615,7 +619,11 @@ Here are the different input of the lane:
 
 ### 4.5 - Cars
 
-The cars are instances possessing a few values:
+Cars can move from left to right and right to left. When frogger collide with a car a life should be removed and the position of frogger should be reset to the start position.
+For the purpose of saving lut, all the car are 1 tiles in size and use the same `car` sprite
+
+#### 4.5.1 - Instantiation & Output  
+The cars are instanced from the following value:
 
 **inputs:**
 | Name            | Description                                           | Type               | Default value |
@@ -634,9 +642,76 @@ The cars are instances possessing a few values:
 | o_Car_X | The current X position of the car, this value is used to get the position of the car | 6 bit positive int |
 | o_Car_Y | The current Y position of the car, this value is used to get the position of the car | 6 bit positive int |
 
+#### 4.5.2 - Speed and Direction
+All the car in a lane go the same speed and same direction. The speed is measured in the number of clock cycle it takes an object to move across a tile (32px).
+
+The direction is defined as either `left` or `right`. `left` means that the car goes from right to left and `right` is the opposite.
+
+#### 4.5.3 - Density
+A simplified logic is used to defined the density of cars in a lane. The density is defined as an interval in tiles(32px) between each cars in a lane.
+
+#### 4.5.4 - Table
+| Level 1 | Lane1 | Lane2 | Lane3 | Lane4 | Lane5 |
+| ---| --- | --- | --- | --- | --- |
+| Speed | 39,000,000 | 32,000,000 | 27,000,000 | 18,000,000 | 14,000,000 |
+| Density | 6 | 4 | 6 | 14 | 7 |
+| Direction | left | right | left | right | left |
+| Position in Y | 4 | 5 | 6 | 7 | 8 |
+
+| Level 2 | Lane1 | Lane2 | Lane3 | Lane4 | Lane5 |
+| ---| --- | --- | --- | --- | --- |
+| Speed | 39,000,000 | 32,000,000 | 25,000,000 | 18,000,000 | 14,000,000 |
+| Density | 6 | 4 | 4 | 10 | 7 |
+| Direction | left | right | left | right | left |
+| Position in Y | 4 | 5 | 6 | 7 | 8 |
+
+| Level 3 | Lane1 | Lane2 | Lane3 | Lane4 | Lane5 |
+| ---| --- | --- | --- | --- | --- |
+| Speed | 38,000,000 | 32,000,000 | 24,000,000 | 16,000,000 | 14,000,000 |
+| Density | 4 | 4 | 4 | 10 | 7 |
+| Direction | left | right | left | right | left |
+| Position in Y | 4 | 5 | 6 | 7 | 8 |
+
+| Level 4 | Lane1 | Lane2 | Lane3 | Lane4 | Lane5 |
+| ---| --- | --- | --- | --- | --- |
+| Speed | 35,000,000 | 30,000,000 | 25,000,000 | 14,000,000 | 14,000,000 |
+| Density | 6 | 4 | 4 | 8 | 7 |
+| Direction | left | right | left | right | left |
+| Position in Y | 4 | 5 | 6 | 7 | 8 |
+
+| Level 5 | Lane1 | Lane2 | Lane3 | Lane4 | Lane5 |
+| ---| --- | --- | --- | --- | --- |
+| Speed | 35,000,000 | 22,000,000 | 14,000,000 | 4,000,000 | 17,000,000 |
+| Density | 6 | 6 | 8 | 16 | 7 |
+| Direction | left | right | left | right | left |
+| Position in Y | 4 | 5 | 6 | 7 | 8 |
+
+| Level 6 | Lane1 | Lane2 | Lane3 | Lane4 | Lane5 |
+| ---| --- | --- | --- | --- | --- |
+| Speed | 35,000,000 | 20,000,000 | 14,000,000 | 4,000,000 | 15,000,000 |
+| Density | 6 | 6 | 8 | 14 | 7 |
+| Direction | left | right | left | right | left |
+| Position in Y | 4 | 5 | 6 | 7 | 8 |
+
+| Level 7 | Lane1 | Lane2 | Lane3 | Lane4 | Lane5 |
+| ---| --- | --- | --- | --- | --- |
+| Speed | 35,000,000 | 20,000,000 | 14,000,000 | 4,000,000 | 15,000,000 |
+| Density | 4 | 6 | 6 | 14 | 6 |
+| Direction | left | right | left | right | left |
+| Position in Y | 4 | 5 | 6 | 7 | 8 |
+
+| Level 8 | Lane1 | Lane2 | Lane3 | Lane4 | Lane5 |
+| ---| --- | --- | --- | --- | --- |
+| Speed | 33,000,000 | 18,000,000 | 14,000,000 | 4,000,000 | 14,000,000 |
+| Density | 4 | 6 | 4 | 12 | 6 |
+| Direction | left | right | left | right | left |
+| Position in Y | 4 | 5 | 6 | 7 | 8 |
+
 ### 4.6 - Logs
 
-The logs are an other type of object that can be in a lane. The log all go from left to right.
+The logs are an other type of object that can be in a lane. The log all go from left to right. 
+
+When frogger is on the same tile as a log, the frogger is moved with the log. For example, if a log move 64px to the right in 2s, the frogger on this log also move 64px to the right in 2s.
 
 #### 4.6.1 - Speed
 The speed is measured in the number of clock cycle it takes an object to move across a tile (32px)
@@ -650,10 +725,10 @@ All the logs are the same size in a lane. There are three different size of logs
 - Medium logs are 3 tiles long
 - Long logs are 5 tiles long
 
-Logs are made of two and three sprites, `log_start` is the left-most sprite of a log. `log_end` is the right-most sprite of a log.
-In the case of Medium and Long logs, the tiles in the middle of the log use the `log_middle` sprite.
+Logs are made of two and three sprites, `log1` is the left-most sprite of a log. `log3` is the right-most sprite of a log.
+In the case of Medium and Long logs, the tiles in the middle of the log use the `log2` sprite.
 
-#### 4.6.3 - Table
+#### 4.6.4 - Table
 | Level 1       | Lane1      | Lane2     | Lane3      |
 | ------------- | ---------- | --------- | ---------- |
 | Speed         | 39,000,000 | 7,000,000 | 20,000,000 |
