@@ -10,8 +10,6 @@ module frogger_game
    input            i_VSync,
    // Game Start Button   
    input            i_Game_Start_Button,
-    // Pause Button
-    input            i_Pause_Button,
    // Player 1 and Player 2 Controls (Controls Frogger)
    input            i_Up_Mvt,
    input            i_Down_Mvt,
@@ -26,7 +24,7 @@ module frogger_game
    output [6:0]     o_Segment1,
    output [6:0]     o_Segment2,
    // Output LEDs
-   output           o_LED_2, o_LED_3, o_LED_4
+   output           o_LED_1, o_LED_2, o_LED_3, o_LED_4
 );
 
   // Game constants
@@ -37,15 +35,10 @@ module frogger_game
     // Bitmap array: 0=wall, 1=road, 2=water, 3=safe area, 4=lily pad
   reg [3:0] r_Bitmap[0:c_GAME_HEIGHT-1][0:c_GAME_WIDTH-1];
 
-  parameter CLEANUP = 2'b11;
-
-  wire w_Game_Active = 1'b1;
-
   wire       w_HSync, w_VSync;
   wire [9:0] w_Col_Count, w_Row_Count;
   wire [4:0] w_Col_Count_Div, w_Row_Count_Div;
   wire [5:0] w_Frogger_X, w_Frogger_Y;
-  wire w_Game_Active;
 
   // Cars
   wire [5:0] w_Car_X_1, w_Car_Y_1;
@@ -60,49 +53,48 @@ module frogger_game
 
   wire w_Collided;
 
+  wire w_Lives;
+
   reg [6:0] r_Frogger_Score;
 
-  // State machine enumerations
+ // State machine enumerations
   parameter IDLE    = 2'b00;
-  parameter PLAY = 2'b01;
-  parameter PAUSE = 2'b10;
-  parameter CLEANUP = 2'b11;
+  parameter PLAY    = 2'b01;
+  parameter PAUSE   = 2'b10;
 
   // State register and next state register
-  reg game_state_t, r_CurrentState, r_NextState;
+  reg [1:0] r_Current_State, r_NextState;  // Use 2-bit state registers
+
+  // Initialize the state machine
+  initial begin
+    r_Current_State = IDLE;  // Set the initial state to IDLE
+  end
 
   // State transition logic
   always @(posedge i_Clk) begin
-    r_CurrentState <= r_NextState;
+    r_Current_State <= r_NextState;
   end
 
   // Next state logic
   always @(*) begin
-    case (r_CurrentState)
+    case (r_Current_State)
       IDLE: begin
-        if (i_Game_Start_Button)         // Transition to PLAY on game start button
+        if (i_Game_Start_Button) begin
           r_NextState = PLAY;
-        else
-          r_NextState = IDLE;     // Stay in IDLE state
+        end else begin
+          r_NextState = IDLE;
+        end
       end
       PLAY: begin
-        if (i_Pause_Button)       // Transition to PAUSE on pause button
-          r_NextState = PAUSE;
-        else
-          r_NextState = PLAY;     // Stay in PLAY state
-      end
-      PAUSE: begin
-        if (i_Pause_Button)       // Unpause the game (return to PLAY state)
+        if (w_Lives != 0) begin
           r_NextState = PLAY;
-        else
-          r_NextState = PAUSE;    // Stay in PAUSE state
+        end else begin
+          r_NextState = IDLE;
+        end
       end
-      default: r_NextState = IDLE; // Default state
+      default: r_NextState = IDLE;
     endcase
   end
-
-  // Control signals for game elements based on state
-  wire w_Game_Active = (r_CurrentState == PLAY);  // Enable game movement only in PLAY state
 
   // Synchronize to row and column counters
   Sync_To_Count #(.TOTAL_COLS(c_TOTAL_COLS),
@@ -138,6 +130,7 @@ module frogger_game
   lives_counter lives_counter_inst (
     .i_Clk(i_Clk),
     .i_Collided(w_Collided),
+    .o_Lives(w_Lives),
     .o_LED_2(o_LED_2),
     .o_LED_3(o_LED_3),
     .o_LED_4(o_LED_4)
@@ -154,7 +147,8 @@ module frogger_game
     .i_Collided(w_Collided),
     .i_Col_Count_Div(w_Col_Count_Div),
     .i_Row_Count_Div(w_Row_Count_Div),
-    .i_Bitmap_Data(w_Bitmap_Data),  // Pass the bitmap data
+    .i_Bitmap_Data(w_Bitmap_Data),
+    .i_Current_State(r_Current_State),
     .o_Frogger_X(w_Frogger_X),
     .o_Frogger_Y(w_Frogger_Y),
     .o_Score(r_Frogger_Score)

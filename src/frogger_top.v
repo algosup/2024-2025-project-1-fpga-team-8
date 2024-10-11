@@ -93,7 +93,6 @@ module frogger_top(
         .i_HSync(w_HSync_Frogger),
         .i_VSync(w_VSync_Frogger),
         .i_Game_Start_Button(w_Debounced_1 & w_Debounced_2 & w_Debounced_3 & w_Debounced_4),
-        .i_Pause_Button(w_Debounced_1 & w_Debounced_2 & w_Debounced_3 & w_Debounced_4),
         .i_Up_Mvt(w_Debounced_1),
         .i_Down_Mvt(w_Debounced_2),
         .i_Left_Mvt(w_Debounced_3),
@@ -105,6 +104,7 @@ module frogger_top(
         .o_Blu_Video(w_Blu_Video_Frogger),
         .o_Segment1(o_Segment1),
         .o_Segment2(o_Segment2),
+        .o_LED_1(w_LED_1),
         .o_LED_2(w_LED_2),
         .o_LED_3(w_LED_3),
         .o_LED_4(w_LED_4)
@@ -140,6 +140,7 @@ module frogger_top(
   assign o_VGA_Blu_1 = w_Blu_Video_Porch[1];
   assign o_VGA_Blu_2 = w_Blu_Video_Porch[2];
 
+  assign o_LED_1 = w_LED_1;
   assign o_LED_2 = w_LED_2;
   assign o_LED_3 = w_LED_3;
   assign o_LED_4 = w_LED_4;
