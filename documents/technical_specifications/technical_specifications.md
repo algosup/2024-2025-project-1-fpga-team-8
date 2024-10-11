@@ -710,8 +710,9 @@ In the case of Medium and Long logs, the tiles in the middle of the log use the 
 The collision system works by getting the X and Y position of each tile, car, turtle, log and lilypad displayed and compare them with the position of the frog.
 
 Here is a list explaining the different interactions when the frog collides with an element:
-- Cars, water and turtles underwater kill the frog,
+- Cars, water, turtles underwater and walls kill the frog,
 - Logs and turtles while moving will move the frog (e.g: when the frog is on a turtle and the turtle moves on tile to the left, the frog moves along with it).
+- Lilypads: The second sprite of the frog is drawn on the lilypad, the lilypad now acts as a wall and the frog reapear at its original position.
 
 ### 4.9 - Lives system
 
