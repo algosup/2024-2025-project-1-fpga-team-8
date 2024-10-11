@@ -51,7 +51,8 @@ Created by: Aurélien FERNANDEZ
       - [4.6.3 - Size](#463---size)
       - [4.6.3 - Table](#463---table)
       - [4.7 - Turtles](#47---turtles)
-    - [4.8 - Lives system](#48---lives-system)
+    - [4.8 - Collision system](#48---collision-system)
+    - [4.9 - Lives system](#49---lives-system)
   - [Glossary](#glossary)
 </details>
 
@@ -704,7 +705,15 @@ In the case of Medium and Long logs, the tiles in the middle of the log use the 
 #### 4.7 - Turtles
 
 
-### 4.8 - Lives system
+### 4.8 - Collision system
+
+The collision system works by getting the X and Y position of each tile, car, turtle, log and lilypad displayed and compare them with the position of the frog.
+
+Here is a list explaining the different interactions when the frog collides with an element:
+- Cars, water and turtles underwater kill the frog,
+- Logs and turtles while moving will move the frog (e.g: when the frog is on a turtle and the turtle moves on tile to the left, the frog moves along with it).
+
+### 4.9 - Lives system
 
 The system of lives is a simple counter which decreases each time a collision is triggered.
 
