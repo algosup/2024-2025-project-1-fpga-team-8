@@ -53,7 +53,7 @@ module frogger_game
 
   wire w_Collided;
 
-  wire w_Lives;
+  wire [1:0] w_Lives;
 
   reg [6:0] r_Frogger_Score;
 
