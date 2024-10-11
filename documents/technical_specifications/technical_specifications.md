@@ -50,6 +50,7 @@ Created by: Aurélien FERNANDEZ
       - [4.6.3 - Size](#463---size)
       - [4.6.3 - Table](#463---table)
       - [4.7 - Turtles](#47---turtles)
+    - [4.8 - Lives system](#48---lives-system)
   - [Glossary](#glossary)
 </details>
 
@@ -244,6 +245,7 @@ Comments should be regularly written to ensure the comprehension of the code of 
 
 The code must follow few but strict rules such as:
 
+- The file containing a module must be shorter than 20 character and clear enough to understand,
 - The module contained in a file must have the same name as its file,
 - The spacing 4 spaces between each level of indentation.
 
@@ -677,6 +679,18 @@ In the case of Medium and Long logs, the tiles in the middle of the log use the 
 #### 4.7 - Turtles
 
 
+### 4.8 - Lives system
+
+The system of lives is a simple counter which decreases each time a collision is triggered.
+
+The lives are displayed by using the 4 LEDs present on the log, the number of lives can be read from left to right meaning:
+- LED 1 is on: the player has 1 life,
+- LED 1 & 2 are on: the player has 2 lives,
+- LED 1 to 3 are on: the player has 3 lives.
+
+The base number of lives is set to 3.
+
+Due to the limitation of the go-boards in terms of calculations and saved values we cannot create a score system without removing key element of the game, thus the player cannot gain lives from reaching a defined number of points.
 
 ## Glossary
 [^1]: Verilog: A programming language used to program and/or simulate circuit boards. Verilog is notably used with specific hardware such as FPGAs.
