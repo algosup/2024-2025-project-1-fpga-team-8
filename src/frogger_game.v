@@ -41,7 +41,7 @@ module frogger_game #(
 		output [3:0]     o_Blu_Video,
 
 		// TODO: On Log led debug
-		// output o_LED_On_Log,
+		output o_LED_1,
 		
 		// 7-segment display outputs
 		output [6:0]     o_Segment1,
@@ -94,7 +94,7 @@ module frogger_game #(
 		wire w_Game_Active;
 
   	// Cars
-		wire [5:0] w_Car_X_1, w_Car_Y_1;
+		// wire [5:0] w_Car_X_1, w_Car_Y_1;
 		// wire [5:0] w_Car_X_2, w_Car_Y_2;
 		// wire [5:0] w_Car_X_3, w_Car_Y_3;
 		// wire [5:0] w_Car_X_4, w_Car_Y_4;
@@ -104,6 +104,8 @@ module frogger_game #(
 		wire [5:0] w_Floating_X_1, w_Floating_Y_1;
 		wire [5:0] w_Floating_X_2, w_Floating_Y_2;
 		wire [5:0] w_Floating_X_3, w_Floating_Y_3;
+		wire [5:0] w_Floating_X_4, w_Floating_Y_4;
+		wire [5:0] w_Floating_X_5, w_Floating_Y_5;
 
   	// Drop 5 LSBs, which effectively divides by 32
 		assign w_Col_Count_Div = w_Col_Count[9:5];
@@ -173,6 +175,7 @@ module frogger_game #(
 			.i_On_Log(w_On_Log)
 		);
 
+/*
     // Car 1 instance
 		car_ctrl #(
 		.c_CAR_SPEED(1),
@@ -189,7 +192,7 @@ module frogger_game #(
 			.o_Car_X(w_Car_X_1),
 			.o_Car_Y(w_Car_Y_1),
 		);
-/*
+
     // Car 2 instance
 		car_ctrl #(
 			.c_CAR_SPEED(1),
@@ -281,7 +284,7 @@ module frogger_game #(
 			.c_MIN_X(0),
 			.c_SLOW_COUNT(39000000),
 			.c_INIT_X(13),
-			.c_INIT_Y(3)
+			.c_INIT_Y(2)
 		)
 
 		floating_ctrl_inst_2 (
@@ -298,7 +301,7 @@ module frogger_game #(
 			.c_MIN_X(0),
 			.c_SLOW_COUNT(39000000),
 			.c_INIT_X(13),
-			.c_INIT_Y(5)
+			.c_INIT_Y(3)
 		)
 
 		floating_ctrl_inst_3 (
@@ -309,8 +312,44 @@ module frogger_game #(
 			.o_Floating_Y(w_Floating_Y_3),
 		);
 
+	// Floating Log 4 instance 
+		floating_ctrl #(
+			.c_FLOATING_SPEED(1),
+			.c_MIN_X(0),
+			.c_SLOW_COUNT(39000000),
+			.c_INIT_X(13),
+			.c_INIT_Y(4)
+		)
+
+		floating_ctrl_inst_4 (
+			.i_Clk(i_Clk),
+			.i_Col_Count_Div(w_Col_Count_Div),
+			.i_Row_Count_Div(w_Row_Count_Div),
+			.o_Floating_X(w_Floating_X_4),
+			.o_Floating_Y(w_Floating_Y_4),
+		);
+
+	// Floating Log 5 instance 
+		floating_ctrl #(
+			.c_FLOATING_SPEED(1),
+			.c_MIN_X(0),
+			.c_SLOW_COUNT(39000000),
+			.c_INIT_X(13),
+			.c_INIT_Y(5)
+		)
+
+		floating_ctrl_inst_5 (
+			.i_Clk(i_Clk),
+			.i_Col_Count_Div(w_Col_Count_Div),
+			.i_Row_Count_Div(w_Row_Count_Div),
+			.o_Floating_X(w_Floating_X_5),
+			.o_Floating_Y(w_Floating_Y_5),
+		);
+
 
 	// TEMPORARY: Assign car positions to out-of-bounds values to deactivate collisions
+		assign w_Car_X_1 = 6'd63;  
+		assign w_Car_Y_1 = 6'd63;
 		assign w_Car_X_2 = 6'd63;  
 		assign w_Car_Y_2 = 6'd63;
 		assign w_Car_X_3 = 6'd63;
@@ -342,6 +381,10 @@ module frogger_game #(
 			.i_Log_Y_2(w_Floating_Y_2),
 			.i_Log_X_3(w_Floating_X_3),
 			.i_Log_Y_3(w_Floating_Y_3),
+			.i_Log_X_3(w_Floating_X_4),
+			.i_Log_Y_3(w_Floating_Y_4),
+			.i_Log_X_3(w_Floating_X_5),
+			.i_Log_Y_3(w_Floating_Y_5),
 			.o_Collided(w_Collided),
 			.o_On_Log(w_On_Log)
 		);
@@ -380,6 +423,7 @@ module frogger_game #(
 					r_Blu_Video = 4'b0000;
 				end
 
+			/*
 			else if ((w_Col_Count_Div == w_Car_X_1) && (w_Row_Count_Div == w_Car_Y_1)) 
 				// (w_Col_Count_Div == w_Car_X_2) && (w_Row_Count_Div == w_Car_Y_2) || 
 				// (w_Col_Count_Div == w_Car_X_3) && (w_Row_Count_Div == w_Car_Y_3) || 
@@ -395,6 +439,7 @@ module frogger_game #(
 					r_Grn_Video = 4'b1111;
 					r_Blu_Video = 4'b1111;
 				end
+			*/
 			
 			//  Three tile wide floating log
 			else if (// Log 1
@@ -411,7 +456,17 @@ module frogger_game #(
 				((w_Col_Count_Div == w_Floating_X_3 ||
 				w_Col_Count_Div == subtract_modulo(w_Floating_X_3, 1) ||
 				w_Col_Count_Div == subtract_modulo(w_Floating_X_3, 2)) &&
-				w_Row_Count_Div == w_Floating_Y_3))
+				w_Row_Count_Div == w_Floating_Y_3) ||
+				// Log 4
+				((w_Col_Count_Div == w_Floating_X_4 ||
+				w_Col_Count_Div == subtract_modulo(w_Floating_X_4, 1) ||
+				w_Col_Count_Div == subtract_modulo(w_Floating_X_4, 2)) &&
+				w_Row_Count_Div == w_Floating_Y_4) ||
+				// Log 5
+				((w_Col_Count_Div == w_Floating_X_5 ||
+				w_Col_Count_Div == subtract_modulo(w_Floating_X_5, 1) ||
+				w_Col_Count_Div == subtract_modulo(w_Floating_X_5, 2)) &&
+				w_Row_Count_Div == w_Floating_Y_5))
 
 				begin
 					r_Red_Video = 4'b1000; // Brownish color
@@ -491,7 +546,7 @@ module frogger_game #(
 			assign o_Blu_Video = r_Blu_Video;
 
 			// TODO: onLog 
-			// assign o_LED_On_Log = w_Collided;
+			assign o_LED_1 = w_On_Log;
 
 		// Display Score on 7-segment displays
 			score_control score_control_inst (

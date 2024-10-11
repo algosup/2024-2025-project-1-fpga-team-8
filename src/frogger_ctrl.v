@@ -130,6 +130,7 @@ module frogger_ctrl(
                         o_Frogger_X <= o_Frogger_X - 1;
                     else
                         o_Frogger_X <= c_GAME_WIDTH - 1; // Wrap around
+                        
                 end
             end else begin
                 r_Log_Movement_Counter <= 0; // Reset counter if not on log
