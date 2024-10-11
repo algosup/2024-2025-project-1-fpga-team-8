@@ -34,6 +34,22 @@ module frogger_collisions (
         // Collision with logs signal
         output reg o_On_Log
 );
+
+    // Parameter for game width (number of tiles in X direction)
+    parameter c_GAME_WIDTH = 14;
+
+    // Function to handle coordinate wrapping
+    function [5:0] subtract_modulo;
+        input [5:0] x;
+        input [5:0] y;
+        begin
+            if (x >= y)
+                subtract_modulo = x - y;
+            else
+                subtract_modulo = c_GAME_WIDTH - (y - x);
+        end
+    endfunction
+
     /// Initialize collision signals
     initial begin
         o_Collided = 0;
@@ -41,7 +57,7 @@ module frogger_collisions (
     end
 
        // Main collision detection logic
-    always @(posedge i_Clk) begin
+    always @(*) begin
         // Default to no collision
         o_Collided <= 0;
         o_On_Log <= 0;
@@ -63,22 +79,24 @@ module frogger_collisions (
                 (i_Frogger_X == i_Log_X_2 && i_Frogger_Y == i_Log_Y_2) ||
                 (i_Frogger_X == i_Log_X_3 && i_Frogger_Y == i_Log_Y_3))
         */
-        // Three tile wide variant
-        else if ((i_Frogger_Y == i_Log_Y_1 && (i_Frogger_X == i_Log_X_1 || i_Frogger_X == i_Log_X_1 - 1 || i_Frogger_X == i_Log_X_1 - 2)) ||
-        (i_Frogger_Y == i_Log_Y_2 && (i_Frogger_X == i_Log_X_2 || i_Frogger_X == i_Log_X_2 - 1 || i_Frogger_X == i_Log_X_2 - 2)) ||
-        (i_Frogger_Y == i_Log_Y_3 && (i_Frogger_X == i_Log_X_3 || i_Frogger_X == i_Log_X_3 - 1 || i_Frogger_X == i_Log_X_3 - 2)))
-                 
-                begin
-                    o_On_Log <= 1;
-                end
-
-        // No collision
-        else
         
-            begin
-                o_Collided <= 0;
-                o_On_Log <= 0;
-            end
+        // Handle collision with logs (three tiles wide with wrapping)
+        else if (
+            (i_Frogger_Y == i_Log_Y_1 &&
+             (i_Frogger_X == i_Log_X_1 ||
+              i_Frogger_X == subtract_modulo(i_Log_X_1, 1) ||
+              i_Frogger_X == subtract_modulo(i_Log_X_1, 2))) ||
+            (i_Frogger_Y == i_Log_Y_2 &&
+             (i_Frogger_X == i_Log_X_2 ||
+              i_Frogger_X == subtract_modulo(i_Log_X_2, 1) ||
+              i_Frogger_X == subtract_modulo(i_Log_X_2, 2))) ||
+            (i_Frogger_Y == i_Log_Y_3 &&
+             (i_Frogger_X == i_Log_X_3 ||
+              i_Frogger_X == subtract_modulo(i_Log_X_3, 1) ||
+              i_Frogger_X == subtract_modulo(i_Log_X_3, 2)))
+        ) begin
+            o_On_Log = 1;
+        end
     end
 
 endmodule

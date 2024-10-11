@@ -69,6 +69,19 @@ module frogger_game #(
 		// State for resetting the game
 		parameter CLEANUP = 2'b11;
 
+	/// Functions
+		// Function to handle coordinate wrapping
+		function [5:0] subtract_modulo;
+			input [5:0] x;
+			input [5:0] y;
+			begin
+				if (x >= y)
+					subtract_modulo = x - y;
+				else
+					subtract_modulo = c_GAME_WIDTH - (y - x);
+			end
+		endfunction
+
   	// Player starts with 3 lives
 		reg [1:0] lives = 2'b11;
 
@@ -384,9 +397,21 @@ module frogger_game #(
 				end
 			
 			//  Three tile wide floating log
-			else if (((w_Col_Count_Div == w_Floating_X_1 || w_Col_Count_Div == w_Floating_X_1 - 1 || w_Col_Count_Div == w_Floating_X_1 - 2) && w_Row_Count_Div == w_Floating_Y_1) ||
-         		((w_Col_Count_Div == w_Floating_X_2 || w_Col_Count_Div == w_Floating_X_2 - 1 || w_Col_Count_Div == w_Floating_X_2 - 2) && w_Row_Count_Div == w_Floating_Y_2) ||
-         		((w_Col_Count_Div == w_Floating_X_3 || w_Col_Count_Div == w_Floating_X_3 - 1 || w_Col_Count_Div == w_Floating_X_3 - 2) && w_Row_Count_Div == w_Floating_Y_3))
+			else if (// Log 1
+				((w_Col_Count_Div == w_Floating_X_1 ||
+				w_Col_Count_Div == subtract_modulo(w_Floating_X_1, 1) ||
+				w_Col_Count_Div == subtract_modulo(w_Floating_X_1, 2)) &&
+				w_Row_Count_Div == w_Floating_Y_1) ||
+				// Log 2
+				((w_Col_Count_Div == w_Floating_X_2 ||
+				w_Col_Count_Div == subtract_modulo(w_Floating_X_2, 1) ||
+				w_Col_Count_Div == subtract_modulo(w_Floating_X_2, 2)) &&
+				w_Row_Count_Div == w_Floating_Y_2) ||
+				// Log 3
+				((w_Col_Count_Div == w_Floating_X_3 ||
+				w_Col_Count_Div == subtract_modulo(w_Floating_X_3, 1) ||
+				w_Col_Count_Div == subtract_modulo(w_Floating_X_3, 2)) &&
+				w_Row_Count_Div == w_Floating_Y_3))
 
 				begin
 					r_Red_Video = 4'b1000; // Brownish color
@@ -476,5 +501,5 @@ module frogger_game #(
 				.o_Segment2(o_Segment2)
 			);
 
-		endmodule
+endmodule
 
