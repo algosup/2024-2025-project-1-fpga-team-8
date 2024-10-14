@@ -69,7 +69,7 @@ This project is a reproduction of the game "Frogger" published in 1981 by Konami
 ### 1.2.1 - Go boards
 
 #### 1.2.1.1- Overview
-For this project, we were give  n a total of 7 [go boards](https://nandland.com/the-go-board/) which can be programmed using Verilog[^1].
+For this project, we were give  n a total of 7 [go boards](https://nandland.com/the-go-board/) which can be programmed using Verilog[^1] or VHDL.
 
 A go board is an FPGA[^2] that can be reprogrammed at any time. it has been created by the company [NandLand](https://nandland.com/) to allow students and beginners to learn about FPGAs[^2].
 
@@ -274,7 +274,7 @@ The code must follow few but strict rules such as:
 
 - The file containing a module must be shorter than 20 character and clear enough to understand,
 - The module contained in a file must have the same name as its file,
-- The spacing 4 spaces between each level of indentation.
+- The space between each level of indentation must be of 4 spaces.
 
 ## 4 - Technical implementations
 
@@ -572,7 +572,8 @@ By pressing all four button at the same time the game will reset to its orginal 
 - The frog's position,
 - The level number,
 - The number of lives,
-- The lilypads' states.
+- The lilypads' states,
+- The screen is cleared and redrawn to reset the screen.
 
 Finally, the 4 buttons are subject to a side-effect called "boucing". The boucing is a common problem of physical switches, when you are pressing a button, two metal parts connect to let electricty pass, the contact is not made instantly, in the span of 1 millisecond, multiple contacts are made which in turn distort the desired result by repeatedly turning on and off.
 
@@ -738,16 +739,18 @@ The lives are displayed by using the 4 LEDs present on the log, the number of li
 - LED 1 is on: the player has 1 life,
 - LED 1 & 2 are on: the player has 2 lives,
 - LED 1 to 3 are on: the player has 3 lives.
+- LED 1 to 4 are on: the player has 4 lives.
 
 The base number of lives is set to 3.
 
-Due to the limitation of the go-boards in terms of calculations and saved values we cannot create a score system without removing key element of the game, thus the player cannot gain lives from reaching a defined number of points.
+Once the level 4 is reached, the number of lives increases by 1.
 
 When the number of lives reaches 0, the game resets variables including: 
 - The number of lives,
 - The current level,
 - The position of the frog,
-- The lylipads' states.
+- The lylipads' states, 
+- The screen is cleared and redrawn to reset the screen.
 
 ## Glossary
 [^1]: Verilog: A programming language used to program and/or simulate circuit boards. Verilog is notably used with specific hardware such as FPGAs.
