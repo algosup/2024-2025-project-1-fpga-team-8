@@ -73,7 +73,7 @@ This project is a reproduction of the game "Frogger" published in 1981 by Konami
 ### 1.2.1 - Go boards
 
 #### 1.2.1.1- Overview
-For this project, we were give  n a total of 7 [go boards](https://nandland.com/the-go-board/) which can be programmed using Verilog[^1] or VHDL.
+For this project, we were given a total of 7 [go boards](https://nandland.com/the-go-board/) which can be programmed using Verilog[^1] or VHDL.
 
 A go board is an FPGA[^2] that can be reprogrammed at any time. it has been created by the company [NandLand](https://nandland.com/) to allow students and beginners to learn about FPGAs[^2].
 
@@ -143,14 +143,13 @@ Along with the boards we were given 7 books written by Russell MERRICK, our teac
 
 ![](./images/fpga.png)
 
-The clock, operating at a frequency of 25Mhz, performs 25 000 000 cycles per second. 
+The clock, operating at a frequency of 25Mhz translating to 25 000 000 cycles per second. 
 
 The default parameters of the go board will remain unchanged, which means no component is added, removed or modified and the clock will hold the same frequency throughout the project.
 
 ### 1.2.2 - Screen
 
-We were also given a screen of  1920 pixels width by 1080 pixels height, along with a VGA cable to connect a board to the screen. The specific model of our screen is the LCD monitor EK1 Series-EK251Q.
-
+We were also provided with a screen that has a width of 1920 pixels and a height of 1080 pixels with a VGA cable to connect a board to the screen. The specific model of our screen is the LCD monitor EK1 Series-EK251Q.
 
 ## 1.3 - File architecture
 
@@ -180,8 +179,8 @@ FPGA Project
 ### 2.1 - Computers
 
 Our team uses multiple machines to work on this project, such as:
-- 2 IBM-compatible laptops operating on Windows 11,
-- 5 MacBooks operating on MacOS Sequoia 15.0.
+- IBM-compatible laptops operating on Windows 11,
+- MacBooks operating on MacOS Sequoia 15.0.
 
 As for the IDE, we are using Visual Studio Code. Finally, to be able to upload a program to the board we all installed the tool [Apio](https://github.com/FPGAwars/apio/) on our machines.
 
@@ -189,13 +188,13 @@ As for the IDE, we are using Visual Studio Code. Finally, to be able to upload a
 
 #### 2.2.1 What is an FPGA?
 
-Fields ProGramable Arrays, in short FPGA, are alternatives to processors capable of executing multiple instructions at the same time whereas processors are executing the instructions sequentialy, one at the time. The logic blocks of the FPGA, used to perform the different calculations are configurable, this allows FPGAs to be highly versatile. All these advantages allow FPGAs to be faster than regular processors in terms of calculations per cycles.
+Field-Programable Gate Arrays, in short FPGA, are alternatives to processors capable of executing multiple instructions in parallel whereas processors are executing the instructions sequentialy, one at the time. The logic blocks of the FPGA, used to perform the different calculations are configurable, this allows FPGAs to be highly versatile. All these advantages allow FPGAs to be faster than processors holding the same clock frequency in terms of calculations per cycles.
 
 To summarise, here is the list of the different advantages of FPGAs:
 - Highly flexible,
 - Parallel processing,
 - Reconfigurability,
-- Rapide prototyping.
+- Fast prototyping.
 
 FPGAs also possess downsides, here is the list of the different downsides:
 - They cost more to produce than traditional circuit boards,
@@ -203,7 +202,7 @@ FPGAs also possess downsides, here is the list of the different downsides:
 - They may be less performant than specialised circuit boards,
 - They are generaly bigger physically than traditional circuit boards due to the fact that logic blocks are not centralised in a single unit but physcial components.
 
-FPGAs are used in very specific fields, more precisely in military projects, in radars and in aerospace project such as satellites, they can also be used for projects requiring fast calculations or video processing.
+FPGAs are used in very specific fields, more precisely in military projects, in radars and in aerospace project such as satellites, they can also be used for projects requiring fast calculations or video processing but the FPGA are not generally suited for creating project such as applications or games.
 
 #### 2.2.2 - What is Verilog?
 
