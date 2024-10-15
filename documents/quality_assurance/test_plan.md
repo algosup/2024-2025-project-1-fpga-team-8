@@ -37,7 +37,7 @@
 
 ## 1. Introduction
 
-This document outlines the test plan for verifying and validating the Frogger game developed in Verilog[^2] for execution on the Go Board FPGA[^1] platform. The objective is to ensure that the game functions correctly, both in terms of gameplay logic and interaction with the hardware peripherals (7-segment displays, switches, LEDs).
+This document outlines the test plan for verifying and validating the Frogger game developed in Verilog[^2] for execution on the Go Board FPGA[^1] platform. The objective is to ensure that the game functions correctly, both in terms of gameplay logic, and interaction with the hardware peripherals (7-segment displays, switches, LEDs).
 
 ## 2. Test Environment
 
@@ -184,9 +184,9 @@ The test phase will be ran
 
 #### 5.1.1. BlackBox Testing[^5]
 
-To ensure a correct delivery in the project's timeframe, we need to validate early on if the functionnalities are working on our app without focusing on the implemetation of those features.
+To ensure a correct delivery in the project's timeframe, we need to validate early on if the functionalities are working on our app without focusing on the implementation of those features.
 
-This will allow us to validate the core functionnalities early on and focus on iterating to implement less critical features.
+This will allow us to validate the core functionalities early on and focus on iterating to implement less critical features.
 
 For this test phase, we will solely test the solutions via gameplay sessions.
 
@@ -194,7 +194,7 @@ For this test phase, we will solely test the solutions via gameplay sessions.
 
 #### 5.1.2. Simulation Testing
 
-FPGAs are a blackbox executing code without any possibility of simple debugging, apart from creating a logic analyzer will be used only once. Rather than going for this extensive solution, we will use simulation[^4] to ensure the states of each component follow the specifications' instructions, but also verify if the specifications themselves are accurate.
+FPGAs are a blackbox executing code without any possibility of simple debugging, apart from creating a logic analyzer which would only be used only once. Rather than going for this extensive solution, we will use simulation[^4] to ensure the states of each component follow the specifications' instructions, but also verify if the specifications themselves are accurate.
 
 As mentionned in the [Test Environment section](#22-software-tools), we are going to use [EDAPlayGround](edaplayground.com), a website on which we can execute our Verilog and test components independently, but also in the game environment.
 
@@ -223,7 +223,7 @@ This will allow the team to get insights on the progression of the development, 
 
 ### 5.2. Test Cases
 
-All of our codebase will be tested following the defined [test cases](./test_cases.md). Those test cases are using all the mehtodologies explained in the [Methodology Section](#51-test-methodology).
+All of our codebase will be tested following the defined [test cases](./test_cases.md). Those test cases are using all the methodologies explained in the [Methodology Section](#51-test-methodology).
 
 ### 5.3. Test Reports
 
@@ -251,12 +251,12 @@ graph TD
 
 To ensure relevant test reports and provide insights on the firmware development progression, the following points need to be validated:
 
-- All the necessary documentation and requirement information should be available in the repository to ensure consistent testing. It will also allow testers to operate the system correctly
+- All the necessary documentation and requirement information should be available in the repository to ensure consistent testing. It will also allow testers to operate the system correctly.
 - All the needed software tools including the testing tools must have been successfully installed and should work properly.
 - All the hardware platforms must have been successfully installed, configured and functioning properly.
 - The test environment, including the hardware, the firmware, and issue templates must be ready.
 - The test scenarios, test cases and testing suite have been reviewed.
-- esters must be familiar with the product's specific features and expected functionalities.
+- Testers must be familiar with the product's specific features and expected functionalities.
 - All the core features defined for the MVP[^7] in the functional specifications have been implemented.
 
 #### 6.2. Exit Criteria
@@ -286,7 +286,7 @@ To resume the testing phase, the cause of the suspension should have been identi
 | Risk                                                   | Mitigation                                                                 |
 | ------------------------------------------------------ | -------------------------------------------------------------------------- |
 | The provided codebase isn't working                    | Find the origin of the error and create a new issue to inform the dev team |
-| Limited time or ressources allocated because of delays | Test the most critical features first                                      |
+| Limited time or resources allocated because of delays | Test the most critical features first                                      |
 | A hardware failure occurs                              | Try to fix the hardware or share it with other teams if needed             |
 
 #### 8. Deliverables
