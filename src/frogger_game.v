@@ -94,18 +94,18 @@ module frogger_game #(
 		wire w_Game_Active;
 
   	// Cars
-		// wire [5:0] w_Car_X_1, w_Car_Y_1;
-		// wire [5:0] w_Car_X_2, w_Car_Y_2;
-		// wire [5:0] w_Car_X_3, w_Car_Y_3;
-		// wire [5:0] w_Car_X_4, w_Car_Y_4;
-		// wire [5:0] w_Car_X_5, w_Car_Y_5;
+		wire [5:0] w_Car_X_1, w_Car_Y_1;
+		wire [5:0] w_Car_X_2, w_Car_Y_2;
+		wire [5:0] w_Car_X_3, w_Car_Y_3;
+		wire [5:0] w_Car_X_4, w_Car_Y_4;
+		wire [5:0] w_Car_X_5, w_Car_Y_5;
 
 	// Floating Logs
-		wire [5:0] w_Floating_X_1, w_Floating_Y_1;
-		wire [5:0] w_Floating_X_2, w_Floating_Y_2;
-		wire [5:0] w_Floating_X_3, w_Floating_Y_3;
-		wire [5:0] w_Floating_X_4, w_Floating_Y_4;
-		wire [5:0] w_Floating_X_5, w_Floating_Y_5;
+		// wire [5:0] w_Floating_X_1, w_Floating_Y_1;
+		// wire [5:0] w_Floating_X_2, w_Floating_Y_2;
+		// wire [5:0] w_Floating_X_3, w_Floating_Y_3;
+		// wire [5:0] w_Floating_X_4, w_Floating_Y_4;
+		// wire [5:0] w_Floating_X_5, w_Floating_Y_5;
 
   	// Drop 5 LSBs, which effectively divides by 32
 		assign w_Col_Count_Div = w_Col_Count[9:5];
@@ -175,7 +175,7 @@ module frogger_game #(
 			.i_On_Log(w_On_Log)
 		);
 
-/*
+
     // Car 1 instance
 		car_ctrl #(
 		.c_CAR_SPEED(1),
@@ -260,7 +260,7 @@ module frogger_game #(
 			.o_Car_X(w_Car_X_5),
 			.o_Car_Y(w_Car_Y_5),
 		);
-*/
+/*
 	// Floating Log 1 instance 
 		floating_ctrl #(
 			.c_FLOATING_SPEED(1),
@@ -328,6 +328,7 @@ module frogger_game #(
 			.o_Floating_X(w_Floating_X_4),
 			.o_Floating_Y(w_Floating_Y_4),
 		);
+	
 
 	// Floating Log 5 instance 
 		floating_ctrl #(
@@ -345,19 +346,21 @@ module frogger_game #(
 			.o_Floating_X(w_Floating_X_5),
 			.o_Floating_Y(w_Floating_Y_5),
 		);
+*/
 
 
 	// TEMPORARY: Assign car positions to out-of-bounds values to deactivate collisions
-		assign w_Car_X_1 = 6'd63;  
-		assign w_Car_Y_1 = 6'd63;
-		assign w_Car_X_2 = 6'd63;  
-		assign w_Car_Y_2 = 6'd63;
-		assign w_Car_X_3 = 6'd63;
-		assign w_Car_Y_3 = 6'd63;
-		assign w_Car_X_4 = 6'd63;
-		assign w_Car_Y_4 = 6'd63;
-		assign w_Car_X_5 = 6'd63;
-		assign w_Car_Y_5 = 6'd63;
+		assign w_Floating_X_1 = 6'd63;
+		assign w_Floating_Y_1 = 6'd63;
+		assign w_Floating_X_2 = 6'd63;
+		assign w_Floating_Y_2 = 6'd63;
+		assign w_Floating_X_3 = 6'd63;
+		assign w_Floating_Y_3 = 6'd63;
+		assign w_Floating_X_4 = 6'd63;
+		assign w_Floating_Y_4 = 6'd63;
+		assign w_Floating_X_5 = 6'd63;
+		assign w_Floating_Y_5 = 6'd63;
+
   	// Check for collisions between Frogger and cars
 		frogger_collisions frogger_collisions_inst (
 			.i_Clk(i_Clk),
@@ -396,23 +399,6 @@ module frogger_game #(
 	/// Main game logic
 		always @(*) begin
 
-			// DEBUG
-			if (w_On_Log) begin
-				// When w_On_Log goes high, start the counter and turn on the LED
-				r_LED_Counter <= 24'd10_000_000; // Adjust the count value based on your clock frequency
-				r_LED_On_Log <= 1'b1;
-			end
-			else if (r_LED_Counter > 0) begin
-				// Decrement the counter each clock cycle
-				r_LED_Counter <= r_LED_Counter - 1;
-				r_LED_On_Log <= 1'b1; // Keep the LED on while the counter is running
-			end
-			else begin
-				// When the counter reaches zero, turn off the LED
-				r_LED_On_Log <= 1'b0;
-			end
-			// ENDDEBUG
-
 			// Check if the current tile matches Frogger's position
 			if ((w_Col_Count_Div == w_Frogger_X) && (w_Row_Count_Div == w_Frogger_Y))
 				begin
@@ -423,15 +409,14 @@ module frogger_game #(
 					r_Blu_Video = 4'b0000;
 				end
 
-			/*
-			else if ((w_Col_Count_Div == w_Car_X_1) && (w_Row_Count_Div == w_Car_Y_1)) 
-				// (w_Col_Count_Div == w_Car_X_2) && (w_Row_Count_Div == w_Car_Y_2) || 
-				// (w_Col_Count_Div == w_Car_X_3) && (w_Row_Count_Div == w_Car_Y_3) || 
-				// (w_Col_Count_Div == w_Car_X_4) && (w_Row_Count_Div == w_Car_Y_4) || 
-				// (w_Col_Count_Div == w_Car_X_5) && (w_Row_Count_Div == w_Car_Y_5) ||
-				// (w_Col_Count_Div == w_Floating_X_1) && (w_Row_Count_Div == w_Floating_Y_1) ||
-				// (w_Col_Count_Div == w_Floating_X_2) && (w_Row_Count_Div == w_Floating_Y_2) ||
-				// (w_Col_Count_Div == w_Floating_X_3) && (w_Row_Count_Div == w_Floating_Y_3))
+
+			else if (
+				(w_Col_Count_Div == w_Car_X_1) && (w_Row_Count_Div == w_Car_Y_1) || 
+				(w_Col_Count_Div == w_Car_X_2) && (w_Row_Count_Div == w_Car_Y_2) || 
+				(w_Col_Count_Div == w_Car_X_3) && (w_Row_Count_Div == w_Car_Y_3) || 
+				(w_Col_Count_Div == w_Car_X_4) && (w_Row_Count_Div == w_Car_Y_4) || 
+				(w_Col_Count_Div == w_Car_X_5) && (w_Row_Count_Div == w_Car_Y_5))
+
 				begin
 
 					// If in the same tile as a car, draw the car in white
@@ -439,40 +424,41 @@ module frogger_game #(
 					r_Grn_Video = 4'b1111;
 					r_Blu_Video = 4'b1111;
 				end
-			*/
-			
+
+			/*
 			//  Three tile wide floating log
-			else if (// Log 1
+			else if // Log 1
 				((w_Col_Count_Div == w_Floating_X_1 ||
 				w_Col_Count_Div == subtract_modulo(w_Floating_X_1, 1) ||
 				w_Col_Count_Div == subtract_modulo(w_Floating_X_1, 2)) &&
 				w_Row_Count_Div == w_Floating_Y_1) ||
-				// Log 2
+				Log 2
 				((w_Col_Count_Div == w_Floating_X_2 ||
 				w_Col_Count_Div == subtract_modulo(w_Floating_X_2, 1) ||
 				w_Col_Count_Div == subtract_modulo(w_Floating_X_2, 2)) &&
 				w_Row_Count_Div == w_Floating_Y_2) ||
-				// Log 3
+				Log 3
 				((w_Col_Count_Div == w_Floating_X_3 ||
 				w_Col_Count_Div == subtract_modulo(w_Floating_X_3, 1) ||
 				w_Col_Count_Div == subtract_modulo(w_Floating_X_3, 2)) &&
 				w_Row_Count_Div == w_Floating_Y_3) ||
-				// Log 4
+				Log 4
 				((w_Col_Count_Div == w_Floating_X_4 ||
 				w_Col_Count_Div == subtract_modulo(w_Floating_X_4, 1) ||
 				w_Col_Count_Div == subtract_modulo(w_Floating_X_4, 2)) &&
-				w_Row_Count_Div == w_Floating_Y_4) ||
-				// Log 5
+				w_Row_Count_Div == w_Floating_Y_4))
+				Log 5
 				((w_Col_Count_Div == w_Floating_X_5 ||
 				w_Col_Count_Div == subtract_modulo(w_Floating_X_5, 1) ||
 				w_Col_Count_Div == subtract_modulo(w_Floating_X_5, 2)) &&
-				w_Row_Count_Div == w_Floating_Y_5))
+				w_Row_Count_Div == w_Floating_Y_5)
 
 				begin
 					r_Red_Video = 4'b1000; // Brownish color
     				r_Grn_Video = 4'b0100;
     				r_Blu_Video = 4'b0000;
 				end
+			*/
 
 			// Otherwise, draw the background based on the bitmap
 			else if (w_Col_Count_Div < c_GAME_WIDTH && w_Row_Count_Div < c_GAME_HEIGHT)

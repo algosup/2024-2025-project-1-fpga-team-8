@@ -1,10 +1,10 @@
 module frogger_top(
-    input wire i_Clk,              // System clock input
-    input wire i_Switch_1,              // Button input to move the square to the right
-    input wire i_Switch_2,              // 
+    input wire i_Clk,                 // System clock input
+    input wire i_Switch_1,            // Button input to move the square to the right
+    input wire i_Switch_2,            // 
     input wire i_Switch_3,
     input wire i_Switch_4,
-    output reg [6:0] o_Segment1,     // 7-segment display for ones digit
+    output reg [6:0] o_Segment1,      // 7-segment display for ones digit
     output reg [6:0] o_Segment2,      // 7-segment display for tens digit
 
     // VGA output signals
@@ -18,7 +18,7 @@ module frogger_top(
     output reg o_VGA_Grn_2,           // Green channel bit 2
     output reg o_VGA_Blu_0,           // Blue channel bit 0
     output reg o_VGA_Blu_1,           // Blue channel bit 1
-    output reg o_VGA_Blu_2,            // Blue channel bit 2
+    output reg o_VGA_Blu_2,           // Blue channel bit 2
 
     // output o_LED_1,
     output o_LED_1,
