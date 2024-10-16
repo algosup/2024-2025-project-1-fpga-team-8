@@ -18,7 +18,7 @@ This implementation should only the basic functionality of the game at first. Mo
 
 ## Team members and responsibilities
 
-| Name             | Role              | Responsibilities                                                                                                                     | Performance criteria                                                                                                                      |
+| Name | Role | Responsibilities  | Performance criteria  |
 | ---------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | Max BERNARD  | Project Manager   | Managment (time, resources)<br>Workload distribution<br> Report to stakeholders<br>Risk anticipation and mitigation                  | Project delivered on time <br>Complete software delivered<br>Resource management not exceeding expectations<br>Seamlessly running project |
 | David CUAHONTE | Program Manager   | Mock-ups and general design of the software<br>Communication with the client<br>Functional specification delivery<br>Risk management | Functional specification<br>Client approval of the design and functionalities                                                             |
@@ -50,7 +50,7 @@ After the final presentation which will take place on October, 25th 2024, we wil
 
 ## Deliverables
 
-The main deliverable is the source code of the application. In addition, to ensure we stay on the right track, we will submit multiple mock-ups and prototypes to the client.
+The main deliverable is the source code of the Frogger.
 
 Additional documents will be given to the client:
 
@@ -59,20 +59,22 @@ Additional documents will be given to the client:
 - Test Plan
 - User Manual
 - Management Planning & Weekly reports
+- Wiki
 
 In addition, a presentation of our work will be done to the client as a 15-minute long presentation.
 
 ## Allocated Resources
 
 Budget: 0€
-Workforce allocated: 6 team members
-Worktime: 16 half-days of 3h30 each
+Hardware : 7 FPGA Go Boards & 2 VGA Screens
+Workforce allocated: 7 team members
+Work-time: 14 half-days of 3h30 each
 
-Total human hours estimation: 336h
+Total man hours estimation: 343h
 
 ## Risks
 
 | Type                                     | Description                                                                                                                | Likelihood | Impact                  | Mitigation                                                     |
 | ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | ---------- | ----------------------- | -------------------------------------------------------------- |
-| New requirements                         | The client might request some changes at any time, forcing us to change our specifications and potentially creating delays | Medium     | Varies from low to high | Avoidance                                                      |
-| Wrong interpretation of the requirements | We might forget a key point in our solution or misinterpret a requirement                                                  | Medium     | High                    | Regular communications about what's being done with the client |
+| Hardware Failure                         | The FPGA Go Board provided to us by the client may fail from user error or unexpected issue. | Low     | Varies from low to high | Avoidance                                                      |
+| Copyright issues | Our copy of frogger may not be allowed by the copyright owner | High     | Low                    | Use the legally distinct name froggo |
