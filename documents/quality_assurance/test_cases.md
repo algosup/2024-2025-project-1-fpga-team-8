@@ -33,6 +33,10 @@ The test cases are defined by a criticality level, indicating the importance of 
 
 1. Run the command `apio build` in the src folder of the project.
 
+**Expected Result:**
+
+![Build Success](./images/build_success.png)
+
 ---
  
 ### 2. The game can be uploaded on the Go Board FPGA
@@ -53,17 +57,21 @@ The test cases are defined by a criticality level, indicating the importance of 
 
 1. Run the command `apio upload` in the src folder of the project.
 
+**Expected Result:**
+
+![Uplaod Success](./images/upload_success.png)
+
 ---
  
 ### 3. Move Frogger up
 
-| ID               | 3                                                   |
-| ---------------- | --------------------------------------------------- |
-| Name             | Move Frogger up                                     |
-| Test Description | Pressing Switch 1 should move the frog one tile up. |
-| Test Type        | Manual                                              |
-| Test Criticality | 🔴                                                   |
-| Expected Result  | The frog should move one tile up.                   |
+| ID               | 3                                                             |
+| ---------------- | ------------------------------------------------------------- |
+| Name             | Move Frogger up                                               |
+| Test Description | Pressing Switch 1 should move the frog one tile up.           |
+| Test Type        | Manual                                                        |
+| Test Criticality | 🔴                                                             |
+| Expected Result  | The frog should move one tile up (1/15 of the screen height). |
 
 **Hardware:**
 
@@ -77,13 +85,13 @@ The test cases are defined by a criticality level, indicating the importance of 
  
 ### 4. Move Frogger down
 
-| ID               | 4                                                     |
-| ---------------- | ----------------------------------------------------- |
-| Name             | Move Frogger down                                     |
-| Test Description | Pressing Switch 4 should move the frog one tile down. |
-| Test Type        | Manual                                                |
-| Test Criticality | 🔴                                                     |
-| Expected Result  | The frog should move one tile down.                   |
+| ID               | 4                                                               |
+| ---------------- | --------------------------------------------------------------- |
+| Name             | Move Frogger down                                               |
+| Test Description | Pressing Switch 4 should move the frog one tile down.           |
+| Test Type        | Manual                                                          |
+| Test Criticality | 🔴                                                               |
+| Expected Result  | The frog should move one tile down (1/15 of the screen height). |
 
 **Hardware:**
 
@@ -97,13 +105,13 @@ The test cases are defined by a criticality level, indicating the importance of 
  
 ### 5. Move Frogger left
 
-| ID               | 5                                                     |
-| ---------------- | ----------------------------------------------------- |
-| Name             | Move Frogger left                                     |
-| Test Description | Pressing Switch 2 should move the frog one tile left. |
-| Test Type        | Manual                                                |
-| Test Criticality | 🔴                                                     |
-| Expected Result  | The frog should move one tile left.                   |
+| ID               | 5                                                              |
+| ---------------- | -------------------------------------------------------------- |
+| Name             | Move Frogger left                                              |
+| Test Description | Pressing Switch 2 should move the frog one tile left.          |
+| Test Type        | Manual                                                         |
+| Test Criticality | 🔴                                                              |
+| Expected Result  | The frog should move one tile left (1/20 of the screen width). |
 
 **Hardware:**
 
@@ -117,13 +125,13 @@ The test cases are defined by a criticality level, indicating the importance of 
  
 ### 6. Move Frogger right
 
-| ID               | 6                                                   |
-| ---------------- | --------------------------------------------------- |
-| Name             | Move Frogger right                                  |
-| Test Description | Pressing Switch 3 should move the frog one tile up. |
-| Test Type        | Manual                                              |
-| Test Criticality | 🔴                                                   |
-| Expected Result  | The frog should move one tile right.                |
+| ID               | 6                                                               |
+| ---------------- | --------------------------------------------------------------- |
+| Name             | Move Frogger right                                              |
+| Test Description | Pressing Switch 3 should move the frog one tile up.             |
+| Test Type        | Manual                                                          |
+| Test Criticality | 🔴                                                               |
+| Expected Result  | The frog should move one tile right (1/20 of the screen width). |
 
 **Hardware:**
 
@@ -274,24 +282,24 @@ The test cases are defined by a criticality level, indicating the importance of 
 
 **Comparison Table:**
 
-| Name of the texture | Texture |
-| ------------------- | ------- |
-| Frog                |    ![frog](./images/frog.png)   |
-| Home Bay           |    ![bay](./images/goal.png)    |
-| Road                |    ![road](./images/road.png)    |
-| River               |    ![river](./images/river.png)    |
-| Log Start           |    ![log start](./images/logpart1.png)    |
-| Log Middle          |    ![log mid](./images/logpart2.png)      |
-| Log End             |    ![log end](./images/logpart3.png)       |
-| Car Lane 1          |    ![car1](./images/car1.png)       |
-| Car Lane 2          |    ![car2](./images/car2.png)     |
-| Car Lane 3          |    ![car3](./images/car3.png)     |
-| Car Lane 4          |    ![car4](./images/car4.png)     |
-| Truck Lane 5        |    ![truck](./images/truck.png)    |
-| Turtle / Diving Turtles            |    ![turtles](./images/turtle.png)     |
-| Home Bay Grass      |    ![touch grass](./images/image.png)     |
-| Pink Lady           |    ![pink frog](./images/pink_frog.png)    |
-| Fly                 |    ![fly](./images/fly.png)     |
+| Name of the texture     | Texture                                                   |
+| ----------------------- | --------------------------------------------------------- |
+| Frog                    | <div width=250>![frog](./images/frog.png)</div>           |
+| Home Bay                | <div width=250>![bay](./images/goal.png)</div>            |
+| Road                    | <div width=250>![road](./images/road.png)</div>           |
+| River                   | <div width=250>![river](./images/river.png)</div>         |
+| Log Start               | <div width=250>![log start](./images/logpart1.png)</div>  |
+| Log Middle              | <div width=250>![log mid](./images/logpart2.png)</div>    |
+| Log End                 | <div width=250>![log end](./images/logpart3.png)</div>    |
+| Car Lane 1              | <div width=250>![car1](./images/car1.png)</div>           |
+| Car Lane 2              | <div width=250>![car2](./images/car2.png)</div>           |
+| Car Lane 3              | <div width=250>![car3](./images/car3.png)</div>           |
+| Car Lane 4              | <div width=250>![car4](./images/car4.png)</div>           |
+| Truck Lane 5            | <div width=250>![truck](./images/truck.png)</div>         |
+| Turtle / Diving Turtles | <div width=250>![turtles](./images/turtle.png)</div>      |
+| Home Bay Grass          | <div width=250>![touch grass](./images/image.png)</div>   |
+| Pink Lady               | <div width=250>![pink frog](./images/pink_frog.png)</div> |
+| Fly                     | <div width=250>![fly](./images/fly.png)</div>             |
 
 ---
  
@@ -315,18 +323,18 @@ The test cases are defined by a criticality level, indicating the importance of 
 
 **Comparison Table:**
 
-| Lane number (from bottom to top) | Element texture |
-| -------------------------------- | --------------- |
-| 1                                |                 |
-| 2                                |                 |
-| 3                                |                 |
-| 4                                |                 |
-| 5                                |                 |
-| 7                                |                 |
-| 8                                |                 |
-| 9                                |                 |
-| 10                               |                 |
-| 11                               |                 |
+| Lane number (from bottom to top) | Element texture                                                                                         | Additional comments                                  |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| 1                                | ![car1](./images/car1.png)                                                                              |                                                      |
+| 2                                | ![car2](./images/car2.png)                                                                              |                                                      |
+| 3                                | ![car3](./images/car3.png)                                                                              |                                                      |
+| 4                                | ![car4](./images/car4.png)                                                                              |                                                      |
+| 5                                | ![truck](./images/truck.png)                                                                            |                                                      |
+| 7                                | ![turtles](./images/turtle.png)                                                                         | Groups of 3 turtles separated by 1-tile empty spaces |
+| 8                                | ![log start](./images/logpart1.png) ![log mid](./images/logpart2.png) ![log end](./images/logpart3.png) | 3-tile long logs separated by a 4-tile empty space   |
+| 9                                | ![log start](./images/logpart1.png) ![log mid](./images/logpart2.png) ![log end](./images/logpart3.png) | 7-tile long logs separated by a 2-tile empty space   |
+| 10                               | ![turtles](./images/turtle.png)                                                                         | Groups of 2 turtles separated by 2-tile empty spaces |
+| 11                               | ![log start](./images/logpart1.png) ![log mid](./images/logpart2.png) ![log end](./images/logpart3.png) | 4-tile long logs separated by a 2-tile empty space   |
 
 ---
  
@@ -349,6 +357,10 @@ The test cases are defined by a criticality level, indicating the importance of 
 1. Reach a home base.
 2. Verify the frog's body is displayed in the home base.
 3. Repeat steps 1 and 2 for each home base.
+
+**Expected result:**
+
+![frogger stays in base](./images//frogger_base.png)
 
 ---
  
@@ -394,13 +406,13 @@ The test cases are defined by a criticality level, indicating the importance of 
  
 ### 17. Limited time to cross the screen
 
-| ID               | 17                                                                              |
-| ---------------- | ------------------------------------------------------------------------------- |
-| Name             | Limited time to cross the screen                                                |
-| Test Description | Frogger should have 30 seconds to reach the home base at the top of the screen. |
-| Test Type        | Manual                                                                          |
-| Test Criticality | 🟡                                                                               |
-| Expected Result  | One fewer LED should light up if time runs out.                                 |
+| ID               | 17                                                                                                     |
+| ---------------- | ------------------------------------------------------------------------------------------------------ |
+| Name             | Limited time to cross the screen                                                                       |
+| Test Description | Frogger should have 30 seconds to reach the home base at the top of the screen.                        |
+| Test Type        | Manual                                                                                                 |
+| Test Criticality | 🟡                                                                                                      |
+| Expected Result  | One fewer LED should be litted up if time runs out and Frogger should be teleported back to the spawn. |
 
 **Hardware:**
 
@@ -430,7 +442,7 @@ The test cases are defined by a criticality level, indicating the importance of 
 
 1. Check the presence of a time indicator on the screen like the one attached.
 
-**Image:**
+**Expected Result:**
 
 ![timeband](./images/timeband.png)
 
@@ -455,7 +467,7 @@ The test cases are defined by a criticality level, indicating the importance of 
 1. Check the presence of a time indicator on the screen like the one attached.
 2. Wait until only 10 seconds remain, which should correspond to 1/3 of the time indicator.
 
-**Image:**
+**Expected Result:**
 
 ![timeband](./images/redtimeband.png)
 
