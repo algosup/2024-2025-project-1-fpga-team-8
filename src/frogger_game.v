@@ -180,7 +180,7 @@ module frogger_game #(
 		car_ctrl #(
 		.c_CAR_SPEED(1),
 		.c_MAX_X(14),
-		.c_SLOW_COUNT(4000000),
+		.c_SLOW_COUNT(39000000),
 		.c_INIT_X(0),
 		.c_INIT_Y(11)
 		)
@@ -197,7 +197,7 @@ module frogger_game #(
 		car_ctrl #(
 			.c_CAR_SPEED(1),
 			.c_MAX_X(14),
-			.c_SLOW_COUNT(5000000),
+			.c_SLOW_COUNT(32000000),
 			.c_INIT_X(0),
 			.c_INIT_Y(10)
 		)
@@ -214,7 +214,7 @@ module frogger_game #(
 		car_ctrl #(
 			.c_CAR_SPEED(1),
 			.c_MAX_X(14),
-			.c_SLOW_COUNT(3700000),
+			.c_SLOW_COUNT(27000000),
 			.c_INIT_X(0),
 			.c_INIT_Y(9)
 		)
@@ -231,7 +231,7 @@ module frogger_game #(
 		car_ctrl #(
 			.c_CAR_SPEED(1),
 			.c_MAX_X(14),
-			.c_SLOW_COUNT(4500000),
+			.c_SLOW_COUNT(18000000),
 			.c_INIT_X(0),
 			.c_INIT_Y(8)
 		)
@@ -248,7 +248,7 @@ module frogger_game #(
 		car_ctrl #(
 			.c_CAR_SPEED(1),
 			.c_MAX_X(14),
-			.c_SLOW_COUNT(4200000),
+			.c_SLOW_COUNT(14000000),
 			.c_INIT_X(0),
 			.c_INIT_Y(7)
 		)

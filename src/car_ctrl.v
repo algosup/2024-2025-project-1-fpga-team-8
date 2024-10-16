@@ -11,6 +11,8 @@ module car_ctrl #(
         parameter c_INIT_X = 0,
         // Initial Y position
         parameter c_INIT_Y = 13,
+        // Counter width
+        parameter COUNTER_WIDTH = 26,
 )(
     /// Inputs
         // Clock input
@@ -29,7 +31,7 @@ module car_ctrl #(
 
     /// Internal signals
         // Counter for slowing down the car movement
-        reg [31:0] r_Counter = 0;      // 32-bit counter for slowing down the car movement
+        reg [COUNTER_WIDTH-1:0] r_Counter = 0;      // 32-bit counter for slowing down the car movement
 
     /// Initialize starting position of the car
     initial begin
