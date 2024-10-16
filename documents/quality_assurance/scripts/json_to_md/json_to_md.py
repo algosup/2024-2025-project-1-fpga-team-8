@@ -14,7 +14,7 @@ file_content = """# Test Cases
 
 This document outlines the different critical points of the software which will be tested. Those tests will ensure the device can be used in production by anyone without significant bug.
 
-## criticality
+## Criticality
 
 The test cases are defined by a criticality level, indicating the importance of the feature in the system and the inner workings of the device.
 """
