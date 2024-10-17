@@ -56,7 +56,7 @@ module frogger_ctrl(
         // Initial column
         o_Frogger_X = 10;
         // Initial row (bottom of the screen)
-        o_Frogger_Y = 14;
+        o_Frogger_Y = 12;
         // Initial score
         o_Score = 0;
     end

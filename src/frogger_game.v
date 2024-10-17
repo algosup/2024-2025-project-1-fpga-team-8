@@ -40,8 +40,8 @@ module frogger_game #(
 		// Blue video output
 		output [3:0]     o_Blu_Video,
 
-		// TODO: On Log led debug
-		output o_LED_1,
+    // LEDs for displaying lives
+		output o_LED_1, o_LED_2, o_LED_3, o_LED_4,
 		
 		// 7-segment display outputs
 		output [6:0]     o_Segment1,
@@ -175,6 +175,14 @@ module frogger_game #(
 			.i_On_Log(w_On_Log)
 		);
 
+  // Implement lives display
+  lives_counter lives_counter_inst (
+    .i_Clk(i_Clk),
+    .i_Collided(w_Collided),
+    .o_LED_2(o_LED_2),
+    .o_LED_3(o_LED_3),
+    .o_LED_4(o_LED_4)
+  );
 
     // Car 1 instance
 		car_ctrl #(
@@ -260,6 +268,8 @@ module frogger_game #(
 			.o_Car_X(w_Car_X_5),
 			.o_Car_Y(w_Car_Y_5),
 		);
+
+
 /*
 	// Floating Log 1 instance 
 		floating_ctrl #(
@@ -269,14 +279,6 @@ module frogger_game #(
 			.c_INIT_X(13),
 			.c_INIT_Y(1)
 		)
-
-		floating_ctrl_inst_1 (
-			.i_Clk(i_Clk),
-			.i_Col_Count_Div(w_Col_Count_Div),
-			.i_Row_Count_Div(w_Row_Count_Div),
-			.o_Floating_X(w_Floating_X_1),
-			.o_Floating_Y(w_Floating_Y_1),
-		);
 
 	// Floating Log 2 instance 
 		floating_ctrl #(
