@@ -63,29 +63,10 @@ module frogger_top(
   );
 
     // Debounce the switch inputs
-    debounce_filter #(25000) debounce_filter_1 (
-        .i_Clk(i_Clk),
-        .i_Bouncy(i_Switch_1),
-        .o_Debounced(w_Debounced_1)
-    );
-
-    debounce_filter #(25000) debounce_filter_2 (
-        .i_Clk(i_Clk),
-        .i_Bouncy(i_Switch_2),
-        .o_Debounced(w_Debounced_2)
-    );
-
-    debounce_filter #(25000) debounce_filter_3 (
-        .i_Clk(i_Clk),
-        .i_Bouncy(i_Switch_3),
-        .o_Debounced(w_Debounced_3)
-    );
-
-    debounce_filter #(25000) debounce_filter_4 (
-        .i_Clk(i_Clk),
-        .i_Bouncy(i_Switch_4),
-        .o_Debounced(w_Debounced_4)
-    );
+    debounce_filter #(25000) debounce_filter_1 (.i_Clk(i_Clk),.i_Bouncy(i_Switch_1),.o_Debounced(w_Debounced_1));
+    debounce_filter #(25000) debounce_filter_2 (.i_Clk(i_Clk),.i_Bouncy(i_Switch_2),.o_Debounced(w_Debounced_2));
+    debounce_filter #(25000) debounce_filter_3 (.i_Clk(i_Clk),.i_Bouncy(i_Switch_3),.o_Debounced(w_Debounced_3));
+    debounce_filter #(25000) debounce_filter_4 (.i_Clk(i_Clk),.i_Bouncy(i_Switch_4),.o_Debounced(w_Debounced_4));
 
     frogger_game frogger_game_inst(
         .i_Clk(i_Clk),
