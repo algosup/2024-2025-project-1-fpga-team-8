@@ -5,17 +5,12 @@ command_exists() {
 }
 
 # Download the latest release of the repository
-REPO_URL="https://github.com/algosup/2024-2025-project-1-fpga-team-8"
-LATEST_RELEASE=$(curl -s "$REPO_URL/releases/latest" | grep -oP 'href="\K[^"]+')
-DOWNLOAD_URL="https://github.com$LATEST_RELEASE"
-
-echo "Downloading the latest release from $DOWNLOAD_URL..."
-wget -q --show-progress "$DOWNLOAD_URL" -O latest_release.zip
-
-# Extract the downloaded zip file
-echo "Extracting the downloaded release..."
-unzip -q latest_release.zip
-rm latest_release.zip  # Remove the zip file after extraction
+sudo apt install curl
+if [ ! -d "./2024-2025-project-1-fpga-team-8-main/"]; then
+	curl -L -o project.zip https://github.com/algosup/2024-2025-project-1-fpga-team-8/archive/refs/heads/main.zip
+	unzip project.zip
+	rm project.zip  # Remove the zip file after extraction
+fi
 
 # Install Python if not installed
 if ! command_exists python3; then
@@ -27,7 +22,7 @@ else
 fi
 
 # Install pip if not installed
-if ! command_exists pip3; then
+if ! command_exists pip3; then 
     echo "pip is not installed. Installing pip..."
     sudo apt install -y python3-pip
 else
@@ -36,6 +31,10 @@ fi
 
 # Install apio using pip
 echo "Installing apio..."
-pip3 install apio
+sudo apt install python3-apio
 
-echo "Setup complete!"
+cd 2024-2025-project-1-fpga-team-8-main/src/
+apio upload
+echo "Setup complete! Press any key to close"
+
+read a
