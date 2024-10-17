@@ -1,29 +1,43 @@
 module car_ctrl #(
-    // Parameters for car movement
-    // c_MAX_X: Maximum X position (grid width)
-    // c_CAR_SPEED: How much to move the car in one step
-    // c_SLOW_COUNT: Slow down counter threshold (adjust based on clock speed)
-    parameter c_MAX_X = 20,
-    parameter c_CAR_SPEED = 1,
-    parameter c_SLOW_COUNT = 4000000,
-    parameter c_INIT_X = 0,
-    parameter c_INIT_Y = 13,
+/// This module is responsible for controlling the movement of the car in the game.
+    /// Parameters
+        // Maximum X position (grid width)
+        parameter c_MAX_X = 20,
+        // How much to move the car in one step
+        parameter c_CAR_SPEED = 1,
+        // Slow down counter threshold (adjust based on clock speed)
+        parameter c_SLOW_COUNT = 4000000,
+        // Initial X position
+        parameter c_INIT_X = 0,
+        // Initial Y position
+        parameter c_INIT_Y = 13,
 )(
-    input i_Clk,
-    input [5:0] i_Col_Count_Div,
-    input [5:0] i_Row_Count_Div,
-    output reg [5:0] o_Car_X,
-    output reg [5:0] o_Car_Y
+    /// Inputs
+        // Clock input
+        input i_Clk,
+        // Column count divider
+        input [5:0] i_Col_Count_Div,
+        // Row count divider
+        input [5:0] i_Row_Count_Div,
+
+    /// Outputs
+        // X position of the car
+        output reg [5:0] o_Car_X,
+        // Y position of the car
+        output reg [5:0] o_Car_Y
 );
 
-    reg [31:0] r_Counter = 0;      // 32-bit counter for slowing down the car movement
+    /// Internal signals
+        // Counter for slowing down the car movement
+        reg [31:0] r_Counter = 0;      // 32-bit counter for slowing down the car movement
 
+    /// Initialize starting position of the car
     initial begin
         o_Car_X = c_INIT_Y;  // Start position
         o_Car_Y = c_INIT_Y; // Starting Y position
     end
 
-    // Car movement logic
+    /// Main car control logic
     always @(posedge i_Clk) begin
 
         // Increment the slow down counter

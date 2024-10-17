@@ -1,17 +1,18 @@
 module lives_counter (
     input i_Clk,
     input i_Collided,
-    output reg [1:0] o_Lives,  // Change to 2-bit wide reg type
     output reg o_LED_2,  // Change to reg type
     output reg o_LED_3,  // Change to reg type
-    output reg o_LED_4   // Change to reg type
+    output reg o_LED_4,  // Change to reg type
+    output reg o_Game_Over  // Change to reg type
 );
 
     // Declare lives as a register
+    reg [1:0] lives;
     reg r_Collision_Handled;  // Flag to track collision handling
 
     initial begin
-        o_Lives = 3;  // Initialize to 3 lives
+        lives = 3;  // Initialize to 3 lives
         r_Collision_Handled = 0;  // Initialize collision handled flag
     end
 
@@ -20,8 +21,8 @@ module lives_counter (
         // Initialize lives at the start
         if (i_Collided && !r_Collision_Handled) begin
             // Decrement lives on collision if not already handled
-            if (o_Lives > 0) begin
-                o_Lives <= o_Lives - 1;
+            if (lives > 0) begin
+                lives <= lives - 1;
             end
             r_Collision_Handled <= 1;  // Mark collision as handled
         end else if (!i_Collided) begin
@@ -29,7 +30,7 @@ module lives_counter (
         end
 
         // Set the LEDs based on remaining lives
-        case (o_Lives)
+        case (lives)
             0: begin
                 o_LED_2 <= 0;
                 o_LED_3 <= 0;

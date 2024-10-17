@@ -1,10 +1,10 @@
 module frogger_top(
-    input wire i_Clk,              // System clock input
-    input wire i_Switch_1,              // Button input to move the square to the right
-    input wire i_Switch_2,              // 
+    input wire i_Clk,                 // System clock input
+    input wire i_Switch_1,            // Button input to move the square to the right
+    input wire i_Switch_2,            // 
     input wire i_Switch_3,
     input wire i_Switch_4,
-    output reg [6:0] o_Segment1,     // 7-segment display for ones digit
+    output reg [6:0] o_Segment1,      // 7-segment display for ones digit
     output reg [6:0] o_Segment2,      // 7-segment display for tens digit
 
     // VGA output signals
@@ -18,8 +18,9 @@ module frogger_top(
     output reg o_VGA_Grn_2,           // Green channel bit 2
     output reg o_VGA_Blu_0,           // Blue channel bit 0
     output reg o_VGA_Blu_1,           // Blue channel bit 1
-    output reg o_VGA_Blu_2,            // Blue channel bit 2
+    output reg o_VGA_Blu_2,           // Blue channel bit 2
 
+    // output o_LED_1,
     output o_LED_1,
     output o_LED_2,
     output o_LED_3,
@@ -92,7 +93,7 @@ module frogger_top(
         .i_Clk(i_Clk),
         .i_HSync(w_HSync_Frogger),
         .i_VSync(w_VSync_Frogger),
-        .i_Game_Start_Button(w_Debounced_1 & w_Debounced_2 & w_Debounced_3 & w_Debounced_4),
+        .i_Game_Start(w_Debounced_1 & w_Debounced_2 & w_Debounced_3 & w_Debounced_4),
         .i_Up_Mvt(w_Debounced_1),
         .i_Down_Mvt(w_Debounced_2),
         .i_Left_Mvt(w_Debounced_3),
@@ -104,7 +105,6 @@ module frogger_top(
         .o_Blu_Video(w_Blu_Video_Frogger),
         .o_Segment1(o_Segment1),
         .o_Segment2(o_Segment2),
-        .o_LED_1(w_LED_1),
         .o_LED_2(w_LED_2),
         .o_LED_3(w_LED_3),
         .o_LED_4(w_LED_4)
@@ -140,7 +140,6 @@ module frogger_top(
   assign o_VGA_Blu_1 = w_Blu_Video_Porch[1];
   assign o_VGA_Blu_2 = w_Blu_Video_Porch[2];
 
-  assign o_LED_1 = w_LED_1;
   assign o_LED_2 = w_LED_2;
   assign o_LED_3 = w_LED_3;
   assign o_LED_4 = w_LED_4;

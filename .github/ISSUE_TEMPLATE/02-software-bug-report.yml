@@ -1,0 +1,77 @@
+name: Software Bug Report
+description: Report an issue related to our software.
+labels: [Bug, Dev]
+title: "Software Bug Report [2024/XX/XX]"
+assignees: 
+  - aurelienfernandez
+  - Quentin-Clement
+  - mathiskakal
+body:
+  - type: markdown
+    attributes:
+        value: "Thank you for filling an issue! If you are here for an issue unrelated to software behaviours, please use the other templates available. This issue form is for Frogger Clone."
+  - type: textarea
+    id: description
+    attributes:
+      label: "Issue description"
+      description: "Describe the problem encountered (Tip: You can attach images or log files by clicking this area to highlight it and then dragging files in.)"
+      value: "Explicit description of the problem and your error message and code sample if needed"
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: "Issue priority"
+      description: "Please be realistic. If you need to elaborate, please use the textarea above in this form to describe the issue."
+      options:
+      - 4. Critical (Severe impact)
+      - 3. High (Immediate attention needed)
+      - 2. Medium (Should be fixed soon)
+      - 1. Low (Slightly annoying)
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: "Version"
+      description: "The version of the software you are working with"
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: "Environment information"
+      description: "What are your environment characteristics"
+      value: |
+        - Apio v.X.X.X (Displayed by running `apio --version`)
+        - Hardware used: (Go Board, ...)
+        - macOS Ventura X.X.X/Windows 10 X.X.X/Debian X.X.X
+        - Do not hesitate to add information which seems relevant
+      render: markdown
+    validations:
+        required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: "Steps taken"
+      description: "What did you do to arrive at this point?"
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: "Expected result"
+      description: "What were you expecting to happen?"
+    validations:
+      required: true
+  - type: textarea
+    id: workaround
+    attributes:
+      label: "Workaround or solution"
+      description: "If you found a workaround or know how to fix the issue, please share it here."
+  - type: input
+    id: dev_release
+    attributes:
+      label: This issue was tested on a development release
+      placeholder: d23280c (commit hash)
+      description: "The issue might already be fixed in a development release or main. This is not required, but helps us greatly."

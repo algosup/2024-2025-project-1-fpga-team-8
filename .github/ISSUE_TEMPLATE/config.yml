@@ -1,0 +1,2 @@
+#Force people to use templates for issues
+blank_issues_enabled: false
