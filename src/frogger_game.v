@@ -50,9 +50,9 @@ module frogger_game #(
 
   	// Game constants
 		// 14 columns in the bitmap
-		parameter c_GAME_WIDTH  = 14;
+		parameter c_GAME_WIDTH  = 20;
 		// 13 rows in the bitmap
-		parameter c_GAME_HEIGHT = 13;
+		parameter c_GAME_HEIGHT = 15;
 		// Each tile is 32x32 pixels
 		parameter TILE_SIZE     = 32;
 
