@@ -103,7 +103,7 @@ module frogger_ctrl(
             // Reset Frogger position if a collision occurs
             if (i_Collided) begin
                 o_Frogger_X <= 10;
-                o_Frogger_Y <= 14;
+                o_Frogger_Y <= 12;
                 // TODO: Add all the death logic
             end
 
