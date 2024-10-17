@@ -28,6 +28,7 @@ module car_ctrl #(
         // Y position of the car
         output reg [5:0] o_Car_Y
 );
+// test
 
     /// Internal signals
         // Counter for slowing down the car movement
