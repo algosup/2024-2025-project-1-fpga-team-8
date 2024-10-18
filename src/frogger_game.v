@@ -73,13 +73,22 @@ module frogger_game #(
 		endfunction
 
   	// Player starts with 3 lives
-		reg [1:0] lives = 2'b11;
+		// reg [1:0] lives = 2'b11;
   	
 	// Register for storing the score
-		reg [6:0] r_Frogger_Score;
-	
-	// Declare registers for LED pulse extension
-		reg [23:0] r_LED_Counter = 24'd0; // Adjust the bit width as needed
+		// reg [6:0] r_Frogger_Score;
+
+	// Main game consolidated state storage
+		reg [8:0] game_state;
+
+		// Use specific bits to represent different states
+		// always @(posedge i_Clk) begin
+		// 	game_state[1:0] <= lives;
+		// 	game_state[8:2] <= r_Frogger_Score;
+		// 	game_state[31:9] <= r_LED_Counter;
+		// end
+
+
 
 	/// Internal signals
 		wire w_Game_Active = 1'b1;
@@ -138,7 +147,7 @@ module frogger_game #(
   	// Control Frogger's movements and track its position
 		frogger_ctrl frogger_ctrl_inst (
 			.i_Clk(i_Clk),
-			.i_Score(r_Frogger_Score),
+			.i_Score(game_state[8:2]),
 			.i_Up_Mvt(i_Up_Mvt),
 			.i_Down_Mvt(i_Down_Mvt),
 			.i_Left_Mvt(i_Left_Mvt),
@@ -149,7 +158,7 @@ module frogger_game #(
 			.i_Bitmap_Data(w_Bitmap_Data),  // Pass the bitmap data
 			.o_Frogger_X(w_Frogger_X),
 			.o_Frogger_Y(w_Frogger_Y),
-			.o_Score(r_Frogger_Score),
+			.o_Score(game_state[8:2]),
 		);
 
 
@@ -290,7 +299,7 @@ module frogger_game #(
 		// Display Score on 7-segment displays
 			score_control score_control_inst (
 				.i_Clk(i_Clk),
-				.i_Score(r_Frogger_Score),
+				.i_Score(game_state[8:2]),
 				.o_Segment1(o_Segment1),
 				.o_Segment2(o_Segment2)
 			);
