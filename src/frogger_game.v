@@ -59,7 +59,7 @@ module frogger_game #(
     // Bitmap array: 0=wall, 1=road, 2=water, 3=safe area, 4=lily pad
 	// OPTIMIZEDBELOW ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  		// reg [2:0] r_Bitmap[0:c_GAME_HEIGHT-1][0:c_GAME_WIDTH-1];
+  		// reg [3:0] r_Bitmap[0:c_GAME_HEIGHT-1][0:c_GAME_WIDTH-1];
   		reg [2:0] r_Bitmap[0:c_GAME_HEIGHT-1][0:c_GAME_WIDTH-1];
 
 	/// Functions
@@ -140,8 +140,9 @@ module frogger_game #(
 
 		end
 
-
-    wire [3:0] w_Bitmap_Data;
+	// OPTIMIZEDBELOW ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; REMOVED ONE BIT FROM BITMAP DATA
+    // wire [3:0] w_Bitmap_Data;
+    wire [2:0] w_Bitmap_Data;
 
   	// Assign bitmap data corresponding to Frogger's position
 		assign w_Bitmap_Data = (w_Frogger_Y < c_GAME_HEIGHT && w_Frogger_X < c_GAME_WIDTH) ? 
@@ -202,6 +203,7 @@ module frogger_game #(
 
 	// Determine background colors based on the bitmap and draw Frogger if applicable
 	// OPTIMIZEDBELOW ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; REMOVED ONE BIT FROM EACH COLOR CHANNEL
+		// reg [3:0] r_Red_Video, r_Grn_Video, r_Blu_Video;
 		reg [2:0] r_Red_Video, r_Grn_Video, r_Blu_Video;
 
 	/// Main game logic
