@@ -422,17 +422,31 @@ module frogger_game #(
         .o_Score(game_state[8:2])
     );
 
-    multi_car_ctrl #(
-		.NUM_CARS(NUM_CARS),
-		.c_CAR_SPEED({1, 1, 1, 1, 1, 1, 1, 1, 1, 1}),
-		.c_MAX_X(20)  // Ensure this is aligned with the grid and display limits
-	) car_control_inst (
-		.i_Clk(i_Clk),
-		.i_Init_X({6'd1, 6'd2, 6'd3, 6'd4, 6'd5, 6'd6, 6'd7, 6'd8, 6'd9, 6'd10}),  // Smaller, distinct X values for testing
-		.i_Init_Y({6'd1, 6'd2, 6'd3, 6'd4, 6'd5, 6'd8, 6'd9, 6'd10, 6'd11, 6'd12}),  // Y values as before
-		.o_Car_X(o_Car_X),
-		.o_Car_Y(o_Car_Y)
+    // multi_car_ctrl #(
+	// 	.NUM_CARS(NUM_CARS),
+	// 	.c_CAR_SPEED({1, 1, 1, 1, 1, 1, 1, 1, 1, 1}),
+	// 	.c_MAX_X(20)  // Ensure this is aligned with the grid and display limits
+	// ) car_control_inst (
+	// 	.i_Clk(i_Clk),
+	// 	.i_Init_X({6'd1, 6'd2, 6'd3, 6'd4, 6'd5, 6'd6, 6'd7, 6'd8, 6'd9, 6'd10}),  // Smaller, distinct X values for testing
+	// 	.i_Init_Y({6'd1, 6'd2, 6'd3, 6'd4, 6'd5, 6'd8, 6'd9, 6'd10, 6'd11, 6'd12}),  // Y values as before
+	// 	.o_Car_X(o_Car_X),
+	// 	.o_Car_Y(o_Car_Y)
+	// );
+
+
+	// Instantiate the debug version of the multi-car controller with only 2 cars
+	multi_car_ctrl_debug #(
+		.NUM_CARS(2),               // Test with 2 cars
+		.c_MAX_X(20),               // Maximum X position (smaller grid for testing)
+		.c_CAR_SPEED({1, 1}),       // Both cars move at the same speed
+		.c_SLOW_COUNT(2000000)      // Slowdown counter value
+	) car_control_debug_inst (
+		.i_Clk(i_Clk),              // Pass the clock signal
+		.o_Car_X(o_Car_X),          // Connect to the X position output
+		.o_Car_Y(o_Car_Y)           // Connect to the Y position output
 	);
+
 
 
 
@@ -464,13 +478,28 @@ module frogger_game #(
 		end 
 		else begin
 			// Check if the current tile matches any car's position
-			for (i = 0; i < NUM_CARS; i = i + 1) begin
-				if ((w_Col_Count_Div == o_Car_X[i*6 +: 6]) && (w_Row_Count_Div == o_Car_Y[i*6 +: 6])) begin
-					// Draw the car in white
-					r_Red_Video = 3'b111;  // White
-					r_Grn_Video = 3'b111;
-					r_Blu_Video = 3'b111;
-				end
+			// for (i = 0; i < NUM_CARS; i = i + 1) begin
+			// 	if ((w_Col_Count_Div == o_Car_X[i*6 +: 6]) && (w_Row_Count_Div == o_Car_Y[i*6 +: 6])) begin
+			// 		// Draw the car in white
+			// 		r_Red_Video = 3'b111;  // White
+			// 		r_Grn_Video = 3'b111;
+			// 		r_Blu_Video = 3'b111;
+			// 	end
+			// end
+
+			// DEBUG
+			// Draw car 1 based on its X and Y position
+			if ((w_Col_Count_Div == o_Car_X[0*6 +: 6]) && (w_Row_Count_Div == o_Car_Y[0*6 +: 6])) begin
+				r_Red_Video = 3'b111;  // White
+				r_Grn_Video = 3'b111;
+				r_Blu_Video = 3'b111;
+			end
+
+			// Draw car 2 based on its X and Y position
+			else if ((w_Col_Count_Div == o_Car_X[1*6 +: 6]) && (w_Row_Count_Div == o_Car_Y[1*6 +: 6])) begin
+				r_Red_Video = 3'b000;  // Cyan
+				r_Grn_Video = 3'b111;
+				r_Blu_Video = 3'b111;
 			end
 		end
 
