@@ -83,7 +83,7 @@ module frogger_game #(
 		wire [5:0] w_Frogger_X, w_Frogger_Y;
 
   	// Cars
-		wire [5:0] w_Car_X_1, w_Car_Y_1;
+		// wire [5:0] w_Car_X_1, w_Car_Y_1;
 
   	// Drop 5 LSBs, which effectively divides by 32
 		assign w_Col_Count_Div = w_Col_Count[9:5];
@@ -151,21 +151,21 @@ module frogger_game #(
 
 
     // Car 1 instance
-		car_ctrl #(
-		.c_CAR_SPEED(1),
-		.c_MAX_X(20),
-		.c_SLOW_COUNT(10000000),
-		.c_INIT_X(0),
-		.c_INIT_Y(12)
-		)
+		// car_ctrl #(
+		// .c_CAR_SPEED(1),
+		// .c_MAX_X(20),
+		// .c_SLOW_COUNT(10000000),
+		// .c_INIT_X(0),
+		// .c_INIT_Y(12)
+		// )
 		
-		car_ctrl_inst_1 (
-			.i_Clk(i_Clk),
-			.i_Col_Count_Div(w_Col_Count_Div),
-			.i_Row_Count_Div(w_Row_Count_Div),
-			.o_Car_X(w_Car_X_1),
-			.o_Car_Y(w_Car_Y_1),
-		);
+		// car_ctrl_inst_1 (
+		// 	.i_Clk(i_Clk),
+		// 	.i_Col_Count_Div(w_Col_Count_Div),
+		// 	.i_Row_Count_Div(w_Row_Count_Div),
+		// 	.o_Car_X(w_Car_X_1),
+		// 	.o_Car_Y(w_Car_Y_1),
+		// );
 
 
 	// TEMPORARY: Assign car positions to out-of-bounds values to deactivate collisions
@@ -179,8 +179,8 @@ module frogger_game #(
 			.i_Frogger_Y(w_Frogger_Y),
 			.i_Frogger_Orig_x(10),
 			.i_Frogger_Orig_y(14),
-			.i_Car_X_1(w_Car_X_1),
-			.i_Car_Y_1(w_Car_Y_1),
+			// .i_Car_X_1(w_Car_X_1),
+			// .i_Car_Y_1(w_Car_Y_1),
 			.o_Collided(w_Collided),
 		);
 
@@ -202,15 +202,15 @@ module frogger_game #(
 				end
 
 
-			else if ((w_Col_Count_Div == w_Car_X_1) && (w_Row_Count_Div == w_Car_Y_1))
+			// else if ((w_Col_Count_Div == w_Car_X_1) && (w_Row_Count_Div == w_Car_Y_1))
 
-				begin
+			// 	begin
 
-					// If in the same tile as a car, draw the car in white
-					r_Red_Video = 4'b1111;
-					r_Grn_Video = 4'b1111;
-					r_Blu_Video = 4'b1111;
-				end
+			// 		// If in the same tile as a car, draw the car in white
+			// 		r_Red_Video = 4'b1111;
+			// 		r_Grn_Video = 4'b1111;
+			// 		r_Blu_Video = 4'b1111;
+			// 	end
 
 
 			// Otherwise, draw the background based on the bitmap

@@ -12,7 +12,7 @@ module frogger_collisions (
         // Frogger original Y position
         input [5:0] i_Frogger_Orig_y,
         // Car 1 X position
-        input [5:0] i_Car_X_1, i_Car_Y_1,
+        // input [5:0] i_Car_X_1, i_Car_Y_1,
  
     /// Outputs
         // Collision with cars signal
@@ -41,11 +41,11 @@ module frogger_collisions (
         o_Collided = 0;
 
         // Handle collisions with cars
-        if ((i_Frogger_Y == i_Car_Y_1 && (i_Frogger_X + 1 == i_Car_X_1 || i_Frogger_X == i_Car_X_1 + 1)))
+        // if ((i_Frogger_Y == i_Car_Y_1 && (i_Frogger_X + 1 == i_Car_X_1 || i_Frogger_X == i_Car_X_1 + 1)))
             
-            begin
-                o_Collided <= 1;
-            end
+        //     begin
+        //         o_Collided <= 1;
+        //     end
     
     end
 
