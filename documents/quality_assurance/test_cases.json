@@ -1,0 +1,1805 @@
+{
+    "tests": [
+        {
+            "test_id": 1,
+            "test_name": "The code can be built",
+            "test_description": "Running `apio build` should not return any error",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 0,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Run the command `apio build` in the src folder of the project."
+                }
+            ],
+            "expected_result": "The code should compile without any errors.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 2,
+            "test_name": "The game can be uploaded on the Go Board FPGA",
+            "test_description": "Running apio upload should complete without any errors.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 0,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Run the command `apio upload` in the src folder of the project."
+                }
+            ],
+            "expected_result": "No errors should occur, and the process should complete successfully.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 3,
+            "test_name": "Move Frogger up",
+            "test_description": "Pressing Switch 1 should move the frog one tile up.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 0,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Press the Switch 1 button."
+                }
+            ],
+            "expected_result": "The frog should move one tile up.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 4,
+            "test_name": "Move Frogger down",
+            "test_description": "Pressing Switch 4 should move the frog one tile down.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 0,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Press the Switch 4 button."
+                }
+            ],
+            "expected_result": "The frog should move one tile down.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 5,
+            "test_name": "Move Frogger left",
+            "test_description": "Pressing Switch 2 should move the frog one tile left.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 0,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Press the Switch 2 button."
+                }
+            ],
+            "expected_result": "The frog should move one tile left.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 6,
+            "test_name": "Move Frogger right",
+            "test_description": "Pressing Switch 3 should move the frog one tile up.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 0,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Press the Switch 3 button."
+                }
+            ],
+            "expected_result": "The frog should move one tile right.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 7,
+            "test_name": "Single tile movement per button press",
+            "test_description": "When pressing a button, the frog should move only one tile in the corresponding direction. This behavior should occur even when the button is held down.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 0,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Press and hold the Switch 1 button."
+                },
+                {
+                    "step_number": 2,
+                    "step_description": "Ensure that the frog moves only one tile up."
+                },
+                {
+                    "step_number": 3,
+                    "step_description": "Press and hold the Switch 4 button."
+                },
+                {
+                    "step_number": 4,
+                    "step_description": "Ensure that the frog moves only one tile down."
+                },
+                {
+                    "step_number": 5,
+                    "step_description": "Press and hold the Switch 2 button."
+                },
+                {
+                    "step_number": 6,
+                    "step_description": "Ensure that the frog moves only one tile left."
+                },
+                {
+                    "step_number": 7,
+                    "step_description": "Press and hold the Switch 3 button."
+                },
+                {
+                    "step_number": 8,
+                    "step_description": "Ensure that the frog moves only one tile right."
+                }
+            ],
+            "expected_result": "The frog should move exactly one tile in the pressed direction, even if the button is held down.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 8,
+            "test_name": "Frogger loses a life when colliding with a car",
+            "test_description": "When the frog collides with a car, the frog should lose a life.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 0,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Move the frog on the first road lane."
+                },
+                {
+                    "step_number": 2,
+                    "step_description": "Wait for a car to collide with the frog."
+                }
+            ],
+            "expected_result": "One fewer LED should be lit on the board.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 9,
+            "test_name": "Frogger loses a life when entering the water",
+            "test_description": "When the frog enters the water, it should lose a life.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 0,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Reach the lower river bank after the road."
+                },
+                {
+                    "step_number": 2,
+                    "step_description": "Ensure no log is coming on the first river lane and move up."
+                }
+            ],
+            "expected_result": "One fewer LED should be lit on the board.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 10,
+            "test_name": "Presence of 5 home bases",
+            "test_description": "There should be 5 home bases displayed on the screen.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 0,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Check the top of the screen."
+                }
+            ],
+            "expected_result": "There should be 5 home bases displayed on the top of the screen.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 11,
+            "test_name": "Fluid movement of objects across the screen",
+            "test_description": "The movement of cars and logs should be fluid, without choppiness.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 0,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Check the movement of the cars, logs and bonuses to ensure they move fluidly for 30 seconds."
+                },
+                {
+                    "step_number": 2,
+                    "step_description": "Observe Frogger's movement to ensure it is fluid."
+                },
+                {
+                    "step_number": 3,
+                    "step_description": "Check for any screen tearing or flickering."
+                },
+                {
+                    "step_number": 4,
+                    "step_description": "Verify that the framerate remains stable."
+                }
+            ],
+            "expected_result": "All elements on the screen should move smoothly, with a stable framerate of at least 30fps.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 12,
+            "test_name": "The textures of the elements are correct.",
+            "test_description": "Verify that the sprites of the cars, logs, frog, and bonuses match the expected designs.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 0,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Ensure Frogger's texture matches the expected sprite."
+                },
+                {
+                    "step_number": 2,
+                    "step_description": "Ensure the cars' textures match the expected sprites."
+                },
+                {
+                    "step_number": 3,
+                    "step_description": "Ensure the logs' textures match the expected sprites."
+                },
+                {
+                    "step_number": 4,
+                    "step_description": "Ensure the bonuses' textures match the expected sprites."
+                },
+                {
+                    "step_number": 5,
+                    "step_description": "Ensure the home bases' textures match the expected sprites."
+                },
+                {
+                    "step_number": 6,
+                    "step_description": "Ensure the water's textures match the expected sprites."
+                },
+                {
+                    "step_number": 7,
+                    "step_description": "Ensure the road's textures match the expected sprites."
+                },
+                {
+                    "step_number": 8,
+                    "step_description": "Ensure the safe zones' textures match the expected sprites."
+                }
+            ],
+            "expected_result": "The textures should match the expected ones.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 13,
+            "test_name": "Lanes contain various elements",
+            "test_description": "The lanes should contain various elements such as cars, logs, bonuses, etc.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 0,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Verify content of the lanes matches the elements indicated in the linked table."
+                }
+            ],
+            "expected_result": "Each lane should contain the elements indicated in the table.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 14,
+            "test_name": "Frogger body display in home base during same level",
+            "test_description": "When the frog has reached a home base, its body should be displayed in the home base until the next level starts.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 1,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Reach a home base."
+                },
+                {
+                    "step_number": 2,
+                    "step_description": "Verify the frog's body is displayed in the home base."
+                },
+                {
+                    "step_number": 3,
+                    "step_description": "Repeat steps 1 and 2 for each home base."
+                }
+            ],
+            "expected_result": "The bodies of the frog should be displayed in the home bases until all the bases were reached and a new level starts.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 15,
+            "test_name": "Moving Animations",
+            "test_description": "The snakes and otters should have moving animations.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 1,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Verify the snakes and otters have moving animations."
+                }
+            ],
+            "expected_result": "The snakes and otters should have moving animations with various textures.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 16,
+            "test_name": "Objects are moving at the indicated speed",
+            "test_description": "Objects are moving at a pre-defined speed depening on the level and their lane.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 1,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Verify the speed of the cars, logs, bonuses, etc. matches the expected speed indicated in the linked table."
+                }
+            ],
+            "expected_result": "The objects should move at their expected speed.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 17,
+            "test_name": "Limited time to cross the screen",
+            "test_description": "Frogger should have 30 seconds to reach the home base at the top of the screen.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 1,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Wait 30 seconds without moving the frog"
+                }
+            ],
+            "expected_result": "One fewer LED should light up if time runs out.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 18,
+            "test_name": "Time Indicator Presence",
+            "test_description": "There should be a time indicator displayed on the screen.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 2,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Check the presence of a time indicator on the screen like the one attached."
+                }
+            ],
+            "expected_result": "There should be a time indicator displayed on the screen.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 19,
+            "test_name": "Time Indicator Alternative Display",
+            "test_description": "When 10 seconds remain, the time indicator should change its display.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 2,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Check the presence of a time indicator on the screen like the one attached."
+                },
+                {
+                    "step_number": 2,
+                    "step_description": "Wait until only 10 seconds remain, which should correspond to 1/3 of the time indicator."
+                }
+            ],
+            "expected_result": "The time indicator should change its display, switching to red when 10 seconds are left.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 20,
+            "test_name": "Score Incrementation",
+            "test_description": "When reaching an empty home base, the score should be incremented by 100 points.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 0,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Reach an empty home base."
+                }
+            ],
+            "expected_result": "The score should have been incremented by 100 points.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 21,
+            "test_name": "Filled Home Base - Warping",
+            "test_description": "When filling a home base, the frog should be warped to the bottom of the screen.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 0,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Reach an empty home base."
+                }
+            ],
+            "expected_result": "A sprite of the frog should be warped to the bottom of the screen.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 22,
+            "test_name": "Level incrementation",
+            "test_description": "When all home bases are filled, the level should be incremented by 1.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 0,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Fill all the home bases."
+                }
+            ],
+            "expected_result": "The home bases should be emptied and the level should be incremented by 1 on the 7-segment display.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 23,
+            "test_name": "Game resets after losing all lives",
+            "test_description": "When no more LEDs are litted, the game should reset to the first level with 3 lives.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 0,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Lose all lives."
+                }
+            ],
+            "expected_result": "The home bases should be emptied, the 7-segment display should show the number 1 and the 3 lives LEDs should be light",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 24,
+            "test_name": "Win Condition",
+            "test_description": "The player should win the game upon beating the 8th level.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 0,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Beat the 8th level."
+                }
+            ],
+            "expected_result": "The game’s state machine should switch to the 'WIN' state.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 25,
+            "test_name": "Win - Game Reset",
+            "test_description": "Upon winning the game, the game should reset to the first level with 3 lives.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 0,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Complete the 8th level."
+                }
+            ],
+            "expected_result": "The home bases should be cleared, the 7-segment display should show '1', and the 3 life LEDs should light up.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 26,
+            "test_name": "Occupied home base - Life loosing",
+            "test_description": "If Frogger reaches a home base that is already occupied, the player should lose a life.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 1,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Reach and fill an empty home base."
+                },
+                {
+                    "step_number": 2,
+                    "step_description": "Attempt to fill the same home base again."
+                }
+            ],
+            "expected_result": "The player should lose a life, and the home base should remain filled. Frogger should warp to the bottom of the screen.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 27,
+            "test_name": "Otters apparition",
+            "test_description": "Otters should start appearing on the screen beginning from level 3.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 2,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Progress to level 3."
+                }
+            ],
+            "expected_result": "Otters should appear on screen during level 3.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 28,
+            "test_name": "Otters speed",
+            "test_description": "Otters should move 10% faster than other objects in their lane.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 2,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Reach the 3rd level."
+                },
+                {
+                    "step_number": 2,
+                    "step_description": "Wait for the otters to appear."
+                }
+            ],
+            "expected_result": "The gap between otters and the logs ahead in the same lane should decrease.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 29,
+            "test_name": "Snake apparition",
+            "test_description": "Snakes should appear on the screen beginning from level 3.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 2,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Progress to level 3."
+                }
+            ],
+            "expected_result": "Snakes should appear on the screen during level 3.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 30,
+            "test_name": "Frogger - Floating off-screen",
+            "test_description": "In level 1, Frogger may float off-screen for one frame.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 2,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Start level 1."
+                },
+                {
+                    "step_number": 2,
+                    "step_description": "Jump onto a log."
+                },
+                {
+                    "step_number": 3,
+                    "step_description": "Wait for the log to move off-screen while Frogger is still on it."
+                },
+                {
+                    "step_number": 4,
+                    "step_description": "Verify Frogger behaviour."
+                }
+            ],
+            "expected_result": "Frogger should float off-screen for one frame and then reappear without losing a life.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 31,
+            "test_name": "Frogger - Scoring system",
+            "test_description": "The scoring system should match the predefined values.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 0,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Check the scoring system matches the predefined values."
+                }
+            ],
+            "expected_result": "The score should increment as defined in the game's scoring system.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 32,
+            "test_name": "Frogger - Extra life",
+            "test_description": "If the player reaches 20,000 points, an extra life should be granted if the player has fewer than 4 lives.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 0,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Lose a life to reduce the number of lives to fewer than 4."
+                },
+                {
+                    "step_number": 2,
+                    "step_description": "Reach a score of 20000 points."
+                },
+                {
+                    "step_number": 3,
+                    "step_description": "Verify that you have 4 lives."
+                }
+            ],
+            "expected_result": "The player should gain an extra life upon reaching 20,000 points, provided fewer than 4 lives remain.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 33,
+            "test_name": "Frogger - Lives on a log",
+            "test_description": "Frogger lives when on a log, jumping on a log should not make frogger lose a life.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 1,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Wait for logs to appear"
+                },
+                {
+                    "step_number": 2,
+                    "step_description": "Jump onto a log"
+                },
+                {
+                    "step_number": 3,
+                    "step_description": "Verify if Frogger loses a life"
+                }
+            ],
+            "expected_result": "Frogger should not lose a life when he jumps on a log. ",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 34,
+            "test_name": "Logs - Frogger Getting Moved",
+            "test_description": "Frogger should move with the logs.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 1,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Wait for logs to appear"
+                },
+                {
+                    "step_number": 2,
+                    "step_description": "Jump on the logs"
+                },
+                {
+                    "step_number": 3,
+                    "step_description": "Ensure that Frogger moves along with the logs."
+                }
+            ],
+            "expected_result": "Frogger should be transported along with the logs.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 35,
+            "test_name": "Turtle - Can Be On Turtles' Back",
+            "test_description": "Frogger should be able to be on a turtle's back and move with it.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 1,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Wait for turtles to appear"
+                },
+                {
+                    "step_number": 2,
+                    "step_description": "Jump on the turtles back"
+                },
+                {
+                    "step_number": 3,
+                    "step_description": "Verify the behavior of Frogger"
+                },
+                {
+                    "step_number": 4,
+                    "step_description": "Verify Frogger moves with the turtle"
+                }
+            ],
+            "expected_result": "Frogger should be able to jump on the turtles back and move with it. Without losing a life",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 36,
+            "test_name": "Cars - Different directions",
+            "test_description": "Cars should move in different directions across the lanes.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 1,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Cars in Lane 1 should move from left to right."
+                },
+                {
+                    "step_number": 2,
+                    "step_description": "Cars in Lane 2 should move from right to left."
+                },
+                {
+                    "step_number": 3,
+                    "step_description": "Cars in Lane 3 should move from left to right."
+                },
+                {
+                    "step_number": 4,
+                    "step_description": "Cars in Lane 4 should move from right to left."
+                },
+                {
+                    "step_number": 5,
+                    "step_description": "Cars in Lane 5 should move from left to right."
+                }
+            ],
+            "expected_result": "",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 37,
+            "test_name": "Turtles - Frogger Movement",
+            "test_description": "Frogger can move when on turtles",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 1,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Wait for turtles to appear"
+                },
+                {
+                    "step_number": 2,
+                    "step_description": "Hop on the turtles back"
+                },
+                {
+                    "step_number": 3,
+                    "step_description": "Try to move Frogger"
+                }
+            ],
+            "expected_result": "Frogger should be able to move when on the turtles back. From left to right and right to left.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 38,
+            "test_name": "Diving Turtles - Diving Periodically",
+            "test_description": "Turtles should dive at regular intervals.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 2,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Wait for the diving turtles to appear."
+                },
+                {
+                    "step_number": 2,
+                    "step_description": "Verify the turtles dive periodically"
+                }
+            ],
+            "expected_result": "The turtles should dive approximately every 2 seconds.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 39,
+            "test_name": "Turtles Diving - Frogger dies",
+            "test_description": "Frogger should lose a life when the turtles dive.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 2,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Wait for diving turtles to appear"
+                },
+                {
+                    "step_number": 2,
+                    "step_description": "Jump onto the turtles' back."
+                },
+                {
+                    "step_number": 3,
+                    "step_description": "Wait for the turtles to dive"
+                },
+                {
+                    "step_number": 4,
+                    "step_description": "Verify the behavior of Frogger"
+                }
+            ],
+            "expected_result": "Frogger should lose a life if he remains on the turtles' back when they dive.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 40,
+            "test_name": "Logs - Different lengths",
+            "test_description": "Logs should have varying lengths.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 2,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Wait for logs to appear."
+                },
+                {
+                    "step_number": 2,
+                    "step_description": "Compare the lengths of the logs."
+                },
+                {
+                    "step_number": 3,
+                    "step_description": "Compare the small logs to medium logs."
+                },
+                {
+                    "step_number": 4,
+                    "step_description": "Compare the small logs to long logs."
+                },
+                {
+                    "step_number": 5,
+                    "step_description": "Compare the medium logs to long logs."
+                }
+            ],
+            "expected_result": "Logs should appear in different lengths as expected.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 41,
+            "test_name": "Alligator - Frogger Walk",
+            "test_description": "Frogger should be able to walk on the backs of alligators.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 2,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Wait for an alligator to appear in the water."
+                },
+                {
+                    "step_number": 2,
+                    "step_description": "Jump onto the alligator's back."
+                },
+                {
+                    "step_number": 3,
+                    "step_description": "Verify the behavior of Frogger"
+                }
+            ],
+            "expected_result": "Frogger should be able to jump onto the alligator's back, regardless of its state.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 42,
+            "test_name": "Alligators - Frogger Immunity",
+            "test_description": "Frogger should be able to walk safely on an alligator's closed jaws.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 2,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Wait for an alligator to appear in the water"
+                },
+                {
+                    "step_number": 2,
+                    "step_description": "Wait for the alligator to close its jaws."
+                },
+                {
+                    "step_number": 3,
+                    "step_description": "Jump onto the alligator while its jaws are closed."
+                },
+                {
+                    "step_number": 4,
+                    "step_description": "Verify the behavior of Frogger"
+                }
+            ],
+            "expected_result": "Frogger should not lose a life when walking on the alligator's closed jaws.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 43,
+            "test_name": "Alligators - Frogger life loosing",
+            "test_description": "Frogger should lose a life when walking on an alligator's open jaw.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 2,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Wait for an alligator to appear in the water"
+                },
+                {
+                    "step_number": 2,
+                    "step_description": "Wait for the alligator to open its jaws."
+                },
+                {
+                    "step_number": 3,
+                    "step_description": "Move Frogger onto the alligator's open jaw."
+                },
+                {
+                    "step_number": 4,
+                    "step_description": "Check the behavior of Frogger"
+                }
+            ],
+            "expected_result": "Frogger should lose a life when walking onto the alligator's open jaws.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 44,
+            "test_name": "Alligators head - Frogger Kill",
+            "test_description": "If an alligator's head remains visible in a home bay for more than two seconds, Frogger should lose a life upon entering the bay.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 2,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Wait for an alligator head to appear in one of the home bases."
+                },
+                {
+                    "step_number": 2,
+                    "step_description": "Enter the home bay after two seconds have passed."
+                },
+                {
+                    "step_number": 3,
+                    "step_description": "Check the behavior of Frogger."
+                }
+            ],
+            "expected_result": "Frogger should lose a life when entering the home bay after the alligator's head has been visible for more than two seconds.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 45,
+            "test_name": "Otters - Pushing Frogger",
+            "test_description": "Otters should attempt to push Frogger off floating objects.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 2,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Reach level 3"
+                },
+                {
+                    "step_number": 2,
+                    "step_description": "Place Frogger at the edge of a log."
+                },
+                {
+                    "step_number": 3,
+                    "step_description": "Wait for an otter to appear"
+                },
+                {
+                    "step_number": 4,
+                    "step_description": "Verify the behavior of the otter"
+                }
+            ],
+            "expected_result": "Otters should try to push Frogger off the logs.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 46,
+            "test_name": "Snakes - Direction",
+            "test_description": "Snakes should move from left to right across the screen.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 2,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Reach level 3"
+                },
+                {
+                    "step_number": 2,
+                    "step_description": "Wait for a snake to appear on the screen."
+                },
+                {
+                    "step_number": 3,
+                    "step_description": "Verify the direction of the snake."
+                }
+            ],
+            "expected_result": "The snake should move from the left to the right of the screen.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 47,
+            "test_name": "Alligators head - Frogger Immunity",
+            "test_description": "If an alligator's head has been visible in a home bay for less than two seconds, Frogger should be immune upon entering that bay.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 2,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Wait for an alligator head to appear in one of the home bases."
+                },
+                {
+                    "step_number": 2,
+                    "step_description": "Enter the home bay before two seconds have passed."
+                },
+                {
+                    "step_number": 3,
+                    "step_description": "Check the behavior of Frogger."
+                }
+            ],
+            "expected_result": "Frogger should not lose a life when entering a home bay within two seconds of the alligator's head appearing.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 48,
+            "test_name": "Alligators - speed",
+            "test_description": "Alligators should move at the same speed as other objects in their lane.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 2,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Wait for an alligator to appear"
+                },
+                {
+                    "step_number": 2,
+                    "step_description": "Check the speed of the alligator."
+                },
+                {
+                    "step_number": 3,
+                    "step_description": "Compare the alligator's speed with other objects in its lane."
+                }
+            ],
+            "expected_result": "Alligators should move at the same speed as logs.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 49,
+            "test_name": "Pink Lady Bonus - Random Appearance",
+            "test_description": "The pink lady frog should appear randomly on the logs.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 2,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Wait for pink lady to appear"
+                },
+                {
+                    "step_number": 2,
+                    "step_description": "Check if the pink lady appears at random intervals."
+                }
+            ],
+            "expected_result": "The pink lady should appear at random intervals.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 50,
+            "test_name": "Pink Lady Bonus - Spawning on a single log",
+            "test_description": "The Pink Lady frog should remain on a single log.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 2,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Wait for ping lady to appear"
+                },
+                {
+                    "step_number": 2,
+                    "step_description": "Verify that she appears on a single log."
+                }
+            ],
+            "expected_result": "The Pink Lady should remain on a single log and not move.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 51,
+            "test_name": "Pink Lady Bonus - Movement",
+            "test_description": "The Pink Lady frog should move only horizontally.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 2,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Wait for the Pink Lady to appear on the screen."
+                },
+                {
+                    "step_number": 2,
+                    "step_description": "Check the horizontal movement of the Pink Lady."
+                }
+            ],
+            "expected_result": "The Pink Lady should move horizontally, from left to right and right to left.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 52,
+            "test_name": "Pink Lady Bonus - Frogger sprite change",
+            "test_description": "When Frogger reaches the same position as the Pink Lady, Frogger's sprite should change to a different color.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 2,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Wait for the Pink Lady to appear on the screen."
+                },
+                {
+                    "step_number": 2,
+                    "step_description": "Move Frogger to the Pink Lady's position."
+                },
+                {
+                    "step_number": 3,
+                    "step_description": "Verify the sprite of Frogger"
+                }
+            ],
+            "expected_result": "Frogger's sprite should change to a different color and a glowing effect upon contact.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 53,
+            "test_name": "Pink Lady Bonus - Bonus Points Addition",
+            "test_description": "If Frogger escorts the Pink Lady to a home bay, the score should increase by 200 points.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "simulation",
+            "test_criticality": 2,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Wait for pink lady to appear."
+                },
+                {
+                    "step_number": 2,
+                    "step_description": "Escort the Pink Lady to a home bay."
+                },
+                {
+                    "step_number": 3,
+                    "step_description": "Verify the score has been incremented."
+                }
+            ],
+            "expected_result": "The score should increase by 200 points.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 54,
+            "test_name": "Random Appearance - Fly in home base",
+            "test_description": "A fly should randomly appear in one of the empty home bays.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "manual",
+            "test_criticality": 2,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Wait for a fly to appear at random intervals."
+                },
+                {
+                    "step_number": 2,
+                    "step_description": "Verify if the fly appears in an empty home bay."
+                }
+            ],
+            "expected_result": "A fly should appear in one of the empty home bays at random intervals.",
+            "test_data": {
+                "data": ""
+            }
+        },
+        {
+            "test_id": 55,
+            "test_name": "Bonus Points - Frog in home base",
+            "test_description": "If a fly is present in one of the home bays, Frogger should earn 200 points upon entering.",
+            "test_requirements": [
+                {
+                    "hardware": [
+                        "Go Board"
+                    ]
+                },
+                {
+                    "external_tools": []
+                }
+            ],
+            "test_type": "simulation",
+            "test_criticality": 2,
+            "steps_to_follow": [
+                {
+                    "step_number": 1,
+                    "step_description": "Wait for a fly to appear."
+                },
+                {
+                    "step_number": 2,
+                    "step_description": "Move Frogger into the home bay with the fly."
+                },
+                {
+                    "step_number": 3,
+                    "step_description": "Verify the score gets updated by 200 points."
+                }
+            ],
+            "expected_result": "The score should increase by 200 points when Frogger enters the home bay with a fly.",
+            "test_data": {
+                "data": ""
+            }
+        }
+    ]
+}
