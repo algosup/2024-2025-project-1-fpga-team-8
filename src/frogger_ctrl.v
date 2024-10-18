@@ -13,8 +13,6 @@ module frogger_ctrl(
         input            i_Left_Mvt,
         // Right movement switch
         input            i_Right_Mvt,
-        // Game active signal
-        input            i_Game_Active,
         // Collision signal
         input            i_Collided,
         // Column count divider
@@ -68,8 +66,6 @@ module frogger_ctrl(
         r_Switch_2 <= i_Down_Mvt;
         r_Switch_3 <= i_Left_Mvt;
         r_Switch_4 <= i_Right_Mvt;
-
-        if (i_Game_Active) begin
 
         /// Handle Frogger's movements
             // Move up
@@ -142,9 +138,6 @@ module frogger_ctrl(
                 o_Frogger_Y <= c_FROGGER_ORIG_Y;
                 // Decrement lives or other penalty
             end
-
-
-        end // Game active
 
     end // Main Frogger control logic
 

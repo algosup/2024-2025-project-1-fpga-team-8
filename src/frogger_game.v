@@ -144,7 +144,6 @@ module frogger_game #(
 			.i_Down_Mvt(i_Down_Mvt),
 			.i_Left_Mvt(i_Left_Mvt),
 			.i_Right_Mvt(i_Right_Mvt),
-			.i_Game_Active(w_Game_Active),
 			.i_Collided(w_Collided),
 			.i_Col_Count_Div(w_Col_Count_Div),
 			.i_Row_Count_Div(w_Row_Count_Div),
@@ -236,40 +235,6 @@ module frogger_game #(
 					r_Blu_Video = 4'b1111;
 				end
 
-			/*
-			//  Three tile wide floating log
-			else if // Log 1
-				((w_Col_Count_Div == w_Floating_X_1 ||
-				w_Col_Count_Div == subtract_modulo(w_Floating_X_1, 1) ||
-				w_Col_Count_Div == subtract_modulo(w_Floating_X_1, 2)) &&
-				w_Row_Count_Div == w_Floating_Y_1) ||
-				Log 2
-				((w_Col_Count_Div == w_Floating_X_2 ||
-				w_Col_Count_Div == subtract_modulo(w_Floating_X_2, 1) ||
-				w_Col_Count_Div == subtract_modulo(w_Floating_X_2, 2)) &&
-				w_Row_Count_Div == w_Floating_Y_2) ||
-				Log 3
-				((w_Col_Count_Div == w_Floating_X_3 ||
-				w_Col_Count_Div == subtract_modulo(w_Floating_X_3, 1) ||
-				w_Col_Count_Div == subtract_modulo(w_Floating_X_3, 2)) &&
-				w_Row_Count_Div == w_Floating_Y_3) ||
-				Log 4
-				((w_Col_Count_Div == w_Floating_X_4 ||
-				w_Col_Count_Div == subtract_modulo(w_Floating_X_4, 1) ||
-				w_Col_Count_Div == subtract_modulo(w_Floating_X_4, 2)) &&
-				w_Row_Count_Div == w_Floating_Y_4))
-				Log 5
-				((w_Col_Count_Div == w_Floating_X_5 ||
-				w_Col_Count_Div == subtract_modulo(w_Floating_X_5, 1) ||
-				w_Col_Count_Div == subtract_modulo(w_Floating_X_5, 2)) &&
-				w_Row_Count_Div == w_Floating_Y_5)
-
-				begin
-					r_Red_Video = 4'b1000; // Brownish color
-    				r_Grn_Video = 4'b0100;
-    				r_Blu_Video = 4'b0000;
-				end
-			*/
 
 			// Otherwise, draw the background based on the bitmap
 			else if (w_Col_Count_Div < c_GAME_WIDTH && w_Row_Count_Div < c_GAME_HEIGHT)
