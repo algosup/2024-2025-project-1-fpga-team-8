@@ -9,6 +9,7 @@ module frogger_game #(
 		parameter c_ACTIVE_COLS=640,
 		// Active rows in the VGA display
 		parameter c_ACTIVE_ROWS=480
+
 )(
 	/// Inputs
 		// Clock input
@@ -56,8 +57,24 @@ module frogger_game #(
 		// Each tile is 32x32 pixels
 		parameter TILE_SIZE     = 32;
 
+		parameter SPRITE_SIZE = 32;
+
     // Bitmap array: 0=wall, 1=road, 2=water, 3=safe area, 4=lily pad
   		reg [3:0] r_Bitmap[0:c_GAME_HEIGHT-1][0:c_GAME_WIDTH-1];
+		reg [3:0] frog_sprite [31:0][31:0];
+	
+		reg [3:0] car_sprite [31:0][31:0];
+		
+		integer car_row = w_Row_Count % SPRITE_SIZE;
+		integer car_col = w_Col_Count % SPRITE_SIZE;
+
+		integer frog_row = w_Row_Count % SPRITE_SIZE;
+		integer frog_col = w_Col_Count % SPRITE_SIZE;
+
+		// integer car_row = w_Row_Count;
+   		// integer car_col = w_Col_Count;
+		// integer car_sprite_row = (car_row * SPRITE_SIZE) / TILE_SIZE;
+		// integer car_sprite_col = (car_col * SPRITE_SIZE) / TILE_SIZE;
 
   	/// State machine enumerations
 		// Game not started
@@ -144,18 +161,34 @@ module frogger_game #(
 
   	// Initialize bitmap background
 		integer row, col;  // Declare loop index variables outside of the loops
+		
 		initial begin
 			$readmemh("bitmap_init.mem", r_Bitmap);
-
+			$readmemh("car.mem", car_sprite);
+			$readmemh("frogger.mem", frog_sprite);
 		end
 
 
-    wire [3:0] w_Bitmap_Data;
 
+
+	wire[31:0] w_Car_Sprites;
+    wire [15:0] w_Bitmap_Data;
+	wire [15:0] w_Frog_Sprite;
+
+	
+
+		
   	// Assign bitmap data corresponding to Frogger's position
 		assign w_Bitmap_Data = (w_Frogger_Y < c_GAME_HEIGHT && w_Frogger_X < c_GAME_WIDTH) ? 
 			r_Bitmap[w_Frogger_Y][w_Frogger_X] : 4'd0;
 
+		assign w_Car_Sprites = (w_Car_Y_1 < car_sprite_height && w_Car_X_1 < car_sprite_width) ?
+			car_sprite[w_Car_Y_1][w_Car_X_1] : 4'd0;
+
+		assign w_Frog_Sprite = (w_Frogger_Y < frog_sprite_height && w_Frogger_X < frog_sprite_width) ?
+			frog_sprite[w_Frogger_Y][w_Frogger_X] : 4'd0;
+
+	
   	// Control Frogger's movements and track its position
 		frogger_ctrl frogger_ctrl_inst (
 			.i_Clk(i_Clk),
@@ -197,6 +230,7 @@ module frogger_game #(
 			.i_Clk(i_Clk),
 			.i_Col_Count_Div(w_Col_Count_Div),
 			.i_Row_Count_Div(w_Row_Count_Div),
+			.i_Sprites_Data(w_Car_Sprites),
 			.o_Car_X(w_Car_X_1),
 			.o_Car_Y(w_Car_Y_1),
 		);
@@ -214,6 +248,7 @@ module frogger_game #(
 			.i_Clk(i_Clk),
 			.i_Col_Count_Div(w_Col_Count_Div),
 			.i_Row_Count_Div(w_Row_Count_Div),
+			.i_Sprites_Data(w_Car_Sprites),
 			.o_Car_X(w_Car_X_2),
 			.o_Car_Y(w_Car_Y_2),
 		);
@@ -231,6 +266,7 @@ module frogger_game #(
 			.i_Clk(i_Clk),
 			.i_Col_Count_Div(w_Col_Count_Div),
 			.i_Row_Count_Div(w_Row_Count_Div),
+			.i_Sprites_Data(w_Car_Sprites),
 			.o_Car_X(w_Car_X_3),
 			.o_Car_Y(w_Car_Y_3),
 		);
@@ -248,6 +284,7 @@ module frogger_game #(
 			.i_Clk(i_Clk),
 			.i_Col_Count_Div(w_Col_Count_Div),
 			.i_Row_Count_Div(w_Row_Count_Div),
+			.i_Sprites_Data(w_Car_Sprites),
 			.o_Car_X(w_Car_X_4),
 			.o_Car_Y(w_Car_Y_4),
 		);
@@ -265,6 +302,7 @@ module frogger_game #(
 			.i_Clk(i_Clk),
 			.i_Col_Count_Div(w_Col_Count_Div),
 			.i_Row_Count_Div(w_Row_Count_Div),
+			.i_Sprites_Data(w_Car_Sprites),
 			.o_Car_X(w_Car_X_5),
 			.o_Car_Y(w_Car_Y_5),
 		);
@@ -398,140 +436,141 @@ module frogger_game #(
 	// Determine background colors based on the bitmap and draw Frogger if applicable
 		reg [3:0] r_Red_Video, r_Grn_Video, r_Blu_Video;
 
+	
+    
+
 	/// Main game logic
 		always @(*) begin
 
-			// Check if the current tile matches Frogger's position
-			if ((w_Col_Count_Div == w_Frogger_X) && (w_Row_Count_Div == w_Frogger_Y))
-				begin
+	
+    // Check if the current tile matches Frogger's position
+    if ((w_Col_Count_Div == w_Frogger_X) && (w_Row_Count_Div == w_Frogger_Y)) begin
+        // If in the same tile as Frogger, draw Frogger in red
+        // r_Red_Video = 4'b1111; // Red
+        // r_Grn_Video = 4'b0000;
+        // r_Blu_Video = 4'b0000;
+		case (frog_sprite[frog_row][frog_col])
+			4'd0: begin
+				//transparent
+				r_Red_Video = 4'b0000;
+				r_Grn_Video = 4'b0000;
+				r_Blu_Video = 4'b0000;
+			end
+			4'd1: begin
+				// Red
+	            r_Red_Video = 4'b0000;
+	            r_Grn_Video = 4'b1111;
+	            r_Blu_Video = 4'b0000;
+			end
+			4'd2: begin
+				// Yellow
+	            r_Red_Video = 4'b1111;
+	            r_Grn_Video = 4'b1111;
+	            r_Blu_Video = 4'b0000;
+			end
+			4'd3: begin
+	            r_Red_Video = 4'b1111;
+	            r_Grn_Video = 4'b0011;
+	            r_Blu_Video = 4'b1001;
+			end
+		endcase 
+    end
 
-					// If in the same tile as Frogger, draw Frogger in red
-					r_Red_Video = 4'b1111; // White
-					r_Grn_Video = 4'b0000;
-					r_Blu_Video = 4'b0000;
-				end
+    // Draw car sprite based on the current row and column within the sprite
+	else if ((w_Col_Count_Div == w_Car_X_1 && w_Row_Count_Div == w_Car_Y_1) || 
+	    (w_Col_Count_Div == w_Car_X_2 && w_Row_Count_Div == w_Car_Y_2) || 
+	    // (w_Col_Count_Div == w_Car_X_3 && w_Row_Count_Div == w_Car_Y_3) || 
+	    // (w_Col_Count_Div == w_Car_X_4 && w_Row_Count_Div == w_Car_Y_4) || 
+	    (w_Col_Count_Div == w_Car_X_5 && w_Row_Count_Div == w_Car_Y_5))
+		begin
+	    // Get the correct pixel from the sprite based on car_row and car_col
+	    case (car_sprite[car_row][car_col])
+	        4'd0: begin
+	            // Background color (Black)
+	            r_Red_Video = 4'b0000;
+	            r_Grn_Video = 4'b0000;
+	            r_Blu_Video = 4'b0000;
+	        end
+	        4'd1: begin
+	            // Red
+	            r_Red_Video = 4'b1111;
+	            r_Grn_Video = 4'b0000;
+	            r_Blu_Video = 4'b0000;
+	        end
+	        4'd2: begin
+	            // Yellow
+	            r_Red_Video = 4'b1111;
+	            r_Grn_Video = 4'b1111;
+	            r_Blu_Video = 4'b0000;
+	        end
+	        4'd3: begin
+	            // Purple
+	            r_Red_Video = 4'b1111;
+	            r_Grn_Video = 4'b0000;
+	            r_Blu_Video = 4'b1111;
+	        end
+	        default: begin
+	            // Default to background color (Black)
+	            r_Red_Video = 4'b0000;
+	            r_Grn_Video = 4'b0000;
+	            r_Blu_Video = 4'b0000;
+	        end
+	    endcase
+	end
 
+    // Otherwise, draw the background based on the bitmap
+    else if (w_Col_Count_Div < c_GAME_WIDTH && w_Row_Count_Div < c_GAME_HEIGHT) begin
+        // Check the current tile in the bitmap
+        case (r_Bitmap[w_Row_Count_Div][w_Col_Count_Div])
+            4'd0: begin
+                r_Red_Video = 4'b0001;  // Wall: Red Channel = 0
+                r_Grn_Video = 4'b1110;  // Wall: Green Channel = 14
+                r_Blu_Video = 4'b0000;  // Wall: Blue Channel = 0
+            end
+            4'd1: begin
+                r_Red_Video = 4'b0000;  // Road: Red Channel = 0
+                r_Grn_Video = 4'b0000;  // Road: Green Channel = 0
+                r_Blu_Video = 4'b0000;  // Road: Blue Channel = 0
+            end
+            4'd2: begin
+                r_Red_Video = 4'b0001;  // Water: Red Channel = 1
+                r_Grn_Video = 4'b0000;  // Water: Green Channel = 0
+                r_Blu_Video = 4'b1110;  // Water: Blue Channel = 14
+            end
+            4'd3: begin
+                // Safe Area color logic
+                if ((w_Row_Count % TILE_SIZE == 0) || (w_Row_Count % TILE_SIZE == TILE_SIZE - 1)) begin
+                    r_Red_Video = 4'b0000;  // Black line
+                    r_Grn_Video = 4'b0000;
+                    r_Blu_Video = 4'b0000;
+                end else begin
+                    r_Red_Video = 4'b0011;  // Safe Area: Red Channel = 3
+                    r_Grn_Video = 4'b0000;  // Safe Area: Green Channel = 0
+                    r_Blu_Video = 4'b1111;  // Safe Area: Blue Channel = 15
+                end
+            end
+            4'd4: begin
+                r_Red_Video = 4'b0001;  // Lily Pad: Red Channel = 1
+                r_Grn_Video = 4'b0000;  // Lily Pad: Green Channel = 0
+                r_Blu_Video = 4'b1110;  // Lily Pad: Blue Channel = 14
+            end
+            default: begin
+                r_Red_Video = 4'b0000;  // Background: Red Channel = 0
+                r_Grn_Video = 4'b0000;  // Background: Green Channel = 0
+                r_Blu_Video = 4'b0000;  // Background: Blue Channel = 0
+            end
+        endcase
+    end else begin
+        r_Red_Video = 4'b0000;
+        r_Grn_Video = 4'b0000;
+        r_Blu_Video = 4'b0000;
+    end
+end
 
-			else if (
-				(w_Col_Count_Div == w_Car_X_1) && (w_Row_Count_Div == w_Car_Y_1) || 
-				(w_Col_Count_Div == w_Car_X_2) && (w_Row_Count_Div == w_Car_Y_2) || 
-				(w_Col_Count_Div == w_Car_X_3) && (w_Row_Count_Div == w_Car_Y_3) || 
-				(w_Col_Count_Div == w_Car_X_4) && (w_Row_Count_Div == w_Car_Y_4) || 
-				(w_Col_Count_Div == w_Car_X_5) && (w_Row_Count_Div == w_Car_Y_5))
-
-				begin
-
-					// If in the same tile as a car, draw the car in white
-					r_Red_Video = 4'b1111;
-					r_Grn_Video = 4'b1111;
-					r_Blu_Video = 4'b1111;
-				end
-
-			/*
-			//  Three tile wide floating log
-			else if // Log 1
-				((w_Col_Count_Div == w_Floating_X_1 ||
-				w_Col_Count_Div == subtract_modulo(w_Floating_X_1, 1) ||
-				w_Col_Count_Div == subtract_modulo(w_Floating_X_1, 2)) &&
-				w_Row_Count_Div == w_Floating_Y_1) ||
-				Log 2
-				((w_Col_Count_Div == w_Floating_X_2 ||
-				w_Col_Count_Div == subtract_modulo(w_Floating_X_2, 1) ||
-				w_Col_Count_Div == subtract_modulo(w_Floating_X_2, 2)) &&
-				w_Row_Count_Div == w_Floating_Y_2) ||
-				Log 3
-				((w_Col_Count_Div == w_Floating_X_3 ||
-				w_Col_Count_Div == subtract_modulo(w_Floating_X_3, 1) ||
-				w_Col_Count_Div == subtract_modulo(w_Floating_X_3, 2)) &&
-				w_Row_Count_Div == w_Floating_Y_3) ||
-				Log 4
-				((w_Col_Count_Div == w_Floating_X_4 ||
-				w_Col_Count_Div == subtract_modulo(w_Floating_X_4, 1) ||
-				w_Col_Count_Div == subtract_modulo(w_Floating_X_4, 2)) &&
-				w_Row_Count_Div == w_Floating_Y_4))
-				Log 5
-				((w_Col_Count_Div == w_Floating_X_5 ||
-				w_Col_Count_Div == subtract_modulo(w_Floating_X_5, 1) ||
-				w_Col_Count_Div == subtract_modulo(w_Floating_X_5, 2)) &&
-				w_Row_Count_Div == w_Floating_Y_5)
-
-				begin
-					r_Red_Video = 4'b1000; // Brownish color
-    				r_Grn_Video = 4'b0100;
-    				r_Blu_Video = 4'b0000;
-				end
-			*/
-
-			// Otherwise, draw the background based on the bitmap
-			else if (w_Col_Count_Div < c_GAME_WIDTH && w_Row_Count_Div < c_GAME_HEIGHT)
-				begin
-					
-					// Check the current tile in the bitmap
-					case (r_Bitmap[w_Row_Count_Div][w_Col_Count_Div])
-
-					4'd0: begin
-						r_Red_Video = 4'b0001;  // Wall: Red Channel = 0
-						r_Grn_Video = 4'b1110;  // Wall: Green Channel = 14
-						r_Blu_Video = 4'b0000;  // Wall: Blue Channel = 0
-					end
-
-					4'd1: begin
-						r_Red_Video = 4'b0000;  // Road: Red Channel = 0
-						r_Grn_Video = 4'b0000;  // Road: Green Channel = 0
-						r_Blu_Video = 4'b0000;  // Road: Blue Channel = 0
-					end
-
-					4'd2: begin
-						r_Red_Video = 4'b0001;  // Water: Red Channel = 1
-						r_Grn_Video = 4'b0000;  // Water: Green Channel = 0
-						r_Blu_Video = 4'b1110;  // Water: Blue Channel = 14
-					end
-					
-					4'd3: begin
-
-						// Safe Area: Check if it's the top or bottom line of the tile
-						if ((w_Row_Count % TILE_SIZE == 0) || (w_Row_Count % TILE_SIZE == TILE_SIZE - 1)) 
-							begin
-
-								// Top or bottom line of the tile
-								r_Red_Video = 4'b0000;  // Black line
-								r_Grn_Video = 4'b0000;
-								r_Blu_Video = 4'b0000;
-							end
-							
-							else begin
-								// Normal safe area color
-								r_Red_Video = 4'b0011;  // Safe Area: Red Channel = 3
-								r_Grn_Video = 4'b0000;  // Safe Area: Green Channel = 0
-								r_Blu_Video = 4'b1111;  // Safe Area: Blue Channel = 15
-							end
-					end
-
-					4'd4: begin
-						r_Red_Video = 4'b0001;  // Lily Pad: Red Channel = 1
-						r_Grn_Video = 4'b0000;  // Lily Pad: Green Channel = 0
-						r_Blu_Video = 4'b1110;  // Lily Pad: Blue Channel = 14
-					end
-
-					default: begin
-						r_Red_Video = 4'b0000;  // Background: Red Channel = 0
-						r_Grn_Video = 4'b0000;  // Background: Green Channel = 0
-						r_Blu_Video = 4'b0000;  // Background: Blue Channel = 0
-					end
-
-					endcase
-				end else
-					begin
-						r_Red_Video = 4'b0000;
-						r_Grn_Video = 4'b0000;
-						r_Blu_Video = 4'b0000;
-					end
-		end
-
-		// Assign video outputs
-			assign o_Red_Video = r_Red_Video;
-			assign o_Grn_Video = r_Grn_Video;
-			assign o_Blu_Video = r_Blu_Video;
+// Assign video outputs
+assign o_Red_Video = r_Red_Video;
+assign o_Grn_Video = r_Grn_Video;
+assign o_Blu_Video = r_Blu_Video;
 
 			// TODO: onLog 
 			assign o_LED_1 = w_On_Log;
