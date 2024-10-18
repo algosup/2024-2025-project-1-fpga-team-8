@@ -59,16 +59,6 @@ module frogger_game #(
     // Bitmap array: 0=wall, 1=road, 2=water, 3=safe area, 4=lily pad
   		reg [3:0] r_Bitmap[0:c_GAME_HEIGHT-1][0:c_GAME_WIDTH-1];
 
-  	/// State machine enumerations
-		// Game not started
-		parameter IDLE    = 2'b00;
-		// Game running
-		parameter RUNNING = 2'b01;
-		// Player 1 wins
-		parameter P1_WINS = 2'b10;
-		// State for resetting the game
-		parameter CLEANUP = 2'b11;
-
 	/// Functions
 		// Function to handle coordinate wrapping
 		function [5:0] subtract_modulo;
@@ -91,7 +81,6 @@ module frogger_game #(
 		wire [9:0] w_Col_Count, w_Row_Count;
 		wire [4:0] w_Col_Count_Div, w_Row_Count_Div;
 		wire [5:0] w_Frogger_X, w_Frogger_Y;
-		wire w_Game_Active;
 
   	// Cars
 		wire [5:0] w_Car_X_1, w_Car_Y_1;
@@ -100,23 +89,14 @@ module frogger_game #(
 		wire [5:0] w_Car_X_4, w_Car_Y_4;
 		wire [5:0] w_Car_X_5, w_Car_Y_5;
 
-	// Floating Logs
-		// wire [5:0] w_Floating_X_1, w_Floating_Y_1;
-		// wire [5:0] w_Floating_X_2, w_Floating_Y_2;
-		// wire [5:0] w_Floating_X_3, w_Floating_Y_3;
-		// wire [5:0] w_Floating_X_4, w_Floating_Y_4;
-		// wire [5:0] w_Floating_X_5, w_Floating_Y_5;
-
   	// Drop 5 LSBs, which effectively divides by 32
 		assign w_Col_Count_Div = w_Col_Count[9:5];
 		assign w_Row_Count_Div = w_Row_Count[9:5];
 
 	// Declare registers for LED pulse extension
 		reg [23:0] r_LED_Counter = 24'd0; // Adjust the bit width as needed
-		reg        r_LED_On_Log = 1'b0;
 
   	wire w_Collided;
-	wire w_On_Log;
 
   	reg [6:0] r_Frogger_Score;
 
@@ -172,7 +152,6 @@ module frogger_game #(
 			.o_Frogger_X(w_Frogger_X),
 			.o_Frogger_Y(w_Frogger_Y),
 			.o_Score(r_Frogger_Score),
-			.i_On_Log(w_On_Log)
 		);
 
 
@@ -348,19 +327,6 @@ module frogger_game #(
 		);
 */
 
-
-	// TEMPORARY: Assign car positions to out-of-bounds values to deactivate collisions
-		assign w_Floating_X_1 = 6'd63;
-		assign w_Floating_Y_1 = 6'd63;
-		assign w_Floating_X_2 = 6'd63;
-		assign w_Floating_Y_2 = 6'd63;
-		assign w_Floating_X_3 = 6'd63;
-		assign w_Floating_Y_3 = 6'd63;
-		assign w_Floating_X_4 = 6'd63;
-		assign w_Floating_Y_4 = 6'd63;
-		assign w_Floating_X_5 = 6'd63;
-		assign w_Floating_Y_5 = 6'd63;
-
   	// Check for collisions between Frogger and cars
 		frogger_collisions frogger_collisions_inst (
 			.i_Clk(i_Clk),
@@ -378,18 +344,7 @@ module frogger_game #(
 			.i_Car_Y_4(w_Car_Y_4),
 			.i_Car_X_5(w_Car_X_5),
 			.i_Car_Y_5(w_Car_Y_5),
-			.i_Log_X_1(w_Floating_X_1),
-			.i_Log_Y_1(w_Floating_Y_1),
-			.i_Log_X_2(w_Floating_X_2),
-			.i_Log_Y_2(w_Floating_Y_2),
-			.i_Log_X_3(w_Floating_X_3),
-			.i_Log_Y_3(w_Floating_Y_3),
-			.i_Log_X_3(w_Floating_X_4),
-			.i_Log_Y_3(w_Floating_Y_4),
-			.i_Log_X_3(w_Floating_X_5),
-			.i_Log_Y_3(w_Floating_Y_5),
 			.o_Collided(w_Collided),
-			.o_On_Log(w_On_Log)
 		);
 
 
@@ -530,9 +485,6 @@ module frogger_game #(
 			assign o_Red_Video = r_Red_Video;
 			assign o_Grn_Video = r_Grn_Video;
 			assign o_Blu_Video = r_Blu_Video;
-
-			// TODO: onLog 
-			assign o_LED_1 = w_On_Log;
 
 		// Display Score on 7-segment displays
 			score_control score_control_inst (
