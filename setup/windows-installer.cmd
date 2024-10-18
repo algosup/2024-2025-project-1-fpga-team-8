@@ -23,14 +23,18 @@ if %errorlevel% neq 0 (
 )
 
 :: Check if the file or directory exists
-if not exist "2024-2025-project-1-fpga-team-8-main" (
+if not exist "../src/" (
     echo %_fYellow%Downloading the latest version of the game...%_reset%
     curl -L -o project.zip https://github.com/algosup/2024-2025-project-1-fpga-team-8/archive/refs/heads/main.zip
     tar -xf project.zip
     del .\project.zip
+    cd .\2024-2025-project-1-fpga-team-8-main\src\
 )
 
-cd .\2024-2025-project-1-fpga-team-8-main\src\
+if exist "../src/" (
+    cd ../src/
+)
+
 apio upload
 
 
