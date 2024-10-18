@@ -59,16 +59,6 @@ module frogger_game #(
     // Bitmap array: 0=wall, 1=road, 2=water, 3=safe area, 4=lily pad
   		reg [2:0] r_Bitmap[0:c_GAME_HEIGHT-1][0:c_GAME_WIDTH-1];
 
-  	/// State machine enumerations
-		// Game not started
-		parameter IDLE    = 2'b00;
-		// Game running
-		parameter RUNNING = 2'b01;
-		// Player 1 wins
-		parameter P1_WINS = 2'b10;
-		// State for resetting the game
-		parameter CLEANUP = 2'b11;
-
 	/// Functions
 		// Function to handle coordinate wrapping
 		function [5:0] subtract_modulo;
@@ -81,9 +71,6 @@ module frogger_game #(
 					subtract_modulo = c_GAME_WIDTH - (y - x);
 			end
 		endfunction
-
-  	// Player starts with 3 lives
-		reg [1:0] lives = 2'b11;
 
 	/// Internal signals
 		wire w_Game_Active = 1'b1;
@@ -99,6 +86,11 @@ module frogger_game #(
 		wire [5:0] w_Car_X_3, w_Car_Y_3;
 		wire [5:0] w_Car_X_4, w_Car_Y_4;
 		wire [5:0] w_Car_X_5, w_Car_Y_5;
+    wire [5:0] w_Car_X_6, w_Car_Y_6;
+    // wire [5:0] w_Car_X_7, w_Car_Y_7;
+    // wire [5:0] w_Car_X_8, w_Car_Y_8;
+    // wire [5:0] w_Car_X_9, w_Car_Y_9;
+    // wire [5:0] w_Car_X_10, w_Car_Y_10;
 
   	// Drop 5 LSBs, which effectively divides by 32
 		assign w_Col_Count_Div = w_Col_Count[9:5];
@@ -259,7 +251,7 @@ module frogger_game #(
 			.o_Car_Y(w_Car_Y_5),
 		);
 
-    // Car 6 instance
+  // Car 6 instance
     car_ctrl #(
       .c_CAR_SPEED(1),
       .c_MAX_X(14),
@@ -276,75 +268,75 @@ module frogger_game #(
       .o_Car_Y(w_Car_Y_6),
     );
 
-    // Car 7 instance
-    car_ctrl #(
-      .c_CAR_SPEED(1),
-      .c_MAX_X(14),
-      .c_SLOW_COUNT(5000000),
-      .c_INIT_X(0),
-      .c_INIT_Y(4)
-    )
+  // // Car 7 instance
+  //   car_ctrl #(
+  //     .c_CAR_SPEED(1),
+  //     .c_MAX_X(14),
+  //     .c_SLOW_COUNT(4000000),
+  //     .c_INIT_X(0),
+  //     .c_INIT_Y(4)
+  //   )
 
-    car_ctrl_inst_7 (
-      .i_Clk(i_Clk),
-      .i_Col_Count_Div(w_Col_Count_Div),
-      .i_Row_Count_Div(w_Row_Count_Div),
-      .o_Car_X(w_Car_X_7),
-      .o_Car_Y(w_Car_Y_7),
-    );
+  //   car_ctrl_inst_7 (
+  //     .i_Clk(i_Clk),
+  //     .i_Col_Count_Div(w_Col_Count_Div),
+  //     .i_Row_Count_Div(w_Row_Count_Div),
+  //     .o_Car_X(w_Car_X_7),
+  //     .o_Car_Y(w_Car_Y_7),
+  //   );
 
-    // Car 8 instance
-    car_ctrl #(
-      .c_CAR_SPEED(1),
-      .c_MAX_X(14),
-      .c_SLOW_COUNT(3700000),
-      .c_INIT_X(0),
-      .c_INIT_Y(3)
-    )
+  // // Car 8 instance
+  //   car_ctrl #(
+  //     .c_CAR_SPEED(1),
+  //     .c_MAX_X(14),
+  //     .c_SLOW_COUNT(4000000),
+  //     .c_INIT_X(0),
+  //     .c_INIT_Y(3)
+  //   )
 
-    car_ctrl_inst_8 (
-      .i_Clk(i_Clk),
-      .i_Col_Count_Div(w_Col_Count_Div),
-      .i_Row_Count_Div(w_Row_Count_Div),
-      .o_Car_X(w_Car_X_8),
-      .o_Car_Y(w_Car_Y_8),
-    );
+  //   car_ctrl_inst_8 (
+  //     .i_Clk(i_Clk),
+  //     .i_Col_Count_Div(w_Col_Count_Div),
+  //     .i_Row_Count_Div(w_Row_Count_Div),
+  //     .o_Car_X(w_Car_X_8),
+  //     .o_Car_Y(w_Car_Y_8),
+  //   );
 
-    // Car 9 instance
-    car_ctrl #(
-      .c_CAR_SPEED(1),
-      .c_MAX_X(14),
-      .c_SLOW_COUNT(4500000),
-      .c_INIT_X(0),
-      .c_INIT_Y(2)
-    )
+    // // Car 9 instance
+    // car_ctrl #(
+    //   .c_CAR_SPEED(1),
+    //   .c_MAX_X(14),
+    //   .c_SLOW_COUNT(4000000),
+    //   .c_INIT_X(0),
+    //   .c_INIT_Y(2)
+    // )
 
-    car_ctrl_inst_9 (
-      .i_Clk(i_Clk),
-      .i_Col_Count_Div(w_Col_Count_Div),
-      .i_Row_Count_Div(w_Row_Count_Div),
-      .o_Car_X(w_Car_X_9),
-      .o_Car_Y(w_Car_Y_9),
-    );
+    // car_ctrl_inst_9 (
+    //   .i_Clk(i_Clk),
+    //   .i_Col_Count_Div(w_Col_Count_Div),
+    //   .i_Row_Count_Div(w_Row_Count_Div),
+    //   .o_Car_X(w_Car_X_9),
+    //   .o_Car_Y(w_Car_Y_9),
+    // );
 
-    // Car 10 instance
-    car_ctrl #(
-      .c_CAR_SPEED(1),
-      .c_MAX_X(14),
-      .c_SLOW_COUNT(4200000),
-      .c_INIT_X(0),
-      .c_INIT_Y(1)
-    )
+    // // Car 10 instance
+    // car_ctrl #(
+    //   .c_CAR_SPEED(1),
+    //   .c_MAX_X(14),
+    //   .c_SLOW_COUNT(4000000),
+    //   .c_INIT_X(0),
+    //   .c_INIT_Y(1)
+    // )
 
-    car_ctrl_inst_10 (
-      .i_Clk(i_Clk),
-      .i_Col_Count_Div(w_Col_Count_Div),
-      .i_Row_Count_Div(w_Row_Count_Div),
-      .o_Car_X(w_Car_X_10),
-      .o_Car_Y(w_Car_Y_10),
-    );
-
-  	// Check for collisions between Frogger and cars
+    // car_ctrl_inst_10 (
+    //   .i_Clk(i_Clk),
+    //   .i_Col_Count_Div(w_Col_Count_Div),
+    //   .i_Row_Count_Div(w_Row_Count_Div),
+    //   .o_Car_X(w_Car_X_10),
+    //   .o_Car_Y(w_Car_Y_10),
+    // );
+    
+    // Check for collisions between Frogger and cars
 		frogger_collisions frogger_collisions_inst (
 			.i_Clk(i_Clk),
 			.i_Frogger_X(w_Frogger_X),
@@ -361,6 +353,16 @@ module frogger_game #(
 			.i_Car_Y_4(w_Car_Y_4),
 			.i_Car_X_5(w_Car_X_5),
 			.i_Car_Y_5(w_Car_Y_5),
+      .i_Car_X_6(w_Car_X_6),
+      .i_Car_Y_6(w_Car_Y_6),
+      // .i_Car_X_7(w_Car_X_7),
+      // .i_Car_Y_7(w_Car_Y_7),
+      // .i_Car_X_8(w_Car_X_8),
+      // .i_Car_Y_8(w_Car_Y_8),
+      // .i_Car_X_9(w_Car_X_9),
+      // .i_Car_Y_9(w_Car_Y_9),
+      // .i_Car_X_10(w_Car_X_10),
+      // .i_Car_Y_10(w_Car_Y_10),
 			.o_Collided(w_Collided),
 		);
 
@@ -388,11 +390,11 @@ module frogger_game #(
 				(w_Col_Count_Div == w_Car_X_3) && (w_Row_Count_Div == w_Car_Y_3) || 
 				(w_Col_Count_Div == w_Car_X_4) && (w_Row_Count_Div == w_Car_Y_4) || 
 				(w_Col_Count_Div == w_Car_X_5) && (w_Row_Count_Div == w_Car_Y_5) ||
-        (w_Col_Count_Div == w_Car_X_6) && (w_Row_Count_Div == w_Car_Y_6) ||
-        (w_Col_Count_Div == w_Car_X_7) && (w_Row_Count_Div == w_Car_Y_7) ||
-        (w_Col_Count_Div == w_Car_X_8) && (w_Row_Count_Div == w_Car_Y_8) ||
-        (w_Col_Count_Div == w_Car_X_9) && (w_Row_Count_Div == w_Car_Y_9) ||
-        (w_Col_Count_Div == w_Car_X_10) && (w_Row_Count_Div == w_Car_Y_10))
+        (w_Col_Count_Div == w_Car_X_6) && (w_Row_Count_Div == w_Car_Y_6))
+        // (w_Col_Count_Div == w_Car_X_7) && (w_Row_Count_Div == w_Car_Y_7)
+        // (w_Col_Count_Div == w_Car_X_8) && (w_Row_Count_Div == w_Car_Y_8)
+        // (w_Col_Count_Div == w_Car_X_9) && (w_Row_Count_Div == w_Car_Y_9)
+        // (w_Col_Count_Div == w_Car_X_10) && (w_Row_Count_Div == w_Car_Y_10))
 
 				begin
 

@@ -21,12 +21,16 @@ module frogger_collisions (
         input [5:0] i_Car_X_4, i_Car_Y_4,
         // Car 5 X position
         input [5:0] i_Car_X_5, i_Car_Y_5,
-        // Log 1 X position
-        input [5:0] i_Log_X_1, i_Log_Y_1,
-        // Log 2 X position
-        input [5:0] i_Log_X_2, i_Log_Y_2,
-        // Log 3 X position
-        input [5:0] i_Log_X_3, i_Log_Y_3,
+        // Car 6 X position
+        input [5:0] i_Car_X_6, i_Car_Y_6,
+        // // Car 7 X position
+        // input [5:0] i_Car_X_7, i_Car_Y_7,
+        // // Car 8 X position
+        // input [5:0] i_Car_X_8, i_Car_Y_8,
+        // // Car 9 X position
+        // input [5:0] i_Car_X_9, i_Car_Y_9,
+        // Car 10 X position
+        // input [5:0] i_Car_X_10, i_Car_Y_10,
  
     /// Outputs
         // Collision with cars signal
@@ -58,7 +62,12 @@ module frogger_collisions (
             (i_Frogger_Y == i_Car_Y_2 && (i_Frogger_X + 1 == i_Car_X_2 || i_Frogger_X == i_Car_X_2 + 1)) ||
             (i_Frogger_Y == i_Car_Y_3 && (i_Frogger_X + 1 == i_Car_X_3 || i_Frogger_X == i_Car_X_3 + 1)) ||
             (i_Frogger_Y == i_Car_Y_4 && (i_Frogger_X + 1 == i_Car_X_4 || i_Frogger_X == i_Car_X_4 + 1)) ||
-            (i_Frogger_Y == i_Car_Y_5 && (i_Frogger_X + 1 == i_Car_X_5 || i_Frogger_X == i_Car_X_5 + 1)))
+            (i_Frogger_Y == i_Car_Y_5 && (i_Frogger_X + 1 == i_Car_X_5 || i_Frogger_X == i_Car_X_5 + 1)) ||
+            (i_Frogger_Y == i_Car_Y_6 && (i_Frogger_X + 1 == i_Car_X_6 || i_Frogger_X == i_Car_X_6 + 1)))
+            // (i_Frogger_Y == i_Car_Y_7 && (i_Frogger_X + 1 == i_Car_X_7 || i_Frogger_X == i_Car_X_7 + 1)))
+            // (i_Frogger_Y == i_Car_Y_8 && (i_Frogger_X + 1 == i_Car_X_8 || i_Frogger_X == i_Car_X_8 + 1)))
+            // (i_Frogger_Y == i_Car_Y_9 && (i_Frogger_X + 1 == i_Car_X_9 || i_Frogger_X == i_Car_X_9 + 1)) ||
+            // (i_Frogger_Y == i_Car_Y_10 && (i_Frogger_X + 1 == i_Car_X_10 || i_Frogger_X == i_Car_X_10 + 1))
             
             begin
                 o_Collided <= 1;
