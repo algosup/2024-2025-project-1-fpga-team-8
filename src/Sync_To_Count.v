@@ -17,6 +17,7 @@ module Sync_To_Count
    wire w_Frame_Start;
    
   // Register syncs to align with output data.
+
   always @(posedge i_Clk)
   begin
     o_VSync <= i_VSync;
@@ -51,6 +52,42 @@ module Sync_To_Count
       end
     end
   end
+
+  // OPTIMIZEDBELOW ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  //  PROPOSED MERGE OF TWO ALWAYS BLOCKS SEE LATER IF IT WORKS 
+  // always @(posedge i_Clk)
+  //   begin
+  //       // Register syncs to align with output data.
+  //       o_VSync <= i_VSync;
+  //       o_HSync <= i_HSync;
+
+  //       // Keep track of Row/Column counters.
+  //       if (w_Frame_Start == 1'b1)
+  //       begin
+  //           o_Col_Count <= 0;
+  //           o_Row_Count <= 0;
+  //       end
+  //       else
+  //       begin
+  //           if (o_Col_Count == TOTAL_COLS-1)
+  //           begin
+  //               if (o_Row_Count == TOTAL_ROWS-1)
+  //               begin
+  //                   o_Row_Count <= 0;
+  //               end
+  //               else
+  //               begin
+  //                   o_Row_Count <= o_Row_Count + 1;
+  //               end
+  //               o_Col_Count <= 0;
+  //           end
+  //           else
+  //           begin
+  //               o_Col_Count <= o_Col_Count + 1;
+  //           end
+  //       end
+  //   end
+
   
     
   // Look for rising edge on Vertical Sync to reset the counters
