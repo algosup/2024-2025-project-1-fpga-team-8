@@ -103,12 +103,11 @@ module frogger_game #(
 		reg [1:0] lives = 2'b11;
 
 	/// Internal signals
-		wire w_Game_Active = 1'b1;
+		wire w_Game_Active = true;
 		wire       w_HSync, w_VSync;
 		wire [9:0] w_Col_Count, w_Row_Count;
 		wire [4:0] w_Col_Count_Div, w_Row_Count_Div;
 		wire [5:0] w_Frogger_X, w_Frogger_Y;
-		wire w_Game_Active;
 
   	// Cars
 		wire [5:0] w_Car_X_1, w_Car_Y_1;
