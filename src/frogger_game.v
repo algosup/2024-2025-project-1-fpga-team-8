@@ -159,7 +159,7 @@ module frogger_game #(
 		car_ctrl #(
 		.c_CAR_SPEED(1),
 		.c_MAX_X(14),
-		.c_SLOW_COUNT(39000000),
+		.c_SLOW_COUNT(20000000),
 		.c_INIT_X(0),
 		.c_INIT_Y(11)
 		)
@@ -172,160 +172,16 @@ module frogger_game #(
 			.o_Car_Y(w_Car_Y_1),
 		);
 
-    // Car 2 instance
-		car_ctrl #(
-			.c_CAR_SPEED(1),
-			.c_MAX_X(14),
-			.c_SLOW_COUNT(32000000),
-			.c_INIT_X(0),
-			.c_INIT_Y(10)
-		)
 
-		car_ctrl_inst_2 (
-			.i_Clk(i_Clk),
-			.i_Col_Count_Div(w_Col_Count_Div),
-			.i_Row_Count_Div(w_Row_Count_Div),
-			.o_Car_X(w_Car_X_2),
-			.o_Car_Y(w_Car_Y_2),
-		);
-
-    // Car 3 instance
-		car_ctrl #(
-			.c_CAR_SPEED(1),
-			.c_MAX_X(14),
-			.c_SLOW_COUNT(27000000),
-			.c_INIT_X(0),
-			.c_INIT_Y(9)
-		)
-
-		car_ctrl_inst_3 (
-			.i_Clk(i_Clk),
-			.i_Col_Count_Div(w_Col_Count_Div),
-			.i_Row_Count_Div(w_Row_Count_Div),
-			.o_Car_X(w_Car_X_3),
-			.o_Car_Y(w_Car_Y_3),
-		);
-
-	// Car 4 instance
-		car_ctrl #(
-			.c_CAR_SPEED(1),
-			.c_MAX_X(14),
-			.c_SLOW_COUNT(18000000),
-			.c_INIT_X(0),
-			.c_INIT_Y(8)
-		)
-
-		car_ctrl_inst_4 (
-			.i_Clk(i_Clk),
-			.i_Col_Count_Div(w_Col_Count_Div),
-			.i_Row_Count_Div(w_Row_Count_Div),
-			.o_Car_X(w_Car_X_4),
-			.o_Car_Y(w_Car_Y_4),
-		);
-
-	// Car 5 instance
-		car_ctrl #(
-			.c_CAR_SPEED(1),
-			.c_MAX_X(14),
-			.c_SLOW_COUNT(14000000),
-			.c_INIT_X(0),
-			.c_INIT_Y(7)
-		)
-
-		car_ctrl_inst_5 (
-			.i_Clk(i_Clk),
-			.i_Col_Count_Div(w_Col_Count_Div),
-			.i_Row_Count_Div(w_Row_Count_Div),
-			.o_Car_X(w_Car_X_5),
-			.o_Car_Y(w_Car_Y_5),
-		);
-/*
-	// Floating Log 1 instance 
-		floating_ctrl #(
-			.c_FLOATING_SPEED(1),
-			.c_MIN_X(0),
-			.c_SLOW_COUNT(39000000),
-			.c_INIT_X(13),
-			.c_INIT_Y(1)
-		)
-
-		floating_ctrl_inst_1 (
-			.i_Clk(i_Clk),
-			.i_Col_Count_Div(w_Col_Count_Div),
-			.i_Row_Count_Div(w_Row_Count_Div),
-			.o_Floating_X(w_Floating_X_1),
-			.o_Floating_Y(w_Floating_Y_1),
-		);
-
-	// Floating Log 2 instance 
-		floating_ctrl #(
-			.c_FLOATING_SPEED(1),
-			.c_MIN_X(0),
-			.c_SLOW_COUNT(39000000),
-			.c_INIT_X(13),
-			.c_INIT_Y(2)
-		)
-
-		floating_ctrl_inst_2 (
-			.i_Clk(i_Clk),
-			.i_Col_Count_Div(w_Col_Count_Div),
-			.i_Row_Count_Div(w_Row_Count_Div),
-			.o_Floating_X(w_Floating_X_2),
-			.o_Floating_Y(w_Floating_Y_2),
-		);
-
-	// Floating Log 3 instance 
-		floating_ctrl #(
-			.c_FLOATING_SPEED(1),
-			.c_MIN_X(0),
-			.c_SLOW_COUNT(39000000),
-			.c_INIT_X(13),
-			.c_INIT_Y(3)
-		)
-
-		floating_ctrl_inst_3 (
-			.i_Clk(i_Clk),
-			.i_Col_Count_Div(w_Col_Count_Div),
-			.i_Row_Count_Div(w_Row_Count_Div),
-			.o_Floating_X(w_Floating_X_3),
-			.o_Floating_Y(w_Floating_Y_3),
-		);
-
-	// Floating Log 4 instance 
-		floating_ctrl #(
-			.c_FLOATING_SPEED(1),
-			.c_MIN_X(0),
-			.c_SLOW_COUNT(39000000),
-			.c_INIT_X(13),
-			.c_INIT_Y(4)
-		)
-
-		floating_ctrl_inst_4 (
-			.i_Clk(i_Clk),
-			.i_Col_Count_Div(w_Col_Count_Div),
-			.i_Row_Count_Div(w_Row_Count_Div),
-			.o_Floating_X(w_Floating_X_4),
-			.o_Floating_Y(w_Floating_Y_4),
-		);
-	
-
-	// Floating Log 5 instance 
-		floating_ctrl #(
-			.c_FLOATING_SPEED(1),
-			.c_MIN_X(0),
-			.c_SLOW_COUNT(39000000),
-			.c_INIT_X(13),
-			.c_INIT_Y(5)
-		)
-
-		floating_ctrl_inst_5 (
-			.i_Clk(i_Clk),
-			.i_Col_Count_Div(w_Col_Count_Div),
-			.i_Row_Count_Div(w_Row_Count_Div),
-			.o_Floating_X(w_Floating_X_5),
-			.o_Floating_Y(w_Floating_Y_5),
-		);
-*/
+	// TEMPORARY: Assign car positions to out-of-bounds values to deactivate collisions
+		assign w_Car_X_2 = 6'd63;
+		assign w_Car_Y_2 = 6'd63;
+		assign w_Car_X_3 = 6'd63;
+		assign w_Car_Y_3 = 6'd63;
+		assign w_Car_X_4 = 6'd63;
+		assign w_Car_Y_4 = 6'd63;
+		assign w_Car_X_5 = 6'd63;
+		assign w_Car_Y_5 = 6'd63;
 
   	// Check for collisions between Frogger and cars
 		frogger_collisions frogger_collisions_inst (
