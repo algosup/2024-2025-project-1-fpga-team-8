@@ -439,7 +439,8 @@ module frogger_game #(
 	multi_car_ctrl_debug #(
 		.NUM_CARS(2),               // Test with 2 cars
 		.c_MAX_X(20),               // Maximum X position (smaller grid for testing)
-		.c_CAR_SPEED({1, 1}),       // Both cars move at the same speed
+		.c_CAR_SPEED_0(1),          // Speed for car 1
+		.c_CAR_SPEED_1(2),          // Speed for car 2
 		.c_SLOW_COUNT(2000000)      // Slowdown counter value
 	) car_control_debug_inst (
 		.i_Clk(i_Clk),              // Pass the clock signal

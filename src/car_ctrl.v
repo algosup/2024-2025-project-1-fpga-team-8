@@ -54,15 +54,17 @@
 
 
 module multi_car_ctrl_debug #(
-    parameter NUM_CARS = 2,                    // Test with 2 cars
-    parameter c_MAX_X = 20,                    // Smaller grid for testing
-    parameter [NUM_CARS-1:0] c_CAR_SPEED = {1, 1}, // Same speed for both cars
-    parameter c_SLOW_COUNT = 2000000,          // Slowdown counter threshold
-    parameter COUNTER_WIDTH = 26               // Counter width for slowdown
+    parameter NUM_CARS = 2,                     // Number of cars
+    parameter c_MAX_X = 20,                     // Maximum X position
+    parameter c_CAR_SPEED_0 = 1,                // Speed for car 1
+    parameter c_CAR_SPEED_1 = 1,                // Speed for car 2
+    parameter c_SLOW_COUNT = 2000000,           // Slowdown counter threshold
+    parameter COUNTER_WIDTH = 26                // Counter width for slowdown
 )(
-    input i_Clk,                               // Clock input
-    output reg [NUM_CARS*6-1:0] o_Car_X,       // Flattened X positions for all cars
-    output reg [NUM_CARS*6-1:0] o_Car_Y        // Flattened Y positions for all cars (lanes)
+    input i_Clk,                                // Clock input
+    output reg [NUM_CARS*6-1:0] o_Car_X,        // Flattened X positions for all cars
+    output reg [NUM_CARS*6-1:0] o_Car_Y,        // Flattened Y positions for all cars
+    output reg [5:0] debug_car2_X               // Debug output to monitor car 2's X position
 );
 
     // Register arrays for car positions
@@ -73,10 +75,10 @@ module multi_car_ctrl_debug #(
 
     // Initialize car positions
     initial begin
-        r_Car_X[0] = 6'd4;   // Start positions for car 1
+        r_Car_X[0] = 6'd5;   // Start positions for car 1
         r_Car_X[1] = 6'd10;  // Start positions for car 2
-        r_Car_Y[0] = 6'd4;   // Same Y position for both cars for simplicity
-        r_Car_Y[1] = 6'd5;
+        r_Car_Y[0] = 6'd5;   // Y position for car 1
+        r_Car_Y[1] = 6'd4;   // Y position for car 2
     end
 
     // Main car control logic
@@ -84,21 +86,21 @@ module multi_car_ctrl_debug #(
         // Increment the slowdown counter
         r_Counter <= r_Counter + 1;
 
-        // When the counter reaches the threshold, update the car positions
+        // When the counter reaches the threshold, update both cars
         if (r_Counter >= c_SLOW_COUNT) begin
             // Reset the counter
             r_Counter <= 0;
 
-            // Update car 1's position
-            if (r_Car_X[0] + c_CAR_SPEED[0] < c_MAX_X) begin
-                r_Car_X[0] <= r_Car_X[0] + c_CAR_SPEED[0];  // Move car 1
+            // Move car 1
+            if (r_Car_X[0] + c_CAR_SPEED_0 < c_MAX_X) begin
+                r_Car_X[0] <= r_Car_X[0] + c_CAR_SPEED_0;  // Move car 1
             end else begin
                 r_Car_X[0] <= 0;  // Wrap around for car 1
             end
 
-            // Update car 2's position
-            if (r_Car_X[1] + c_CAR_SPEED[1] < c_MAX_X) begin
-                r_Car_X[1] <= r_Car_X[1] + c_CAR_SPEED[1];  // Move car 2
+            // Move car 2
+            if (r_Car_X[1] + c_CAR_SPEED_1 < c_MAX_X) begin
+                r_Car_X[1] <= r_Car_X[1] + c_CAR_SPEED_1;  // Move car 2
             end else begin
                 r_Car_X[1] <= 0;  // Wrap around for car 2
             end
@@ -111,6 +113,11 @@ module multi_car_ctrl_debug #(
         o_Car_X[1*6 +: 6] = r_Car_X[1];  // Car 2 X position
         o_Car_Y[0*6 +: 6] = r_Car_Y[0];  // Car 1 Y position
         o_Car_Y[1*6 +: 6] = r_Car_Y[1];  // Car 2 Y position
+    end
+
+    // Debug output for car 2's X position
+    always @(posedge i_Clk) begin
+        debug_car2_X <= r_Car_X[1];  // Output car 2's X position for monitoring
     end
 
 endmodule
