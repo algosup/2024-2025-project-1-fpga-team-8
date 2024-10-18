@@ -84,10 +84,6 @@ module frogger_game #(
 
   	// Cars
 		wire [5:0] w_Car_X_1, w_Car_Y_1;
-		wire [5:0] w_Car_X_2, w_Car_Y_2;
-		wire [5:0] w_Car_X_3, w_Car_Y_3;
-		wire [5:0] w_Car_X_4, w_Car_Y_4;
-		wire [5:0] w_Car_X_5, w_Car_Y_5;
 
   	// Drop 5 LSBs, which effectively divides by 32
 		assign w_Col_Count_Div = w_Col_Count[9:5];
@@ -173,14 +169,8 @@ module frogger_game #(
 
 
 	// TEMPORARY: Assign car positions to out-of-bounds values to deactivate collisions
-		assign w_Car_X_2 = 6'd63;
-		assign w_Car_Y_2 = 6'd63;
-		assign w_Car_X_3 = 6'd63;
-		assign w_Car_Y_3 = 6'd63;
-		assign w_Car_X_4 = 6'd63;
-		assign w_Car_Y_4 = 6'd63;
-		assign w_Car_X_5 = 6'd63;
-		assign w_Car_Y_5 = 6'd63;
+		// assign w_Car_X_2 = 6'd63;
+		// assign w_Car_Y_2 = 6'd63;
 
   	// Check for collisions between Frogger and cars
 		frogger_collisions frogger_collisions_inst (
@@ -191,14 +181,6 @@ module frogger_game #(
 			.i_Frogger_Orig_y(14),
 			.i_Car_X_1(w_Car_X_1),
 			.i_Car_Y_1(w_Car_Y_1),
-			.i_Car_X_2(w_Car_X_2),
-			.i_Car_Y_2(w_Car_Y_2),
-			.i_Car_X_3(w_Car_X_3),
-			.i_Car_Y_3(w_Car_Y_3),
-			.i_Car_X_4(w_Car_X_4),
-			.i_Car_Y_4(w_Car_Y_4),
-			.i_Car_X_5(w_Car_X_5),
-			.i_Car_Y_5(w_Car_Y_5),
 			.o_Collided(w_Collided),
 		);
 
@@ -220,12 +202,7 @@ module frogger_game #(
 				end
 
 
-			else if (
-				(w_Col_Count_Div == w_Car_X_1) && (w_Row_Count_Div == w_Car_Y_1) || 
-				(w_Col_Count_Div == w_Car_X_2) && (w_Row_Count_Div == w_Car_Y_2) || 
-				(w_Col_Count_Div == w_Car_X_3) && (w_Row_Count_Div == w_Car_Y_3) || 
-				(w_Col_Count_Div == w_Car_X_4) && (w_Row_Count_Div == w_Car_Y_4) || 
-				(w_Col_Count_Div == w_Car_X_5) && (w_Row_Count_Div == w_Car_Y_5))
+			else if ((w_Col_Count_Div == w_Car_X_1) && (w_Row_Count_Div == w_Car_Y_1))
 
 				begin
 
