@@ -74,6 +74,12 @@ module frogger_game #(
 
   	// Player starts with 3 lives
 		reg [1:0] lives = 2'b11;
+  	
+	// Register for storing the score
+		reg [6:0] r_Frogger_Score;
+	
+	// Declare registers for LED pulse extension
+		reg [23:0] r_LED_Counter = 24'd0; // Adjust the bit width as needed
 
 	/// Internal signals
 		wire w_Game_Active = 1'b1;
@@ -89,12 +95,9 @@ module frogger_game #(
 		assign w_Col_Count_Div = w_Col_Count[9:5];
 		assign w_Row_Count_Div = w_Row_Count[9:5];
 
-	// Declare registers for LED pulse extension
-		reg [23:0] r_LED_Counter = 24'd0; // Adjust the bit width as needed
 
   	wire w_Collided;
 
-  	reg [6:0] r_Frogger_Score;
 
   	// Synchronize to row and column counters
 		Sync_To_Count #(
