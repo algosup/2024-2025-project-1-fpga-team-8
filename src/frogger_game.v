@@ -57,7 +57,7 @@ module frogger_game #(
 		parameter TILE_SIZE     = 32;
 
     // Bitmap array: 0=wall, 1=road, 2=water, 3=safe area, 4=lily pad
-  		reg [3:0] r_Bitmap[0:c_GAME_HEIGHT-1][0:c_GAME_WIDTH-1];
+  		reg [2:0] r_Bitmap[0:c_GAME_HEIGHT-1][0:c_GAME_WIDTH-1];
 
   	/// State machine enumerations
 		// Game not started
@@ -100,23 +100,14 @@ module frogger_game #(
 		wire [5:0] w_Car_X_4, w_Car_Y_4;
 		wire [5:0] w_Car_X_5, w_Car_Y_5;
 
-	// Floating Logs
-		// wire [5:0] w_Floating_X_1, w_Floating_Y_1;
-		// wire [5:0] w_Floating_X_2, w_Floating_Y_2;
-		// wire [5:0] w_Floating_X_3, w_Floating_Y_3;
-		// wire [5:0] w_Floating_X_4, w_Floating_Y_4;
-		// wire [5:0] w_Floating_X_5, w_Floating_Y_5;
-
   	// Drop 5 LSBs, which effectively divides by 32
 		assign w_Col_Count_Div = w_Col_Count[9:5];
 		assign w_Row_Count_Div = w_Row_Count[9:5];
 
 	// Declare registers for LED pulse extension
 		reg [23:0] r_LED_Counter = 24'd0; // Adjust the bit width as needed
-		reg        r_LED_On_Log = 1'b0;
 
   	wire w_Collided;
-	wire w_On_Log;
 
   	reg [6:0] r_Frogger_Score;
 
@@ -172,7 +163,6 @@ module frogger_game #(
 			.o_Frogger_X(w_Frogger_X),
 			.o_Frogger_Y(w_Frogger_Y),
 			.o_Score(r_Frogger_Score),
-			.i_On_Log(w_On_Log)
 		);
 
   // Implement lives display
@@ -269,99 +259,90 @@ module frogger_game #(
 			.o_Car_Y(w_Car_Y_5),
 		);
 
+    // Car 6 instance
+    car_ctrl #(
+      .c_CAR_SPEED(1),
+      .c_MAX_X(14),
+      .c_SLOW_COUNT(4000000),
+      .c_INIT_X(0),
+      .c_INIT_Y(5)
+    )
 
-/*
-	// Floating Log 1 instance 
-		floating_ctrl #(
-			.c_FLOATING_SPEED(1),
-			.c_MIN_X(0),
-			.c_SLOW_COUNT(39000000),
-			.c_INIT_X(13),
-			.c_INIT_Y(1)
-		)
+    car_ctrl_inst_6 (
+      .i_Clk(i_Clk),
+      .i_Col_Count_Div(w_Col_Count_Div),
+      .i_Row_Count_Div(w_Row_Count_Div),
+      .o_Car_X(w_Car_X_6),
+      .o_Car_Y(w_Car_Y_6),
+    );
 
-	// Floating Log 2 instance 
-		floating_ctrl #(
-			.c_FLOATING_SPEED(1),
-			.c_MIN_X(0),
-			.c_SLOW_COUNT(39000000),
-			.c_INIT_X(13),
-			.c_INIT_Y(2)
-		)
+    // Car 7 instance
+    car_ctrl #(
+      .c_CAR_SPEED(1),
+      .c_MAX_X(14),
+      .c_SLOW_COUNT(5000000),
+      .c_INIT_X(0),
+      .c_INIT_Y(4)
+    )
 
-		floating_ctrl_inst_2 (
-			.i_Clk(i_Clk),
-			.i_Col_Count_Div(w_Col_Count_Div),
-			.i_Row_Count_Div(w_Row_Count_Div),
-			.o_Floating_X(w_Floating_X_2),
-			.o_Floating_Y(w_Floating_Y_2),
-		);
+    car_ctrl_inst_7 (
+      .i_Clk(i_Clk),
+      .i_Col_Count_Div(w_Col_Count_Div),
+      .i_Row_Count_Div(w_Row_Count_Div),
+      .o_Car_X(w_Car_X_7),
+      .o_Car_Y(w_Car_Y_7),
+    );
 
-	// Floating Log 3 instance 
-		floating_ctrl #(
-			.c_FLOATING_SPEED(1),
-			.c_MIN_X(0),
-			.c_SLOW_COUNT(39000000),
-			.c_INIT_X(13),
-			.c_INIT_Y(3)
-		)
+    // Car 8 instance
+    car_ctrl #(
+      .c_CAR_SPEED(1),
+      .c_MAX_X(14),
+      .c_SLOW_COUNT(3700000),
+      .c_INIT_X(0),
+      .c_INIT_Y(3)
+    )
 
-		floating_ctrl_inst_3 (
-			.i_Clk(i_Clk),
-			.i_Col_Count_Div(w_Col_Count_Div),
-			.i_Row_Count_Div(w_Row_Count_Div),
-			.o_Floating_X(w_Floating_X_3),
-			.o_Floating_Y(w_Floating_Y_3),
-		);
+    car_ctrl_inst_8 (
+      .i_Clk(i_Clk),
+      .i_Col_Count_Div(w_Col_Count_Div),
+      .i_Row_Count_Div(w_Row_Count_Div),
+      .o_Car_X(w_Car_X_8),
+      .o_Car_Y(w_Car_Y_8),
+    );
 
-	// Floating Log 4 instance 
-		floating_ctrl #(
-			.c_FLOATING_SPEED(1),
-			.c_MIN_X(0),
-			.c_SLOW_COUNT(39000000),
-			.c_INIT_X(13),
-			.c_INIT_Y(4)
-		)
+    // Car 9 instance
+    car_ctrl #(
+      .c_CAR_SPEED(1),
+      .c_MAX_X(14),
+      .c_SLOW_COUNT(4500000),
+      .c_INIT_X(0),
+      .c_INIT_Y(2)
+    )
 
-		floating_ctrl_inst_4 (
-			.i_Clk(i_Clk),
-			.i_Col_Count_Div(w_Col_Count_Div),
-			.i_Row_Count_Div(w_Row_Count_Div),
-			.o_Floating_X(w_Floating_X_4),
-			.o_Floating_Y(w_Floating_Y_4),
-		);
-	
+    car_ctrl_inst_9 (
+      .i_Clk(i_Clk),
+      .i_Col_Count_Div(w_Col_Count_Div),
+      .i_Row_Count_Div(w_Row_Count_Div),
+      .o_Car_X(w_Car_X_9),
+      .o_Car_Y(w_Car_Y_9),
+    );
 
-	// Floating Log 5 instance 
-		floating_ctrl #(
-			.c_FLOATING_SPEED(1),
-			.c_MIN_X(0),
-			.c_SLOW_COUNT(39000000),
-			.c_INIT_X(13),
-			.c_INIT_Y(5)
-		)
+    // Car 10 instance
+    car_ctrl #(
+      .c_CAR_SPEED(1),
+      .c_MAX_X(14),
+      .c_SLOW_COUNT(4200000),
+      .c_INIT_X(0),
+      .c_INIT_Y(1)
+    )
 
-		floating_ctrl_inst_5 (
-			.i_Clk(i_Clk),
-			.i_Col_Count_Div(w_Col_Count_Div),
-			.i_Row_Count_Div(w_Row_Count_Div),
-			.o_Floating_X(w_Floating_X_5),
-			.o_Floating_Y(w_Floating_Y_5),
-		);
-*/
-
-
-	// TEMPORARY: Assign car positions to out-of-bounds values to deactivate collisions
-		assign w_Floating_X_1 = 6'd63;
-		assign w_Floating_Y_1 = 6'd63;
-		assign w_Floating_X_2 = 6'd63;
-		assign w_Floating_Y_2 = 6'd63;
-		assign w_Floating_X_3 = 6'd63;
-		assign w_Floating_Y_3 = 6'd63;
-		assign w_Floating_X_4 = 6'd63;
-		assign w_Floating_Y_4 = 6'd63;
-		assign w_Floating_X_5 = 6'd63;
-		assign w_Floating_Y_5 = 6'd63;
+    car_ctrl_inst_10 (
+      .i_Clk(i_Clk),
+      .i_Col_Count_Div(w_Col_Count_Div),
+      .i_Row_Count_Div(w_Row_Count_Div),
+      .o_Car_X(w_Car_X_10),
+      .o_Car_Y(w_Car_Y_10),
+    );
 
   	// Check for collisions between Frogger and cars
 		frogger_collisions frogger_collisions_inst (
@@ -380,18 +361,7 @@ module frogger_game #(
 			.i_Car_Y_4(w_Car_Y_4),
 			.i_Car_X_5(w_Car_X_5),
 			.i_Car_Y_5(w_Car_Y_5),
-			.i_Log_X_1(w_Floating_X_1),
-			.i_Log_Y_1(w_Floating_Y_1),
-			.i_Log_X_2(w_Floating_X_2),
-			.i_Log_Y_2(w_Floating_Y_2),
-			.i_Log_X_3(w_Floating_X_3),
-			.i_Log_Y_3(w_Floating_Y_3),
-			.i_Log_X_3(w_Floating_X_4),
-			.i_Log_Y_3(w_Floating_Y_4),
-			.i_Log_X_3(w_Floating_X_5),
-			.i_Log_Y_3(w_Floating_Y_5),
 			.o_Collided(w_Collided),
-			.o_On_Log(w_On_Log)
 		);
 
 
@@ -417,7 +387,12 @@ module frogger_game #(
 				(w_Col_Count_Div == w_Car_X_2) && (w_Row_Count_Div == w_Car_Y_2) || 
 				(w_Col_Count_Div == w_Car_X_3) && (w_Row_Count_Div == w_Car_Y_3) || 
 				(w_Col_Count_Div == w_Car_X_4) && (w_Row_Count_Div == w_Car_Y_4) || 
-				(w_Col_Count_Div == w_Car_X_5) && (w_Row_Count_Div == w_Car_Y_5))
+				(w_Col_Count_Div == w_Car_X_5) && (w_Row_Count_Div == w_Car_Y_5) ||
+        (w_Col_Count_Div == w_Car_X_6) && (w_Row_Count_Div == w_Car_Y_6) ||
+        (w_Col_Count_Div == w_Car_X_7) && (w_Row_Count_Div == w_Car_Y_7) ||
+        (w_Col_Count_Div == w_Car_X_8) && (w_Row_Count_Div == w_Car_Y_8) ||
+        (w_Col_Count_Div == w_Car_X_9) && (w_Row_Count_Div == w_Car_Y_9) ||
+        (w_Col_Count_Div == w_Car_X_10) && (w_Row_Count_Div == w_Car_Y_10))
 
 				begin
 
@@ -427,41 +402,6 @@ module frogger_game #(
 					r_Blu_Video = 4'b1111;
 				end
 
-			/*
-			//  Three tile wide floating log
-			else if // Log 1
-				((w_Col_Count_Div == w_Floating_X_1 ||
-				w_Col_Count_Div == subtract_modulo(w_Floating_X_1, 1) ||
-				w_Col_Count_Div == subtract_modulo(w_Floating_X_1, 2)) &&
-				w_Row_Count_Div == w_Floating_Y_1) ||
-				Log 2
-				((w_Col_Count_Div == w_Floating_X_2 ||
-				w_Col_Count_Div == subtract_modulo(w_Floating_X_2, 1) ||
-				w_Col_Count_Div == subtract_modulo(w_Floating_X_2, 2)) &&
-				w_Row_Count_Div == w_Floating_Y_2) ||
-				Log 3
-				((w_Col_Count_Div == w_Floating_X_3 ||
-				w_Col_Count_Div == subtract_modulo(w_Floating_X_3, 1) ||
-				w_Col_Count_Div == subtract_modulo(w_Floating_X_3, 2)) &&
-				w_Row_Count_Div == w_Floating_Y_3) ||
-				Log 4
-				((w_Col_Count_Div == w_Floating_X_4 ||
-				w_Col_Count_Div == subtract_modulo(w_Floating_X_4, 1) ||
-				w_Col_Count_Div == subtract_modulo(w_Floating_X_4, 2)) &&
-				w_Row_Count_Div == w_Floating_Y_4))
-				Log 5
-				((w_Col_Count_Div == w_Floating_X_5 ||
-				w_Col_Count_Div == subtract_modulo(w_Floating_X_5, 1) ||
-				w_Col_Count_Div == subtract_modulo(w_Floating_X_5, 2)) &&
-				w_Row_Count_Div == w_Floating_Y_5)
-
-				begin
-					r_Red_Video = 4'b1000; // Brownish color
-    				r_Grn_Video = 4'b0100;
-    				r_Blu_Video = 4'b0000;
-				end
-			*/
-
 			// Otherwise, draw the background based on the bitmap
 			else if (w_Col_Count_Div < c_GAME_WIDTH && w_Row_Count_Div < c_GAME_HEIGHT)
 				begin
@@ -469,25 +409,19 @@ module frogger_game #(
 					// Check the current tile in the bitmap
 					case (r_Bitmap[w_Row_Count_Div][w_Col_Count_Div])
 
-					4'd0: begin
+					3'd0: begin
 						r_Red_Video = 4'b0001;  // Wall: Red Channel = 0
 						r_Grn_Video = 4'b1110;  // Wall: Green Channel = 14
 						r_Blu_Video = 4'b0000;  // Wall: Blue Channel = 0
 					end
 
-					4'd1: begin
+					3'd1: begin
 						r_Red_Video = 4'b0000;  // Road: Red Channel = 0
 						r_Grn_Video = 4'b0000;  // Road: Green Channel = 0
 						r_Blu_Video = 4'b0000;  // Road: Blue Channel = 0
 					end
-
-					4'd2: begin
-						r_Red_Video = 4'b0001;  // Water: Red Channel = 1
-						r_Grn_Video = 4'b0000;  // Water: Green Channel = 0
-						r_Blu_Video = 4'b1110;  // Water: Blue Channel = 14
-					end
 					
-					4'd3: begin
+					3'd2: begin
 
 						// Safe Area: Check if it's the top or bottom line of the tile
 						if ((w_Row_Count % TILE_SIZE == 0) || (w_Row_Count % TILE_SIZE == TILE_SIZE - 1)) 
