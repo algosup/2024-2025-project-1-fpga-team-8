@@ -57,7 +57,10 @@ module frogger_game #(
 		parameter TILE_SIZE     = 32;
 
     // Bitmap array: 0=wall, 1=road, 2=water, 3=safe area, 4=lily pad
-  		reg [3:0] r_Bitmap[0:c_GAME_HEIGHT-1][0:c_GAME_WIDTH-1];
+	// OPTIMIZEDBELOW ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  		// reg [2:0] r_Bitmap[0:c_GAME_HEIGHT-1][0:c_GAME_WIDTH-1];
+  		reg [2:0] r_Bitmap[0:c_GAME_HEIGHT-1][0:c_GAME_WIDTH-1];
 
 	/// Functions
 		// Function to handle coordinate wrapping
@@ -198,7 +201,8 @@ module frogger_game #(
 
 
 	// Determine background colors based on the bitmap and draw Frogger if applicable
-		reg [3:0] r_Red_Video, r_Grn_Video, r_Blu_Video;
+	// OPTIMIZEDBELOW ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; REMOVED ONE BIT FROM EACH COLOR CHANNEL
+		reg [2:0] r_Red_Video, r_Grn_Video, r_Blu_Video;
 
 	/// Main game logic
 		always @(*) begin
