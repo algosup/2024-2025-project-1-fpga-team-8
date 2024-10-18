@@ -108,7 +108,7 @@ module frogger_ctrl(
             if (o_Frogger_Y == 0) begin
 
                 // Check if current position is a lily pad
-                if (i_Bitmap_Data == 4) begin
+                if (i_Bitmap_Data == 3) begin
                     o_Score <= i_Score + 1;  // Increment score if on a lily pad
                 end
 
