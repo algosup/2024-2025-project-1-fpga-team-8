@@ -21,7 +21,7 @@ module frogger_collisions (
 );
 
     // Parameter for game width (number of tiles in X direction)
-    parameter c_GAME_WIDTH = 14;
+    parameter c_GAME_WIDTH = 20;
 
     // Function to handle coordinate wrapping
     function [5:0] subtract_modulo;

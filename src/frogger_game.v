@@ -50,9 +50,9 @@ module frogger_game #(
 
   	// Game constants
 		// 14 columns in the bitmap
-		parameter c_GAME_WIDTH  = 14;
+		parameter c_GAME_WIDTH = 20;
 		// 13 rows in the bitmap
-		parameter c_GAME_HEIGHT = 13;
+		parameter c_GAME_HEIGHT = 15;
 		// Each tile is 32x32 pixels
 		parameter TILE_SIZE     = 32;
 
@@ -153,10 +153,10 @@ module frogger_game #(
     // Car 1 instance
 		car_ctrl #(
 		.c_CAR_SPEED(1),
-		.c_MAX_X(14),
-		.c_SLOW_COUNT(20000000),
+		.c_MAX_X(20),
+		.c_SLOW_COUNT(10000000),
 		.c_INIT_X(0),
-		.c_INIT_Y(11)
+		.c_INIT_Y(12)
 		)
 		
 		car_ctrl_inst_1 (

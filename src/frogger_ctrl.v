@@ -91,7 +91,7 @@ module frogger_ctrl(
 
             // Move right
             else if (i_Right_Mvt == 1'b1 && r_Switch_4 == 1'b0) begin
-                if (o_Frogger_X < 13) begin
+                if (o_Frogger_X < 19) begin
                     o_Frogger_X <= o_Frogger_X + 1;
                 end
             end

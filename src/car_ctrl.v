@@ -2,7 +2,7 @@ module car_ctrl #(
 /// This module is responsible for controlling the movement of the car in the game.
     /// Parameters
         // Maximum X position (grid width)
-        parameter c_MAX_X = 20,
+        parameter c_MAX_X = 40,
         // How much to move the car in one step
         parameter c_CAR_SPEED = 1,
         // Slow down counter threshold (adjust based on clock speed)
