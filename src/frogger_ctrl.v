@@ -45,15 +45,15 @@ module frogger_ctrl(
 
     // Parameters and registers for log movement
         parameter c_LOG_SLOW_COUNT = 39000000;
-        parameter c_FROGGER_ORIG_X = 10;
+        parameter c_FROGGER_ORIG_X = 11;
         parameter c_FROGGER_ORIG_Y = 14;
 
     /// Initialize starting position of Frogger
     initial begin
         // Initial column
-        o_Frogger_X = 10;
+        o_Frogger_X = 11;
         // Initial row (bottom of the screen)
-        o_Frogger_Y = 12;
+        o_Frogger_Y = 14;
         // Initial score
         o_Score = 0;
     end
@@ -99,8 +99,8 @@ module frogger_ctrl(
 
             // Reset Frogger position if a collision occurs
             if (i_Collided) begin
-                o_Frogger_X <= 10;
-                o_Frogger_Y <= 12;
+                o_Frogger_X <= 11;
+                o_Frogger_Y <= 14;
                 // TODO: Add all the death logic
             end
 
@@ -113,7 +113,7 @@ module frogger_ctrl(
                 end
 
                 // Reset Frogger to start position
-                o_Frogger_X <= 10;
+                o_Frogger_X <= 11;
                 o_Frogger_Y <= 14;
             end
 

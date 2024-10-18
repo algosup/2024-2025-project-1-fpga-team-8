@@ -50,9 +50,9 @@ module frogger_game #(
 
   	// Game constants
 		// 14 columns in the bitmap
-		parameter c_GAME_WIDTH  = 14;
+		parameter c_GAME_WIDTH  = 20;
 		// 13 rows in the bitmap
-		parameter c_GAME_HEIGHT = 13;
+		parameter c_GAME_HEIGHT = 15;
 		// Each tile is 32x32 pixels
 		parameter TILE_SIZE     = 32;
 
@@ -169,10 +169,10 @@ module frogger_game #(
     // Car 1 instance
 		car_ctrl #(
 		.c_CAR_SPEED(1),
-		.c_MAX_X(14),
+		.c_MAX_X(20),
 		.c_SLOW_COUNT(4000000),
 		.c_INIT_X(0),
-		.c_INIT_Y(11)
+		.c_INIT_Y(13)
 		)
 		
 		car_ctrl_inst_1 (
@@ -186,10 +186,10 @@ module frogger_game #(
     // Car 2 instance
 		car_ctrl #(
 			.c_CAR_SPEED(1),
-			.c_MAX_X(14),
+			.c_MAX_X(20),
 			.c_SLOW_COUNT(5000000),
 			.c_INIT_X(0),
-			.c_INIT_Y(10)
+			.c_INIT_Y(12)
 		)
 
 		car_ctrl_inst_2 (
@@ -203,10 +203,10 @@ module frogger_game #(
     // Car 3 instance
 		car_ctrl #(
 			.c_CAR_SPEED(1),
-			.c_MAX_X(14),
+			.c_MAX_X(20),
 			.c_SLOW_COUNT(3700000),
 			.c_INIT_X(0),
-			.c_INIT_Y(9)
+			.c_INIT_Y(11)
 		)
 
 		car_ctrl_inst_3 (
@@ -220,10 +220,10 @@ module frogger_game #(
 	// Car 4 instance
 		car_ctrl #(
 			.c_CAR_SPEED(1),
-			.c_MAX_X(14),
+			.c_MAX_X(20),
 			.c_SLOW_COUNT(4500000),
 			.c_INIT_X(0),
-			.c_INIT_Y(8)
+			.c_INIT_Y(10)
 		)
 
 		car_ctrl_inst_4 (
@@ -237,10 +237,10 @@ module frogger_game #(
 	// Car 5 instance
 		car_ctrl #(
 			.c_CAR_SPEED(1),
-			.c_MAX_X(14),
+			.c_MAX_X(20),
 			.c_SLOW_COUNT(4200000),
 			.c_INIT_X(0),
-			.c_INIT_Y(7)
+			.c_INIT_Y(9)
 		)
 
 		car_ctrl_inst_5 (
@@ -254,10 +254,10 @@ module frogger_game #(
   // Car 6 instance
     car_ctrl #(
       .c_CAR_SPEED(1),
-      .c_MAX_X(14),
+      .c_MAX_X(20),
       .c_SLOW_COUNT(4000000),
       .c_INIT_X(0),
-      .c_INIT_Y(5)
+      .c_INIT_Y(8)
     )
 
     car_ctrl_inst_6 (
