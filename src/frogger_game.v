@@ -365,6 +365,9 @@ module frogger_game #(
     parameter TILE_SIZE     = 32;
     parameter NUM_CARS      = 10;
 
+	// Car speeds
+	localparam [NUM_CARS*6-1:0] car_speeds = {6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1};
+
     reg [2:0] r_Bitmap[0:c_GAME_HEIGHT-1][0:c_GAME_WIDTH-1];
     reg [8:0] game_state;
 
@@ -436,25 +439,37 @@ module frogger_game #(
 
 
 	// Instantiate the debug version of the multi-car controller with only 2 cars
-	multi_car_ctrl_debug #(
-		.NUM_CARS(10),               // Test with 2 cars
-		.c_MAX_X(20),               // Maximum X position (smaller grid for testing)
-		.c_CAR_SPEED_0(1),          // Speed for car 1
-		.c_CAR_SPEED_1(1),
-		.c_CAR_SPEED_2(1),
-		.c_CAR_SPEED_3(1),
-		.c_CAR_SPEED_4(1),
-		.c_CAR_SPEED_5(1),
-		.c_CAR_SPEED_6(1),
-		.c_CAR_SPEED_7(1),
-		.c_CAR_SPEED_8(1),
-		.c_CAR_SPEED_9(1),
-		.c_SLOW_COUNT(2000000)      // Slowdown counter value
-	) car_control_debug_inst (
-		.i_Clk(i_Clk),              // Pass the clock signal
-		.o_Car_X(o_Car_X),          // Connect to the X position output
-		.o_Car_Y(o_Car_Y)           // Connect to the Y position output
+	// multi_car_ctrl_debug #(
+	// 	.NUM_CARS(10),               // Test with 2 cars
+	// 	.c_MAX_X(20),               // Maximum X position (smaller grid for testing)
+	// 	.c_CAR_SPEED_0(1),          // Speed for car 1
+	// 	.c_CAR_SPEED_1(1),
+	// 	.c_CAR_SPEED_2(1),
+	// 	.c_CAR_SPEED_3(1),
+	// 	.c_CAR_SPEED_4(1),
+	// 	.c_CAR_SPEED_5(1),
+	// 	.c_CAR_SPEED_6(1),
+	// 	.c_CAR_SPEED_7(1),
+	// 	.c_CAR_SPEED_8(1),
+	// 	.c_CAR_SPEED_9(1),
+	// 	.c_SLOW_COUNT(2000000)      // Slowdown counter value
+	// ) car_control_debug_inst (
+	// 	.i_Clk(i_Clk),              // Pass the clock signal
+	// 	.o_Car_X(o_Car_X),          // Connect to the X position output
+	// 	.o_Car_Y(o_Car_Y)           // Connect to the Y position output
+	// );
+
+	multi_car_ctrl_optimized #(
+		.NUM_CARS(10),
+		.c_CAR_SPEED(car_speeds),   // Assign localparam to the car speeds array
+		.c_MAX_X(20),
+		.c_SLOW_COUNT(2000000)
+	) car_control_inst (
+		.i_Clk(i_Clk),
+		.o_Car_X(o_Car_X),
+		.o_Car_Y(o_Car_Y)
 	);
+
 
 
 
