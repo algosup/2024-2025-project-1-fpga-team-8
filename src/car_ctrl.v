@@ -18,26 +18,37 @@ module multi_car_ctrl #(
 
     // Initialize car positions
     initial begin
-        r_Car_X[0] = 6'd1;
-        r_Car_Y[0] = 6'd1;
-        r_Car_X[1] = 6'd2;
-        r_Car_Y[1] = 6'd2;
-        r_Car_X[2] = 6'd3;
-        r_Car_Y[2] = 6'd3;
-        r_Car_X[3] = 6'd4;
-        r_Car_Y[3] = 6'd4;
-        r_Car_X[4] = 6'd5;
-        r_Car_Y[4] = 6'd5;
-        r_Car_X[5] = 6'd6;
-        r_Car_Y[5] = 6'd8;
-        r_Car_X[6] = 6'd7;
-        r_Car_Y[6] = 6'd9;
-        r_Car_X[7] = 6'd8;
-        r_Car_Y[7] = 6'd10;
-        r_Car_X[8] = 6'd9;
-        r_Car_Y[8] = 6'd11;
-        r_Car_X[9] = 6'd10;
-        r_Car_Y[9] = 6'd12;
+        // Lane 12 (Both cars go right, so use even indices)
+        r_Car_X[0] = 6'd0;    // Car 1 (even index, goes right)
+        r_Car_Y[0] = 6'd12;
+        r_Car_X[2] = 6'd6;    // Car 2 (even index, goes right)
+        r_Car_Y[2] = 6'd12;
+
+        // Lane 11 (Both cars go left, so use odd indices)
+        r_Car_X[1] = 6'd24;   // Car 1 (odd index, goes left)
+        r_Car_Y[1] = 6'd11;
+        r_Car_X[3] = 6'd20;   // Car 2 (odd index, goes left)
+        r_Car_Y[3] = 6'd11;
+        r_Car_X[9] = 6'd16;   // Extra car (goes right)
+        r_Car_Y[9] = 6'd11;
+
+        // Lane 10 (Both cars go right, so use even indices)
+        r_Car_X[4] = 6'd3;    // Car 1 (even index, goes right)
+        r_Car_Y[4] = 6'd10;
+        r_Car_X[6] = 6'd9;    // Car 2 (even index, goes right)
+        r_Car_Y[6] = 6'd10;
+
+        // Lane 9 (Both cars go left, so use odd indices)
+        r_Car_X[5] = 6'd4;    // Car 1 (odd index, goes left)
+        r_Car_Y[5] = 6'd9;
+        r_Car_X[7] = 6'd18;   // Car 2 (odd index, goes left)
+        r_Car_Y[7] = 6'd9;
+
+        // Lane 8 (Both cars go right, so use even indices)
+        r_Car_X[8] = 6'd4;    // Car 1 (even index, goes right)
+        r_Car_Y[8] = 6'd8;
+        r_Car_X[10] = 6'd11;  // Car 2 (even index, goes right)
+        r_Car_Y[10] = 6'd8;
     end
 
     // Main car control logic
