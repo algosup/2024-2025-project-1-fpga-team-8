@@ -1,18 +1,17 @@
 module multi_car_ctrl #(
-    parameter NUM_CARS = 10,                    // Number of cars
     parameter c_MAX_X = 20,                     // Maximum X position
-    parameter [NUM_CARS*6-1:0] c_CAR_SPEED = {6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1},  // Speeds for each car
-    parameter c_SLOW_COUNT = 700000,           // Slowdown counter threshold
-    parameter COUNTER_WIDTH = 21               // Counter width for slowdown
+    parameter [59:0] c_CAR_SPEED = {6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1},  // Speeds for 10 cars
+    parameter c_SLOW_COUNT = 700000,            // Slowdown counter threshold
+    parameter COUNTER_WIDTH = 21                // Counter width for slowdown
 )(
     input i_Clk,                                // Clock input
-    output reg [NUM_CARS*6-1:0] o_Car_X,        // Flattened X positions for all cars
-    output reg [NUM_CARS*6-1:0] o_Car_Y         // Flattened Y positions for all cars
+    output reg [59:0] o_Car_X,                  // Flattened X positions for 10 cars (10 * 6 bits)
+    output reg [59:0] o_Car_Y                   // Flattened Y positions for 10 cars (10 * 6 bits)
 );
 
-    // Register arrays for car positions
-    reg [4:0] r_Car_X [NUM_CARS-1:0];
-    reg [4:0] r_Car_Y [NUM_CARS-1:0];
+    // Register arrays for car positions (10 cars)
+    reg [4:0] r_Car_X [9:0];  // 10 cars with 5-bit positions
+    reg [4:0] r_Car_Y [9:0];  // 10 cars with 5-bit positions
     reg [COUNTER_WIDTH-1:0] r_Counter = 0;
     reg [3:0] current_car = 0;  // Counter to keep track of which car to update
     integer i;  // Declare the loop variable outside the loop
@@ -50,7 +49,7 @@ module multi_car_ctrl #(
             r_Counter <= 0;
 
             // Odd lanes (right movement) and even lanes (left movement)
-            if (current_car % 2 == 1) begin
+            if (current_car % 2 == 0) begin
                 // Odd lanes: Move right
                 if (r_Car_X[current_car] + c_CAR_SPEED[current_car*6 +: 6] < c_MAX_X) begin
                     r_Car_X[current_car] <= r_Car_X[current_car] + c_CAR_SPEED[current_car*6 +: 6];
@@ -67,13 +66,13 @@ module multi_car_ctrl #(
             end
 
             // Move to the next car
-            current_car <= (current_car + 1) % NUM_CARS;
+            current_car <= (current_car + 1) % 10;  // Fixed 10 cars
         end
     end
 
     // Output the car positions
     always @(*) begin
-        for (i = 0; i < NUM_CARS; i = i + 1) begin
+        for (i = 0; i < 10; i = i + 1) begin
             o_Car_X[i*6 +: 6] = r_Car_X[i];  // Car `i` X position
             o_Car_Y[i*6 +: 6] = r_Car_Y[i];  // Car `i` Y position
         end

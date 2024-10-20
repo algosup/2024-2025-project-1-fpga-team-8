@@ -95,7 +95,6 @@ module frogger_game #(
     );
 
 	multi_car_ctrl #(
-    .NUM_CARS(10),
     .c_CAR_SPEED(car_speeds),                  // Keep your speed configuration
     .c_MAX_X(20),
     .c_SLOW_COUNT(700000)
