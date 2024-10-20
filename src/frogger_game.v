@@ -94,52 +94,7 @@ module frogger_game #(
         .o_Score(game_state[8:2])
     );
 
-    // multi_car_ctrl #(
-	// 	.NUM_CARS(NUM_CARS),
-	// 	.c_CAR_SPEED({1, 1, 1, 1, 1, 1, 1, 1, 1, 1}),
-	// 	.c_MAX_X(20)  // Ensure this is aligned with the grid and display limits
-	// ) car_control_inst (
-	// 	.i_Clk(i_Clk),
-	// 	.i_Init_X({6'd1, 6'd2, 6'd3, 6'd4, 6'd5, 6'd6, 6'd7, 6'd8, 6'd9, 6'd10}),  // Smaller, distinct X values for testing
-	// 	.i_Init_Y({6'd1, 6'd2, 6'd3, 6'd4, 6'd5, 6'd8, 6'd9, 6'd10, 6'd11, 6'd12}),  // Y values as before
-	// 	.o_Car_X(o_Car_X),
-	// 	.o_Car_Y(o_Car_Y)
-	// );
-
-
-	// Instantiate the debug version of the multi-car controller with only 2 cars
-	// multi_car_ctrl_debug #(
-	// 	.NUM_CARS(10),               // Test with 2 cars
-	// 	.c_MAX_X(20),               // Maximum X position (smaller grid for testing)
-	// 	.c_CAR_SPEED_0(1),          // Speed for car 1
-	// 	.c_CAR_SPEED_1(1),
-	// 	.c_CAR_SPEED_2(1),
-	// 	.c_CAR_SPEED_3(1),
-	// 	.c_CAR_SPEED_4(1),
-	// 	.c_CAR_SPEED_5(1),
-	// 	.c_CAR_SPEED_6(1),
-	// 	.c_CAR_SPEED_7(1),
-	// 	.c_CAR_SPEED_8(1),
-	// 	.c_CAR_SPEED_9(1),
-	// 	.c_SLOW_COUNT(2000000)      // Slowdown counter value
-	// ) car_control_debug_inst (
-	// 	.i_Clk(i_Clk),              // Pass the clock signal
-	// 	.o_Car_X(o_Car_X),          // Connect to the X position output
-	// 	.o_Car_Y(o_Car_Y)           // Connect to the Y position output
-	// );
-
-	// multi_car_ctrl_optimized #(
-	// 	.NUM_CARS(10),
-	// 	.c_CAR_SPEED(car_speeds),
-	// 	.c_MAX_X(20),
-	// 	.c_SLOW_COUNT(10000000)
-	// ) car_control_inst (
-	// 	.i_Clk(i_Clk),
-	// 	.o_Car_X(o_Car_X),
-	// 	.o_Car_Y(o_Car_Y)
-	// );
-
-	multi_car_ctrl_optimized #(
+	multi_car_ctrl #(
     .NUM_CARS(10),
     .c_CAR_SPEED(car_speeds),                  // Keep your speed configuration
     .c_CAR_DIRECTION(10'b1010101010),          // Example: alternating directions for 10 cars
@@ -150,11 +105,6 @@ module frogger_game #(
 		.o_Car_X(o_Car_X),
 		.o_Car_Y(o_Car_Y)
 	);
-
-
-
-
-
 
     // Collision check with multiple cars
     integer i;
