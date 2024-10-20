@@ -97,9 +97,8 @@ module frogger_game #(
 	multi_car_ctrl #(
     .NUM_CARS(10),
     .c_CAR_SPEED(car_speeds),                  // Keep your speed configuration
-    .c_CAR_DIRECTION(10'b1010101010),          // Example: alternating directions for 10 cars
     .c_MAX_X(20),
-    .c_SLOW_COUNT(2000000)
+    .c_SLOW_COUNT(700000)
 	) car_control_inst (
 		.i_Clk(i_Clk),
 		.o_Car_X(o_Car_X),
@@ -119,138 +118,79 @@ module frogger_game #(
 
     reg [2:0] r_Red_Video, r_Grn_Video, r_Blu_Video;
 
-    always @(*) begin
-		// Reset video signals to black (default)
-		r_Red_Video = 3'b000;
-		r_Grn_Video = 3'b000;
-		r_Blu_Video = 3'b000;
+    
+	always @(*) begin
+    // Reset video signals to black (default)
+    r_Red_Video = 3'b000;
+    r_Grn_Video = 3'b000;
+    r_Blu_Video = 3'b000;
 
-		// Check if the current tile matches Frogger's position
-		if ((w_Col_Count_Div == w_Frogger_X) && (w_Row_Count_Div == w_Frogger_Y)) begin
-			// Draw Frogger in red
-			r_Red_Video = 3'b111;  // Red
-			r_Grn_Video = 3'b000;  // No green
-			r_Blu_Video = 3'b000;  // No blue
-		end 
-		else begin
+    // Check if the current tile matches Frogger's position
+    if ((w_Col_Count_Div == w_Frogger_X) && (w_Row_Count_Div == w_Frogger_Y)) begin
+        // Draw Frogger in red
+        r_Red_Video = 3'b111;  // Red
+        r_Grn_Video = 3'b000;  // No green
+        r_Blu_Video = 3'b000;  // No blue
+    end else begin
+        // Check if the current tile matches any car's position
+        for (i = 0; i < 10; i = i + 1) begin
+            if ((w_Col_Count_Div == o_Car_X[i*6 +: 6]) && (w_Row_Count_Div == o_Car_Y[i*6 +: 6])) begin
+                // Draw all cars in white
+                r_Red_Video = 3'b111;  // Red
+                r_Grn_Video = 3'b111;  // Green
+                r_Blu_Video = 3'b111;  // Blue
+            end
+        end
+    end
 
-			// Draw car 1 based on its X and Y position
-			if ((w_Col_Count_Div == o_Car_X[0*6 +: 6]) && (w_Row_Count_Div == o_Car_Y[0*6 +: 6])) begin
-				r_Red_Video = 3'b111;  // White
-				r_Grn_Video = 3'b111;
-				r_Blu_Video = 3'b111;
-			end
+    // If no Frogger or car, draw the background based on the bitmap
+    if (r_Red_Video == 3'b000 && r_Grn_Video == 3'b000 && r_Blu_Video == 3'b000) begin
+        // Only draw the background if nothing is drawn yet (no Frogger or car)
+        if (w_Col_Count_Div < c_GAME_WIDTH && w_Row_Count_Div < c_GAME_HEIGHT) begin
+            case (r_Bitmap[w_Row_Count_Div][w_Col_Count_Div])
+                3'd0: begin  // Wall
+                    r_Red_Video = 3'b001;
+                    r_Grn_Video = 3'b110;
+                    r_Blu_Video = 3'b000;
+                end
+                3'd1: begin  // Road
+                    r_Red_Video = 3'b000;
+                    r_Grn_Video = 3'b000;
+                    r_Blu_Video = 3'b000;
+                end
+                3'd2: begin  // Water
+                    r_Red_Video = 3'b001;
+                    r_Grn_Video = 3'b000;
+                    r_Blu_Video = 3'b110;
+                end
+                3'd3: begin  // Safe Area
+                    // Safe Area color with black lines on the top/bottom
+                    if ((w_Row_Count % TILE_SIZE == 0) || (w_Row_Count % TILE_SIZE == TILE_SIZE - 1)) begin
+                        r_Red_Video = 3'b000;  // Black line
+                        r_Grn_Video = 3'b000;
+                        r_Blu_Video = 3'b000;
+                    end else begin
+                        r_Red_Video = 3'b011;  // Safe Area
+                        r_Grn_Video = 3'b000;
+                        r_Blu_Video = 3'b111;
+                    end
+                end
+                3'd4: begin  // Lily Pad
+                    r_Red_Video = 3'b001;
+                    r_Grn_Video = 3'b000;
+                    r_Blu_Video = 3'b110;
+                end
+                default: begin  // Background (black)
+                    r_Red_Video = 3'b000;
+                    r_Grn_Video = 3'b000;
+                    r_Blu_Video = 3'b000;
+                end
+            endcase
+        end
+    end
+end
 
-			// Draw car 2 based on its X and Y position
-			else if ((w_Col_Count_Div == o_Car_X[1*6 +: 6]) && (w_Row_Count_Div == o_Car_Y[1*6 +: 6])) begin
-				r_Red_Video = 3'b000;  // Cyan
-				r_Grn_Video = 3'b111;
-				r_Blu_Video = 3'b111;
-			end
-			
-			// Draw car 3 based on its X and Y position
-			else if ((w_Col_Count_Div == o_Car_X[2*6 +: 6]) && (w_Row_Count_Div == o_Car_Y[2*6 +: 6])) begin
-				r_Red_Video = 3'b111;  // Magenta
-				r_Grn_Video = 3'b000;
-				r_Blu_Video = 3'b111;
-			end
 
-			// Draw car 4 based on its X and Y position
-			else if ((w_Col_Count_Div == o_Car_X[3*6 +: 6]) && (w_Row_Count_Div == o_Car_Y[3*6 +: 6])) begin
-				r_Red_Video = 3'b111;  // Yellow
-				r_Grn_Video = 3'b111;
-				r_Blu_Video = 3'b000;
-			end
-
-			// Draw car 5 based on its X and Y position
-			else if ((w_Col_Count_Div == o_Car_X[4*6 +: 6]) && (w_Row_Count_Div == o_Car_Y[4*6 +: 6])) begin
-				r_Red_Video = 3'b000;  // Blue
-				r_Grn_Video = 3'b000;
-				r_Blu_Video = 3'b111;
-			end
-
-			// Draw car 6 based on its X and Y position
-			else if ((w_Col_Count_Div == o_Car_X[5*6 +: 6]) && (w_Row_Count_Div == o_Car_Y[5*6 +: 6])) begin
-				r_Red_Video = 3'b111;  // Green
-				r_Grn_Video = 3'b000;
-				r_Blu_Video = 3'b111;
-			end
-
-			// Draw car 7 based on its X and Y position
-			else if ((w_Col_Count_Div == o_Car_X[6*6 +: 6]) && (w_Row_Count_Div == o_Car_Y[6*6 +: 6])) begin
-				r_Red_Video = 3'b111;  // Cyan
-				r_Grn_Video = 3'b111;
-				r_Blu_Video = 3'b000;
-			end
-
-			// Draw car 8 based on its X and Y position
-			else if ((w_Col_Count_Div == o_Car_X[7*6 +: 6]) && (w_Row_Count_Div == o_Car_Y[7*6 +: 6])) begin
-				r_Red_Video = 3'b000;  // Magenta
-				r_Grn_Video = 3'b111;
-				r_Blu_Video = 3'b111;
-			end
-
-			// Draw car 9 based on its X and Y position
-			else if ((w_Col_Count_Div == o_Car_X[8*6 +: 6]) && (w_Row_Count_Div == o_Car_Y[8*6 +: 6])) begin
-				r_Red_Video = 3'b111;  // Yellow
-				r_Grn_Video = 3'b000;
-				r_Blu_Video = 3'b111;
-			end
-
-			// Draw car 10 based on its X and Y position
-			else if ((w_Col_Count_Div == o_Car_X[9*6 +: 6]) && (w_Row_Count_Div == o_Car_Y[9*6 +: 6])) begin
-				r_Red_Video = 3'b000;  // White
-				r_Grn_Video = 3'b111;
-				r_Blu_Video = 3'b111;
-			end
-		end
-
-		// If no Frogger or car, draw the background based on the bitmap
-		if (r_Red_Video == 3'b000 && r_Grn_Video == 3'b000 && r_Blu_Video == 3'b000) begin
-			// Only draw the background if nothing is drawn yet (no Frogger or car)
-			if (w_Col_Count_Div < c_GAME_WIDTH && w_Row_Count_Div < c_GAME_HEIGHT) begin
-				case (r_Bitmap[w_Row_Count_Div][w_Col_Count_Div])
-					3'd0: begin  // Wall
-						r_Red_Video = 3'b001;
-						r_Grn_Video = 3'b110;
-						r_Blu_Video = 3'b000;
-					end
-					3'd1: begin  // Road
-						r_Red_Video = 3'b000;
-						r_Grn_Video = 3'b000;
-						r_Blu_Video = 3'b000;
-					end
-					3'd2: begin  // Water
-						r_Red_Video = 3'b001;
-						r_Grn_Video = 3'b000;
-						r_Blu_Video = 3'b110;
-					end
-					3'd3: begin  // Safe Area
-						// Safe Area color with black lines on the top/bottom
-						if ((w_Row_Count % TILE_SIZE == 0) || (w_Row_Count % TILE_SIZE == TILE_SIZE - 1)) begin
-							r_Red_Video = 3'b000;  // Black line
-							r_Grn_Video = 3'b000;
-							r_Blu_Video = 3'b000;
-						end else begin
-							r_Red_Video = 3'b011;  // Safe Area
-							r_Grn_Video = 3'b000;
-							r_Blu_Video = 3'b111;
-						end
-					end
-					3'd4: begin  // Lily Pad
-						r_Red_Video = 3'b001;
-						r_Grn_Video = 3'b000;
-						r_Blu_Video = 3'b110;
-					end
-					default: begin  // Background (black)
-						r_Red_Video = 3'b000;
-						r_Grn_Video = 3'b000;
-						r_Blu_Video = 3'b000;
-					end
-				endcase
-			end
-		end
-	end
 
 
     assign o_Red_Video = r_Red_Video;

@@ -1,14 +1,13 @@
 module multi_car_ctrl #(
-    parameter NUM_CARS = 10,
-    parameter c_MAX_X = 20,
-    parameter [NUM_CARS*6-1:0] c_CAR_SPEED = {6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1},
-    parameter [NUM_CARS-1:0] c_CAR_DIRECTION = {10'b1111111111},
-    parameter c_SLOW_COUNT = 2000000,
-    parameter COUNTER_WIDTH = 26
+    parameter NUM_CARS = 10,                    // Number of cars
+    parameter c_MAX_X = 20,                     // Maximum X position
+    parameter [NUM_CARS*6-1:0] c_CAR_SPEED = {6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1},  // Speeds for each car
+    parameter c_SLOW_COUNT = 700000,           // Slowdown counter threshold
+    parameter COUNTER_WIDTH = 21               // Counter width for slowdown
 )(
-    input i_Clk,
-    output reg [NUM_CARS*6-1:0] o_Car_X,
-    output reg [NUM_CARS*6-1:0] o_Car_Y
+    input i_Clk,                                // Clock input
+    output reg [NUM_CARS*6-1:0] o_Car_X,        // Flattened X positions for all cars
+    output reg [NUM_CARS*6-1:0] o_Car_Y         // Flattened Y positions for all cars
 );
 
     // Register arrays for car positions
@@ -50,16 +49,16 @@ module multi_car_ctrl #(
         if (r_Counter >= c_SLOW_COUNT) begin
             r_Counter <= 0;
 
-            // Update the current car based on direction and speed
-            if (c_CAR_DIRECTION[current_car] == 1'b1) begin
-                // Move right
+            // Odd lanes (right movement) and even lanes (left movement)
+            if (current_car % 2 == 1) begin
+                // Odd lanes: Move right
                 if (r_Car_X[current_car] + c_CAR_SPEED[current_car*6 +: 6] < c_MAX_X) begin
                     r_Car_X[current_car] <= r_Car_X[current_car] + c_CAR_SPEED[current_car*6 +: 6];
                 end else begin
                     r_Car_X[current_car] <= 0;  // Wrap around for right-moving cars
                 end
             end else begin
-                // Move left
+                // Even lanes: Move left
                 if (r_Car_X[current_car] >= c_CAR_SPEED[current_car*6 +: 6]) begin
                     r_Car_X[current_car] <= r_Car_X[current_car] - c_CAR_SPEED[current_car*6 +: 6];
                 end else begin
