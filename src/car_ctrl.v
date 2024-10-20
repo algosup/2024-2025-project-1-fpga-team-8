@@ -1,7 +1,7 @@
 module multi_car_ctrl #(
     parameter [59:0] c_CAR_SPEED = {6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1},  // Speeds for 10 cars
-    parameter c_SLOW_COUNT = 700000,            // Slowdown counter threshold
-    parameter COUNTER_WIDTH = 21                // Counter width for slowdown
+    parameter c_SLOW_COUNT = 1700000,            // Increased Slowdown counter threshold (3x slower)
+    parameter COUNTER_WIDTH = 21                 // Counter width for slowdown
 )(
     input i_Clk,                                // Clock input
     output reg [59:0] o_Car_X,                  // Flattened X positions for 10 cars (10 * 6 bits)
