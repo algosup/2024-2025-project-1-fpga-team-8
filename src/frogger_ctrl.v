@@ -13,8 +13,6 @@ module frogger_ctrl(
         input            i_Left_Mvt,
         // Right movement switch
         input            i_Right_Mvt,
-        // Game active signal
-        input            i_Game_Active,
         // Collision signal
         input            i_Collided,
         // Column count divider
@@ -69,32 +67,31 @@ module frogger_ctrl(
         r_Switch_3 <= i_Left_Mvt;
         r_Switch_4 <= i_Right_Mvt;
 
-        if (i_Game_Active) begin
 
         /// Handle Frogger's movements
             // Move up
-            if (i_Up_Mvt == 1'b1 && r_Switch_1 == 1'b0) begin
+            if (i_Up_Mvt && !r_Switch_1) begin
                 if (o_Frogger_Y > 0) begin
-                    o_Frogger_Y <= o_Frogger_Y - 1;
+                    // o_Frogger_Y <= o_Frogger_Y - 1;
                 end
             end
 
             // Move down
-            else if (i_Down_Mvt == 1'b1 && r_Switch_2 == 1'b0) begin
+            else if (i_Down_Mvt && !r_Switch_2) begin
                 if (o_Frogger_Y < 14) begin
-                    o_Frogger_Y <= o_Frogger_Y + 1;
+                    // o_Frogger_Y <= o_Frogger_Y + 1;
                 end
             end
 
             // Move left
-            else if (i_Left_Mvt == 1'b1 && r_Switch_3 == 1'b0) begin
+            else if (i_Left_Mvt && !r_Switch_3) begin
                 if (o_Frogger_X > 0) begin
                     o_Frogger_X <= o_Frogger_X - 1;
                 end
             end
 
             // Move right
-            else if (i_Right_Mvt == 1'b1 && r_Switch_4 == 1'b0) begin
+            else if (i_Right_Mvt && !r_Switch_4) begin
                 if (o_Frogger_X < 13) begin
                     o_Frogger_X <= o_Frogger_X + 1;
                 end
@@ -144,7 +141,6 @@ module frogger_ctrl(
             end
 
 
-        end // Game active
 
     end // Main Frogger control logic
 

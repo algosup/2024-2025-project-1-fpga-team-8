@@ -103,7 +103,6 @@ module frogger_game #(
 		reg [1:0] lives = 2'b11;
 
 	/// Internal signals
-		wire w_Game_Active = true;
 		wire       w_HSync, w_VSync;
 		wire [9:0] w_Col_Count, w_Row_Count;
 		wire [4:0] w_Col_Count_Div, w_Row_Count_Div;
@@ -196,7 +195,6 @@ module frogger_game #(
 			.i_Down_Mvt(i_Down_Mvt),
 			.i_Left_Mvt(i_Left_Mvt),
 			.i_Right_Mvt(i_Right_Mvt),
-			.i_Game_Active(w_Game_Active),
 			.i_Collided(w_Collided),
 			.i_Col_Count_Div(w_Col_Count_Div),
 			.i_Row_Count_Div(w_Row_Count_Div),
@@ -439,47 +437,35 @@ module frogger_game #(
     
 
 	/// Main game logic
-		always @(*) begin
+always @( posedge i_Clk) begin
 
 	
     // Check if the current tile matches Frogger's position
-    if ((w_Col_Count_Div == w_Frogger_X) && (w_Row_Count_Div == w_Frogger_Y)) begin
-        // If in the same tile as Frogger, draw Frogger in red
-        // r_Red_Video = 4'b1111; // Red
-        // r_Grn_Video = 4'b0000;
-        // r_Blu_Video = 4'b0000;
-		case (frog_sprite[frog_row][frog_col])
-			4'd0: begin
-				//transparent
-				r_Red_Video = 4'b0000;
-				r_Grn_Video = 4'b0000;
-				r_Blu_Video = 4'b0000;
-			end
-			4'd1: begin
+  if ((w_Col_Count_Div == w_Frogger_X) && (w_Row_Count_Div == w_Frogger_Y) && frog_sprite[frog_row][frog_col]!=4'd0) begin
+			if(frog_sprite[frog_row][frog_col]==4'd1)begin
 				// Red
 	            r_Red_Video = 4'b0000;
 	            r_Grn_Video = 4'b1111;
 	            r_Blu_Video = 4'b0000;
 			end
-			4'd2: begin
+			else if(frog_sprite[frog_row][frog_col]==4'd2) begin
 				// Yellow
 	            r_Red_Video = 4'b1111;
 	            r_Grn_Video = 4'b1111;
 	            r_Blu_Video = 4'b0000;
 			end
-			4'd3: begin
+			else if(frog_sprite[frog_row][frog_col]==4'd3) begin
 	            r_Red_Video = 4'b1111;
 	            r_Grn_Video = 4'b0011;
 	            r_Blu_Video = 4'b1001;
 			end
-		endcase 
+		 
     end
-
     // Draw car sprite based on the current row and column within the sprite
 	else if ((w_Col_Count_Div == w_Car_X_1 && w_Row_Count_Div == w_Car_Y_1) || 
 	    (w_Col_Count_Div == w_Car_X_2 && w_Row_Count_Div == w_Car_Y_2) || 
-	    // (w_Col_Count_Div == w_Car_X_3 && w_Row_Count_Div == w_Car_Y_3) || 
-	    // (w_Col_Count_Div == w_Car_X_4 && w_Row_Count_Div == w_Car_Y_4) || 
+	    (w_Col_Count_Div == w_Car_X_3 && w_Row_Count_Div == w_Car_Y_3) || 
+	    (w_Col_Count_Div == w_Car_X_4 && w_Row_Count_Div == w_Car_Y_4) || 
 	    (w_Col_Count_Div == w_Car_X_5 && w_Row_Count_Div == w_Car_Y_5))
 		begin
 	    // Get the correct pixel from the sprite based on car_row and car_col
