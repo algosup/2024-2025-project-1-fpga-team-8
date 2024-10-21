@@ -65,9 +65,9 @@ module frogger_ctrl(
     always @(posedge i_Clk) begin
 
         r_Switch_1 <= i_Up_Mvt;
-        r_Switch_2 <= i_Down_Mvt;
-        r_Switch_3 <= i_Left_Mvt;
-        r_Switch_4 <= i_Right_Mvt;
+        r_Switch_4 <= i_Down_Mvt;
+        r_Switch_2 <= i_Left_Mvt;
+        r_Switch_3 <= i_Right_Mvt;
 
         
             
