@@ -31,7 +31,7 @@ module frogger_game #(
     parameter NUM_CARS      = 10;
 
     reg [2:0] r_Bitmap[0:c_GAME_HEIGHT-1][0:c_GAME_WIDTH-1];
-    reg [8:0] game_state;
+    reg [6:0] game_level;
 
     
     wire w_Game_Active = 1'b1;
@@ -39,7 +39,7 @@ module frogger_game #(
     wire [9:0] w_Col_Count, w_Row_Count;
     wire [4:0] w_Col_Count_Div, w_Row_Count_Div;
     wire [5:0] w_Frogger_X, w_Frogger_Y;
-    wire w_Collided;
+    reg w_Collided;
 
     reg [4:0] o_Car_X [0:NUM_CARS-1];  
     reg [4:0] o_Car_Y [0:NUM_CARS-1];  
@@ -83,7 +83,7 @@ module frogger_game #(
     
     frogger_ctrl frogger_ctrl_inst (
         .i_Clk(i_Clk),
-        .i_Score(game_state[8:2]),
+        .i_Score(game_level[6:0]),
         .i_Up_Mvt(i_Up_Mvt),
         .i_Down_Mvt(i_Down_Mvt),
         .i_Left_Mvt(i_Left_Mvt),
@@ -94,20 +94,20 @@ module frogger_game #(
         .i_Bitmap_Data(w_Bitmap_Data),
         .o_Frogger_X(w_Frogger_X),
         .o_Frogger_Y(w_Frogger_Y),
-        .o_Score(game_state[8:2])
+        .o_Score(game_level[6:0])
     );
 
     
-    car #(.CAR_INIT_X(0), .BASE_SPEED(24'd9000), .CAR_DIRECTION(1)) car_0 (.i_Clk(slow_clk),.level(game_state[8:2]),.o_car_x(car_x_0));
-    car #(.CAR_INIT_X(19), .BASE_SPEED(24'd9000), .CAR_DIRECTION(0)) car_1 (.i_Clk(slow_clk),.level(game_state[8:2]),.o_car_x(car_x_1));
-    car #(.CAR_INIT_X(6), .BASE_SPEED(24'd9000), .CAR_DIRECTION(1)) car_2 (.i_Clk(slow_clk),.level(game_state[8:2]),.o_car_x(car_x_2));
-    car #(.CAR_INIT_X(20), .BASE_SPEED(24'd9000), .CAR_DIRECTION(0)) car_3 (.i_Clk(slow_clk),.level(game_state[8:2]),.o_car_x(car_x_3));
-    car #(.CAR_INIT_X(3), .BASE_SPEED(24'd10003), .CAR_DIRECTION(1)) car_4 (.i_Clk(slow_clk),.level(game_state[8:2]),.o_car_x(car_x_4));
-    car #(.CAR_INIT_X(4), .BASE_SPEED(24'd10003), .CAR_DIRECTION(0)) car_5 (.i_Clk(slow_clk),.level(game_state[8:2]),.o_car_x(car_x_5));
-    car #(.CAR_INIT_X(9), .BASE_SPEED(24'd10003), .CAR_DIRECTION(1)) car_6 (.i_Clk(slow_clk),.level(game_state[8:2]),.o_car_x(car_x_6));
-    car #(.CAR_INIT_X(18), .BASE_SPEED(24'd10003), .CAR_DIRECTION(0)) car_7 (.i_Clk(slow_clk),.level(game_state[8:2]),.o_car_x(car_x_7));
-    car #(.CAR_INIT_X(4), .BASE_SPEED(24'd10003), .CAR_DIRECTION(1)) car_8 (.i_Clk(slow_clk),.level(game_state[8:2]),.o_car_x(car_x_8));
-    car #(.CAR_INIT_X(11), .BASE_SPEED(24'd10003), .CAR_DIRECTION(1)) car_9 (.i_Clk(slow_clk),.level(game_state[8:2]),.o_car_x(car_x_9));
+    car #(.CAR_INIT_X(0), .BASE_SPEED(24'd9000), .CAR_DIRECTION(1)) car_0 (.i_Clk(slow_clk),.level(game_level[6:0]),.o_car_x(car_x_0));
+    car #(.CAR_INIT_X(19), .BASE_SPEED(24'd9000), .CAR_DIRECTION(0)) car_1 (.i_Clk(slow_clk),.level(game_level[6:0]),.o_car_x(car_x_1));
+    car #(.CAR_INIT_X(6), .BASE_SPEED(24'd9000), .CAR_DIRECTION(1)) car_2 (.i_Clk(slow_clk),.level(game_level[6:0]),.o_car_x(car_x_2));
+    car #(.CAR_INIT_X(20), .BASE_SPEED(24'd9000), .CAR_DIRECTION(0)) car_3 (.i_Clk(slow_clk),.level(game_level[6:0]),.o_car_x(car_x_3));
+    car #(.CAR_INIT_X(3), .BASE_SPEED(24'd10003), .CAR_DIRECTION(1)) car_4 (.i_Clk(slow_clk),.level(game_level[6:0]),.o_car_x(car_x_4));
+    car #(.CAR_INIT_X(4), .BASE_SPEED(24'd10003), .CAR_DIRECTION(0)) car_5 (.i_Clk(slow_clk),.level(game_level[6:0]),.o_car_x(car_x_5));
+    car #(.CAR_INIT_X(9), .BASE_SPEED(24'd10003), .CAR_DIRECTION(1)) car_6 (.i_Clk(slow_clk),.level(game_level[6:0]),.o_car_x(car_x_6));
+    car #(.CAR_INIT_X(18), .BASE_SPEED(24'd10003), .CAR_DIRECTION(0)) car_7 (.i_Clk(slow_clk),.level(game_level[6:0]),.o_car_x(car_x_7));
+    car #(.CAR_INIT_X(4), .BASE_SPEED(24'd10003), .CAR_DIRECTION(1)) car_8 (.i_Clk(slow_clk),.level(game_level[6:0]),.o_car_x(car_x_8));
+    car #(.CAR_INIT_X(11), .BASE_SPEED(24'd10003), .CAR_DIRECTION(1)) car_9 (.i_Clk(slow_clk),.level(game_level[6:0]),.o_car_x(car_x_9));
 
    
     always @(posedge i_Clk) begin
@@ -231,7 +231,7 @@ module frogger_game #(
     
     score_control score_control_inst (
         .i_Clk(i_Clk),
-        .i_Score(game_state[8:2]),
+        .i_Score(game_level[6:0]),
         .o_Segment1(o_Segment1),
         .o_Segment2(o_Segment2)
     );

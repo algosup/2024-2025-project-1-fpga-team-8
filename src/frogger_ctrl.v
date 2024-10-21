@@ -47,6 +47,8 @@ module frogger_ctrl(
         parameter c_LOG_SLOW_COUNT = 39000000;
         parameter c_FROGGER_ORIG_X = 10;
         parameter c_FROGGER_ORIG_Y = 14;
+        parameter c_GAME_WIDTH = 20;
+
         reg [31:0] r_Log_Movement_Counter = 0;
 
     
