@@ -63,11 +63,11 @@ The test cases are defined by a criticality level, indicating the importance of 
 
 ---
  
-### 3. Move Frogger up
+### 3. Move Froggo up
 
 | ID               | 3                                                             |
 | ---------------- | ------------------------------------------------------------- |
-| Name             | Move Frogger up                                               |
+| Name             | Move Froggo up                                               |
 | Test Description | Pressing Switch 1 should move the frog one tile up.           |
 | Test Type        | Manual                                                        |
 | Test Criticality | 🔴                                                             |
@@ -83,11 +83,11 @@ The test cases are defined by a criticality level, indicating the importance of 
 
 ---
  
-### 4. Move Frogger down
+### 4. Move Froggo down
 
 | ID               | 4                                                               |
 | ---------------- | --------------------------------------------------------------- |
-| Name             | Move Frogger down                                               |
+| Name             | Move Froggo down                                               |
 | Test Description | Pressing Switch 4 should move the frog one tile down.           |
 | Test Type        | Manual                                                          |
 | Test Criticality | 🔴                                                               |
@@ -103,11 +103,11 @@ The test cases are defined by a criticality level, indicating the importance of 
 
 ---
  
-### 5. Move Frogger left
+### 5. Move Froggo left
 
 | ID               | 5                                                              |
 | ---------------- | -------------------------------------------------------------- |
-| Name             | Move Frogger left                                              |
+| Name             | Move Froggo left                                              |
 | Test Description | Pressing Switch 2 should move the frog one tile left.          |
 | Test Type        | Manual                                                         |
 | Test Criticality | 🔴                                                              |
@@ -123,11 +123,11 @@ The test cases are defined by a criticality level, indicating the importance of 
 
 ---
  
-### 6. Move Frogger right
+### 6. Move Froggo right
 
 | ID               | 6                                                               |
 | ---------------- | --------------------------------------------------------------- |
-| Name             | Move Frogger right                                              |
+| Name             | Move Froggo right                                              |
 | Test Description | Pressing Switch 3 should move the frog one tile up.             |
 | Test Type        | Manual                                                          |
 | Test Criticality | 🔴                                                               |
@@ -170,11 +170,11 @@ The test cases are defined by a criticality level, indicating the importance of 
 
 ---
  
-### 8. Frogger loses a life when colliding with a car
+### 8. Froggo loses a life when colliding with a car
 
 | ID               | 8                                                               |
 | ---------------- | --------------------------------------------------------------- |
-| Name             | Frogger loses a life when colliding with a car                  |
+| Name             | Froggo loses a life when colliding with a car                  |
 | Test Description | When the frog collides with a car, the frog should lose a life. |
 | Test Type        | Manual                                                          |
 | Test Criticality | 🔴                                                               |
@@ -189,13 +189,19 @@ The test cases are defined by a criticality level, indicating the importance of 
 1. Move the frog on the first road lane.
 2. Wait for a car to collide with the frog.
 
+**Images for Reference:**
+
+| Initial board LEDs             | Final Board LEDs             |
+| ------------------------------ | ---------------------------- |
+| ![initial](./images/3LEDs.jpg) | ![final](./images/2LEDs.jpg) |
+
 ---
  
-### 9. Frogger loses a life when entering the water
+### 9. Froggo loses a life when entering the water
 
 | ID               | 9                                                      |
 | ---------------- | ------------------------------------------------------ |
-| Name             | Frogger loses a life when entering the water           |
+| Name             | Froggo loses a life when entering the water           |
 | Test Description | When the frog enters the water, it should lose a life. |
 | Test Type        | Manual                                                 |
 | Test Criticality | 🔴                                                      |
@@ -209,6 +215,12 @@ The test cases are defined by a criticality level, indicating the importance of 
 
 1. Reach the lower river bank after the road.
 2. Ensure no log is coming on the first river lane and move up.
+
+**Images for Reference:**
+
+| Initial board LEDs             | Final Board LEDs             |
+| ------------------------------ | ---------------------------- |
+| ![initial](./images/3LEDs.jpg) | ![final](./images/2LEDs.jpg) |
 
 ---
  
@@ -230,17 +242,21 @@ The test cases are defined by a criticality level, indicating the importance of 
 
 1. Check the top of the screen.
 
+**Expected Result:**
+
+![home base](./images/river.png)
+
 ---
  
 ### 11. Fluid movement of objects across the screen
 
-| ID               | 11                                                                                          |
-| ---------------- | ------------------------------------------------------------------------------------------- |
-| Name             | Fluid movement of objects across the screen                                                 |
-| Test Description | The movement of cars and logs should be fluid, without choppiness.                          |
-| Test Type        | Manual                                                                                      |
-| Test Criticality | 🔴                                                                                           |
-| Expected Result  | All elements on the screen should move smoothly, with a stable framerate of at least 30fps. |
+| ID               | 11                                                                                         |
+| ---------------- | ------------------------------------------------------------------------------------------ |
+| Name             | Fluid movement of objects across the screen                                                |
+| Test Description | The movement of cars and logs should be fluid, without choppiness.                         |
+| Test Type        | Manual                                                                                     |
+| Test Criticality | 🔴                                                                                          |
+| Expected Result  | All elements on the screen should move smoothly, with a stable framerate of at least 60Hz. |
 
 **Hardware:**
 
@@ -249,7 +265,7 @@ The test cases are defined by a criticality level, indicating the importance of 
 **Steps:**
 
 1. Check the movement of the cars, logs and bonuses to ensure they move fluidly for 30 seconds.
-2. Observe Frogger's movement to ensure it is fluid.
+2. Observe Froggo's movement to ensure it is fluid.
 3. Check for any screen tearing or flickering.
 4. Verify that the framerate remains stable.
 
@@ -271,7 +287,7 @@ The test cases are defined by a criticality level, indicating the importance of 
 
 **Steps:**
 
-1. Ensure Frogger's texture matches the expected sprite.
+1. Ensure Froggo's texture matches the expected sprite.
 2. Ensure the cars' textures match the expected sprites.
 3. Ensure the logs' textures match the expected sprites.
 4. Ensure the bonuses' textures match the expected sprites.
@@ -285,7 +301,7 @@ The test cases are defined by a criticality level, indicating the importance of 
 | Name of the texture     | Texture                                                   |
 | ----------------------- | --------------------------------------------------------- |
 | Frog                    | <div width=250>![frog](./images/frog.png)</div>           |
-| Home Bay                | <div width=250>![bay](./images/goal.png)</div>            |
+| Home base               | <div width=250>![base](./images/goal.png)</div>           |
 | Road                    | <div width=250>![road](./images/road.png)</div>           |
 | River                   | <div width=250>![river](./images/river.png)</div>         |
 | Log Start               | <div width=250>![log start](./images/logpart1.png)</div>  |
@@ -297,7 +313,7 @@ The test cases are defined by a criticality level, indicating the importance of 
 | Car Lane 4              | <div width=250>![car4](./images/car4.png)</div>           |
 | Truck Lane 5            | <div width=250>![truck](./images/truck.png)</div>         |
 | Turtle / Diving Turtles | <div width=250>![turtles](./images/turtle.png)</div>      |
-| Home Bay Grass          | <div width=250>![touch grass](./images/image.png)</div>   |
+| Home base Grass         | <div width=250>![touch grass](./images/image.png)</div>   |
 | Pink Lady               | <div width=250>![pink frog](./images/pink_frog.png)</div> |
 | Fly                     | <div width=250>![fly](./images/fly.png)</div>             |
 
@@ -338,11 +354,11 @@ The test cases are defined by a criticality level, indicating the importance of 
 
 ---
  
-### 14. Frogger body display in home base during same level
+### 14. Froggo body display in home base during same level
 
 | ID               | 14                                                                                                                    |
 | ---------------- | --------------------------------------------------------------------------------------------------------------------- |
-| Name             | Frogger body display in home base during same level                                                                   |
+| Name             | Froggo body display in home base during same level                                                                   |
 | Test Description | When the frog has reached a home base, its body should be displayed in the home base until the next level starts.     |
 | Test Type        | Manual                                                                                                                |
 | Test Criticality | 🟡                                                                                                                     |
@@ -360,7 +376,7 @@ The test cases are defined by a criticality level, indicating the importance of 
 
 **Expected result:**
 
-![frogger stays in base](./images//frogger_base.png)
+![Froggo stays in base](./images//Froggo_base.png)
 
 ---
  
@@ -402,6 +418,16 @@ The test cases are defined by a criticality level, indicating the importance of 
 
 1. Verify the speed of the cars, logs, bonuses, etc. matches the expected speed indicated in the linked table.
 
+**Speed Table:**
+
+| Level | Lane1 | Lane2 | Lane3 | Lane4 | Lane5 | Turtle1 | Log1 | Log2 | Turtle2 | Log3 | Snakes |
+| ----- | ----- | ----- | ----- | ----- | ----- | ------- | ---- | ---- | ------- | ---- | ------ |
+| 1     | 22    | 18    | 15    | 10    | 8     | 8       | 22   | 4    | 8       | 11   | /      |
+| 2     | 22    | 18    | 15    | 10    | 8     | 8       | 22   | 4    | 8       | 11   | /      |
+| 3     | 22    | 18    | 15    | 10    | 8     | 8       | 22   | 4    | 8       | 11   | 8      |
+| 4     | 20    | 18    | 15    | 10    | 8     | 8       | 20   | 4    | 8       | 10   | 8      |
+| 5+    | 8     | 12    | 8     | 2     | 10    | 4       | 20   | 8    | 12      | 8    | 8      |
+
 ---
  
 ### 17. Limited time to cross the screen
@@ -409,10 +435,10 @@ The test cases are defined by a criticality level, indicating the importance of 
 | ID               | 17                                                                                                     |
 | ---------------- | ------------------------------------------------------------------------------------------------------ |
 | Name             | Limited time to cross the screen                                                                       |
-| Test Description | Frogger should have 30 seconds to reach the home base at the top of the screen.                        |
+| Test Description | Froggo should have 30 seconds to reach the home base at the top of the screen.                        |
 | Test Type        | Manual                                                                                                 |
 | Test Criticality | 🟡                                                                                                      |
-| Expected Result  | One fewer LED should be litted up if time runs out and Frogger should be teleported back to the spawn. |
+| Expected Result  | One fewer LED should be litted up if time runs out and Froggo should be teleported back to the spawn. |
 
 **Hardware:**
 
@@ -421,6 +447,11 @@ The test cases are defined by a criticality level, indicating the importance of 
 **Steps:**
 
 1. Wait 30 seconds without moving the frog
+**Images for Reference:**
+
+| Initial board LEDs             | Final Board LEDs             |
+| ------------------------------ | ---------------------------- |
+| ![initial](./images/3LEDs.jpg) | ![final](./images/2LEDs.jpg) |
 
 ---
  
@@ -598,10 +629,10 @@ The test cases are defined by a criticality level, indicating the importance of 
 | ID               | 26                                                                                                                      |
 | ---------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | Name             | Occupied home base - Life loosing                                                                                       |
-| Test Description | If Frogger reaches a home base that is already occupied, the player should lose a life.                                 |
+| Test Description | If Froggo reaches a home base that is already occupied, the player should lose a life.                                 |
 | Test Type        | Manual                                                                                                                  |
 | Test Criticality | 🟡                                                                                                                       |
-| Expected Result  | The player should lose a life, and the home base should remain filled. Frogger should warp to the bottom of the screen. |
+| Expected Result  | The player should lose a life, and the home base should remain filled. Froggo should warp to the bottom of the screen. |
 
 **Hardware:**
 
@@ -611,6 +642,12 @@ The test cases are defined by a criticality level, indicating the importance of 
 
 1. Reach and fill an empty home base.
 2. Attempt to fill the same home base again.
+
+**Images for Reference:**
+
+| Initial board LEDs             | Final Board LEDs             |
+| ------------------------------ | ---------------------------- |
+| ![initial](./images/3LEDs.jpg) | ![final](./images/2LEDs.jpg) |
 
 ---
  
@@ -675,15 +712,15 @@ The test cases are defined by a criticality level, indicating the importance of 
 
 ---
  
-### 30. Frogger - Floating off-screen
+### 30. Froggo - Floating off-screen
 
 | ID               | 30                                                                                     |
 | ---------------- | -------------------------------------------------------------------------------------- |
-| Name             | Frogger - Floating off-screen                                                          |
-| Test Description | In level 1, Frogger may float off-screen for one frame.                                |
+| Name             | Froggo - Floating off-screen                                                          |
+| Test Description | In level 1, Froggo may float off-screen for one frame.                                |
 | Test Type        | Manual                                                                                 |
 | Test Criticality | 🟢                                                                                      |
-| Expected Result  | Frogger should float off-screen for one frame and then reappear without losing a life. |
+| Expected Result  | Froggo should float off-screen for one frame and then reappear without losing a life. |
 
 **Hardware:**
 
@@ -693,16 +730,16 @@ The test cases are defined by a criticality level, indicating the importance of 
 
 1. Start level 1.
 2. Jump onto a log.
-3. Wait for the log to move off-screen while Frogger is still on it.
-4. Verify Frogger behaviour.
+3. Wait for the log to move off-screen while Froggo is still on it.
+4. Verify Froggo behaviour.
 
 ---
  
-### 31. Frogger - Scoring system
+### 31. Froggo - Scoring system
 
 | ID               | 31                                                                  |
 | ---------------- | ------------------------------------------------------------------- |
-| Name             | Frogger - Scoring system                                            |
+| Name             | Froggo - Scoring system                                            |
 | Test Description | The scoring system should match the predefined values.              |
 | Test Type        | Manual                                                              |
 | Test Criticality | 🔴                                                                   |
@@ -716,13 +753,25 @@ The test cases are defined by a criticality level, indicating the importance of 
 
 1. Check the scoring system matches the predefined values.
 
+**Scoring System:**
+
+| Action              | Points Earned                       |
+| ------------------- | ----------------------------------- |
+| Jump Forward        | +10 points                          |
+| Reaching Home Bay   | +50 points                          |
+| Beating A Level     | +1,000 points                       |
+| Escorting Pink Lady | +200 points                         |
+| Eating A Fly        | +200 points                         |
+| Bonus Time          | +10 points \* half second remaining |
+| Score = 20,000      | 1 life gained                       |
+
 ---
  
-### 32. Frogger - Extra life
+### 32. Froggo - Extra life
 
 | ID               | 32                                                                                                         |
 | ---------------- | ---------------------------------------------------------------------------------------------------------- |
-| Name             | Frogger - Extra life                                                                                       |
+| Name             | Froggo - Extra life                                                                                       |
 | Test Description | If the player reaches 20,000 points, an extra life should be granted if the player has fewer than 4 lives. |
 | Test Type        | Manual                                                                                                     |
 | Test Criticality | 🔴                                                                                                          |
@@ -738,17 +787,23 @@ The test cases are defined by a criticality level, indicating the importance of 
 2. Reach a score of 20000 points.
 3. Verify that you have 4 lives.
 
+**Images for Reference:**
+
+| Initial board LEDs           | Final Board LEDs               |
+| ---------------------------- | ------------------------------ |
+| ![final](./images/2LEDs.jpg) | ![initial](./images/3LEDs.jpg) |
+
 ---
  
-### 33. Frogger - Lives on a log
+### 33. Froggo - Lives on a log
 
 | ID               | 33                                                                                 |
 | ---------------- | ---------------------------------------------------------------------------------- |
-| Name             | Frogger - Lives on a log                                                           |
-| Test Description | Frogger lives when on a log, jumping on a log should not make frogger lose a life. |
+| Name             | Froggo - Lives on a log                                                           |
+| Test Description | Froggo lives when on a log, jumping on a log should not make Froggo lose a life. |
 | Test Type        | Manual                                                                             |
 | Test Criticality | 🟡                                                                                  |
-| Expected Result  | Frogger should not lose a life when he jumps on a log.                             |
+| Expected Result  | Froggo should not lose a life when he jumps on a log.                             |
 
 **Hardware:**
 
@@ -758,19 +813,19 @@ The test cases are defined by a criticality level, indicating the importance of 
 
 1. Wait for logs to appear
 2. Jump onto a log
-3. Verify if Frogger loses a life
+3. Verify if Froggo loses a life
 
 ---
  
-### 34. Logs - Frogger Getting Moved
+### 34. Logs - Froggo Getting Moved
 
 | ID               | 34                                                 |
 | ---------------- | -------------------------------------------------- |
-| Name             | Logs - Frogger Getting Moved                       |
-| Test Description | Frogger should move with the logs.                 |
+| Name             | Logs - Froggo Getting Moved                       |
+| Test Description | Froggo should move with the logs.                 |
 | Test Type        | Manual                                             |
 | Test Criticality | 🟡                                                  |
-| Expected Result  | Frogger should be transported along with the logs. |
+| Expected Result  | Froggo should be transported along with the logs. |
 
 **Hardware:**
 
@@ -780,7 +835,7 @@ The test cases are defined by a criticality level, indicating the importance of 
 
 1. Wait for logs to appear
 2. Jump on the logs
-3. Ensure that Frogger moves along with the logs.
+3. Ensure that Froggo moves along with the logs.
 
 ---
  
@@ -789,10 +844,10 @@ The test cases are defined by a criticality level, indicating the importance of 
 | ID               | 35                                                                                         |
 | ---------------- | ------------------------------------------------------------------------------------------ |
 | Name             | Turtle - Can Be On Turtles' Back                                                           |
-| Test Description | Frogger should be able to be on a turtle's back and move with it.                          |
+| Test Description | Froggo should be able to be on a turtle's back and move with it.                          |
 | Test Type        | Manual                                                                                     |
 | Test Criticality | 🟡                                                                                          |
-| Expected Result  | Frogger should be able to jump on the turtles back and move with it. Without losing a life |
+| Expected Result  | Froggo should be able to jump on the turtles back and move with it. Without losing a life |
 
 **Hardware:**
 
@@ -802,8 +857,8 @@ The test cases are defined by a criticality level, indicating the importance of 
 
 1. Wait for turtles to appear
 2. Jump on the turtles back
-3. Verify the behavior of Frogger
-4. Verify Frogger moves with the turtle
+3. Verify the behavior of Froggo
+4. Verify Froggo moves with the turtle
 
 ---
  
@@ -831,15 +886,15 @@ The test cases are defined by a criticality level, indicating the importance of 
 
 ---
  
-### 37. Turtles - Frogger Movement
+### 37. Turtles - Froggo Movement
 
 | ID               | 37                                                                                             |
 | ---------------- | ---------------------------------------------------------------------------------------------- |
-| Name             | Turtles - Frogger Movement                                                                     |
-| Test Description | Frogger can move when on turtles                                                               |
+| Name             | Turtles - Froggo Movement                                                                     |
+| Test Description | Froggo can move when on turtles                                                               |
 | Test Type        | Manual                                                                                         |
 | Test Criticality | 🟡                                                                                              |
-| Expected Result  | Frogger should be able to move when on the turtles back. From left to right and right to left. |
+| Expected Result  | Froggo should be able to move when on the turtles back. From left to right and right to left. |
 
 **Hardware:**
 
@@ -849,7 +904,7 @@ The test cases are defined by a criticality level, indicating the importance of 
 
 1. Wait for turtles to appear
 2. Hop on the turtles back
-3. Try to move Frogger
+3. Try to move Froggo
 
 ---
  
@@ -874,15 +929,15 @@ The test cases are defined by a criticality level, indicating the importance of 
 
 ---
  
-### 39. Turtles Diving - Frogger dies
+### 39. Turtles Diving - Froggo dies
 
 | ID               | 39                                                                            |
 | ---------------- | ----------------------------------------------------------------------------- |
-| Name             | Turtles Diving - Frogger dies                                                 |
-| Test Description | Frogger should lose a life when the turtles dive.                             |
+| Name             | Turtles Diving - Froggo dies                                                 |
+| Test Description | Froggo should lose a life when the turtles dive.                             |
 | Test Type        | Manual                                                                        |
 | Test Criticality | 🟢                                                                             |
-| Expected Result  | Frogger should lose a life if he remains on the turtles' back when they dive. |
+| Expected Result  | Froggo should lose a life if he remains on the turtles' back when they dive. |
 
 **Hardware:**
 
@@ -893,7 +948,7 @@ The test cases are defined by a criticality level, indicating the importance of 
 1. Wait for diving turtles to appear
 2. Jump onto the turtles' back.
 3. Wait for the turtles to dive
-4. Verify the behavior of Frogger
+4. Verify the behavior of Froggo
 
 ---
  
@@ -921,15 +976,15 @@ The test cases are defined by a criticality level, indicating the importance of 
 
 ---
  
-### 41. Alligator - Frogger Walk
+### 41. Alligator - Froggo Walk
 
 | ID               | 41                                                                                 |
 | ---------------- | ---------------------------------------------------------------------------------- |
-| Name             | Alligator - Frogger Walk                                                           |
-| Test Description | Frogger should be able to walk on the backs of alligators.                         |
+| Name             | Alligator - Froggo Walk                                                           |
+| Test Description | Froggo should be able to walk on the backs of alligators.                         |
 | Test Type        | Manual                                                                             |
 | Test Criticality | 🟢                                                                                  |
-| Expected Result  | Frogger should be able to jump onto the alligator's back, regardless of its state. |
+| Expected Result  | Froggo should be able to jump onto the alligator's back, regardless of its state. |
 
 **Hardware:**
 
@@ -939,19 +994,19 @@ The test cases are defined by a criticality level, indicating the importance of 
 
 1. Wait for an alligator to appear in the water.
 2. Jump onto the alligator's back.
-3. Verify the behavior of Frogger
+3. Verify the behavior of Froggo
 
 ---
  
-### 42. Alligators - Frogger Immunity
+### 42. Alligators - Froggo Immunity
 
 | ID               | 42                                                                          |
 | ---------------- | --------------------------------------------------------------------------- |
-| Name             | Alligators - Frogger Immunity                                               |
-| Test Description | Frogger should be able to walk safely on an alligator's closed jaws.        |
+| Name             | Alligators - Froggo Immunity                                               |
+| Test Description | Froggo should be able to walk safely on an alligator's closed jaws.        |
 | Test Type        | Manual                                                                      |
 | Test Criticality | 🟢                                                                           |
-| Expected Result  | Frogger should not lose a life when walking on the alligator's closed jaws. |
+| Expected Result  | Froggo should not lose a life when walking on the alligator's closed jaws. |
 
 **Hardware:**
 
@@ -962,19 +1017,19 @@ The test cases are defined by a criticality level, indicating the importance of 
 1. Wait for an alligator to appear in the water
 2. Wait for the alligator to close its jaws.
 3. Jump onto the alligator while its jaws are closed.
-4. Verify the behavior of Frogger
+4. Verify the behavior of Froggo
 
 ---
  
-### 43. Alligators - Frogger life loosing
+### 43. Alligators - Froggo life loosing
 
 | ID               | 43                                                                      |
 | ---------------- | ----------------------------------------------------------------------- |
-| Name             | Alligators - Frogger life loosing                                       |
-| Test Description | Frogger should lose a life when walking on an alligator's open jaw.     |
+| Name             | Alligators - Froggo life loosing                                       |
+| Test Description | Froggo should lose a life when walking on an alligator's open jaw.     |
 | Test Type        | Manual                                                                  |
 | Test Criticality | 🟢                                                                       |
-| Expected Result  | Frogger should lose a life when walking onto the alligator's open jaws. |
+| Expected Result  | Froggo should lose a life when walking onto the alligator's open jaws. |
 
 **Hardware:**
 
@@ -984,20 +1039,20 @@ The test cases are defined by a criticality level, indicating the importance of 
 
 1. Wait for an alligator to appear in the water
 2. Wait for the alligator to open its jaws.
-3. Move Frogger onto the alligator's open jaw.
-4. Check the behavior of Frogger
+3. Move Froggo onto the alligator's open jaw.
+4. Check the behavior of Froggo
 
 ---
  
-### 44. Alligators head - Frogger Kill
+### 44. Alligators head - Froggo Kill
 
-| ID               | 44                                                                                                                                |
-| ---------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| Name             | Alligators head - Frogger Kill                                                                                                    |
-| Test Description | If an alligator's head remains visible in a home bay for more than two seconds, Frogger should lose a life upon entering the bay. |
-| Test Type        | Manual                                                                                                                            |
-| Test Criticality | 🟢                                                                                                                                 |
-| Expected Result  | Frogger should lose a life when entering the home bay after the alligator's head has been visible for more than two seconds.      |
+| ID               | 44                                                                                                                                  |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Name             | Alligators head - Froggo Kill                                                                                                      |
+| Test Description | If an alligator's head remains visible in a home base for more than two seconds, Froggo should lose a life upon entering the base. |
+| Test Type        | Manual                                                                                                                              |
+| Test Criticality | 🟢                                                                                                                                   |
+| Expected Result  | Froggo should lose a life when entering the home base after the alligator's head has been visible for more than two seconds.       |
 
 **Hardware:**
 
@@ -1006,20 +1061,20 @@ The test cases are defined by a criticality level, indicating the importance of 
 **Steps:**
 
 1. Wait for an alligator head to appear in one of the home bases.
-2. Enter the home bay after two seconds have passed.
-3. Check the behavior of Frogger.
+2. Enter the home base after two seconds have passed.
+3. Check the behavior of Froggo.
 
 ---
  
-### 45. Otters - Pushing Frogger
+### 45. Otters - Pushing Froggo
 
 | ID               | 45                                                          |
 | ---------------- | ----------------------------------------------------------- |
-| Name             | Otters - Pushing Frogger                                    |
-| Test Description | Otters should attempt to push Frogger off floating objects. |
+| Name             | Otters - Pushing Froggo                                    |
+| Test Description | Otters should attempt to push Froggo off floating objects. |
 | Test Type        | Manual                                                      |
 | Test Criticality | 🟢                                                           |
-| Expected Result  | Otters should try to push Frogger off the logs.             |
+| Expected Result  | Otters should try to push Froggo off the logs.             |
 
 **Hardware:**
 
@@ -1028,7 +1083,7 @@ The test cases are defined by a criticality level, indicating the importance of 
 **Steps:**
 
 1. Reach level 3
-2. Place Frogger at the edge of a log.
+2. Place Froggo at the edge of a log.
 3. Wait for an otter to appear
 4. Verify the behavior of the otter
 
@@ -1056,15 +1111,15 @@ The test cases are defined by a criticality level, indicating the importance of 
 
 ---
  
-### 47. Alligators head - Frogger Immunity
+### 47. Alligators head - Froggo Immunity
 
-| ID               | 47                                                                                                                                |
-| ---------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| Name             | Alligators head - Frogger Immunity                                                                                                |
-| Test Description | If an alligator's head has been visible in a home bay for less than two seconds, Frogger should be immune upon entering that bay. |
-| Test Type        | Manual                                                                                                                            |
-| Test Criticality | 🟢                                                                                                                                 |
-| Expected Result  | Frogger should not lose a life when entering a home bay within two seconds of the alligator's head appearing.                     |
+| ID               | 47                                                                                                                                  |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Name             | Alligators head - Froggo Immunity                                                                                                  |
+| Test Description | If an alligator's head has been visible in a home base for less than two seconds, Froggo should be immune upon entering that base. |
+| Test Type        | Manual                                                                                                                              |
+| Test Criticality | 🟢                                                                                                                                   |
+| Expected Result  | Froggo should not lose a life when entering a home base within two seconds of the alligator's head appearing.                      |
 
 **Hardware:**
 
@@ -1073,8 +1128,8 @@ The test cases are defined by a criticality level, indicating the importance of 
 **Steps:**
 
 1. Wait for an alligator head to appear in one of the home bases.
-2. Enter the home bay before two seconds have passed.
-3. Check the behavior of Frogger.
+2. Enter the home base before two seconds have passed.
+3. Check the behavior of Froggo.
 
 ---
  
@@ -1163,15 +1218,15 @@ The test cases are defined by a criticality level, indicating the importance of 
 
 ---
  
-### 52. Pink Lady Bonus - Frogger sprite change
+### 52. Pink Lady Bonus - Froggo sprite change
 
 | ID               | 52                                                                                                            |
 | ---------------- | ------------------------------------------------------------------------------------------------------------- |
-| Name             | Pink Lady Bonus - Frogger sprite change                                                                       |
-| Test Description | When Frogger reaches the same position as the Pink Lady, Frogger's sprite should change to a different color. |
+| Name             | Pink Lady Bonus - Froggo sprite change                                                                       |
+| Test Description | When Froggo reaches the same position as the Pink Lady, Froggo's sprite should change to a different color. |
 | Test Type        | Manual                                                                                                        |
 | Test Criticality | 🟢                                                                                                             |
-| Expected Result  | Frogger's sprite should change to a different color and a glowing effect upon contact.                        |
+| Expected Result  | Froggo's sprite should change to a different color and a glowing effect upon contact.                        |
 
 **Hardware:**
 
@@ -1180,20 +1235,20 @@ The test cases are defined by a criticality level, indicating the importance of 
 **Steps:**
 
 1. Wait for the Pink Lady to appear on the screen.
-2. Move Frogger to the Pink Lady's position.
-3. Verify the sprite of Frogger
+2. Move Froggo to the Pink Lady's position.
+3. Verify the sprite of Froggo
 
 ---
  
 ### 53. Pink Lady Bonus - Bonus Points Addition
 
-| ID               | 53                                                                                       |
-| ---------------- | ---------------------------------------------------------------------------------------- |
-| Name             | Pink Lady Bonus - Bonus Points Addition                                                  |
-| Test Description | If Frogger escorts the Pink Lady to a home bay, the score should increase by 200 points. |
-| Test Type        | Simulation                                                                               |
-| Test Criticality | 🟢                                                                                        |
-| Expected Result  | The score should increase by 200 points.                                                 |
+| ID               | 53                                                                                        |
+| ---------------- | ----------------------------------------------------------------------------------------- |
+| Name             | Pink Lady Bonus - Bonus Points Addition                                                   |
+| Test Description | If Froggo escorts the Pink Lady to a home base, the score should increase by 200 points. |
+| Test Type        | Simulation                                                                                |
+| Test Criticality | 🟢                                                                                         |
+| Expected Result  | The score should increase by 200 points.                                                  |
 
 **Hardware:**
 
@@ -1202,20 +1257,20 @@ The test cases are defined by a criticality level, indicating the importance of 
 **Steps:**
 
 1. Wait for pink lady to appear.
-2. Escort the Pink Lady to a home bay.
+2. Escort the Pink Lady to a home base.
 3. Verify the score has been incremented.
 
 ---
  
 ### 54. Random Appearance - Fly in home base
 
-| ID               | 54                                                                     |
-| ---------------- | ---------------------------------------------------------------------- |
-| Name             | Random Appearance - Fly in home base                                   |
-| Test Description | A fly should randomly appear in one of the empty home bays.            |
-| Test Type        | Manual                                                                 |
-| Test Criticality | 🟢                                                                      |
-| Expected Result  | A fly should appear in one of the empty home bays at random intervals. |
+| ID               | 54                                                                      |
+| ---------------- | ----------------------------------------------------------------------- |
+| Name             | Random Appearance - Fly in home base                                    |
+| Test Description | A fly should randomly appear in one of the empty home bases.            |
+| Test Type        | Manual                                                                  |
+| Test Criticality | 🟢                                                                       |
+| Expected Result  | A fly should appear in one of the empty home bases at random intervals. |
 
 **Hardware:**
 
@@ -1224,19 +1279,19 @@ The test cases are defined by a criticality level, indicating the importance of 
 **Steps:**
 
 1. Wait for a fly to appear at random intervals.
-2. Verify if the fly appears in an empty home bay.
+2. Verify if the fly appears in an empty home base.
 
 ---
  
 ### 55. Bonus Points - Frog in home base
 
-| ID               | 55                                                                                         |
-| ---------------- | ------------------------------------------------------------------------------------------ |
-| Name             | Bonus Points - Frog in home base                                                           |
-| Test Description | If a fly is present in one of the home bays, Frogger should earn 200 points upon entering. |
-| Test Type        | Simulation                                                                                 |
-| Test Criticality | 🟢                                                                                          |
-| Expected Result  | The score should increase by 200 points when Frogger enters the home bay with a fly.       |
+| ID               | 55                                                                                          |
+| ---------------- | ------------------------------------------------------------------------------------------- |
+| Name             | Bonus Points - Frog in home base                                                            |
+| Test Description | If a fly is present in one of the home bases, Froggo should earn 200 points upon entering. |
+| Test Type        | Simulation                                                                                  |
+| Test Criticality | 🟢                                                                                           |
+| Expected Result  | The score should increase by 200 points when Froggo enters the home base with a fly.       |
 
 **Hardware:**
 
@@ -1245,5 +1300,5 @@ The test cases are defined by a criticality level, indicating the importance of 
 **Steps:**
 
 1. Wait for a fly to appear.
-2. Move Frogger into the home bay with the fly.
+2. Move Froggo into the home base with the fly.
 3. Verify the score gets updated by 200 points.

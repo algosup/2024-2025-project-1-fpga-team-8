@@ -56,7 +56,7 @@
         },
         {
             "test_id": 3,
-            "test_name": "Move Frogger up",
+            "test_name": "Move Froggo up",
             "test_description": "Pressing Switch 1 should move the frog one tile up.",
             "test_requirements": [
                 {
@@ -83,7 +83,7 @@
         },
         {
             "test_id": 4,
-            "test_name": "Move Frogger down",
+            "test_name": "Move Froggo down",
             "test_description": "Pressing Switch 4 should move the frog one tile down.",
             "test_requirements": [
                 {
@@ -110,7 +110,7 @@
         },
         {
             "test_id": 5,
-            "test_name": "Move Frogger left",
+            "test_name": "Move Froggo left",
             "test_description": "Pressing Switch 2 should move the frog one tile left.",
             "test_requirements": [
                 {
@@ -137,7 +137,7 @@
         },
         {
             "test_id": 6,
-            "test_name": "Move Frogger right",
+            "test_name": "Move Froggo right",
             "test_description": "Pressing Switch 3 should move the frog one tile up.",
             "test_requirements": [
                 {
@@ -219,7 +219,7 @@
         },
         {
             "test_id": 8,
-            "test_name": "Frogger loses a life when colliding with a car",
+            "test_name": "Froggo loses a life when colliding with a car",
             "test_description": "When the frog collides with a car, the frog should lose a life.",
             "test_requirements": [
                 {
@@ -250,7 +250,7 @@
         },
         {
             "test_id": 9,
-            "test_name": "Frogger loses a life when entering the water",
+            "test_name": "Froggo loses a life when entering the water",
             "test_description": "When the frog enters the water, it should lose a life.",
             "test_requirements": [
                 {
@@ -329,7 +329,7 @@
                 },
                 {
                     "step_number": 2,
-                    "step_description": "Observe Frogger's movement to ensure it is fluid."
+                    "step_description": "Observe Froggo's movement to ensure it is fluid."
                 },
                 {
                     "step_number": 3,
@@ -364,7 +364,7 @@
             "steps_to_follow": [
                 {
                     "step_number": 1,
-                    "step_description": "Ensure Frogger's texture matches the expected sprite."
+                    "step_description": "Ensure Froggo's texture matches the expected sprite."
                 },
                 {
                     "step_number": 2,
@@ -429,7 +429,7 @@
         },
         {
             "test_id": 14,
-            "test_name": "Frogger body display in home base during same level",
+            "test_name": "Froggo body display in home base during same level",
             "test_description": "When the frog has reached a home base, its body should be displayed in the home base until the next level starts.",
             "test_requirements": [
                 {
@@ -519,7 +519,7 @@
         {
             "test_id": 17,
             "test_name": "Limited time to cross the screen",
-            "test_description": "Frogger should have 30 seconds to reach the home base at the top of the screen.",
+            "test_description": "Froggo should have 30 seconds to reach the home base at the top of the screen.",
             "test_requirements": [
                 {
                     "hardware": [
@@ -766,7 +766,7 @@
         {
             "test_id": 26,
             "test_name": "Occupied home base - Life loosing",
-            "test_description": "If Frogger reaches a home base that is already occupied, the player should lose a life.",
+            "test_description": "If Froggo reaches a home base that is already occupied, the player should lose a life.",
             "test_requirements": [
                 {
                     "hardware": [
@@ -789,7 +789,7 @@
                     "step_description": "Attempt to fill the same home base again."
                 }
             ],
-            "expected_result": "The player should lose a life, and the home base should remain filled. Frogger should warp to the bottom of the screen.",
+            "expected_result": "The player should lose a life, and the home base should remain filled. Froggo should warp to the bottom of the screen.",
             "test_data": {
                 "data": ""
             }
@@ -881,8 +881,8 @@
         },
         {
             "test_id": 30,
-            "test_name": "Frogger - Floating off-screen",
-            "test_description": "In level 1, Frogger may float off-screen for one frame.",
+            "test_name": "Froggo - Floating off-screen",
+            "test_description": "In level 1, Froggo may float off-screen for one frame.",
             "test_requirements": [
                 {
                     "hardware": [
@@ -906,21 +906,21 @@
                 },
                 {
                     "step_number": 3,
-                    "step_description": "Wait for the log to move off-screen while Frogger is still on it."
+                    "step_description": "Wait for the log to move off-screen while Froggo is still on it."
                 },
                 {
                     "step_number": 4,
-                    "step_description": "Verify Frogger behaviour."
+                    "step_description": "Verify Froggo behaviour."
                 }
             ],
-            "expected_result": "Frogger should float off-screen for one frame and then reappear without losing a life.",
+            "expected_result": "Froggo should float off-screen for one frame and then reappear without losing a life.",
             "test_data": {
                 "data": ""
             }
         },
         {
             "test_id": 31,
-            "test_name": "Frogger - Scoring system",
+            "test_name": "Froggo - Scoring system",
             "test_description": "The scoring system should match the predefined values.",
             "test_requirements": [
                 {
@@ -947,7 +947,7 @@
         },
         {
             "test_id": 32,
-            "test_name": "Frogger - Extra life",
+            "test_name": "Froggo - Extra life",
             "test_description": "If the player reaches 20,000 points, an extra life should be granted if the player has fewer than 4 lives.",
             "test_requirements": [
                 {
@@ -982,8 +982,8 @@
         },
         {
             "test_id": 33,
-            "test_name": "Frogger - Lives on a log",
-            "test_description": "Frogger lives when on a log, jumping on a log should not make frogger lose a life.",
+            "test_name": "Froggo - Lives on a log",
+            "test_description": "Froggo lives when on a log, jumping on a log should not make Froggo lose a life.",
             "test_requirements": [
                 {
                     "hardware": [
@@ -1007,18 +1007,18 @@
                 },
                 {
                     "step_number": 3,
-                    "step_description": "Verify if Frogger loses a life"
+                    "step_description": "Verify if Froggo loses a life"
                 }
             ],
-            "expected_result": "Frogger should not lose a life when he jumps on a log. ",
+            "expected_result": "Froggo should not lose a life when he jumps on a log. ",
             "test_data": {
                 "data": ""
             }
         },
         {
             "test_id": 34,
-            "test_name": "Logs - Frogger Getting Moved",
-            "test_description": "Frogger should move with the logs.",
+            "test_name": "Logs - Froggo Getting Moved",
+            "test_description": "Froggo should move with the logs.",
             "test_requirements": [
                 {
                     "hardware": [
@@ -1042,10 +1042,10 @@
                 },
                 {
                     "step_number": 3,
-                    "step_description": "Ensure that Frogger moves along with the logs."
+                    "step_description": "Ensure that Froggo moves along with the logs."
                 }
             ],
-            "expected_result": "Frogger should be transported along with the logs.",
+            "expected_result": "Froggo should be transported along with the logs.",
             "test_data": {
                 "data": ""
             }
@@ -1053,7 +1053,7 @@
         {
             "test_id": 35,
             "test_name": "Turtle - Can Be On Turtles' Back",
-            "test_description": "Frogger should be able to be on a turtle's back and move with it.",
+            "test_description": "Froggo should be able to be on a turtle's back and move with it.",
             "test_requirements": [
                 {
                     "hardware": [
@@ -1077,14 +1077,14 @@
                 },
                 {
                     "step_number": 3,
-                    "step_description": "Verify the behavior of Frogger"
+                    "step_description": "Verify the behavior of Froggo"
                 },
                 {
                     "step_number": 4,
-                    "step_description": "Verify Frogger moves with the turtle"
+                    "step_description": "Verify Froggo moves with the turtle"
                 }
             ],
-            "expected_result": "Frogger should be able to jump on the turtles back and move with it. Without losing a life",
+            "expected_result": "Froggo should be able to jump on the turtles back and move with it. Without losing a life",
             "test_data": {
                 "data": ""
             }
@@ -1134,8 +1134,8 @@
         },
         {
             "test_id": 37,
-            "test_name": "Turtles - Frogger Movement",
-            "test_description": "Frogger can move when on turtles",
+            "test_name": "Turtles - Froggo Movement",
+            "test_description": "Froggo can move when on turtles",
             "test_requirements": [
                 {
                     "hardware": [
@@ -1159,10 +1159,10 @@
                 },
                 {
                     "step_number": 3,
-                    "step_description": "Try to move Frogger"
+                    "step_description": "Try to move Froggo"
                 }
             ],
-            "expected_result": "Frogger should be able to move when on the turtles back. From left to right and right to left.",
+            "expected_result": "Froggo should be able to move when on the turtles back. From left to right and right to left.",
             "test_data": {
                 "data": ""
             }
@@ -1200,8 +1200,8 @@
         },
         {
             "test_id": 39,
-            "test_name": "Turtles Diving - Frogger dies",
-            "test_description": "Frogger should lose a life when the turtles dive.",
+            "test_name": "Turtles Diving - Froggo dies",
+            "test_description": "Froggo should lose a life when the turtles dive.",
             "test_requirements": [
                 {
                     "hardware": [
@@ -1229,10 +1229,10 @@
                 },
                 {
                     "step_number": 4,
-                    "step_description": "Verify the behavior of Frogger"
+                    "step_description": "Verify the behavior of Froggo"
                 }
             ],
-            "expected_result": "Frogger should lose a life if he remains on the turtles' back when they dive.",
+            "expected_result": "Froggo should lose a life if he remains on the turtles' back when they dive.",
             "test_data": {
                 "data": ""
             }
@@ -1282,8 +1282,8 @@
         },
         {
             "test_id": 41,
-            "test_name": "Alligator - Frogger Walk",
-            "test_description": "Frogger should be able to walk on the backs of alligators.",
+            "test_name": "Alligator - Froggo Walk",
+            "test_description": "Froggo should be able to walk on the backs of alligators.",
             "test_requirements": [
                 {
                     "hardware": [
@@ -1307,18 +1307,18 @@
                 },
                 {
                     "step_number": 3,
-                    "step_description": "Verify the behavior of Frogger"
+                    "step_description": "Verify the behavior of Froggo"
                 }
             ],
-            "expected_result": "Frogger should be able to jump onto the alligator's back, regardless of its state.",
+            "expected_result": "Froggo should be able to jump onto the alligator's back, regardless of its state.",
             "test_data": {
                 "data": ""
             }
         },
         {
             "test_id": 42,
-            "test_name": "Alligators - Frogger Immunity",
-            "test_description": "Frogger should be able to walk safely on an alligator's closed jaws.",
+            "test_name": "Alligators - Froggo Immunity",
+            "test_description": "Froggo should be able to walk safely on an alligator's closed jaws.",
             "test_requirements": [
                 {
                     "hardware": [
@@ -1346,18 +1346,18 @@
                 },
                 {
                     "step_number": 4,
-                    "step_description": "Verify the behavior of Frogger"
+                    "step_description": "Verify the behavior of Froggo"
                 }
             ],
-            "expected_result": "Frogger should not lose a life when walking on the alligator's closed jaws.",
+            "expected_result": "Froggo should not lose a life when walking on the alligator's closed jaws.",
             "test_data": {
                 "data": ""
             }
         },
         {
             "test_id": 43,
-            "test_name": "Alligators - Frogger life loosing",
-            "test_description": "Frogger should lose a life when walking on an alligator's open jaw.",
+            "test_name": "Alligators - Froggo life loosing",
+            "test_description": "Froggo should lose a life when walking on an alligator's open jaw.",
             "test_requirements": [
                 {
                     "hardware": [
@@ -1381,22 +1381,22 @@
                 },
                 {
                     "step_number": 3,
-                    "step_description": "Move Frogger onto the alligator's open jaw."
+                    "step_description": "Move Froggo onto the alligator's open jaw."
                 },
                 {
                     "step_number": 4,
-                    "step_description": "Check the behavior of Frogger"
+                    "step_description": "Check the behavior of Froggo"
                 }
             ],
-            "expected_result": "Frogger should lose a life when walking onto the alligator's open jaws.",
+            "expected_result": "Froggo should lose a life when walking onto the alligator's open jaws.",
             "test_data": {
                 "data": ""
             }
         },
         {
             "test_id": 44,
-            "test_name": "Alligators head - Frogger Kill",
-            "test_description": "If an alligator's head remains visible in a home bay for more than two seconds, Frogger should lose a life upon entering the bay.",
+            "test_name": "Alligators head - Froggo Kill",
+            "test_description": "If an alligator's head remains visible in a home bay for more than two seconds, Froggo should lose a life upon entering the bay.",
             "test_requirements": [
                 {
                     "hardware": [
@@ -1420,18 +1420,18 @@
                 },
                 {
                     "step_number": 3,
-                    "step_description": "Check the behavior of Frogger."
+                    "step_description": "Check the behavior of Froggo."
                 }
             ],
-            "expected_result": "Frogger should lose a life when entering the home bay after the alligator's head has been visible for more than two seconds.",
+            "expected_result": "Froggo should lose a life when entering the home bay after the alligator's head has been visible for more than two seconds.",
             "test_data": {
                 "data": ""
             }
         },
         {
             "test_id": 45,
-            "test_name": "Otters - Pushing Frogger",
-            "test_description": "Otters should attempt to push Frogger off floating objects.",
+            "test_name": "Otters - Pushing Froggo",
+            "test_description": "Otters should attempt to push Froggo off floating objects.",
             "test_requirements": [
                 {
                     "hardware": [
@@ -1451,7 +1451,7 @@
                 },
                 {
                     "step_number": 2,
-                    "step_description": "Place Frogger at the edge of a log."
+                    "step_description": "Place Froggo at the edge of a log."
                 },
                 {
                     "step_number": 3,
@@ -1462,7 +1462,7 @@
                     "step_description": "Verify the behavior of the otter"
                 }
             ],
-            "expected_result": "Otters should try to push Frogger off the logs.",
+            "expected_result": "Otters should try to push Froggo off the logs.",
             "test_data": {
                 "data": ""
             }
@@ -1504,8 +1504,8 @@
         },
         {
             "test_id": 47,
-            "test_name": "Alligators head - Frogger Immunity",
-            "test_description": "If an alligator's head has been visible in a home bay for less than two seconds, Frogger should be immune upon entering that bay.",
+            "test_name": "Alligators head - Froggo Immunity",
+            "test_description": "If an alligator's head has been visible in a home bay for less than two seconds, Froggo should be immune upon entering that bay.",
             "test_requirements": [
                 {
                     "hardware": [
@@ -1529,10 +1529,10 @@
                 },
                 {
                     "step_number": 3,
-                    "step_description": "Check the behavior of Frogger."
+                    "step_description": "Check the behavior of Froggo."
                 }
             ],
-            "expected_result": "Frogger should not lose a life when entering a home bay within two seconds of the alligator's head appearing.",
+            "expected_result": "Froggo should not lose a life when entering a home bay within two seconds of the alligator's head appearing.",
             "test_data": {
                 "data": ""
             }
@@ -1667,8 +1667,8 @@
         },
         {
             "test_id": 52,
-            "test_name": "Pink Lady Bonus - Frogger sprite change",
-            "test_description": "When Frogger reaches the same position as the Pink Lady, Frogger's sprite should change to a different color.",
+            "test_name": "Pink Lady Bonus - Froggo sprite change",
+            "test_description": "When Froggo reaches the same position as the Pink Lady, Froggo's sprite should change to a different color.",
             "test_requirements": [
                 {
                     "hardware": [
@@ -1688,14 +1688,14 @@
                 },
                 {
                     "step_number": 2,
-                    "step_description": "Move Frogger to the Pink Lady's position."
+                    "step_description": "Move Froggo to the Pink Lady's position."
                 },
                 {
                     "step_number": 3,
-                    "step_description": "Verify the sprite of Frogger"
+                    "step_description": "Verify the sprite of Froggo"
                 }
             ],
-            "expected_result": "Frogger's sprite should change to a different color and a glowing effect upon contact.",
+            "expected_result": "Froggo's sprite should change to a different color and a glowing effect upon contact.",
             "test_data": {
                 "data": ""
             }
@@ -1703,7 +1703,7 @@
         {
             "test_id": 53,
             "test_name": "Pink Lady Bonus - Bonus Points Addition",
-            "test_description": "If Frogger escorts the Pink Lady to a home bay, the score should increase by 200 points.",
+            "test_description": "If Froggo escorts the Pink Lady to a home bay, the score should increase by 200 points.",
             "test_requirements": [
                 {
                     "hardware": [
@@ -1769,7 +1769,7 @@
         {
             "test_id": 55,
             "test_name": "Bonus Points - Frog in home base",
-            "test_description": "If a fly is present in one of the home bays, Frogger should earn 200 points upon entering.",
+            "test_description": "If a fly is present in one of the home bays, Froggo should earn 200 points upon entering.",
             "test_requirements": [
                 {
                     "hardware": [
@@ -1789,14 +1789,14 @@
                 },
                 {
                     "step_number": 2,
-                    "step_description": "Move Frogger into the home bay with the fly."
+                    "step_description": "Move Froggo into the home bay with the fly."
                 },
                 {
                     "step_number": 3,
                     "step_description": "Verify the score gets updated by 200 points."
                 }
             ],
-            "expected_result": "The score should increase by 200 points when Frogger enters the home bay with a fly.",
+            "expected_result": "The score should increase by 200 points when Froggo enters the home bay with a fly.",
             "test_data": {
                 "data": ""
             }
