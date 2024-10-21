@@ -221,15 +221,9 @@ module frogger_game #(
                         r_Blu_Video = 3'b110;
                     end
                     3'd3: begin  
-                        if ((w_Row_Count % TILE_SIZE == 0) || (w_Row_Count % TILE_SIZE == TILE_SIZE - 1)) begin
-                            r_Red_Video = 3'b000;  
-                            r_Grn_Video = 3'b000;
-                            r_Blu_Video = 3'b000;
-                        end else begin
-                            r_Red_Video = 3'b011;  
-                            r_Grn_Video = 3'b000;
-                            r_Blu_Video = 3'b111;
-                        end
+                        r_Red_Video = 3'b011;  
+                        r_Grn_Video = 3'b000;
+                        r_Blu_Video = 3'b111;
                     end
                     3'd4: begin  
                         r_Red_Video = 3'b001;
