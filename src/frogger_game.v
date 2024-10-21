@@ -30,10 +30,20 @@ module frogger_game #(
     parameter c_GAME_WIDTH = 20;
     parameter c_GAME_HEIGHT = 15;
     parameter TILE_SIZE     = 32;
+    parameter SPRITE_SIZE = 32;
     parameter NUM_CARS      = 15;
 
     reg [2:0] r_Bitmap[0:c_GAME_HEIGHT-1][0:c_GAME_WIDTH-1];
+    reg [3:0] frog_sprite [31:0][31:0];
+	reg [3:0] car_sprite [31:0][31:0];
     reg [6:0] game_level;
+
+
+	integer car_row = w_Row_Count % SPRITE_SIZE;
+	integer car_col = w_Col_Count % SPRITE_SIZE;
+
+	integer frog_row = w_Row_Count % SPRITE_SIZE;
+	integer frog_col = w_Col_Count % SPRITE_SIZE;
 
     
     wire w_Game_Active = 1'b1;
@@ -67,7 +77,10 @@ module frogger_game #(
     integer row, col;
     initial begin
         $readmemh("bitmap_init.mem", r_Bitmap);
+        $readmemh("car.mem", car_sprite);
+		$readmemh("frogger.mem", frog_sprite);
     end
+
 
     wire slow_clk;
 
@@ -82,6 +95,15 @@ module frogger_game #(
     assign w_Bitmap_Data = (w_Frogger_Y < c_GAME_HEIGHT && w_Frogger_X < c_GAME_WIDTH) ? 
         r_Bitmap[w_Frogger_Y][w_Frogger_X] : 3'd0;
 
+
+
+    wire[31:0] w_Car_Sprites;
+    assign w_Car_Sprites = (w_Car_Y_1 < car_sprite_height && w_Car_X_1 < car_sprite_width) ?
+			car_sprite[w_Car_Y_1][w_Car_X_1] : 4'd0;
+
+    wire [15:0] w_Frog_Sprite;
+	assign w_Frog_Sprite = (w_Frogger_Y < frog_sprite_height && w_Frogger_X < frog_sprite_width) ?
+		frog_sprite[w_Frogger_Y][w_Frogger_X] : 4'd0;
     
     frogger_ctrl frogger_ctrl_inst (
         .i_Clk(i_Clk),
@@ -165,19 +187,33 @@ module frogger_game #(
 
     reg [2:0] r_Red_Video, r_Grn_Video, r_Blu_Video;
 
-    always @(*) begin
+    always @(posedge i_Clk) begin
         
         r_Red_Video = 3'b000;
         r_Grn_Video = 3'b000;
         r_Blu_Video = 3'b000;
 
         
-        if ((w_Col_Count_Div == w_Frogger_X) && (w_Row_Count_Div == w_Frogger_Y)) begin
-            
-            r_Red_Video = 3'b111;  
-            r_Grn_Video = 3'b000;  
-            r_Blu_Video = 3'b000;  
-        end else begin
+        if ((w_Col_Count_Div == w_Frogger_X) && (w_Row_Count_Div == w_Frogger_Y) && frog_sprite[frog_row][frog_col]!=4'd0) begin
+			if(frog_sprite[frog_row][frog_col]==4'd1)begin
+				// Red
+	            r_Red_Video = 4'b0000;
+	            r_Grn_Video = 4'b1111;
+	            r_Blu_Video = 4'b0000;
+			end
+			else if(frog_sprite[frog_row][frog_col]==4'd2) begin
+				// Yellow
+	            r_Red_Video = 4'b1111;
+	            r_Grn_Video = 4'b1111;
+	            r_Blu_Video = 4'b0000;
+			end
+			else if(frog_sprite[frog_row][frog_col]==4'd3) begin
+	            r_Red_Video = 4'b1111;
+	            r_Grn_Video = 4'b0011;
+	            r_Blu_Video = 4'b1001;
+			end
+		 
+    end else begin
             
             if ((w_Col_Count_Div == car_x_0 && w_Row_Count_Div == 6'd12) ||
                 (w_Col_Count_Div == car_x_1 && w_Row_Count_Div == 6'd11) ||
@@ -194,10 +230,39 @@ module frogger_game #(
                 (w_Col_Count_Div == car_x_12 && w_Row_Count_Div == 6'd3) ||
                 (w_Col_Count_Div == car_x_13 && w_Row_Count_Div == 6'd2) ||
                 (w_Col_Count_Div == car_x_14 && w_Row_Count_Div == 6'd1)) begin
-                
-                r_Red_Video = 3'b111;  
-                r_Grn_Video = 3'b111;  
-                r_Blu_Video = 3'b111;  
+                    
+                case (car_sprite[car_row][car_col])
+	                4'd0: begin
+	                    // Background color (Black)
+	                    r_Red_Video = 4'b0000;
+	                    r_Grn_Video = 4'b0000;
+	                    r_Blu_Video = 4'b0000;
+	                end
+	                4'd1: begin
+	                    // Red
+	                    r_Red_Video = 4'b1111;
+	                    r_Grn_Video = 4'b0000;
+	                    r_Blu_Video = 4'b0000;
+	                end
+	                4'd2: begin
+	                    // Yellow
+	                    r_Red_Video = 4'b1111;
+	                    r_Grn_Video = 4'b1111;
+	                    r_Blu_Video = 4'b0000;
+	                end
+	                4'd3: begin
+	                    // Purple
+	                    r_Red_Video = 4'b1111;
+	                    r_Grn_Video = 4'b0000;
+	                    r_Blu_Video = 4'b1111;
+	                end
+	                default: begin
+	                    // Default to background color (Black)
+	                    r_Red_Video = 4'b0000;
+	                    r_Grn_Video = 4'b0000;
+	                    r_Blu_Video = 4'b0000;
+	                end
+	            endcase
             end
         end
 
