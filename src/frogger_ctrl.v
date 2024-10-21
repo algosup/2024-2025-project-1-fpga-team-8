@@ -49,7 +49,7 @@ module frogger_ctrl(
         parameter c_FROGGER_ORIG_Y = 14;
         parameter c_GAME_WIDTH = 20;
 
-        reg [31:0] r_Log_Movement_Counter = 0;
+        // reg [31:0] r_Log_Movement_Counter = 0;
 
     
     initial begin
@@ -119,27 +119,27 @@ module frogger_ctrl(
             end
 
             
-            if (i_On_Log) begin
-                r_Log_Movement_Counter <= r_Log_Movement_Counter + 1;
-                if (r_Log_Movement_Counter >= c_LOG_SLOW_COUNT) begin
-                    r_Log_Movement_Counter <= 0;
+            // if (i_On_Log) begin
+            //     r_Log_Movement_Counter <= r_Log_Movement_Counter + 1;
+            //     if (r_Log_Movement_Counter >= c_LOG_SLOW_COUNT) begin
+            //         r_Log_Movement_Counter <= 0;
                     
-                    if (o_Frogger_X > 0)
-                        o_Frogger_X <= o_Frogger_X - 1;
-                    else
-                        o_Frogger_X <= c_GAME_WIDTH - 1; 
+            //         if (o_Frogger_X > 0)
+            //             o_Frogger_X <= o_Frogger_X - 1;
+            //         else
+            //             o_Frogger_X <= c_GAME_WIDTH - 1; 
                         
-                end
-            end else begin
-                r_Log_Movement_Counter <= 0; 
-            end
+            //     end
+            // end else begin
+            //     r_Log_Movement_Counter <= 0; 
+            // end
 
             
-            if (i_Bitmap_Data == 4'd2 && !i_On_Log) begin
-                o_Frogger_X <= c_FROGGER_ORIG_X;
-                o_Frogger_Y <= c_FROGGER_ORIG_Y;
+            // if (i_Bitmap_Data == 4'd2 && !i_On_Log) begin
+            //     o_Frogger_X <= c_FROGGER_ORIG_X;
+            //     o_Frogger_Y <= c_FROGGER_ORIG_Y;
                 
-            end
+            // end
 
     end 
 

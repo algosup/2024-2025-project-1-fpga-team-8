@@ -76,7 +76,7 @@ module frogger_game #(
         .o_Divided_Clk(slow_clk)
     );
 
-    wire [2:0] w_Bitmap_Data;
+    wire [3:0] w_Bitmap_Data;
     assign w_Bitmap_Data = (w_Frogger_Y < c_GAME_HEIGHT && w_Frogger_X < c_GAME_WIDTH) ? 
         r_Bitmap[w_Frogger_Y][w_Frogger_X] : 3'd0;
 

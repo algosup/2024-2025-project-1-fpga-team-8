@@ -20,10 +20,10 @@ module frogger_top(
     output wire o_VGA_Blu_1,           
     output wire o_VGA_Blu_2,           
 
-    output o_LED_1,
-    output o_LED_2,
-    output o_LED_3,
-    output o_LED_4
+    // output o_LED_1,
+    // output o_LED_2,
+    // output o_LED_3,
+    // output o_LED_4
 );
 
     
