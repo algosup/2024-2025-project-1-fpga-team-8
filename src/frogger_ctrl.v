@@ -78,21 +78,21 @@ module frogger_ctrl(
             end
 
             
-            else if (i_Down_Mvt == 1'b1 && r_Switch_2 == 1'b0) begin
+            else if (i_Down_Mvt == 1'b1 && r_Switch_4 == 1'b0) begin
                 if (o_Frogger_Y < 14) begin
                     o_Frogger_Y <= o_Frogger_Y + 1;
                 end
             end
 
             
-            else if (i_Left_Mvt == 1'b1 && r_Switch_3 == 1'b0) begin
+            else if (i_Left_Mvt == 1'b1 && r_Switch_2 == 1'b0) begin
                 if (o_Frogger_X > 0) begin
                     o_Frogger_X <= o_Frogger_X - 1;
                 end
             end
 
             
-            else if (i_Right_Mvt == 1'b1 && r_Switch_4 == 1'b0) begin
+            else if (i_Right_Mvt == 1'b1 && r_Switch_3 == 1'b0) begin
                 if (o_Frogger_X < 19) begin
                     o_Frogger_X <= o_Frogger_X + 1;
                 end
