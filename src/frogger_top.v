@@ -38,6 +38,8 @@ module frogger_top(
     wire [c_VIDEO_WIDTH-1:0] w_Grn_Video_Frogger, w_Grn_Video_Porch;
     wire [c_VIDEO_WIDTH-1:0] w_Blu_Video_Frogger, w_Blu_Video_Porch;
 
+    wire w_LED_1, w_LED_2, w_LED_3, w_LED_4;
+
     wire w_HSync_VGA, w_VSync_VGA;
     wire w_HSync_Frogger, w_VSync_Frogger;
 
@@ -88,7 +90,10 @@ module frogger_top(
         .o_Grn_Video(w_Grn_Video_Frogger),
         .o_Blu_Video(w_Blu_Video_Frogger),
         .o_Segment1(o_Segment1),
-        .o_Segment2(o_Segment2)
+        .o_Segment2(o_Segment2),
+        .o_LED_2(w_LED_2),
+        .o_LED_3(w_LED_3),
+        .o_LED_4(w_LED_4)
     );
 
     
@@ -123,5 +128,9 @@ module frogger_top(
     assign o_VGA_Blu_0 = w_Blu_Video_Porch[0];
     assign o_VGA_Blu_1 = w_Blu_Video_Porch[1];
     assign o_VGA_Blu_2 = w_Blu_Video_Porch[2];
+
+  assign o_LED_2 = w_LED_2;
+  assign o_LED_3 = w_LED_3;
+  assign o_LED_4 = w_LED_4;
 
 endmodule

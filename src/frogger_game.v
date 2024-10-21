@@ -131,6 +131,14 @@ module frogger_game #(
         o_Car_X[12] <= car_x_12;
         o_Car_X[13] <= car_x_13;
         o_Car_X[14] <= car_x_14;
+  // Implement lives display
+  lives_counter lives_counter_inst (
+    .i_Clk(i_Clk),
+    .i_Collided(w_Collided),
+    .o_LED_2(o_LED_2),
+    .o_LED_3(o_LED_3),
+    .o_LED_4(o_LED_4)
+  );
 
         
         o_Car_Y[0] <= 5'd12;
