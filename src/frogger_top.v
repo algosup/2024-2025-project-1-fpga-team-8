@@ -4,8 +4,8 @@ module frogger_top(
     input wire i_Switch_2,            
     input wire i_Switch_3,
     input wire i_Switch_4,
-    output reg [6:0] o_Segment1,      
-    output reg [6:0] o_Segment2,      
+    output reg [6:0] o_Segment1,
+    output reg [6:0] o_Segment2,
 
     
     output wire o_VGA_HSync,          

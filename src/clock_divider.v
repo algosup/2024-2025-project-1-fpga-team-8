@@ -1,5 +1,5 @@
 module clock_divider #(
-    parameter DIV_FACTOR = 23'd2500000  // Adjust this value to slow down the clock as needed
+    parameter DIV_FACTOR = 23'd2200000  // Adjust this value to slow down the clock as needed
 )(
     input wire i_Clk,
     output reg o_Divided_Clk

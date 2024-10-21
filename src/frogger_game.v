@@ -136,7 +136,7 @@ module frogger_game #(
     car #(.CAR_INIT_X(5), .BASE_SPEED(25'd9000), .CAR_DIRECTION(1)) car_11 (.i_Clk(slow_clk),.level(game_level[6:0]),.o_car_x(car_x_11));
     car #(.CAR_INIT_X(6), .BASE_SPEED(25'd10000), .CAR_DIRECTION(0)) car_12 (.i_Clk(slow_clk),.level(game_level[6:0]),.o_car_x(car_x_12));
     car #(.CAR_INIT_X(18), .BASE_SPEED(25'd8000), .CAR_DIRECTION(1)) car_13 (.i_Clk(slow_clk),.level(game_level[6:0]),.o_car_x(car_x_13));
-    car #(.CAR_INIT_X(10), .BASE_SPEED(25'd16000000), .CAR_DIRECTION(0)) car_14 (.i_Clk(slow_clk),.level(game_level[6:0]),.o_car_x(car_x_14));
+    car #(.CAR_INIT_X(10), .BASE_SPEED(25'd1600000), .CAR_DIRECTION(0)) car_14 (.i_Clk(slow_clk),.level(game_level[6:0]),.o_car_x(car_x_14));
     car #(.CAR_INIT_X(0), .BASE_SPEED(25'd10000), .CAR_DIRECTION(0)) car_15 (.i_Clk(slow_clk),.level(game_level[6:0]),.o_car_x(car_x_15));
 
    
