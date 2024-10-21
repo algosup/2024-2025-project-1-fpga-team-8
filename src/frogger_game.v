@@ -259,7 +259,7 @@ module frogger_game #(
 	                    r_Blu_Video = 4'b0000;
 	                end
 	                4'd3: begin
-	                    // Purple
+	                    // Purple 
 	                    r_Red_Video = 4'b1111;
 	                    r_Grn_Video = 4'b0000;
 	                    r_Blu_Video = 4'b1111;
@@ -279,9 +279,9 @@ module frogger_game #(
             if (w_Col_Count_Div < c_GAME_WIDTH && w_Row_Count_Div < c_GAME_HEIGHT) begin
                 case (r_Bitmap[w_Row_Count_Div][w_Col_Count_Div])
                     3'd0: begin  
-                        r_Red_Video = 3'b001;
-                        r_Grn_Video = 3'b110;
-                        r_Blu_Video = 3'b000;
+                        r_Red_Video = 3'b010; // orange is r = 3'b001, g = 3'b000, b = 3'b000
+                        r_Grn_Video = 3'b100;
+                        r_Blu_Video = 3'b001;
                     end
                     3'd1: begin  
                         r_Red_Video = 3'b000;
@@ -294,13 +294,13 @@ module frogger_game #(
                         r_Blu_Video = 3'b110;
                     end
                     3'd3: begin  
-                        r_Red_Video = 3'b011;  
-                        r_Grn_Video = 3'b000;
-                        r_Blu_Video = 3'b111;
+                        r_Red_Video = 3'b100;  
+                        r_Grn_Video = 3'b100;
+                        r_Blu_Video = 3'b100;
                     end
                     3'd4: begin  
                         r_Red_Video = 3'b001;
-                        r_Grn_Video = 3'b000;
+                        r_Grn_Video = 3'b001;
                         r_Blu_Video = 3'b110;
                     end
                     default: begin  
