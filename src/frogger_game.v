@@ -1,296 +1,337 @@
-module frogger_game
-#(
+module frogger_game #(
+    
     parameter c_TOTAL_COLS=800,
     parameter c_TOTAL_ROWS=525,
     parameter c_ACTIVE_COLS=640,
     parameter c_ACTIVE_ROWS=480
 )(
-   input            i_Clk,
-   input            i_HSync,
-   input            i_VSync,
-   // Game Start Button   
-   input            i_Game_Start,
-   // Player 1 and Player 2 Controls (Controls Frogger)
-   input            i_Up_Mvt,
-   input            i_Down_Mvt,
-   input            i_Left_Mvt,
-   input            i_Right_Mvt,
-   // Output Video
-   output reg       o_HSync,
-   output reg       o_VSync,
-   output [3:0]     o_Red_Video,
-   output [3:0]     o_Grn_Video,
-   output [3:0]     o_Blu_Video,
-   output [6:0]     o_Segment1,
-   output [6:0]     o_Segment2
+    input            i_Clk,
+    input            i_HSync,
+    input            i_VSync,
+    input            i_Game_Start,
+    input            i_Up_Mvt,
+    input            i_Down_Mvt,
+    input            i_Left_Mvt,
+    input            i_Right_Mvt,
+    
+    output reg       o_HSync,
+    output reg       o_VSync,
+    output [3:0]     o_Red_Video,
+    output [3:0]     o_Grn_Video,
+    output [3:0]     o_Blu_Video,
+
+    output o_LED_1, o_LED_2, o_LED_3, o_LED_4,
+    
+    output o_LED_1,
+    output [6:0]     o_Segment1,
+    output [6:0]     o_Segment2
 );
 
-  // Game constants
-  parameter c_GAME_WIDTH  = 14;   // 14 columns in the bitmap
-  parameter c_GAME_HEIGHT = 13;   // 13 rows in the bitmap
-  parameter TILE_SIZE     = 32;   // Each tile is 32x32 pixels
+    parameter c_GAME_WIDTH = 20;
+    parameter c_GAME_HEIGHT = 15;
+    parameter TILE_SIZE     = 32;
+    parameter NUM_CARS      = 16;
+    parameter SPRITE_SIZE = 32;
 
-    // Bitmap array: 0=wall, 1=road, 2=water, 3=safe area, 4=lily pad
-  reg [3:0] r_Bitmap[0:c_GAME_HEIGHT-1][0:c_GAME_WIDTH-1];
+    reg [2:0] r_Bitmap[0:c_GAME_HEIGHT-1][0:c_GAME_WIDTH-1];
+    reg [3:0] frog_sprite [31:0][31:0];
+	reg [3:0] car_sprite [31:0][31:0];
+    reg [6:0] game_level;
 
-  // State machine enumerations
-  parameter IDLE    = 2'b00;
-  parameter RUNNING = 2'b01;
-  parameter P1_WINS = 2'b10;
-  parameter CLEANUP = 2'b11;
 
-  reg [1:0] lives = 2'b11;
+	integer car_row = w_Row_Count % SPRITE_SIZE;
+	integer car_col = w_Col_Count % SPRITE_SIZE;
 
-  wire w_Game_Active = 1'b1;
+	integer frog_row = w_Row_Count % SPRITE_SIZE;
+	integer frog_col = w_Col_Count % SPRITE_SIZE;
 
-  wire       w_HSync, w_VSync;
-  wire [9:0] w_Col_Count, w_Row_Count;
-  wire [4:0] w_Col_Count_Div, w_Row_Count_Div;
-  wire [5:0] w_Frogger_X, w_Frogger_Y;
-  wire w_Game_Active;
+    
+    wire w_Game_Active = 1'b1;
+    wire       w_HSync, w_VSync;
+    wire [9:0] w_Col_Count, w_Row_Count;
+    wire [4:0] w_Col_Count_Div, w_Row_Count_Div;
+    wire [5:0] w_Frogger_X, w_Frogger_Y;
+    reg w_Collided;
 
-  // Cars
-  wire [5:0] w_Car_X_1, w_Car_Y_1;
-  wire [5:0] w_Car_X_2, w_Car_Y_2;
-  wire [5:0] w_Car_X_3, w_Car_Y_3;
-  wire [5:0] w_Car_X_4, w_Car_Y_4;
-  wire [5:0] w_Car_X_5, w_Car_Y_5;
+    reg [4:0] o_Car_X [0:NUM_CARS-1];  
+    reg [4:0] o_Car_Y [0:NUM_CARS-1];  
 
-  // Drop 5 LSBs, which effectively divides by 32
-  assign w_Col_Count_Div = w_Col_Count[9:5];
-  assign w_Row_Count_Div = w_Row_Count[9:5];
+    wire [4:0] car_x_0, car_x_1, car_x_2, car_x_3, car_x_4, car_x_5, car_x_6, car_x_7, car_x_8, car_x_9, car_x_10, car_x_11, car_x_12, car_x_13, car_x_14, car_x_15;
 
-  wire w_Collided;
+    assign w_Col_Count_Div = w_Col_Count[9:5];
+    assign w_Row_Count_Div = w_Row_Count[9:5];
+    
+    sync_to_count #(
+        .TOTAL_COLS(c_TOTAL_COLS),
+        .TOTAL_ROWS(c_TOTAL_ROWS)
+    ) sync_to_count_Inst (
+        .i_Clk(i_Clk),
+        .i_HSync(i_HSync),
+        .i_VSync(i_VSync),
+        .o_HSync(o_HSync),
+        .o_VSync(o_VSync),
+        .o_Col_Count(w_Col_Count),
+        .o_Row_Count(w_Row_Count)
+    );
 
-  reg [6:0] r_Frogger_Score;
+    integer row, col;
+    initial begin
+        $readmemh("bitmap_init.mem", r_Bitmap);
+        $readmemh("car.mem", car_sprite);
+		$readmemh("frogger.mem", frog_sprite);
+    end
 
-  // Synchronize to row and column counters
-  Sync_To_Count #(.TOTAL_COLS(c_TOTAL_COLS),
-                  .TOTAL_ROWS(c_TOTAL_ROWS)) Sync_To_Count_Inst
-  (
-    .i_Clk(i_Clk),
-    .i_HSync(i_HSync),
-    .i_VSync(i_VSync),
-    .o_HSync(o_HSync),
-    .o_VSync(o_VSync),
-    .o_Col_Count(w_Col_Count),
-    .o_Row_Count(w_Row_Count)
-  );
 
-  // Convert current column and row into tile coordinates
-  assign w_Col_Count_Div = w_Col_Count[9:5]; // Divide by TILE_SIZE (32)
-  assign w_Row_Count_Div = w_Row_Count[9:5];
+    wire slow_clk;
 
-  // Initialize bitmap background
-  integer row, col;  // Declare loop index variables outside of the loops
-  initial begin
-    $readmemh("bitmap_init.mem", r_Bitmap);
-
-  end
+    clock_divider #(
+        .DIV_FACTOR(23'd2500000)  
+    ) clock_divider_inst (
+        .i_Clk(i_Clk),
+        .o_Divided_Clk(slow_clk)
+    );
 
     wire [3:0] w_Bitmap_Data;
+    assign w_Bitmap_Data = (w_Frogger_Y < c_GAME_HEIGHT && w_Frogger_X < c_GAME_WIDTH) ? 
+        r_Bitmap[w_Frogger_Y][w_Frogger_X] : 3'd0;
 
-  // Assign bitmap data corresponding to Frogger's position
-  assign w_Bitmap_Data = (w_Frogger_Y < c_GAME_HEIGHT && w_Frogger_X < c_GAME_WIDTH) ? 
-                         r_Bitmap[w_Frogger_Y][w_Frogger_X] : 4'd0;
 
-  // Control Frogger's movements and track its position
-  frogger_ctrl frogger_ctrl_inst (
-    .i_Clk(i_Clk),
-    .i_Score(r_Frogger_Score),
-    .i_Up_Mvt(i_Up_Mvt),
-    .i_Down_Mvt(i_Down_Mvt),
-    .i_Left_Mvt(i_Left_Mvt),
-    .i_Right_Mvt(i_Right_Mvt),
-    .i_Game_Active(w_Game_Active),
-    .i_Collided(w_Collided),
-    .i_Col_Count_Div(w_Col_Count_Div),
-    .i_Row_Count_Div(w_Row_Count_Div),
-    .i_Bitmap_Data(w_Bitmap_Data),  // Pass the bitmap data
-    .o_Frogger_X(w_Frogger_X),
-    .o_Frogger_Y(w_Frogger_Y),
-    .o_Score(r_Frogger_Score)
-  );
 
-    // Car 1 instance
-    car_ctrl #(
-      .c_CAR_SPEED(1),
-      .c_MAX_X(14),
-      .c_SLOW_COUNT(4000000),
-      .c_INIT_X(0),
-      .c_INIT_Y(11)
-    )
-      
-      car_ctrl_inst_1 (
+    wire[31:0] w_Car_Sprites;
+    assign w_Car_Sprites = (w_Car_Y_1 < car_sprite_height && w_Car_X_1 < car_sprite_width) ?
+			car_sprite[w_Car_Y_1][w_Car_X_1] : 4'd0;
+
+    wire [15:0] w_Frog_Sprite;
+	assign w_Frog_Sprite = (w_Frogger_Y < frog_sprite_height && w_Frogger_X < frog_sprite_width) ?
+		frog_sprite[w_Frogger_Y][w_Frogger_X] : 4'd0;
+    
+    frogger_ctrl frogger_ctrl_inst (
         .i_Clk(i_Clk),
+        .i_Score(game_level[6:0]),
+        .i_Up_Mvt(i_Up_Mvt),
+        .i_Down_Mvt(i_Down_Mvt),
+        .i_Left_Mvt(i_Left_Mvt),
+        .i_Right_Mvt(i_Right_Mvt),
+        .i_Collided(w_Collided),
         .i_Col_Count_Div(w_Col_Count_Div),
         .i_Row_Count_Div(w_Row_Count_Div),
-        .o_Car_X(w_Car_X_1),
-        .o_Car_Y(w_Car_Y_1),
+        .i_Bitmap_Data(w_Bitmap_Data),
+        .o_Frogger_X(w_Frogger_X),
+        .o_Frogger_Y(w_Frogger_Y),
+        .o_Score(game_level[6:0])
     );
 
-    // Car 2 instance
-    car_ctrl #(
-      .c_CAR_SPEED(1),
-      .c_MAX_X(14),
-      .c_SLOW_COUNT(5000000),
-      .c_INIT_X(0),
-      .c_INIT_Y(10)
-    )
+    
+    car #(.CAR_INIT_X(0), .BASE_SPEED(25'd17000), .CAR_DIRECTION(1)) car_0 (.i_Clk(slow_clk),.level(game_level[6:0]),.o_car_x(car_x_0));
+    car #(.CAR_INIT_X(19), .BASE_SPEED(25'd8000), .CAR_DIRECTION(0)) car_1 (.i_Clk(slow_clk),.level(game_level[6:0]),.o_car_x(car_x_1));
+    car #(.CAR_INIT_X(7), .BASE_SPEED(25'd17000), .CAR_DIRECTION(1)) car_2 (.i_Clk(slow_clk),.level(game_level[6:0]),.o_car_x(car_x_2));
+    car #(.CAR_INIT_X(12), .BASE_SPEED(25'd8000), .CAR_DIRECTION(1)) car_3 (.i_Clk(slow_clk),.level(game_level[6:0]),.o_car_x(car_x_3));
+    car #(.CAR_INIT_X(3), .BASE_SPEED(25'd10003), .CAR_DIRECTION(1)) car_4 (.i_Clk(slow_clk),.level(game_level[6:0]),.o_car_x(car_x_4));
+    car #(.CAR_INIT_X(4), .BASE_SPEED(25'd70003), .CAR_DIRECTION(0)) car_5 (.i_Clk(slow_clk),.level(game_level[6:0]),.o_car_x(car_x_5));
+    car #(.CAR_INIT_X(9), .BASE_SPEED(25'd50003), .CAR_DIRECTION(1)) car_6 (.i_Clk(slow_clk),.level(game_level[6:0]),.o_car_x(car_x_6));
+    car #(.CAR_INIT_X(18), .BASE_SPEED(25'd70003), .CAR_DIRECTION(0)) car_7 (.i_Clk(slow_clk),.level(game_level[6:0]),.o_car_x(car_x_7));
+    car #(.CAR_INIT_X(4), .BASE_SPEED(25'd20003), .CAR_DIRECTION(1)) car_8 (.i_Clk(slow_clk),.level(game_level[6:0]),.o_car_x(car_x_8));
+    car #(.CAR_INIT_X(10), .BASE_SPEED(25'd20003), .CAR_DIRECTION(1)) car_9 (.i_Clk(slow_clk),.level(game_level[6:0]),.o_car_x(car_x_9));
+    car #(.CAR_INIT_X(4), .BASE_SPEED(25'd1003), .CAR_DIRECTION(0)) car_10 (.i_Clk(slow_clk),.level(game_level[6:0]),.o_car_x(car_x_10));
+    car #(.CAR_INIT_X(5), .BASE_SPEED(25'd9000), .CAR_DIRECTION(1)) car_11 (.i_Clk(slow_clk),.level(game_level[6:0]),.o_car_x(car_x_11));
+    car #(.CAR_INIT_X(6), .BASE_SPEED(25'd10000), .CAR_DIRECTION(0)) car_12 (.i_Clk(slow_clk),.level(game_level[6:0]),.o_car_x(car_x_12));
+    car #(.CAR_INIT_X(18), .BASE_SPEED(25'd8000), .CAR_DIRECTION(1)) car_13 (.i_Clk(slow_clk),.level(game_level[6:0]),.o_car_x(car_x_13));
+    car #(.CAR_INIT_X(10), .BASE_SPEED(25'd1600000), .CAR_DIRECTION(0)) car_14 (.i_Clk(slow_clk),.level(game_level[6:0]),.o_car_x(car_x_14));
+    car #(.CAR_INIT_X(0), .BASE_SPEED(25'd10000), .CAR_DIRECTION(0)) car_15 (.i_Clk(slow_clk),.level(game_level[6:0]),.o_car_x(car_x_15));
 
-      car_ctrl_inst_2 (
-        .i_Clk(i_Clk),
-        .i_Col_Count_Div(w_Col_Count_Div),
-        .i_Row_Count_Div(w_Row_Count_Div),
-        .o_Car_X(w_Car_X_2),
-        .o_Car_Y(w_Car_Y_2),
-    );
+   
+    always @(posedge i_Clk) begin
+        o_Car_X[0] <= car_x_0;
+        o_Car_X[1] <= car_x_1;
+        o_Car_X[2] <= car_x_2;
+        o_Car_X[3] <= car_x_3;
+        o_Car_X[4] <= car_x_4;
+        o_Car_X[5] <= car_x_5;
+        o_Car_X[6] <= car_x_6;
+        o_Car_X[7] <= car_x_7;
+        o_Car_X[8] <= car_x_8;
+        o_Car_X[9] <= car_x_9;
+        o_Car_X[10] <= car_x_10;
+        o_Car_X[11] <= car_x_11;
+        o_Car_X[12] <= car_x_12;
+        o_Car_X[13] <= car_x_13;
+        o_Car_X[14] <= car_x_14;
+        o_Car_X[15] <= car_x_15;
 
-    // Car 3 instance
-    car_ctrl #(
-      .c_CAR_SPEED(1),
-      .c_MAX_X(14),
-      .c_SLOW_COUNT(3700000),
-      .c_INIT_X(0),
-      .c_INIT_Y(9)
-    )
-
-      car_ctrl_inst_3 (
-        .i_Clk(i_Clk),
-        .i_Col_Count_Div(w_Col_Count_Div),
-        .i_Row_Count_Div(w_Row_Count_Div),
-        .o_Car_X(w_Car_X_3),
-        .o_Car_Y(w_Car_Y_3),
-    );
-
-    car_ctrl #(
-      .c_CAR_SPEED(1),
-      .c_MAX_X(14),
-      .c_SLOW_COUNT(4500000),
-      .c_INIT_X(0),
-      .c_INIT_Y(8)
-    )
-
-      car_ctrl_inst_4 (
-        .i_Clk(i_Clk),
-        .i_Col_Count_Div(w_Col_Count_Div),
-        .i_Row_Count_Div(w_Row_Count_Div),
-        .o_Car_X(w_Car_X_4),
-        .o_Car_Y(w_Car_Y_4),
-    );
-
-    car_ctrl #(
-      .c_CAR_SPEED(1),
-      .c_MAX_X(14),
-      .c_SLOW_COUNT(4200000),
-      .c_INIT_X(0),
-      .c_INIT_Y(7)
-    )
-
-      car_ctrl_inst_5 (
-        .i_Clk(i_Clk),
-        .i_Col_Count_Div(w_Col_Count_Div),
-        .i_Row_Count_Div(w_Row_Count_Div),
-        .o_Car_X(w_Car_X_5),
-        .o_Car_Y(w_Car_Y_5),
-    );
-
-  // Check for collisions between Frogger and cars
-  frogger_collisions frogger_collisions_inst (
-    .i_Clk(i_Clk),
-    .i_Frogger_X(w_Frogger_X),
-    .i_Frogger_Y(w_Frogger_Y),
-    .i_Frogger_Orig_x(10),
-    .i_Frogger_Orig_y(14),
-    .i_Car_X_1(w_Car_X_1),
-    .i_Car_Y_1(w_Car_Y_1),
-    .i_Car_X_2(w_Car_X_2),
-    .i_Car_Y_2(w_Car_Y_2),
-    .i_Car_X_3(w_Car_X_3),
-    .i_Car_Y_3(w_Car_Y_3),
-    .i_Car_X_4(w_Car_X_4),
-    .i_Car_Y_4(w_Car_Y_4),
-    .i_Car_X_5(w_Car_X_5),
-    .i_Car_Y_5(w_Car_Y_5),
-    .o_Collided(w_Collided)
-  );
-
-  // Determine background colors based on the bitmap and draw Frogger if applicable
-  reg [3:0] r_Red_Video, r_Grn_Video, r_Blu_Video;
-  always @(*) begin
-    // Check if the current tile matches Frogger's position
-    if ((w_Col_Count_Div == w_Frogger_X) && (w_Row_Count_Div == w_Frogger_Y) || 
-    (w_Col_Count_Div == w_Car_X_1) && (w_Row_Count_Div == w_Car_Y_1) || 
-    (w_Col_Count_Div == w_Car_X_2) && (w_Row_Count_Div == w_Car_Y_2) || 
-    (w_Col_Count_Div == w_Car_X_3) && (w_Row_Count_Div == w_Car_Y_3) || 
-    (w_Col_Count_Div == w_Car_X_4) && (w_Row_Count_Div == w_Car_Y_4) || 
-    (w_Col_Count_Div == w_Car_X_5) && (w_Row_Count_Div == w_Car_Y_5)) begin
-      // If in the same tile as Frogger, draw Frogger in white
-      r_Red_Video = 4'b1111; // White
-      r_Grn_Video = 4'b1111;
-      r_Blu_Video = 4'b1111;
+        
+        o_Car_Y[0] <= 5'd12;
+        o_Car_Y[1] <= 5'd11;
+        o_Car_Y[2] <= 5'd12;
+        o_Car_Y[3] <= 5'd2;
+        o_Car_Y[4] <= 5'd10;
+        o_Car_Y[5] <= 5'd9;
+        o_Car_Y[6] <= 5'd10;
+        o_Car_Y[7] <= 5'd9;
+        o_Car_Y[8] <= 5'd8;
+        o_Car_Y[9] <= 5'd8;
+        o_Car_Y[10] <= 5'd5;
+        o_Car_Y[11] <= 5'd4;
+        o_Car_Y[12] <= 5'd3;
+        o_Car_Y[13] <= 5'd2;
+        o_Car_Y[14] <= 5'd1;
+        o_Car_Y[15] <= 5'd3;
     end
-    else if (w_Col_Count_Div < c_GAME_WIDTH && w_Row_Count_Div < c_GAME_HEIGHT) begin
-      // Otherwise, draw the background based on the bitmap
-      case (r_Bitmap[w_Row_Count_Div][w_Col_Count_Div])
-      4'd0: begin
-        r_Red_Video = 4'b0001;  // Wall: Red Channel = 0
-        r_Grn_Video = 4'b1110;  // Wall: Green Channel = 14
-        r_Blu_Video = 4'b0000;  // Wall: Blue Channel = 0
-      end
-      4'd1: begin
-        r_Red_Video = 4'b0000;  // Road: Red Channel = 0
-        r_Grn_Video = 4'b0000;  // Road: Green Channel = 0
-        r_Blu_Video = 4'b0000;  // Road: Blue Channel = 0
-      end
-      4'd2: begin
-        r_Red_Video = 4'b0001;  // Water: Red Channel = 1
-        r_Grn_Video = 4'b0000;  // Water: Green Channel = 0
-        r_Blu_Video = 4'b1110;  // Water: Blue Channel = 14
-      end
-      4'd3: begin
-        // Safe Area: Check if it's the top or bottom line of the tile
-        if ((w_Row_Count % TILE_SIZE == 0) || (w_Row_Count % TILE_SIZE == TILE_SIZE - 1)) begin
-          // Top or bottom line of the tile
-          r_Red_Video = 4'b0000;  // Black line
-          r_Grn_Video = 4'b0000;
-          r_Blu_Video = 4'b0000;
-        end else begin
-          // Normal safe area color
-          r_Red_Video = 4'b0011;  // Safe Area: Red Channel = 3
-          r_Grn_Video = 4'b0000;  // Safe Area: Green Channel = 0
-          r_Blu_Video = 4'b1111;  // Safe Area: Blue Channel = 15
+
+    
+    integer i;
+    always @(posedge i_Clk) begin
+        w_Collided = 1'b0;
+        for (i = 0; i < NUM_CARS; i = i + 1) begin
+            if (w_Frogger_X == o_Car_X[i] && w_Frogger_Y == o_Car_Y[i]) begin
+                w_Collided = 1'b1;
+            end
         end
-      end
-      4'd4: begin
-        r_Red_Video = 4'b0001;  // Lily Pad: Red Channel = 1
-        r_Grn_Video = 4'b0000;  // Lily Pad: Green Channel = 0
-        r_Blu_Video = 4'b1110;  // Lily Pad: Blue Channel = 14
-      end
-      default: begin
-        r_Red_Video = 4'b0000;  // Background: Red Channel = 0
-        r_Grn_Video = 4'b0000;  // Background: Green Channel = 0
-        r_Blu_Video = 4'b0000;  // Background: Blue Channel = 0
-      end
-    endcase
-    end else begin
-      r_Red_Video = 4'b0000;
-      r_Grn_Video = 4'b0000;
-      r_Blu_Video = 4'b0000;
     end
-  end
 
-  // Assign video outputs
-  assign o_Red_Video = r_Red_Video;
-  assign o_Grn_Video = r_Grn_Video;
-  assign o_Blu_Video = r_Blu_Video;
+    reg [2:0] r_Red_Video, r_Grn_Video, r_Blu_Video;
 
-  // Display Score on 7-segment displays
-  score_control score_control_inst (
-    .i_Clk(i_Clk),
-    .i_Score(r_Frogger_Score),
-    .o_Segment1(o_Segment1),
-    .o_Segment2(o_Segment2)
-  );
+    always @(posedge i_Clk) begin
+        
+        r_Red_Video = 3'b000;
+        r_Grn_Video = 3'b000;
+        r_Blu_Video = 3'b000;
+
+        
+        if ((w_Col_Count_Div == w_Frogger_X) && (w_Row_Count_Div == w_Frogger_Y) && frog_sprite[frog_row][frog_col]!=4'd0) begin
+			if(frog_sprite[frog_row][frog_col]==4'd1)begin
+				// Red
+	            r_Red_Video = 4'b0000;
+	            r_Grn_Video = 4'b1111;
+	            r_Blu_Video = 4'b0000;
+			end
+			else if(frog_sprite[frog_row][frog_col]==4'd2) begin
+				// Yellow
+	            r_Red_Video = 4'b1111;
+	            r_Grn_Video = 4'b1111;
+	            r_Blu_Video = 4'b0000;
+			end
+			else if(frog_sprite[frog_row][frog_col]==4'd3) begin
+	            r_Red_Video = 4'b1111;
+	            r_Grn_Video = 4'b0011;
+	            r_Blu_Video = 4'b1001;
+			end
+		 
+    end else begin
+            
+            if ((w_Col_Count_Div == car_x_0 && w_Row_Count_Div == 6'd12) ||
+                (w_Col_Count_Div == car_x_1 && w_Row_Count_Div == 6'd11) ||
+                (w_Col_Count_Div == car_x_2 && w_Row_Count_Div == 6'd12) ||
+                (w_Col_Count_Div == car_x_3 && w_Row_Count_Div == 6'd2) ||
+                (w_Col_Count_Div == car_x_4 && w_Row_Count_Div == 6'd10) ||
+                (w_Col_Count_Div == car_x_5 && w_Row_Count_Div == 6'd9) ||
+                (w_Col_Count_Div == car_x_6 && w_Row_Count_Div == 6'd10) ||
+                (w_Col_Count_Div == car_x_7 && w_Row_Count_Div == 6'd9) ||
+                (w_Col_Count_Div == car_x_8 && w_Row_Count_Div == 6'd8) ||
+                (w_Col_Count_Div == car_x_9 && w_Row_Count_Div == 6'd8) ||
+                (w_Col_Count_Div == car_x_10 && w_Row_Count_Div == 6'd5) ||
+                (w_Col_Count_Div == car_x_11 && w_Row_Count_Div == 6'd4) ||
+                (w_Col_Count_Div == car_x_12 && w_Row_Count_Div == 6'd3) ||
+                (w_Col_Count_Div == car_x_13 && w_Row_Count_Div == 6'd2) ||
+                (w_Col_Count_Div == car_x_14 && w_Row_Count_Div == 6'd1) ||
+                (w_Col_Count_Div == car_x_15 && w_Row_Count_Div == 6'd3)) begin
+                
+                r_Red_Video = 3'b111;  
+                r_Grn_Video = 3'b111;  
+                r_Blu_Video = 3'b111;  
+                    
+                case (car_sprite[car_row][car_col])
+	                4'd0: begin
+	                    // Background color (Black)
+	                    r_Red_Video = 4'b0000;
+	                    r_Grn_Video = 4'b0000;
+	                    r_Blu_Video = 4'b0000;
+	                end
+	                4'd1: begin
+	                    // Red
+	                    r_Red_Video = 4'b1111;
+	                    r_Grn_Video = 4'b0000;
+	                    r_Blu_Video = 4'b0000;
+	                end
+	                4'd2: begin
+	                    // Yellow
+	                    r_Red_Video = 4'b1111;
+	                    r_Grn_Video = 4'b1111;
+	                    r_Blu_Video = 4'b0000;
+	                end
+	                4'd3: begin
+	                    // Purple 
+	                    r_Red_Video = 4'b1111;
+	                    r_Grn_Video = 4'b0000;
+	                    r_Blu_Video = 4'b1111;
+	                end
+	                default: begin
+	                    // Default to background color (Black)
+	                    r_Red_Video = 4'b0000;
+	                    r_Grn_Video = 4'b0000;
+	                    r_Blu_Video = 4'b0000;
+	                end
+	            endcase
+            end
+        end
+
+        
+        if (r_Red_Video == 3'b000 && r_Grn_Video == 3'b000 && r_Blu_Video == 3'b000) begin
+            if (w_Col_Count_Div < c_GAME_WIDTH && w_Row_Count_Div < c_GAME_HEIGHT) begin
+                case (r_Bitmap[w_Row_Count_Div][w_Col_Count_Div])
+                    3'd0: begin  
+                        r_Red_Video = 3'b010; // orange is r = 3'b001, g = 3'b000, b = 3'b000
+                        r_Grn_Video = 3'b100;
+                        r_Blu_Video = 3'b001;
+                    end
+                    3'd1: begin  
+                        r_Red_Video = 3'b000;
+                        r_Grn_Video = 3'b000;
+                        r_Blu_Video = 3'b000;
+                    end
+                    3'd2: begin  
+                        r_Red_Video = 3'b001;
+                        r_Grn_Video = 3'b000;
+                        r_Blu_Video = 3'b110;
+                    end
+                    3'd3: begin  
+                        r_Red_Video = 3'b100;  
+                        r_Grn_Video = 3'b100;
+                        r_Blu_Video = 3'b100;
+                    end
+                    3'd4: begin  
+                        r_Red_Video = 3'b001;
+                        r_Grn_Video = 3'b001;
+                        r_Blu_Video = 3'b110;
+                    end
+                    default: begin  
+                        r_Red_Video = 3'b000;
+                        r_Grn_Video = 3'b000;
+                        r_Blu_Video = 3'b000;
+                    end
+                endcase
+            end
+        end
+    end
+
+    assign o_Red_Video = r_Red_Video;
+    assign o_Grn_Video = r_Grn_Video;
+    assign o_Blu_Video = r_Blu_Video;
+
+    
+    score_control score_control_inst (
+        .i_Clk(i_Clk),
+        .i_Score(game_level[6:0]),
+        .o_Segment1(o_Segment1),
+        .o_Segment2(o_Segment2)
+    );
+
+    // Implement lives display
+    lives_counter lives_counter_inst (
+        .i_Clk(i_Clk),
+        .i_Collided(w_Collided),
+        .o_LED_2(o_LED_2),
+        .o_LED_3(o_LED_3),
+        .o_LED_4(o_LED_4)
+    );
 
 endmodule

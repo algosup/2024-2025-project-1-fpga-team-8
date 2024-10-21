@@ -1,50 +1,62 @@
-module car_ctrl #(
-    // Parameters for car movement
-    // c_MAX_X: Maximum X position (grid width)
-    // c_CAR_SPEED: How much to move the car in one step
-    // c_SLOW_COUNT: Slow down counter threshold (adjust based on clock speed)
-    parameter c_MAX_X = 20,
-    parameter c_CAR_SPEED = 1,
-    parameter c_SLOW_COUNT = 4000000,
-    parameter c_INIT_X = 0,
-    parameter c_INIT_Y = 13,
-)(
-    input i_Clk,
-    input [5:0] i_Col_Count_Div,
-    input [5:0] i_Row_Count_Div,
-    output reg [5:0] o_Car_X,
-    output reg [5:0] o_Car_Y
+module car #(
+    parameter CAR_INIT_X = 0,          
+    parameter BASE_SPEED = 25'd1000,   
+    parameter CAR_DIRECTION = 1        
+) (
+    input wire i_Clk,                  
+    input wire [6:0] level,            
+    output reg [4:0] o_car_x           
 );
+    
+    reg [4:0] car_x = CAR_INIT_X;      
+    reg [2:0] speed_counter;           
+    reg [24:0] adjusted_speed;
 
-    reg [31:0] r_Counter = 0;      // 32-bit counter for slowing down the car movement
-
-    initial begin
-        o_Car_X = c_INIT_Y;  // Start position
-        o_Car_Y = c_INIT_Y; // Starting Y position
+    // Couldn't progressively increase the speed because not enough LUTs to fix overflow :(
+    always @(*) begin
+        case (level)
+            // 7'd1: adjusted_speed = BASE_SPEED;             
+            // 7'd2: adjusted_speed = BASE_SPEED - 1;  
+            // 7'd3: adjusted_speed = BASE_SPEED - 1;  
+            // 7'd4: adjusted_speed = BASE_SPEED - 1;  
+            // 7'd5: adjusted_speed = BASE_SPEED - 1;  
+            // 7'd6: adjusted_speed = BASE_SPEED - 1;  
+            // 7'd7: adjusted_speed = BASE_SPEED - 1;  
+            // 7'd8: adjusted_speed = BASE_SPEED - 1;  
+            // 7'd9: adjusted_speed = BASE_SPEED - 1;  
+            // 7'd10: adjusted_speed = BASE_SPEED - 1; 
+            // 7'd11: adjusted_speed = BASE_SPEED - 1; 
+            // 7'd12: adjusted_speed = BASE_SPEED - 1; 
+            // 7'd13: adjusted_speed = BASE_SPEED - 1; 
+            // 7'd14: adjusted_speed = BASE_SPEED - 1; 
+            // 7'd15: adjusted_speed = BASE_SPEED - 1; 
+            // 7'd16: adjusted_speed = BASE_SPEED - 1; 
+            default: adjusted_speed = BASE_SPEED;       
+        endcase
     end
 
-    // Car movement logic
+    
     always @(posedge i_Clk) begin
+        if (speed_counter == 0) begin
+            speed_counter <= adjusted_speed[6:2];  
 
-        // Increment the slow down counter
-        r_Counter <= r_Counter + 1;
-
-        // When the counter reaches the threshold, update the car position
-        if (r_Counter >= c_SLOW_COUNT) begin
             
-            // Reset the counter
-            r_Counter <= 0;
-
-            // Update car's X position (move car)
-            if (o_Car_X < c_MAX_X - 1) begin
-                o_Car_X <= (o_Car_X + c_CAR_SPEED);
+            if (CAR_DIRECTION == 1) begin
+                if (car_x < 19)
+                    car_x <= car_x + 1;
+                else
+                    car_x <= 0;
+            end else begin
+                if (car_x > 0)
+                    car_x <= car_x - 1;
+                else
+                    car_x <= 19;
             end
-
-            // Wrap around when the car reaches the end of the grid
-            else begin
-                o_Car_X <= 0;
-            end
+        end else begin
+            speed_counter <= speed_counter - 1;
         end
-    end
 
+        
+        o_car_x <= car_x;
+    end
 endmodule

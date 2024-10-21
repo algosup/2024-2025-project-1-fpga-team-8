@@ -44,8 +44,8 @@ set_io o_Segment2[5] 8
 set_io o_Segment2[6] 96
 
 ## UART Outputs
-set_io i_UART_RX 73
-set_io o_UART_TX 74
+## set_io i_UART_RX 73
+## set_io o_UART_TX 74
 
 ## VGA Outputs
 set_io o_VGA_HSync 26
@@ -61,11 +61,11 @@ set_io o_VGA_Blu_1 41
 set_io o_VGA_Blu_2 42
 
 ## PMOD Signals
-set_io io_PMOD_1 65
-set_io io_PMOD_2 64
-set_io io_PMOD_3 63
-set_io io_PMOD_4 62
-set_io io_PMOD_7 78
-set_io io_PMOD_8 79
-set_io io_PMOD_9 80
-set_io io_PMOD_10 81
+## set_io io_PMOD_1 65
+## set_io io_PMOD_2 64
+## set_io io_PMOD_3 63
+## set_io io_PMOD_4 62
+## set_io io_PMOD_7 78
+## set_io io_PMOD_8 79
+## set_io io_PMOD_9 80
+## set_io io_PMOD_10 81
