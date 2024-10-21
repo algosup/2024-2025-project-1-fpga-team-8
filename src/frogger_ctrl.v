@@ -72,14 +72,14 @@ module frogger_ctrl(
             // Move up
             if (i_Up_Mvt && !r_Switch_1) begin
                 if (o_Frogger_Y > 0) begin
-                    // o_Frogger_Y <= o_Frogger_Y - 1;
+                    o_Frogger_Y <= o_Frogger_Y - 1;
                 end
             end
 
             // Move down
             else if (i_Down_Mvt && !r_Switch_2) begin
                 if (o_Frogger_Y < 14) begin
-                    // o_Frogger_Y <= o_Frogger_Y + 1;
+                    o_Frogger_Y <= o_Frogger_Y + 1;
                 end
             end
 
