@@ -1,6 +1,6 @@
-// This module is designed for 640x480 with a 25 MHz input clock.
 
-module VGA_Sync_Pulses 
+
+module VGA_sync_pulses 
  #(parameter TOTAL_COLS  = 800, 
    parameter TOTAL_ROWS  = 525,
    parameter ACTIVE_COLS = 640, 

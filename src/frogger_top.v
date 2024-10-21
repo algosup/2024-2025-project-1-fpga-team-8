@@ -1,13 +1,13 @@
 module frogger_top(
-    input wire i_Clk,                 // System clock input
-    input wire i_Switch_1,            // Button input to move the square to the right
+    input wire i_Clk,                 
+    input wire i_Switch_1,            
     input wire i_Switch_2,            
     input wire i_Switch_3,
     input wire i_Switch_4,
-    output reg [6:0] o_Segment1,      // 7-segment display for ones digit
-    output reg [6:0] o_Segment2,      // 7-segment display for tens digit
+    output reg [6:0] o_Segment1,      
+    output reg [6:0] o_Segment2,      
 
-    // VGA output signals
+    
     output wire o_VGA_HSync,          
     output wire o_VGA_VSync,          
     output reg o_VGA_Red_0,           
@@ -26,14 +26,14 @@ module frogger_top(
     output o_LED_4
 );
 
-    // VGA Constants to set Frame Size
+    
     parameter c_VIDEO_WIDTH = 3;
     parameter c_TOTAL_COLS  = 800;
     parameter c_TOTAL_ROWS  = 525;
     parameter c_ACTIVE_COLS = 640;
     parameter c_ACTIVE_ROWS = 480;
 
-    // Common VGA Signals
+    
     wire [c_VIDEO_WIDTH-1:0] w_Red_Video_Frogger, w_Red_Video_Porch;
     wire [c_VIDEO_WIDTH-1:0] w_Grn_Video_Frogger, w_Grn_Video_Porch;
     wire [c_VIDEO_WIDTH-1:0] w_Blu_Video_Frogger, w_Blu_Video_Porch;
@@ -41,30 +41,30 @@ module frogger_top(
     wire w_HSync_VGA, w_VSync_VGA;
     wire w_HSync_Frogger, w_VSync_Frogger;
 
-    // Button signals
-    wire [3:0] w_Switches = {i_Switch_4, i_Switch_3, i_Switch_2, i_Switch_1}; // Combine all switch inputs
-    wire [3:0] w_Debounced_Switches;  // Debounced outputs for switches
+    
+    wire [3:0] w_Switches = {i_Switch_4, i_Switch_3, i_Switch_2, i_Switch_1}; 
+    wire [3:0] w_Debounced_Switches;  
 
-    // Time-multiplexed button debouncer instance
+    
     multi_button_debouncer multi_button_debouncer_inst (
         .i_Clk(i_Clk),
         .i_Buttons(w_Switches),
         .o_Debounced(w_Debounced_Switches)
     );
 
-    // Assign individual debounced signals
+    
     wire w_Debounced_1 = w_Debounced_Switches[0];
     wire w_Debounced_2 = w_Debounced_Switches[1];
     wire w_Debounced_3 = w_Debounced_Switches[2];
     wire w_Debounced_4 = w_Debounced_Switches[3];
 
-    // VGA Sync Pulses instance
-    VGA_Sync_Pulses #(
+    
+    VGA_sync_pulses #(
         .TOTAL_COLS(c_TOTAL_COLS),
         .TOTAL_ROWS(c_TOTAL_ROWS),
         .ACTIVE_COLS(c_ACTIVE_COLS),
         .ACTIVE_ROWS(c_ACTIVE_ROWS)
-    ) VGA_Sync_Pulses_Inst (
+    ) VGA_sync_pulses_Inst (
         .i_Clk(i_Clk),
         .o_HSync(w_HSync_Frogger),
         .o_VSync(w_VSync_Frogger),
@@ -72,7 +72,7 @@ module frogger_top(
         .o_Row_Count()
     );
 
-    // Frogger game instance
+    
     frogger_game frogger_game_inst (
         .i_Clk(i_Clk),
         .i_HSync(w_HSync_Frogger),
@@ -91,14 +91,14 @@ module frogger_top(
         .o_Segment2(o_Segment2)
     );
 
-    // VGA Sync Porch instance
-    VGA_Sync_Porch #(
+    
+    VGA_sync_porch #(
         .VIDEO_WIDTH(c_VIDEO_WIDTH),
         .TOTAL_COLS(c_TOTAL_COLS),
         .TOTAL_ROWS(c_TOTAL_ROWS),
         .ACTIVE_COLS(c_ACTIVE_COLS),
         .ACTIVE_ROWS(c_ACTIVE_ROWS)
-    ) VGA_Sync_Porch_Inst (
+    ) VGA_sync_porch_Inst (
         .i_Clk(i_Clk),
         .i_HSync(w_HSync_Frogger),
         .i_VSync(w_VSync_Frogger),
