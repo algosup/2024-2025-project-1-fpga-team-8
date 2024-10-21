@@ -12,25 +12,25 @@ module car #(
     reg [2:0] speed_counter;           
     reg [24:0] adjusted_speed;
 
-    
+    // Couldn't progressively increase the speed because not enough LUTs to fix overflow :(
     always @(*) begin
         case (level)
-            7'd1: adjusted_speed = BASE_SPEED;             
-            7'd2: adjusted_speed = BASE_SPEED - 1;  
-            7'd3: adjusted_speed = BASE_SPEED - 2;  
-            7'd4: adjusted_speed = BASE_SPEED - 3;  
-            7'd5: adjusted_speed = BASE_SPEED - 4;  
-            7'd6: adjusted_speed = BASE_SPEED - 5;  
-            7'd7: adjusted_speed = BASE_SPEED - 6;  
-            7'd8: adjusted_speed = BASE_SPEED - 7;  
-            7'd9: adjusted_speed = BASE_SPEED - 8;  
-            7'd10: adjusted_speed = BASE_SPEED - 9; 
-            7'd11: adjusted_speed = BASE_SPEED - 10; 
-            7'd12: adjusted_speed = BASE_SPEED - 11; 
-            7'd13: adjusted_speed = BASE_SPEED - 12; 
-            7'd14: adjusted_speed = BASE_SPEED - 13; 
-            7'd15: adjusted_speed = BASE_SPEED - 14; 
-            7'd16: adjusted_speed = BASE_SPEED - 15; 
+            // 7'd1: adjusted_speed = BASE_SPEED;             
+            // 7'd2: adjusted_speed = BASE_SPEED - 1;  
+            // 7'd3: adjusted_speed = BASE_SPEED - 1;  
+            // 7'd4: adjusted_speed = BASE_SPEED - 1;  
+            // 7'd5: adjusted_speed = BASE_SPEED - 1;  
+            // 7'd6: adjusted_speed = BASE_SPEED - 1;  
+            // 7'd7: adjusted_speed = BASE_SPEED - 1;  
+            // 7'd8: adjusted_speed = BASE_SPEED - 1;  
+            // 7'd9: adjusted_speed = BASE_SPEED - 1;  
+            // 7'd10: adjusted_speed = BASE_SPEED - 1; 
+            // 7'd11: adjusted_speed = BASE_SPEED - 1; 
+            // 7'd12: adjusted_speed = BASE_SPEED - 1; 
+            // 7'd13: adjusted_speed = BASE_SPEED - 1; 
+            // 7'd14: adjusted_speed = BASE_SPEED - 1; 
+            // 7'd15: adjusted_speed = BASE_SPEED - 1; 
+            // 7'd16: adjusted_speed = BASE_SPEED - 1; 
             default: adjusted_speed = BASE_SPEED;       
         endcase
     end
