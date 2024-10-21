@@ -276,7 +276,7 @@ Each test run will be documented in detailed test reports. A test session will r
 - **Issues Found**: Description of any bugs or errors.
 - **Next Steps**: Actions that need to be taken to resolve any discovered issues.
 
-Reports will be stored in the [Test Reports](./test-reports/) folder, allowing the team to track test progress and results over time. An overarching summary will be updated to reflect progress.
+Reports will be stored in the [Test Reports](https://github.com/algosup/2024-2025-project-1-fpga-team-8/tree/main/documents/quality_assurance/test_reports) folder, allowing the team to track test progress and results over time. An overarching summary will be updated to reflect progress.
 
 You can also refer to the [history of testing](https://docs.google.com/spreadsheets/d/13jn9MZXwvPJthTED8lPlTzNpH2iK69MnvhQDEM3IoZw/edit?gid=0#gid=0) which covers all the testing made during the project.
 
