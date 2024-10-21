@@ -278,7 +278,7 @@ Each test run will be documented in detailed test reports. A test session will r
 
 Reports will be stored in the [Test Reports](./test-reports/) folder, allowing the team to track test progress and results over time. An overarching summary will be updated to reflect progress.
 
-You can also refer to the [history of testing]() which links the 
+You can also refer to the [history of testing](https://docs.google.com/spreadsheets/d/13jn9MZXwvPJthTED8lPlTzNpH2iK69MnvhQDEM3IoZw/edit?gid=0#gid=0) which covers all the testing made during the project.
 
 ### 5.4. Bug Lifecycle
 
