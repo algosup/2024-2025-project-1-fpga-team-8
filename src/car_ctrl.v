@@ -1,17 +1,23 @@
 module multi_car_ctrl #(
-    parameter [59:0] c_CAR_SPEED = {6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1, 6'd1},  // Speeds for 10 cars
-    parameter c_SLOW_COUNT = 1700000,            // Increased Slowdown counter threshold (3x slower)
-    parameter COUNTER_WIDTH = 21                 // Counter width for slowdown
+    parameter COUNTER_WIDTH = 32  // Counter width for slowdown
 )(
-    input i_Clk,                                // Clock input
-    output reg [59:0] o_Car_X,                  // Flattened X positions for 10 cars (10 * 6 bits)
-    output reg [59:0] o_Car_Y                   // Flattened Y positions for 10 cars (10 * 6 bits)
+    input i_Clk,                                           // Clock input
+    output reg [59:0] o_Car_X,                             // Flattened X positions for 10 cars (10 * 6 bits)
+    output reg [59:0] o_Car_Y                              // Flattened Y positions for 10 cars (10 * 6 bits)
 );
 
+    // Precomputed slowdown counts for each lane (scaled to match the speeds)
+    localparam [COUNTER_WIDTH-1:0] LANE_12_SLOW_COUNT = 32'd11666430;  // Lane 12 (39 million)
+    localparam [COUNTER_WIDTH-1:0] LANE_11_SLOW_COUNT = 32'd9574300;   // Lane 11 (32 million)
+    localparam [COUNTER_WIDTH-1:0] LANE_10_SLOW_COUNT = 32'd8080340;   // Lane 10 (27 million)
+    localparam [COUNTER_WIDTH-1:0] LANE_9_SLOW_COUNT  = 32'd5386430;   // Lane 9  (18 million)
+    localparam [COUNTER_WIDTH-1:0] LANE_8_SLOW_COUNT  = 32'd4190000;   // Lane 8  (14 million)
+
     // Register arrays for car positions (10 cars)
-    reg [4:0] r_Car_X [9:0];  // 10 cars with 5-bit positions
-    reg [4:0] r_Car_Y [9:0];  // 10 cars with 5-bit positions
-    reg [COUNTER_WIDTH-1:0] r_Counter = 0;
+    reg [4:0] r_Car_X [9:0];                              // 10 cars with 5-bit positions
+    reg [4:0] r_Car_Y [9:0];                              // 10 cars with 5-bit positions
+    reg [COUNTER_WIDTH-1:0] r_Counter[4:0];               // Separate counters for each lane
+
     integer i;
 
     // Initialize car positions
@@ -51,30 +57,74 @@ module multi_car_ctrl #(
 
     // Main car control logic
     always @(posedge i_Clk) begin
-        r_Counter <= r_Counter + 1;
+        // Lane 12 (slowest lane)
+        r_Counter[0] <= r_Counter[0] + 1;
+        if (r_Counter[0] >= LANE_12_SLOW_COUNT) begin
+            r_Counter[0] <= 0;
+            if (r_Car_X[0] + 1 < 20)
+                r_Car_X[0] <= r_Car_X[0] + 1;
+            else
+                r_Car_X[0] <= 0;
+            if (r_Car_X[2] + 1 < 20)
+                r_Car_X[2] <= r_Car_X[2] + 1;
+            else
+                r_Car_X[2] <= 0;
+        end
 
-        // When the counter reaches the threshold, update all cars
-        if (r_Counter >= c_SLOW_COUNT) begin
-            r_Counter <= 0;
+        // Lane 11
+        r_Counter[1] <= r_Counter[1] + 1;
+        if (r_Counter[1] >= LANE_11_SLOW_COUNT) begin
+            r_Counter[1] <= 0;
+            if (r_Car_X[1] >= 1)
+                r_Car_X[1] <= r_Car_X[1] - 1;
+            else
+                r_Car_X[1] <= 20;
+            if (r_Car_X[3] >= 1)
+                r_Car_X[3] <= r_Car_X[3] - 1;
+            else
+                r_Car_X[3] <= 20;
+        end
 
-            // Update all cars simultaneously
-            for (i = 0; i < 10; i = i + 1) begin
-                if (i % 2 == 0) begin
-                    // Odd lanes: Move right
-                    if (r_Car_X[i] + c_CAR_SPEED[i*6 +: 6] < 20) begin
-                        r_Car_X[i] <= r_Car_X[i] + c_CAR_SPEED[i*6 +: 6];
-                    end else begin
-                        r_Car_X[i] <= 0;  // Wrap around for right-moving cars
-                    end
-                end else begin
-                    // Even lanes: Move left
-                    if (r_Car_X[i] >= c_CAR_SPEED[i*6 +: 6]) begin
-                        r_Car_X[i] <= r_Car_X[i] - c_CAR_SPEED[i*6 +: 6];
-                    end else begin
-                        r_Car_X[i] <= 20;  // Wrap around for left-moving cars
-                    end
-                end
-            end
+        // Lane 10
+        r_Counter[2] <= r_Counter[2] + 1;
+        if (r_Counter[2] >= LANE_10_SLOW_COUNT) begin
+            r_Counter[2] <= 0;
+            if (r_Car_X[4] + 1 < 20)
+                r_Car_X[4] <= r_Car_X[4] + 1;
+            else
+                r_Car_X[4] <= 0;
+            if (r_Car_X[6] + 1 < 20)
+                r_Car_X[6] <= r_Car_X[6] + 1;
+            else
+                r_Car_X[6] <= 0;
+        end
+
+        // Lane 9
+        r_Counter[3] <= r_Counter[3] + 1;
+        if (r_Counter[3] >= LANE_9_SLOW_COUNT) begin
+            r_Counter[3] <= 0;
+            if (r_Car_X[5] >= 1)
+                r_Car_X[5] <= r_Car_X[5] - 1;
+            else
+                r_Car_X[5] <= 20;
+            if (r_Car_X[7] >= 1)
+                r_Car_X[7] <= r_Car_X[7] - 1;
+            else
+                r_Car_X[7] <= 20;
+        end
+
+        // Lane 8
+        r_Counter[4] <= r_Counter[4] + 1;
+        if (r_Counter[4] >= LANE_8_SLOW_COUNT) begin
+            r_Counter[4] <= 0;
+            if (r_Car_X[8] + 1 < 20)
+                r_Car_X[8] <= r_Car_X[8] + 1;
+            else
+                r_Car_X[8] <= 0;
+            if (r_Car_X[10] + 1 < 20)
+                r_Car_X[10] <= r_Car_X[10] + 1;
+            else
+                r_Car_X[10] <= 0;
         end
     end
 
