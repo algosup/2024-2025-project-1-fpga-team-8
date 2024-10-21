@@ -19,8 +19,8 @@
     - [5.1. Test Methodology](#51-test-methodology)
       - [5.1.1. BlackBox Testing\[^5\]](#511-blackbox-testing5)
       - [5.1.2. Simulation Testing](#512-simulation-testing)
-      - [5.1.3. Hardware Testing](#513-hardware-testing)
-      - [5.1.4. Regression Testing\[^6\]](#514-regression-testing6)
+      - [5.1.3. Hardware Testing\[^4\]](#513-hardware-testing4)
+      - [5.1.4. Regression Testing](#514-regression-testing)
     - [5.2. Test Cases](#52-test-cases)
     - [5.3. Test Reports](#53-test-reports)
     - [5.4. Bug Lifecycle](#54-bug-lifecycle)
@@ -37,11 +37,13 @@
 
 ## 1. Introduction
 
-This document outlines the test plan for verifying and validating the Frogger game developed in Verilog[^2] for execution on the Go Board FPGA[^1] platform. The objective is to ensure that the game functions correctly, both in terms of gameplay logic, and interaction with the hardware peripherals (7-segment displays, switches, LEDs).
+This document outlines the test plan for verifying and validating the Froggo game developed in Verilog[^2] for execution on the Go Board FPGA[^1] platform. The objective is to ensure that the game functions correctly, both in terms of gameplay logic, and interaction with the hardware peripherals (7-segment displays, switches, LEDs).
+
+The whole 
 
 ## 2. Test Environment
 
-The test environement includes the hardware, the firmware and the development tools necessary for testing the Frogger game that will be uploaded on the FPGA[^1].
+The test environement includes the hardware, the firmware and the development tools necessary for testing the Froggo game that will be uploaded on the FPGA[^1].
 
 ### 2.1. Hardware Platform
 
@@ -64,13 +66,14 @@ The defaut settings of the hardware won't be changed to ensure compatibility of 
 
 **Input:**
 
-- Push-Buttons for Frogger control
+- Push-Buttons for Froggo control
 
 **Output:** 
 
 - VGA Display for rendering game visuals
 - Settable LEDs to display the remaining lives and status of the game
 - Dual 7-Segment LED Display to indicate the score of the user
+- PMOD to transmit data from and to peripherals. This interface is not currently planned to be used in the project, but it might be used in future versions (to connect multiple Go Boards for instance).
 
 ### 2.2. Software Tools
 
@@ -85,12 +88,14 @@ The defaut settings of the hardware won't be changed to ensure compatibility of 
   - **Compile Options:** `-Wall -g2012`
   - **Additional Tools:** Usage of EPWave to verify the state of every variable.
 
+You can refer to this image to make sure your configuration matches the one exepected for the testing phase:
+
+![test config](./images/compile_opts.png)
+
 **Synthesis[^3] Tool:**
 
 - [Apio v.0.9.5](https://apiodoc.readthedocs.io/en/stable/index.html) will be used for synthesizing the Verilog code and to create the bitstream for the FPGA.
 You can follow [this tutorial](https://nandland.com/set-up-apio-fpga-build-and-program/) to get APIO installed on your machine.
-
-<!-- Potentially missing STA Tools, further investigations on this subject will be done -->
 
 **Version Control & Issue Tracking[^8]:**
 
@@ -107,6 +112,8 @@ You can follow [this tutorial](https://nandland.com/set-up-apio-fpga-build-and-p
 
 - In order to make our issues consistent from one to antoher, we decided to use issue templates, a feature allowing people to create an issue by filling simple questions. This allows use to manage assignees more simply, as well as facilitating the tags implementation.
 
+- We will use the GitFlow branching strategy to ensure a smooth integration of features in an incremental manner to the product. This will avoid us most of the conflicts caused by incremental development, as well as ensuring changes made for testing are not interfering with the acstive development.
+
 ### 2.3. Test Equipment
 
 - **Monitor:** LCD monitor EK1 Series-EK251Q.
@@ -115,7 +122,7 @@ You can follow [this tutorial](https://nandland.com/set-up-apio-fpga-build-and-p
 
 ## 3. Scope of Testing
 
-The scope of testing of Frogger's clone encompasses all key requirements pointed out by the client and mentionned in the specifications. It will ensure the correctness of the exectued actions, the execution of a smooth gameplay and correct system performance on the Go Board.
+The scope of testing of Froggo's clone encompasses all key requirements pointed out by the client and mentionned in the specifications. It will ensure the correctness of the exectued actions, the execution of a smooth gameplay and correct system performance on the Go Board.
 
 ### 3.1. In Scope
 
@@ -126,7 +133,7 @@ The scope of testing of Frogger's clone encompasses all key requirements pointed
   - Game states management to handle game overs and level completions
 
 - **Hardware interfaces:**
-  - Buttons to control Frogger's movement.
+  - Buttons to control Froggo's movement.
   - VGA output for visualizing the game elements.
   - LED indicators to indicate remaining lives.
 
@@ -142,13 +149,13 @@ The following elements will nor be covered in the test plan, nor in the test cas
 - **Advanced Audio & Sound Effects**
   - Audio functionality (if any) has no output interface on the Go-Board, and consequently, won't be part of the testing scope.
 - **New Hardware Implmentations:**
-  - To ensure our Frogger clone can be executed on any Go Board, new hardware implementation is not planned and won't be reviewed.
+  - To ensure our Froggo clone can be executed on any Go Board, new hardware implementation is not planned and won't be reviewed.
 - **Addition of a game menu:**
   - The addition of a screen like this one could be a valuable feature, however, it is not part of the game mechanics, and consequently, won't be reviewed.
 
 ## 4. Test Objectives
 
-The objective of the testing phase of Frogger is to rigorously evaluate that our clone meets the requirements and objectives mentionned in the document given by the client, but also in the specifications. Consequently, the testing phase will focus on verifying the following points:
+The objective of the testing phase of Froggo is to rigorously evaluate that our clone meets the requirements and objectives mentionned in the document given by the client, but also in the specifications. Consequently, the testing phase will focus on verifying the following points:
 
 1. Validate Requirements - Core gameplay features
 
@@ -172,68 +179,111 @@ The objective of the testing phase of Frogger is to rigorously evaluate that our
 
     - All user actions via buttons is captured and triggerred only once per click. Information is correctly processed and moves the frog.
     - Verify correct alignments, with elements appear and update in the correct tiles.
-    - The gameplay should be fluid, with a constant framerate and correct timings between interactions.
+    - The gameplay should be fluid, with a constant framerate close to 60Hz and correct timings between interactions with a global response time of about 1ms.
 
 ## 5. Testing Strategy
 
-Our strategy employs a multifaceted approach which will consists in multiple phases of testing to identify issues early on in the project.
+Our strategy employs a multifaceted approach consisting of multiple phases of testing to identify issues early on in the project and ensure a smooth, bug-free experience on the hardware. Testing will be conducted both in simulation and on the actual FPGA hardware, leveraging various tools and methodologies.
 
-The test phase will be ran 
+The test phase will follow a structured timeline:
+
+1. **Initial Functional Testing**: Begin with black-box testing to ensure core gameplay functionality (like frog movement and collision detection).
+2. **Simulations and Edge Case Handling**: Test key game components using Verilog simulation tools to verify edge cases, timing, and logic.
+3. **Real-Time Hardware Validation**: Perform tests on the FPGA hardware to verify real-world performance, responsiveness, and integration with physical inputs (push-buttons) and outputs (VGA, LEDs, etc.).
+4. **Regression Testing**[^6]: Ongoing checks to ensure new changes don't break existing functionality.
 
 ### 5.1. Test Methodology
 
 #### 5.1.1. BlackBox Testing[^5]
 
-To ensure a correct delivery in the project's timeframe, we need to validate early on if the functionalities are working on our app without focusing on the implementation of those features.
+This testing method will allow the team to validate if the features work as expected without diving into the underlying implementation. The primary goal is to ensure that core game features, including gameplay logic and user interactions, operate as expected.
 
-This will allow us to validate the core functionalities early on and focus on iterating to implement less critical features.
-
-For this test phase, we will solely test the solutions via gameplay sessions.
-
-<!-- To verify -->
+- **Frog Movement**: Test that each directional input (Up, Down, Left, Right) moves the frog to the corresponding position on the screen.
+- **Collision Detection**: Verify that the frog "dies" and loses a life when it collides with a car.
+- **Score Incrementation**: Ensure that the score increases when the frog reaches the top of the screen.
+- **Game Over**: Confirm the game transitions to the "Game Over" state when the player's lives reach zero.
+  
+This will be done via gameplay simulation, using the push buttons for input and checking the screen (VGA) and LEDs for output feedback.
 
 #### 5.1.2. Simulation Testing
 
-FPGAs are a blackbox executing code without any possibility of simple debugging, apart from creating a logic analyzer which would only be used only once. Rather than going for this extensive solution, we will use simulation[^4] to ensure the states of each component follow the specifications' instructions, but also verify if the specifications themselves are accurate.
+Since debugging on FPGAs is difficult, simulation testing will be a key method for verifying the behavior of the Froggo clone before uploading it to the hardware. This phase ensures that every component behaves correctly in isolation and as part of the overall system.
 
-As mentionned in the [Test Environment section](#22-software-tools), we are going to use [EDAPlayGround](edaplayground.com), a website on which we can execute our Verilog and test components independently, but also in the game environment.
+We will simulate:
 
-Simulation testing on EDAPlayGround introduces various keywords helping us getting more precise results on the executed tests:
+- **Collision logic**: Ensure that when the frog and car occupy the same tile, the collision is detected.
+- **Movement timing**: Validate that the frog and cars move according to the clock timing requirements.
+- **Score updates and screen refresh**: Ensure that the score updates and screen refresh occur without errors or lag.
 
-- `$dumpfile("dump.vcd");`
-- `$dumpvars;`
-- `assert();`: This statement asserts a component in our FPGA design has the same value as what our exepectation. If the assertion is false, the testing breaks automatically.
-- `#10`: 10 here can be replaced by any positive integer to represent the number of clock cycles during which we have to wait to execute the code following the statement.
+Simulation scripts will be created using [EDAPlayGround](https://edaplayground.com), with clear output (VCD dumps) to examine and verify internal states.
 
-The simulations tests scripts will be stored in the [simulations folder](./simulations/), and be updated to test every new addition to the Frogger clone.
+Each of the simulation tests, referred to as *test*, are in their own directory, indicating the test targetted component. You will find two files in each test directory:
 
-#### 5.1.3. Hardware Testing
+- ***test*_design.sv**: This corresponds to the module under test in EDAPlayGround. It is also the same module as the one contained in the code base.
+- ***test*_testbench.sv**: This file refers to the tests and assertions being ran to test the behaviour of the unit under test.
 
-Some behaviours cannot be simulated, consequently, we will have to go through game testing sessions which will be using the Go Board.
+You can copy and paste the content of these files from the repository to EDAPlayground following the following model:
 
-<!-- To complete -->
+![EDA](./images/edapg.png)
 
-#### 5.1.4. Regression Testing[^6]
+Testing **Edge Cases**:
+- **Simultaneous button presses**: Ensure that multiple buttons do not cause unexpected behavior.
 
-To validate new additions and fixes to the firmware, the whole test bed will be ran every time code will be merged in the dev branch.
+#### 5.1.3. Hardware Testing[^4]
 
-This will allow the team to get insights on the progression of the development, but also on the quality of the code produced.
+Hardware testing will ensure that the game functions properly on the Go-Board FPGA, handling real-world interactions with the physical buttons and providing accurate visual feedback via the VGA display and LEDs.
 
-<!-- To complete -->
+The tests will include:
+
+- **Input Responsiveness**: Validate that button inputs are registered and debounced correctly.
+- **VGA Display**: Check that the frog and cars are displayed properly and smoothly on the screen.
+- **LED Indicators**: Ensure that the LEDs display the remaining lives and the game’s state correctly (e.g., a "Game Over" indicator when all lives are lost).
+- **7-Segment Display**: Ensure the score is updated accurately and is visible to the user.
+
+During hardware testing, various scenarios (e.g., quickly repeated inputs or no input at all) will be simulated to ensure robustness.
+
+#### 5.1.4. Regression Testing 
+
+After adding new features or fixing bugs, regression testing[^6] will be crucial to verify that the new changes do not inadvertently break existing features.
+
+Key focus areas will include:
+
+- **Gameplay**: Ensuring movement, collision, and scoring still work as expected.
+- **User Interface**: Verifying the VGA display and 7-segment display still function correctly.
+- **Performance**: Checking for frame drops or unexpected delays in response time.
+
+By re-running the full suite of tests after each update, we can ensure that any introduced issues are caught early.
+
+Runs of the full suite will be done after each merge into the dev or the main branch, ensuring the correctness and robustness of the submitted code.
 
 ### 5.2. Test Cases
 
-All of our codebase will be tested following the defined [test cases](./test_cases.md). Those test cases are using all the methodologies explained in the [Methodology Section](#51-test-methodology).
+Test cases will be created for each feature and interaction, and will be updated as new features are added or bugs are discovered. These will be managed through GitHub Issues and documented in the [test_cases.md](./test_cases.md) file, ensuring traceability.
+
+Key test cases:
+1. **Movement**: Ensure the frog moves one step per button press in the expected direction.
+2. **Collision**: Verify collision detection with cars.
+3. **Score Incrementation**: Ensure the score increments when the frog reaches the top.
+4. **Life Decrement**: Verify that the frog loses a life upon collision and that the game correctly resets the frog's position.
+5. **Game Over**: Confirm that the game ends after the player loses all lives and properly displays the "Game Over" screen.
 
 ### 5.3. Test Reports
 
-Each testing session consists in testing all the existing test cases. After each testing session, the results will be added into a [Google Sheets Document](https://docs.google.com/spreadsheets/d/13jn9MZXwvPJthTED8lPlTzNpH2iK69MnvhQDEM3IoZw/edit?usp=sharing).
+Each test run will be documented in detailed test reports. A test session will result in a report summarizing:
 
-This will allow the development team to know which test cases failed on a run by run basis, helping them identify the points where fixes should be made to make the most faithful clone of Frogger. It will also help them track their progression over time, and will help managment know if the allocated time and resources to testing and development are sufficient or not.
+- **Tested Features**: What was tested during this session.
+- **Outcomes**: What passed, what failed.
+- **Issues Found**: Description of any bugs or errors.
+- **Next Steps**: Actions that need to be taken to resolve any discovered issues.
 
-After each test execution, a test report will be added to the [Test Reports](./test-reports/) folder, linking all the identified issues and summarizing the overall 
+Reports will be stored in the [Test Reports](./test-reports/) folder, allowing the team to track test progress and results over time. An overarching summary will be updated to reflect progress.
+
+You can also refer to the [history of testing]() which links the 
 
 ### 5.4. Bug Lifecycle
+
+The bug lifecycle, described via the mermaid diagram, ensures all issues are managed efficiently from identification to resolution.
+
 
 ```mermaid
 graph TD
@@ -283,18 +333,21 @@ To resume the testing phase, the cause of the suspension should have been identi
 
 #### 7. Risks & Assumptions
 
-| Risk                                                   | Mitigation                                                                 |
-| ------------------------------------------------------ | -------------------------------------------------------------------------- |
-| The provided codebase isn't working                    | Find the origin of the error and create a new issue to inform the dev team |
-| Limited time or resources allocated because of delays | Test the most critical features first                                      |
-| A hardware failure occurs                              | Try to fix the hardware or share it with other teams if needed             |
+| Risk                                                     | Mitigation                                                                                                                                                                   |
+| -------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The provided codebase isn't working                      | Find the origin of the error and create a new issue to inform the dev team. Pause the testing process.                                                                       |
+| Limited time or resources allocated because of delays    | Test the most critical features first                                                                                                                                        |
+| A hardware failure occurs                                | Use the other Go Boards at our disposal before trying to fix the defects on the failed hardware. Lastly, share hardware among teams to fix the problem.                      |
+| There are manufacturing variations between each Go Board | Inform Russel from a problem, test all available Go Boards to know the percetage of them affected by the defect. Solely use the boards which are not affected by the defect. |
 
 #### 8. Deliverables
 
-- Test Plan
-- Test Cases Description
-- Test Reports
-- Testing resources and scripts
+| Deliverable                   | Release/Updates Frequence                             |
+| ----------------------------- | ----------------------------------------------------- |
+| Test Plan                     | 1 Major Releases with daily iterations for refinement |
+| Test Cases Description        | 1 Major Releases with daily iterations for refinement |
+| Test Reports                  | Released after each test session                      |
+| Testing resources and scripts | 1 Major Releases with daily iterations for refinement |
 
 #### 9. Glossary
 
