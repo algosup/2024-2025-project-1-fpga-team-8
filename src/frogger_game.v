@@ -213,25 +213,17 @@ module frogger_game #(
 	            r_Blu_Video = 4'b1001;
 			end
 		 
-    end else begin
+        end else begin
             
-            if ((w_Col_Count_Div == car_x_0 && w_Row_Count_Div == 6'd12) ||
+            if (
                 (w_Col_Count_Div == car_x_1 && w_Row_Count_Div == 6'd11) ||
-                (w_Col_Count_Div == car_x_2 && w_Row_Count_Div == 6'd12) ||
-                (w_Col_Count_Div == car_x_3 && w_Row_Count_Div == 6'd2) ||
-                (w_Col_Count_Div == car_x_4 && w_Row_Count_Div == 6'd10) ||
                 (w_Col_Count_Div == car_x_5 && w_Row_Count_Div == 6'd9) ||
-                (w_Col_Count_Div == car_x_6 && w_Row_Count_Div == 6'd10) ||
                 (w_Col_Count_Div == car_x_7 && w_Row_Count_Div == 6'd9) ||
-                (w_Col_Count_Div == car_x_8 && w_Row_Count_Div == 6'd8) ||
-                (w_Col_Count_Div == car_x_9 && w_Row_Count_Div == 6'd8) ||
                 (w_Col_Count_Div == car_x_10 && w_Row_Count_Div == 6'd5) ||
-                (w_Col_Count_Div == car_x_11 && w_Row_Count_Div == 6'd4) ||
                 (w_Col_Count_Div == car_x_12 && w_Row_Count_Div == 6'd3) ||
-                (w_Col_Count_Div == car_x_13 && w_Row_Count_Div == 6'd2) ||
                 (w_Col_Count_Div == car_x_14 && w_Row_Count_Div == 6'd1)) begin
-                    
-                case (car_sprite[car_row][car_col])
+
+                case (car_sprite[32- car_row][32 - car_col])
 	                4'd0: begin
 	                    // Background color (Black)
 	                    r_Red_Video = 4'b0000;
@@ -264,6 +256,50 @@ module frogger_game #(
 	                end
 	            endcase
             end
+            else if(
+                (w_Col_Count_Div == car_x_0 && w_Row_Count_Div == 6'd12) ||
+                (w_Col_Count_Div == car_x_2 && w_Row_Count_Div == 6'd12) ||
+                (w_Col_Count_Div == car_x_4 && w_Row_Count_Div == 6'd10) ||
+                (w_Col_Count_Div == car_x_6 && w_Row_Count_Div == 6'd10) ||
+                (w_Col_Count_Div == car_x_8 && w_Row_Count_Div == 6'd8) ||
+                (w_Col_Count_Div == car_x_9 && w_Row_Count_Div == 6'd8) ||
+                (w_Col_Count_Div == car_x_11 && w_Row_Count_Div == 6'd4) ||
+                (w_Col_Count_Div == car_x_3 && w_Row_Count_Div == 6'd2) ||
+                (w_Col_Count_Div == car_x_13 && w_Row_Count_Div == 6'd2) )begin
+                    
+                    case (car_sprite[car_row][car_col])
+	                4'd0: begin
+	                    // Background color (Black)
+	                    r_Red_Video = 4'b0000;
+	                    r_Grn_Video = 4'b0000;
+	                    r_Blu_Video = 4'b0000;
+	                end
+	                4'd1: begin
+	                    // Red
+	                    r_Red_Video = 4'b1111;
+	                    r_Grn_Video = 4'b0000;
+	                    r_Blu_Video = 4'b0000;
+	                end
+	                4'd2: begin
+	                    // Yellow
+	                    r_Red_Video = 4'b1111;
+	                    r_Grn_Video = 4'b1111;
+	                    r_Blu_Video = 4'b0000;
+	                end
+	                4'd3: begin
+	                    // Purple
+	                    r_Red_Video = 4'b1111;
+	                    r_Grn_Video = 4'b0000;
+	                    r_Blu_Video = 4'b1111;
+	                end
+	                default: begin
+	                    // Default to background color (Black)
+	                    r_Red_Video = 4'b0000;
+	                    r_Grn_Video = 4'b0000;
+	                    r_Blu_Video = 4'b0000;
+	                end
+	            endcase
+                end
         end
 
         
