@@ -1,6 +1,6 @@
 module car #(
     parameter CAR_INIT_X = 0,          
-    parameter BASE_SPEED = 24'd1000,   
+    parameter BASE_SPEED = 25'd1000,   
     parameter CAR_DIRECTION = 1        
 ) (
     input wire i_Clk,                  
@@ -10,7 +10,7 @@ module car #(
     
     reg [4:0] car_x = CAR_INIT_X;      
     reg [2:0] speed_counter;           
-    reg [19:0] adjusted_speed;
+    reg [24:0] adjusted_speed;
 
     
     always @(*) begin
