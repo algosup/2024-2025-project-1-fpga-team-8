@@ -238,7 +238,6 @@ module frogger_game #(
                 r_Red_Video = 3'b111;  
                 r_Grn_Video = 3'b111;  
                 r_Blu_Video = 3'b111;  
-                (w_Col_Count_Div == car_x_14 && w_Row_Count_Div == 6'd1)) begin
                     
                 case (car_sprite[car_row][car_col])
 	                4'd0: begin
