@@ -10,33 +10,11 @@ module car #(
     
     reg [4:0] car_x = CAR_INIT_X;      
     reg [2:0] speed_counter;           
-    reg [24:0] adjusted_speed;
-
-    // Couldn't progressively increase the speed because not enough LUTs to fix overflow :(
-    always @(*) begin
-        case (level)
-            // 7'd1: adjusted_speed = BASE_SPEED;             
-            // 7'd2: adjusted_speed = BASE_SPEED - 1;  
-            // 7'd3: adjusted_speed = BASE_SPEED - 1;  
-            // 7'd4: adjusted_speed = BASE_SPEED - 1;  
-            // 7'd5: adjusted_speed = BASE_SPEED - 1;  
-            // 7'd6: adjusted_speed = BASE_SPEED - 1;  
-            // 7'd7: adjusted_speed = BASE_SPEED - 1;  
-            // 7'd8: adjusted_speed = BASE_SPEED - 1;  
-            // 7'd9: adjusted_speed = BASE_SPEED - 1;  
-            // 7'd10: adjusted_speed = BASE_SPEED - 1; 
-            // 7'd11: adjusted_speed = BASE_SPEED - 1; 
-            // 7'd12: adjusted_speed = BASE_SPEED - 1; 
-            // 7'd13: adjusted_speed = BASE_SPEED - 1; 
-            // 7'd14: adjusted_speed = BASE_SPEED - 1; 
-            // 7'd15: adjusted_speed = BASE_SPEED - 1; 
-            // 7'd16: adjusted_speed = BASE_SPEED - 1; 
-            default: adjusted_speed = BASE_SPEED;       
-        endcase
-    end
+    reg [24:0] adjusted_speed;    
 
     
     always @(posedge i_Clk) begin
+        adjusted_speed <= BASE_SPEED;
         if (speed_counter == 0) begin
             speed_counter <= adjusted_speed[6:2];  
 
